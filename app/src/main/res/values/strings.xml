@@ -1,0 +1,117 @@
+<resources>
+    <string name="app_name">XBizWork</string>
+    <!--    Common-->
+    <string name="xbizitwork_app_text">Central de Serviço App</string>
+    <string name="xbizitwork_text">xbizitwork</string>
+    <string name="login_text">"Login"</string>
+    <string name="close_text">Fechar</string>
+    <string name="save_text">Salvar</string>
+    <string name="ingredients_text">Ingredientes</string>
+    <string name="new_recipe_text">Nova Receita</string>
+    <string name="update_recipe_text">Atualizar Receita</string>
+    <string name="detail_recipe_text">Detalhes da receita</string>
+    <string name="minutes_recipe_text">minutos para o tempo de preparo</string>
+    <string name="description_mode_preparation_text">Modo de preparo</string>
+    <string name="category_text">Categoria</string>
+    <string name="categories_text">Categorias</string>
+    <string name="profile_text">Perfil</string>
+
+    <!--    DialogDefault-->
+    <string name="dialog_delete_text">Deletar</string>
+
+    <!--    ErrorState and EmptyState-->
+    <string name="am_error_occurred_text">Um erro ocorreu</string>
+    <string name="try_again_text">Tente novamente</string>
+    <string name="empty_recipe_text">Nenhuma receita</string>
+    <string name="no_connections_text">Voce ainda não possui conexões</string>
+
+    <!--    xbizitworkItem-->
+    <string name="minutes_text">Minutos</string>
+
+    <!--    UsersConnectionsScreen-->
+    <string name="my_connections_text">Minhas conexões</string>
+    <string name="generation_qrcode_text">Gerar Qr Code</string>
+    <string name="read_qrcode_text">Ler Qr Code</string>
+
+    <!--    SearchBarContent-->
+    <string name="search_text">Pesquise pelo nome ou ingrediente</string>
+
+    <!--    SearchxbizitworkScreen-->
+    <string name="title_search_app_bar">"Pesquisar Receitas"</string>
+
+    <!--    AddRecipeContent-->
+    <string name="description_name_recipe_text">Nome</string>
+    <string name="hint_name_recipe_text">Nome da receita</string>
+    <string name="description_time_preparation_text">Tempo de preparação</string>
+    <string name="hint_time_preparation_text">40, 60 ou 120</string>
+    <string name="hint_mode_preparation_text">Descrição da receita</string>
+
+    <!--    AddIngredientDialog-->
+    <string name="description_product_text">Produto</string>
+    <string name="hint_product_text">produto</string>
+    <string name="description_amount_text">Quantidade</string>
+    <string name="hint_amount_text">quantidade</string>
+
+    <!--    Dialog-->
+    <string name="dialog_details_recipe_text">Deletar receita</string>
+    <string name="dialog_details_recipe_description_text">Deseja deletar a receita? Essa ação não podera ser desfeita!</string>
+
+    <string name="dialog_users_connection_text">Deletar conexão</string>
+    <string name="dialog_users_connection_description_text">Deseja deletar a conexão? Essa ação não podera ser desfeita!</string>
+
+    <!--    ProfileUserContent-->
+    <string name="name_text">Nome</string>
+    <string name="email_text">Email</string>
+    <string name="phone_text">Telefone</string>
+    <string name="create_at_text">Criado em</string>
+
+    <!--    Login and Register-->
+    <string name="no_have_account_text">Não tem uma conta?</string>
+    <string name="already_have_an_account">já possui uma conta?</string>
+    <string name="register_text">Registrar-se</string>
+    <string name="register_button_text">Cadastrar</string>
+    <string name="description_email_text">Email</string>
+    <string name="description_password_text">Senha</string>
+    <string name="description_repeat_password_text">Confirme a senha</string>
+    <string name="hint_email_text">account@gmail.com</string>
+    <string name="hint_password_text">Digite a senha</string>
+    <string name="hint_repeat_password_text">Confirme a senha</string>
+
+    <string name="description_nome_text">Nome</string>
+    <string name="description_phone_text">Telefone</string>
+    <string name="hint_nome_text">Escreva seu nome</string>
+    <string name="hint_phone_text">32 9 9138–3838</string>
+
+    <!--    Sharedxbizitwork-->
+    <string name="add_connection_text">Nova Conexão</string>
+    <string name="add_connection_description_text">Adicione uma nova conexão para poder compatilhar as receitas entre si!</string>
+    <string name="expiration_qrcode_text">Esse codigo vai expirar em:</string>
+    <string name="cancel_operation_text">Cancelar operação</string>
+    <string name="accept_operation_text">gostaria de se conectar!</string>
+    <string name="read_qrcode_description_text">Solicite à pessoa que gere um código QR dentro do aplicativo para que você possa escaneá-lo ao clicar no botão.</string>
+    <string name="scan_bar_text">Ler QrCode</string>
+
+    <!-- Strings da tela de Aceitar ou recusar de Conexão -->
+    <string name="accept_connection_description_text">Este usuário está solicitando uma conexão com você. Ao aceitar, vocês poderão compartilhar as receitas.</string>
+    <string name="connection_request_from">Solicitação de conexão de</string>
+    <string name="unknown_user">Usuário Desconhecido</string>
+    <string name="accept_connection">Aceitar Conexão</string>
+    <string name="decline_connection">Recusar Conexão</string>
+
+    <string-array name="categories">
+        <item>Café da Manhã</item>
+        <item>Almoço</item>
+        <item>Sobremesa</item>
+        <item>Lanche</item>
+        <item>Jantar</item>
+    </string-array>
+
+    <string-array name="filter_categories">
+        <item>Todas</item>
+        <item>Café da Manhã</item>
+        <item>Almoço</item>
+        <item>Sobremesa</item>
+        <item>Lanche</item>
+        <item>Jantar</item>
+    </string-array>
+</resources>
