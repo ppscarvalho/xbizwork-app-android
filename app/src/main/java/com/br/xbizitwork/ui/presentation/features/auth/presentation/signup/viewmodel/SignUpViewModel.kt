@@ -1,4 +1,4 @@
-package com.br.xbizitwork.ui.presentation.features.auth.presentation.signin.viewmodel
+package com.br.xbizitwork.ui.presentation.features.auth.presentation.signup.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.br.xbizitwork.core.sideeffects.SideEffect
@@ -6,7 +6,7 @@ import com.br.xbizitwork.core.util.common.Constants
 import com.br.xbizitwork.ui.presentation.features.auth.domain.model.SignUpResultValidation
 import com.br.xbizitwork.ui.presentation.features.auth.domain.usecase.SignUpUseCase
 import com.br.xbizitwork.ui.presentation.features.auth.domain.usecase.ValidateSignUpUseCase
-import com.br.xbizitwork.ui.presentation.features.auth.presentation.signin.state.SignUpState
+import com.br.xbizitwork.ui.presentation.features.auth.presentation.signup.state.SignUpState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,7 +25,7 @@ class SignUpViewModel @Inject constructor(
     private val _uiState: MutableStateFlow<SignUpState> = MutableStateFlow(SignUpState())
     val uiState: StateFlow<SignUpState> = _uiState.asStateFlow()
 
-    private val _sideEffectChannel = Channel<SideEffect>(capacity = Channel.BUFFERED)
+    private val _sideEffectChannel = Channel<SideEffect>(capacity = Channel.Factory.BUFFERED)
     val sideEffectChannel = _sideEffectChannel.receiveAsFlow()
 
     fun onNameChange(value: String){

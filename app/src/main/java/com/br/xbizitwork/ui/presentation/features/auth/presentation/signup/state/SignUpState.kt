@@ -1,4 +1,4 @@
-package com.br.xbizitwork.ui.presentation.features.auth.presentation.signin.state
+package com.br.xbizitwork.ui.presentation.features.auth.presentation.signup.state
 
 data class SignUpState(
     val name: String = "",

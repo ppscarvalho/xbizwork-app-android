@@ -14,10 +14,10 @@ sealed interface Graphs{
 @Serializable
 sealed interface AuthScreens{
     @Serializable
-    data object LoginScreen: AuthScreens
+    data object SignInScreen: AuthScreens
 
     @Serializable
-    data object RegisterScreen: AuthScreens
+    data object SignUpScreen: AuthScreens
 }
 
 @Serializable
