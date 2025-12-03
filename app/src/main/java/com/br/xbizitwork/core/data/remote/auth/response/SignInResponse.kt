@@ -2,7 +2,7 @@ package com.br.xbizitwork.core.data.remote.auth.response
 
 import com.google.gson.annotations.SerializedName
 
-data class TokenResponse(
+data class SignInResponse(
     @SerializedName("name")
     val name: String,
 

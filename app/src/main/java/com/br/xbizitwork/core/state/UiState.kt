@@ -1,4 +1,4 @@
-package com.br.xbizitwork.core.util.common
+package com.br.xbizitwork.core.state
 
 sealed class UiState<out T> {
     data object Empty : UiState<Nothing>()

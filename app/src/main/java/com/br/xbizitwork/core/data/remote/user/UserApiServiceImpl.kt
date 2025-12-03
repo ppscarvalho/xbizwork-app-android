@@ -2,7 +2,7 @@ package com.br.xbizitwork.core.data.remote.user
 
 import com.br.xbizitwork.core.data.remote.common.response.ApiResultResponse
 import com.br.xbizitwork.core.data.remote.user.request.CreateUserRequest
-import com.br.xbizitwork.core.data.remote.user.response.UserResponse
+import com.br.xbizitwork.core.data.remote.user.response.CreateUserResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -23,7 +23,7 @@ class UserApiServiceImpl @Inject constructor(
         return response.body()
     }
 
-    override suspend fun getAllUsers(): UserResponse {
+    override suspend fun getAllUsers(): CreateUserResponse {
         val response = client.get("userss"){
             contentType(ContentType.Application.Json)
         }

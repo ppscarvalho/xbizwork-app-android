@@ -1,4 +1,4 @@
-package com.br.xbizitwork.core.util.common
+package com.br.xbizitwork.core.result
 
 sealed class DefaultResult<out T> {
     data class Success<out T>(val data: T) : DefaultResult<T>()

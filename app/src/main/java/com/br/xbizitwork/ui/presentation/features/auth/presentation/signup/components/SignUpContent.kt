@@ -89,8 +89,8 @@ fun SignUpContent(
 
             SignUpContainer(
                 modifier = Modifier.fillMaxWidth(),
-                isLoading = false,
-                buttonEnabled = true,
+                isLoading = uiState.isLoading,
+                buttonEnabled = uiState.isFormValid,
                 nameValue = uiState.name,
                 emailValue = uiState.email,
                 passwordValue = uiState.password,

@@ -1,8 +1,8 @@
 package com.br.xbizitwork.ui.presentation.features.auth.data.repository
 
-import com.br.xbizitwork.core.data.remote.auth.response.TokenResponse
 import com.br.xbizitwork.core.domain.model.ApiResultModel
-import com.br.xbizitwork.core.util.common.DefaultResult
+import com.br.xbizitwork.core.result.DefaultResult
+import com.br.xbizitwork.ui.presentation.features.auth.domain.model.SignInResponseModel
 import com.br.xbizitwork.ui.presentation.features.auth.domain.model.SignInRequestModel
 import com.br.xbizitwork.ui.presentation.features.auth.domain.model.SignUpRequestModel
 import com.br.xbizitwork.ui.presentation.features.auth.domain.repository.UserAuthRepository
@@ -10,9 +10,9 @@ import com.br.xbizitwork.ui.presentation.features.auth.domain.source.UserAuthRem
 import javax.inject.Inject
 
 class UserAuthRepositoryImpl @Inject constructor(
-    private val remoteDataSource: UserAuthRemoteDataSource
+    private val remoteDataSource: UserAuthRemoteDataSource,
 ): UserAuthRepository {
-    override suspend fun signIn(signInRequestModel: SignInRequestModel): TokenResponse {
+    override suspend fun signIn(signInRequestModel: SignInRequestModel): DefaultResult<SignInResponseModel> {
         return remoteDataSource.signIn(signInRequestModel)
     }
 

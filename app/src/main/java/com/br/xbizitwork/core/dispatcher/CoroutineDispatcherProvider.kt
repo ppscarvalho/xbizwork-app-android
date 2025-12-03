@@ -1,4 +1,4 @@
-package com.br.xbizitwork.core.util.common
+package com.br.xbizitwork.core.dispatcher
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers

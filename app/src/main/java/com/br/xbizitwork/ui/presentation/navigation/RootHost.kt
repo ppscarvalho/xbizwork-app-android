@@ -3,6 +3,7 @@ package com.br.xbizitwork.ui.presentation.navigation
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import com.br.xbizitwork.ui.presentation.features.auth.presentation.signin.navigation.navigateToSignInScreen
 import com.br.xbizitwork.ui.presentation.features.auth.presentation.signup.navigation.navigateToSignUpScreen
 import com.br.xbizitwork.ui.presentation.navigation.graphs.authGraph
 import com.br.xbizitwork.ui.presentation.navigation.graphs.homeGraph
@@ -24,6 +25,9 @@ fun RootHost(
             },
             onNavigateToSignUpScreen = {
                 navController.navigateToSignUpScreen()
+            },
+            onNavigateToSignInScreen = {
+                navController.navigateToSignInScreen()
             }
         )
         homeGraph(

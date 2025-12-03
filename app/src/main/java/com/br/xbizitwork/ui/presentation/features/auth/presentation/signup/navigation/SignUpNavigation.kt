@@ -21,12 +21,13 @@ fun NavGraphBuilder.signUpScreen(
 
         SignUpScreen(
             uiState = uiState,
+            sideEffectFlow = sideEffect,
+            onEvent = viewModel::onEvent,
             onNavigateToSignInScreen = onNavigateToSignInScreen,
             onNameChanged = viewModel::onNameChange,
             onEmailChanged = viewModel::onEmailChange,
             onPasswordChanged = viewModel::onPasswordChange,
-            onConfirmPasswordChanged = viewModel::onConfirmPasswordChange,
-            onSignUpClick = {}
+            onConfirmPasswordChanged = viewModel::onConfirmPasswordChange
         )
     }
 }

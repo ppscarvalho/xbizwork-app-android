@@ -68,8 +68,10 @@
     <!--    Login and Register-->
     <string name="no_have_account_text">Não tem uma conta?</string>
     <string name="already_have_an_account">já possui uma conta?</string>
+    <string name="signIn_text">Autenticação</string>
     <string name="signUp_text">Cadastra-se</string>
     <string name="register_button_text">Cadastrar</string>
+    <string name="signIn_button_text">Autenticar</string>
     <string name="description_email_text">Email</string>
     <string name="description_password_text">Senha</string>
     <string name="description_repeat_password_text">Confirme a senha</string>

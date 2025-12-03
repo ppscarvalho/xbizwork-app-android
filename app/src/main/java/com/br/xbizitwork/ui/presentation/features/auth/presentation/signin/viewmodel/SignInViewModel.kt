@@ -1,16 +1,16 @@
-package com.br.xbizitwork.ui.presentation.features.auth.presentation.signup.viewmodel
+package com.br.xbizitwork.ui.presentation.features.auth.presentation.signin.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.br.xbizitwork.core.sideeffects.SideEffect
 import com.br.xbizitwork.core.config.Constants
 import com.br.xbizitwork.core.util.extensions.collectUiState
-import com.br.xbizitwork.ui.presentation.features.auth.domain.model.SignUpRequestModel
-import com.br.xbizitwork.ui.presentation.features.auth.domain.model.SignUpResultValidation
-import com.br.xbizitwork.ui.presentation.features.auth.domain.usecase.SignUpUseCase
-import com.br.xbizitwork.ui.presentation.features.auth.domain.usecase.ValidateSignUpUseCase
-import com.br.xbizitwork.ui.presentation.features.auth.presentation.signup.events.SignUpEvent
-import com.br.xbizitwork.ui.presentation.features.auth.presentation.signup.state.SignUpState
+import com.br.xbizitwork.ui.presentation.features.auth.domain.model.SignInRequestModel
+import com.br.xbizitwork.ui.presentation.features.auth.domain.model.SignInResultValidation
+import com.br.xbizitwork.ui.presentation.features.auth.domain.usecase.SignInUseCase
+import com.br.xbizitwork.ui.presentation.features.auth.domain.usecase.ValidateSignInUseCase
+import com.br.xbizitwork.ui.presentation.features.auth.presentation.signin.events.SignInEvent
+import com.br.xbizitwork.ui.presentation.features.auth.presentation.signin.state.SignInState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,26 +22,21 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SignUpViewModel @Inject constructor(
-    private val signUpUseCase: SignUpUseCase,
-    private val validateSignUpUseCase: ValidateSignUpUseCase
+class SignInViewModel @Inject constructor(
+    private val signInUseCase: SignInUseCase,
+    private val validateSignInUseCase: ValidateSignInUseCase
 ): ViewModel() {
 
-    private val _uiState: MutableStateFlow<SignUpState> = MutableStateFlow(SignUpState())
-    val uiState: StateFlow<SignUpState> = _uiState.asStateFlow()
+    private val _uiState: MutableStateFlow<SignInState> = MutableStateFlow(SignInState())
+    val uiState: StateFlow<SignInState> = _uiState.asStateFlow()
 
     private val _sideEffectChannel = Channel<SideEffect>(capacity = Channel.Factory.BUFFERED)
     val sideEffectChannel = _sideEffectChannel.receiveAsFlow()
 
-    fun onEvent(event: SignUpEvent){
+    fun onEvent(event: SignInEvent){
         when(event){
-            SignUpEvent.OnSignUpClick -> onSignUpClick()
+            SignInEvent.OnSignInClick -> onSignUpClick()
         }
-    }
-
-    fun onNameChange(value: String){
-        _uiState.update { it.copy(name = value) }
-        validateForm()
     }
 
     fun onEmailChange(value: String){
@@ -54,17 +49,11 @@ class SignUpViewModel @Inject constructor(
         validateForm()
     }
 
-    fun onConfirmPasswordChange(value: String){
-        _uiState.update { it.copy(confirmPassword =  value) }
-        validateForm()
-    }
-
     fun onSignUpClick(){
         viewModelScope.launch {
-            signUpUseCase.invoke(
-                parameters = SignUpUseCase.Parameters(
-                    SignUpRequestModel(
-                        name = _uiState.value.name.trim(),
+            signInUseCase.invoke(
+                parameters = SignInUseCase.Parameters(
+                    SignInRequestModel(
                         email = _uiState.value.email.trim(),
                         password = _uiState.value.password.trim(),
                     )
@@ -77,7 +66,7 @@ class SignUpViewModel @Inject constructor(
                     _uiState.update {
                         it.copy(isLoading = false, isSuccess = response.isSuccessful )
                     }
-                    _sideEffectChannel.send(SideEffect.ShowToast(response.message))
+                    _sideEffectChannel.send(SideEffect.ShowToast(response.message.toString()))
                 },
                 onFailure = {error ->
                     _uiState.update {
@@ -89,61 +78,59 @@ class SignUpViewModel @Inject constructor(
     }
 
     private fun validateForm() {
-        val validationResult = validateSignUpUseCase(
-            name = _uiState.value.name,
+        val validationResult = validateSignInUseCase(
             email = _uiState.value.email,
             password = _uiState.value.password,
-            confirmPassword = _uiState.value.confirmPassword
         )
-        validateSignUpData(validationResult)
+        validateSignInData(validationResult)
     }
 
-    private fun validateSignUpData(type: SignUpResultValidation) {
+    private fun validateSignInData(type: SignInResultValidation) {
         _uiState.update {
             when (type) {
-                SignUpResultValidation.EmptyField -> {
+                SignInResultValidation.EmptyField -> {
                     it.copy(
                         fieldErrorMessage = Constants.ValidationAuthMessages.EMPTY_FIELD,
                         isFormValid = false)
                 }
 
-                SignUpResultValidation.NoEmail -> {
+                SignInResultValidation.NoEmail -> {
                     it.copy(
                         fieldErrorMessage = Constants.ValidationAuthMessages.INVALID_EMAIL,
                         isFormValid = false)
                 }
 
-                SignUpResultValidation.PasswordTooShort -> {
+                SignInResultValidation.PasswordTooShort -> {
                     it.copy(
                         fieldErrorMessage = Constants.ValidationAuthMessages.PASSWORD_TOO_SHORT,
                         isFormValid = false)
                 }
 
-                SignUpResultValidation.PasswordsDoNotMatch -> {
+                SignInResultValidation.PasswordsDoNotMatch -> {
                     it.copy(
                         fieldErrorMessage = Constants.ValidationAuthMessages.PASSWORDS_DO_NOT_MATCH,
                         isFormValid = false)
                 }
 
-                SignUpResultValidation.PasswordUpperCaseMissing -> {
+                SignInResultValidation.PasswordUpperCaseMissing -> {
                     it.copy(
                         fieldErrorMessage = Constants.ValidationAuthMessages.PASSWORD_UPPERCASE_MISSING,
                         isFormValid = false)
                 }
 
-                SignUpResultValidation.PasswordSpecialCharMissing -> {
+                SignInResultValidation.PasswordSpecialCharMissing -> {
                     it.copy(
                         fieldErrorMessage = Constants.ValidationAuthMessages.PASSWORD_SPECIAL_CHAR_MISSING,
                         isFormValid = false)
                 }
 
-                SignUpResultValidation.PasswordNumberMissing -> {
+                SignInResultValidation.PasswordNumberMissing -> {
                     it.copy(
                         fieldErrorMessage = Constants.ValidationAuthMessages.PASSWORD_NUMBER_MISSING,
                         isFormValid = false)
                 }
 
-                SignUpResultValidation.Valid -> {
+                SignInResultValidation.Valid -> {
                     it.copy(
                         fieldErrorMessage = "Dados validados com sucesso",
                         isFormValid = true)

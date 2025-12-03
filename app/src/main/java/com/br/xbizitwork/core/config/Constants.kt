@@ -1,4 +1,4 @@
-package com.br.xbizitwork.core.util.common
+package com.br.xbizitwork.core.config
 
 object Constants {
     const val TYPE_QRCODE_GENERATED = "TYPE_QRCODE_GENERATED"

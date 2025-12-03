@@ -1,13 +1,17 @@
 package com.br.xbizitwork.ui.presentation.features.auth.di
 
 import com.br.xbizitwork.core.data.remote.auth.UserAuthApiService
-import com.br.xbizitwork.core.util.common.CoroutineDispatcherProvider
+import com.br.xbizitwork.core.dispatcher.CoroutineDispatcherProvider
 import com.br.xbizitwork.ui.presentation.features.auth.data.repository.UserAuthRepositoryImpl
 import com.br.xbizitwork.ui.presentation.features.auth.data.source.UserAuthRemoteDataSourceImpl
 import com.br.xbizitwork.ui.presentation.features.auth.domain.repository.UserAuthRepository
 import com.br.xbizitwork.ui.presentation.features.auth.domain.source.UserAuthRemoteDataSource
+import com.br.xbizitwork.ui.presentation.features.auth.domain.usecase.SignInUseCase
+import com.br.xbizitwork.ui.presentation.features.auth.domain.usecase.SignInUseCaseImpl
 import com.br.xbizitwork.ui.presentation.features.auth.domain.usecase.SignUpUseCase
 import com.br.xbizitwork.ui.presentation.features.auth.domain.usecase.SignUpUseCaseImpl
+import com.br.xbizitwork.ui.presentation.features.auth.domain.usecase.ValidateSignInUseCase
+import com.br.xbizitwork.ui.presentation.features.auth.domain.usecase.ValidateSignInUseCaseImpl
 import com.br.xbizitwork.ui.presentation.features.auth.domain.usecase.ValidateSignUpUseCase
 import com.br.xbizitwork.ui.presentation.features.auth.domain.usecase.ValidateSignUpUseCaseImpl
 import dagger.Module
@@ -31,9 +35,10 @@ object SignUpModule {
     @Provides
     @Singleton
     fun provideUserAuthRepository(
-        remoteDataSource: UserAuthRemoteDataSource
+        remoteDataSource: UserAuthRemoteDataSource,
     ): UserAuthRepository{
-        return UserAuthRepositoryImpl(remoteDataSource = remoteDataSource)
+        return UserAuthRepositoryImpl(
+            remoteDataSource = remoteDataSource)
     }
 
     @Provides
@@ -50,7 +55,25 @@ object SignUpModule {
 
     @Provides
     @Singleton
+    fun provideSignInUseCase(
+        authRepository: UserAuthRepository,
+        coroutineDispatcherProvider: CoroutineDispatcherProvider
+    ): SignInUseCase{
+        return SignInUseCaseImpl(
+            authRepository = authRepository,
+            coroutineDispatcherProvider = coroutineDispatcherProvider
+        )
+    }
+
+    @Provides
+    @Singleton
     fun provideValidateSignUpUseCase (): ValidateSignUpUseCase{
         return ValidateSignUpUseCaseImpl()
+    }
+
+    @Provides
+    @Singleton
+    fun provideValidateSignInUseCase (): ValidateSignInUseCase{
+        return ValidateSignInUseCaseImpl()
     }
 }

@@ -1,7 +1,7 @@
 package com.br.xbizitwork.core.di
 
-import com.br.xbizitwork.core.util.common.CoroutineDispatcherProvider
-import com.br.xbizitwork.core.util.common.CoroutineDispatcherProviderImpl
+import com.br.xbizitwork.core.dispatcher.CoroutineDispatcherProvider
+import com.br.xbizitwork.core.dispatcher.CoroutineDispatcherProviderImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

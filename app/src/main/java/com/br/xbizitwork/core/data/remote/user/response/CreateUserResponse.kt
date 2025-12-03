@@ -2,7 +2,7 @@ package com.br.xbizitwork.core.data.remote.user.response
 
 import com.google.gson.annotations.SerializedName
 
-data class UserResponse(
+data class CreateUserResponse(
     @SerializedName("id")
     val id: String,
 

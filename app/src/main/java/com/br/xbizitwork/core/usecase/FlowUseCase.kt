@@ -1,5 +1,6 @@
-package com.br.xbizitwork.core.util.common
+package com.br.xbizitwork.core.usecase
 
+import com.br.xbizitwork.core.state.UiState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow

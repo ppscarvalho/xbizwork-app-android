@@ -1,10 +1,10 @@
 package com.br.xbizitwork.ui.presentation.features.auth.domain.usecase
 
 import com.br.xbizitwork.core.domain.model.ApiResultModel
-import com.br.xbizitwork.core.util.common.FlowUseCase
-import com.br.xbizitwork.core.util.common.DefaultResult
-import com.br.xbizitwork.core.util.common.CoroutineDispatcherProvider
-import com.br.xbizitwork.core.util.common.UiState
+import com.br.xbizitwork.core.usecase.FlowUseCase
+import com.br.xbizitwork.core.result.DefaultResult
+import com.br.xbizitwork.core.dispatcher.CoroutineDispatcherProvider
+import com.br.xbizitwork.core.state.UiState
 import com.br.xbizitwork.ui.presentation.features.auth.domain.model.SignUpRequestModel
 import com.br.xbizitwork.ui.presentation.features.auth.domain.repository.UserAuthRepository
 import kotlinx.coroutines.flow.Flow

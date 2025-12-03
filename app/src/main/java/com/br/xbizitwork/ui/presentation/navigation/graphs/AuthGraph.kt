@@ -9,6 +9,7 @@ import com.br.xbizitwork.ui.presentation.navigation.screens.Graphs
 
 fun NavGraphBuilder.authGraph(
     onNavigateToHomeGraph: () -> Unit,
+    onNavigateToSignInScreen: () -> Unit,
     onNavigateToSignUpScreen: () -> Unit,
 ){
     navigation<Graphs.AuthGraph>(
@@ -19,7 +20,7 @@ fun NavGraphBuilder.authGraph(
             onNavigateToSignUpScreen = onNavigateToSignUpScreen
         )
         signUpScreen(
-            onNavigateToSignInScreen = {}
+            onNavigateToSignInScreen = onNavigateToSignInScreen
         )
     }
 }

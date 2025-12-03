@@ -3,7 +3,7 @@ package com.br.xbizitwork.core.data.remote.auth
 
 import com.br.xbizitwork.core.data.remote.auth.request.SignInRequest
 import com.br.xbizitwork.core.data.remote.auth.request.SignUpRequest
-import com.br.xbizitwork.core.data.remote.auth.response.TokenResponse
+import com.br.xbizitwork.core.data.remote.auth.response.SignInResponse
 import com.br.xbizitwork.core.data.remote.common.response.ApiResultResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -16,7 +16,7 @@ import javax.inject.Inject
 class UserAuthApiServiceImpl @Inject constructor(
     private val httpClient: HttpClient
 ): UserAuthApiService {
-    override suspend fun signIn(authUserRequest: SignInRequest): TokenResponse {
+    override suspend fun signIn(authUserRequest: SignInRequest): SignInResponse {
         val response = httpClient.post("auth/signin") {
             contentType(ContentType.Application.Json)
             setBody(authUserRequest)
