@@ -6,9 +6,15 @@ import com.br.xbizitwork.ui.presentation.features.auth.data.remote.api.UserAuthA
 import com.br.xbizitwork.ui.presentation.features.auth.data.remote.source.UserAuthRemoteDataSource
 import com.br.xbizitwork.ui.presentation.features.auth.data.remote.source.UserAuthRemoteDataSourceImpl
 import com.br.xbizitwork.ui.presentation.features.auth.data.repository.UserAuthRepositoryImpl
+import com.br.xbizitwork.ui.presentation.features.auth.data.usecase.GetAuthSessionUseCaseImpl
+import com.br.xbizitwork.ui.presentation.features.auth.data.usecase.RemoveAuthSessionUseCaseImpl
+import com.br.xbizitwork.ui.presentation.features.auth.data.usecase.SaveAuthSessionUseCaseImpl
 import com.br.xbizitwork.ui.presentation.features.auth.data.usecase.SignInUseCaseImpl
 import com.br.xbizitwork.ui.presentation.features.auth.data.usecase.SignUpUseCaseImpl
 import com.br.xbizitwork.ui.presentation.features.auth.domain.repository.UserAuthRepository
+import com.br.xbizitwork.ui.presentation.features.auth.domain.usecase.GetAuthSessionUseCase
+import com.br.xbizitwork.ui.presentation.features.auth.domain.usecase.RemoveAuthSessionUseCase
+import com.br.xbizitwork.ui.presentation.features.auth.domain.usecase.SaveAuthSessionUseCase
 import com.br.xbizitwork.ui.presentation.features.auth.domain.usecase.SignInUseCase
 import com.br.xbizitwork.ui.presentation.features.auth.domain.usecase.SignUpUseCase
 import com.br.xbizitwork.ui.presentation.features.auth.domain.usecase.ValidateSignInUseCase
@@ -79,5 +85,34 @@ object SignUpModule {
     @Singleton
     fun provideValidateSignInUseCase (): ValidateSignInUseCase{
         return ValidateSignInUseCaseImpl()
+    }
+
+    @Provides
+    fun provideGetAuthSessionUseCase(
+        authRepository: UserAuthRepository
+    ): GetAuthSessionUseCase{
+        return GetAuthSessionUseCaseImpl(authRepository = authRepository)
+    }
+
+    @Provides
+    fun provideSaveAuthSessionUseCase(
+        authRepository: UserAuthRepository,
+        coroutineDispatcherProvider: CoroutineDispatcherProvider
+    ): SaveAuthSessionUseCase
+    {
+        return SaveAuthSessionUseCaseImpl(
+            authRepository =  authRepository,
+            coroutineDispatcherProvider = coroutineDispatcherProvider
+        )
+    }
+
+    @Provides
+    fun provideRemoveAuthSessionUseCase(
+        authRepository: UserAuthRepository,
+    ): RemoveAuthSessionUseCase
+    {
+        return RemoveAuthSessionUseCaseImpl(
+            authRepository =  authRepository,
+        )
     }
 }

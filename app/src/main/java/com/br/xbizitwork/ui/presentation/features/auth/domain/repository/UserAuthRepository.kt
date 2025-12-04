@@ -12,7 +12,7 @@ interface UserAuthRepository {
     suspend fun signIn(signInRequestModel: SignInRequestModel): DefaultResult<SignInResponseModel>
     suspend fun signUp(signUpRequestModel: SignUpRequestModel): DefaultResult<ApiResultModel>
     fun observeSession() : Flow<AuthSession>
-    suspend fun saveSession(name: String, token: String, email: String)
+    suspend fun saveSession(name: String, email: String, token: String)
     suspend fun getSession(): AuthSession?
     suspend fun clearSession()
 }

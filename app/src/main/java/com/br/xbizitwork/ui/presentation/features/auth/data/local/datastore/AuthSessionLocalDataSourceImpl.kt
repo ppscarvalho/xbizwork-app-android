@@ -46,8 +46,8 @@ class AuthSessionLocalDataSourceImpl @Inject constructor(
 
     override suspend fun saveSession(
         name: String,
-        token: String,
         email: String,
+        token: String,
     ) {
         dataStorePreferences.edit { preferences ->
             preferences[PreferencesKeys.NAME_KEY] = name
@@ -59,9 +59,9 @@ class AuthSessionLocalDataSourceImpl @Inject constructor(
     override suspend fun getSession(): AuthSession? {
         val preferences = dataStorePreferences.data.first()
 
-        val token = preferences[PreferencesKeys.TOKEN_KEY]
         val name = preferences[PreferencesKeys.NAME_KEY]
         val email = preferences[PreferencesKeys.EMAIL_KEY]
+        val token = preferences[PreferencesKeys.TOKEN_KEY]
 
         if (token.isNullOrEmpty() || name.isNullOrEmpty() || email.isNullOrEmpty()) {
             return null

@@ -28,13 +28,14 @@ class UserAuthRepositoryImpl @Inject constructor(
 
     override suspend fun saveSession(
         name: String,
-        token: String,
         email: String,
+        token: String,
     ) {
         return localDataSource.saveSession(
             name = name,
-            token = token,
-            email = email)
+            email = email,
+            token = token
+        )
     }
 
     override suspend fun getSession(): AuthSession?  = localDataSource.getSession()

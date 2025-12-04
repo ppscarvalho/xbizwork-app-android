@@ -13,7 +13,7 @@ import javax.inject.Inject
 class SignInUseCaseImpl @Inject constructor(
     private val authRepository: UserAuthRepository,
     private val coroutineDispatcherProvider: CoroutineDispatcherProvider
-) : SignInUseCase,FlowUseCase<SignInUseCase.Parameters, SignInResponseModel>() {
+) : SignInUseCase, FlowUseCase<SignInUseCase.Parameters, SignInResponseModel>() {
     override suspend fun executeTask(parameters: SignInUseCase.Parameters): UiState<SignInResponseModel> {
         return try {
             withContext(coroutineDispatcherProvider.io()) {
