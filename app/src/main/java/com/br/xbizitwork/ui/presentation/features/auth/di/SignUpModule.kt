@@ -1,15 +1,16 @@
 package com.br.xbizitwork.ui.presentation.features.auth.di
 
-import com.br.xbizitwork.core.data.remote.auth.UserAuthApiService
 import com.br.xbizitwork.core.dispatcher.CoroutineDispatcherProvider
+import com.br.xbizitwork.ui.presentation.features.auth.data.local.datastore.AuthSessionLocalDataSource
+import com.br.xbizitwork.ui.presentation.features.auth.data.remote.api.UserAuthApiService
+import com.br.xbizitwork.ui.presentation.features.auth.data.remote.source.UserAuthRemoteDataSource
+import com.br.xbizitwork.ui.presentation.features.auth.data.remote.source.UserAuthRemoteDataSourceImpl
 import com.br.xbizitwork.ui.presentation.features.auth.data.repository.UserAuthRepositoryImpl
-import com.br.xbizitwork.ui.presentation.features.auth.data.source.UserAuthRemoteDataSourceImpl
+import com.br.xbizitwork.ui.presentation.features.auth.data.usecase.SignInUseCaseImpl
+import com.br.xbizitwork.ui.presentation.features.auth.data.usecase.SignUpUseCaseImpl
 import com.br.xbizitwork.ui.presentation.features.auth.domain.repository.UserAuthRepository
-import com.br.xbizitwork.ui.presentation.features.auth.domain.source.UserAuthRemoteDataSource
 import com.br.xbizitwork.ui.presentation.features.auth.domain.usecase.SignInUseCase
-import com.br.xbizitwork.ui.presentation.features.auth.domain.usecase.SignInUseCaseImpl
 import com.br.xbizitwork.ui.presentation.features.auth.domain.usecase.SignUpUseCase
-import com.br.xbizitwork.ui.presentation.features.auth.domain.usecase.SignUpUseCaseImpl
 import com.br.xbizitwork.ui.presentation.features.auth.domain.usecase.ValidateSignInUseCase
 import com.br.xbizitwork.ui.presentation.features.auth.domain.usecase.ValidateSignInUseCaseImpl
 import com.br.xbizitwork.ui.presentation.features.auth.domain.usecase.ValidateSignUpUseCase
@@ -36,9 +37,12 @@ object SignUpModule {
     @Singleton
     fun provideUserAuthRepository(
         remoteDataSource: UserAuthRemoteDataSource,
+        localDataSource: AuthSessionLocalDataSource
     ): UserAuthRepository{
         return UserAuthRepositoryImpl(
-            remoteDataSource = remoteDataSource)
+            remoteDataSource = remoteDataSource,
+            localDataSource = localDataSource
+        )
     }
 
     @Provides

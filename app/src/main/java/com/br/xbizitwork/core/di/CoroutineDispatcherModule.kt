@@ -6,16 +6,17 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+
 /**
  * Módulo de Injeção de Dependência responsável por registrar
  * as implementações relacionadas aos Dispatchers de Coroutines.
  *
- * Este módulo é instalado no [SingletonComponent], garantindo que
+ * Este módulo é instalado no [dagger.hilt.components.SingletonComponent], garantindo que
  * as dependências fornecidas tenham ciclo de vida de singleton
  * em toda a aplicação.
  *
  * Sua principal responsabilidade é associar a implementação concreta
- * [CoroutineDispatcherProviderImpl] ao contrato abstraído que será
+ * [com.br.xbizitwork.core.dispatcher.CoroutineDispatcherProviderImpl] ao contrato abstraído que será
  * utilizado no restante do app.
  */
 @Module
@@ -23,7 +24,7 @@ import dagger.hilt.components.SingletonComponent
 interface CoroutineDispatcherModule {
 
     /**
-     * Faz o bind da implementação [CoroutineDispatcherProviderImpl]
+     * Faz o bind da implementação [com.br.xbizitwork.core.dispatcher.CoroutineDispatcherProviderImpl]
      * para a abstração utilizada pela aplicação.
      *
      * Isso permite:

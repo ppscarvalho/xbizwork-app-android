@@ -1,11 +1,11 @@
 package com.br.xbizitwork.ui.presentation.features.auth.data.mappers
 
-import com.br.xbizitwork.core.data.remote.auth.request.SignInRequest
-import com.br.xbizitwork.core.data.remote.auth.request.SignUpRequest
-import com.br.xbizitwork.core.data.remote.auth.response.SignInResponse
-import com.br.xbizitwork.ui.presentation.features.auth.domain.model.SignInRequestModel
-import com.br.xbizitwork.ui.presentation.features.auth.domain.model.SignInResponseModel
-import com.br.xbizitwork.ui.presentation.features.auth.domain.model.SignUpRequestModel
+import com.br.xbizitwork.ui.presentation.features.auth.data.remote.request.SignInRequest
+import com.br.xbizitwork.ui.presentation.features.auth.data.remote.request.SignUpRequest
+import com.br.xbizitwork.ui.presentation.features.auth.data.remote.response.SignInResponse
+import com.br.xbizitwork.ui.presentation.features.auth.data.remote.request.SignInRequestModel
+import com.br.xbizitwork.ui.presentation.features.auth.data.remote.response.SignInResponseModel
+import com.br.xbizitwork.ui.presentation.features.auth.data.remote.request.SignUpRequestModel
 
 fun SignInRequestModel.toSignInRequest(): SignInRequest{
     return SignInRequest(

@@ -1,18 +1,12 @@
-package com.br.xbizitwork.ui.presentation.features.auth.domain.repository
+package com.br.xbizitwork.ui.presentation.features.auth.data.remote.source
 
 import com.br.xbizitwork.core.model.api.ApiResultModel
 import com.br.xbizitwork.core.result.DefaultResult
-import com.br.xbizitwork.ui.presentation.features.auth.data.local.model.AuthSession
 import com.br.xbizitwork.ui.presentation.features.auth.data.remote.request.SignInRequestModel
 import com.br.xbizitwork.ui.presentation.features.auth.data.remote.response.SignInResponseModel
 import com.br.xbizitwork.ui.presentation.features.auth.data.remote.request.SignUpRequestModel
-import kotlinx.coroutines.flow.Flow
 
-interface UserAuthRepository {
+interface UserAuthRemoteDataSource {
     suspend fun signIn(signInRequestModel: SignInRequestModel): DefaultResult<SignInResponseModel>
     suspend fun signUp(signUpRequestModel: SignUpRequestModel): DefaultResult<ApiResultModel>
-    fun observeSession() : Flow<AuthSession>
-    suspend fun saveSession(name: String, token: String, email: String)
-    suspend fun getSession(): AuthSession?
-    suspend fun clearSession()
 }

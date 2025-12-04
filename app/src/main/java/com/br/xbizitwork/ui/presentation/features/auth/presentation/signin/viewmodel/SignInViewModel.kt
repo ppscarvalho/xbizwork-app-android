@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.br.xbizitwork.core.sideeffects.SideEffect
 import com.br.xbizitwork.core.config.Constants
 import com.br.xbizitwork.core.util.extensions.collectUiState
-import com.br.xbizitwork.ui.presentation.features.auth.domain.model.SignInRequestModel
+import com.br.xbizitwork.ui.presentation.features.auth.data.remote.request.SignInRequestModel
 import com.br.xbizitwork.ui.presentation.features.auth.domain.model.SignInResultValidation
 import com.br.xbizitwork.ui.presentation.features.auth.domain.usecase.SignInUseCase
 import com.br.xbizitwork.ui.presentation.features.auth.domain.usecase.ValidateSignInUseCase
