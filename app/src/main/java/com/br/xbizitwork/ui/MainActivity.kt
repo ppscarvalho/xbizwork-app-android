@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
             XBizWorkTheme {
                 val navController: NavHostController = rememberNavController()
                 RootHost(
-                    startDestination = Graphs.AuthGraph,
+                    startDestination = Graphs.AuthGraphs,
                     navController = navController,
                 )
             }

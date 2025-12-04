@@ -5,10 +5,10 @@ import kotlinx.serialization.Serializable
 @Serializable
 sealed interface Graphs{
     @Serializable
-    data object AuthGraph: Graphs
+    data object AuthGraphs: Graphs
 
     @Serializable
-    data object HomeGraph: Graphs
+    data object HomeGraphs: Graphs
 }
 
 @Serializable
