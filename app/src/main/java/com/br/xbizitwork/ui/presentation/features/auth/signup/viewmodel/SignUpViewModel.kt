@@ -2,12 +2,12 @@ package com.br.xbizitwork.ui.presentation.features.auth.signup.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.br.xbizitwork.core.sideeffects.SideEffect
+import com.br.xbizitwork.application.usecase.auth.SignUpUseCase
 import com.br.xbizitwork.core.config.Constants
+import com.br.xbizitwork.core.sideeffects.SideEffect
 import com.br.xbizitwork.core.util.extensions.collectUiState
-import com.br.xbizitwork.data.remote.auth.dtos.requests.SignUpRequestModel
-import com.br.xbizitwork.domain.model.auth.SignUpResultValidation
-import com.br.xbizitwork.domain.usecase.auth.signup.SignUpUseCase
+import com.br.xbizitwork.domain.validations.auth.SignUpValidationError
+import com.br.xbizitwork.domain.model.auth.SignUpModel
 import com.br.xbizitwork.domain.usecase.auth.signup.ValidateSignUpUseCase
 import com.br.xbizitwork.ui.presentation.features.auth.signup.events.SignUpEvent
 import com.br.xbizitwork.ui.presentation.features.auth.signup.state.SignUpState
@@ -63,7 +63,7 @@ class SignUpViewModel @Inject constructor(
         viewModelScope.launch {
             signUpUseCase.invoke(
                 parameters = SignUpUseCase.Parameters(
-                    SignUpRequestModel(
+                    SignUpModel(
                         name = _uiState.value.name.trim(),
                         email = _uiState.value.email.trim(),
                         password = _uiState.value.password.trim(),
@@ -98,52 +98,52 @@ class SignUpViewModel @Inject constructor(
         validateSignUpData(validationResult)
     }
 
-    private fun validateSignUpData(type: SignUpResultValidation) {
+    private fun validateSignUpData(type: SignUpValidationError) {
         _uiState.update {
             when (type) {
-                SignUpResultValidation.EmptyField -> {
+                SignUpValidationError.EmptyField -> {
                     it.copy(
                         fieldErrorMessage = Constants.ValidationAuthMessages.EMPTY_FIELD,
                         isFormValid = false)
                 }
 
-                SignUpResultValidation.NoEmail -> {
+                SignUpValidationError.NoEmail -> {
                     it.copy(
                         fieldErrorMessage = Constants.ValidationAuthMessages.INVALID_EMAIL,
                         isFormValid = false)
                 }
 
-                SignUpResultValidation.PasswordTooShort -> {
+                SignUpValidationError.PasswordTooShort -> {
                     it.copy(
                         fieldErrorMessage = Constants.ValidationAuthMessages.PASSWORD_TOO_SHORT,
                         isFormValid = false)
                 }
 
-                SignUpResultValidation.PasswordsDoNotMatch -> {
+                SignUpValidationError.PasswordsDoNotMatch -> {
                     it.copy(
                         fieldErrorMessage = Constants.ValidationAuthMessages.PASSWORDS_DO_NOT_MATCH,
                         isFormValid = false)
                 }
 
-                SignUpResultValidation.PasswordUpperCaseMissing -> {
+                SignUpValidationError.PasswordUpperCaseMissing -> {
                     it.copy(
                         fieldErrorMessage = Constants.ValidationAuthMessages.PASSWORD_UPPERCASE_MISSING,
                         isFormValid = false)
                 }
 
-                SignUpResultValidation.PasswordSpecialCharMissing -> {
+                SignUpValidationError.PasswordSpecialCharMissing -> {
                     it.copy(
                         fieldErrorMessage = Constants.ValidationAuthMessages.PASSWORD_SPECIAL_CHAR_MISSING,
                         isFormValid = false)
                 }
 
-                SignUpResultValidation.PasswordNumberMissing -> {
+                SignUpValidationError.PasswordNumberMissing -> {
                     it.copy(
                         fieldErrorMessage = Constants.ValidationAuthMessages.PASSWORD_NUMBER_MISSING,
                         isFormValid = false)
                 }
 
-                SignUpResultValidation.Valid -> {
+                SignUpValidationError.Valid -> {
                     it.copy(
                         fieldErrorMessage = "Dados validados com sucesso",
                         isFormValid = true)

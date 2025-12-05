@@ -3,7 +3,7 @@ package com.br.xbizitwork.domain.usecase.auth.signup
 import com.br.xbizitwork.core.util.extensions.containsNumber
 import com.br.xbizitwork.core.util.extensions.containsSpecialChar
 import com.br.xbizitwork.core.util.extensions.containsUpperCase
-import com.br.xbizitwork.domain.model.auth.SignUpResultValidation
+import com.br.xbizitwork.domain.validations.auth.SignUpValidationError
 
 interface ValidateSignUpUseCase{
     operator fun invoke(
@@ -11,7 +11,7 @@ interface ValidateSignUpUseCase{
         email: String,
         password: String,
         confirmPassword: String
-    ) : SignUpResultValidation
+    ) : SignUpValidationError
 }
 
 class ValidateSignUpUseCaseImpl : ValidateSignUpUseCase{
@@ -20,28 +20,28 @@ class ValidateSignUpUseCaseImpl : ValidateSignUpUseCase{
         email: String,
         password: String,
         confirmPassword: String,
-    ): SignUpResultValidation {
+    ): SignUpValidationError {
         if (name.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-            return SignUpResultValidation.EmptyField
+            return SignUpValidationError.EmptyField
         }
         if ("@" !in email) {
-            return SignUpResultValidation.NoEmail
+            return SignUpValidationError.NoEmail
         }
         if (password != confirmPassword) {
-            return SignUpResultValidation.PasswordsDoNotMatch
+            return SignUpValidationError.PasswordsDoNotMatch
         }
         if (password.count() < 8) {
-            return SignUpResultValidation.PasswordTooShort
+            return SignUpValidationError.PasswordTooShort
         }
         if (!password.containsNumber()) {
-            return SignUpResultValidation.PasswordNumberMissing
+            return SignUpValidationError.PasswordNumberMissing
         }
         if (!password.containsUpperCase()) {
-            return SignUpResultValidation.PasswordUpperCaseMissing
+            return SignUpValidationError.PasswordUpperCaseMissing
         }
         if (!password.containsSpecialChar()) {
-            return SignUpResultValidation.PasswordSpecialCharMissing
+            return SignUpValidationError.PasswordSpecialCharMissing
         }
-        return SignUpResultValidation.Valid
+        return SignUpValidationError.Valid
     }
 }

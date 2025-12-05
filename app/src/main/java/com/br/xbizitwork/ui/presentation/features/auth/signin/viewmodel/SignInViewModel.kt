@@ -2,13 +2,14 @@ package com.br.xbizitwork.ui.presentation.features.auth.signin.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.br.xbizitwork.core.sideeffects.SideEffect
+import com.br.xbizitwork.application.usecase.auth.SignInUseCase
 import com.br.xbizitwork.core.config.Constants
+import com.br.xbizitwork.core.sideeffects.SideEffect
 import com.br.xbizitwork.core.util.extensions.collectUiState
-import com.br.xbizitwork.data.remote.auth.dtos.requests.SignInRequestModel
-import com.br.xbizitwork.domain.model.auth.SignInResultValidation
-import com.br.xbizitwork.domain.usecase.auth.sign.SignInUseCase
-import com.br.xbizitwork.domain.usecase.auth.sign.ValidateSignInUseCase
+import com.br.xbizitwork.domain.validations.auth.SignInValidationError
+import com.br.xbizitwork.domain.model.auth.SignInModel
+import com.br.xbizitwork.domain.usecase.auth.signin.ValidateSignInUseCase
+import com.br.xbizitwork.application.usecase.session.SaveAuthSessionUseCase
 import com.br.xbizitwork.ui.presentation.features.auth.signin.events.SignInEvent
 import com.br.xbizitwork.ui.presentation.features.auth.signin.state.SignInState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,7 +25,8 @@ import javax.inject.Inject
 @HiltViewModel
 class SignInViewModel @Inject constructor(
     private val signInUseCase: SignInUseCase,
-    private val validateSignInUseCase: ValidateSignInUseCase
+    private val validateSignInUseCase: ValidateSignInUseCase,
+    private val saveAuthSessionUseCase: SaveAuthSessionUseCase,
 ): ViewModel() {
 
     private val _uiState: MutableStateFlow<SignInState> = MutableStateFlow(SignInState())
@@ -53,7 +55,7 @@ class SignInViewModel @Inject constructor(
         viewModelScope.launch {
             signInUseCase.invoke(
                 parameters = SignInUseCase.Parameters(
-                    SignInRequestModel(
+                    SignInModel(
                         email = _uiState.value.email.trim(),
                         password = _uiState.value.password.trim(),
                     )
@@ -67,6 +69,7 @@ class SignInViewModel @Inject constructor(
                         it.copy(isLoading = false, isSuccess = response.isSuccessful )
                     }
                     _sideEffectChannel.send(SideEffect.ShowToast(response.message.toString()))
+                    saveLocalSession(response.name.toString(), response.email.toString(), response.token.toString())
                 },
                 onFailure = {error ->
                     _uiState.update {
@@ -77,6 +80,19 @@ class SignInViewModel @Inject constructor(
         }
     }
 
+    private suspend fun saveLocalSession(name: String, email: String, token: String) {
+        saveAuthSessionUseCase.invoke(
+            SaveAuthSessionUseCase.Parameters(
+                name = name,
+                email = email,
+                token = token)
+        ).collectUiState(
+            onLoading = {/*NO-OP*/},
+            onSuccess = {/*NO-OP*/},
+            onFailure = {/*NO-OP*/}
+        )
+    }
+
     private fun validateForm() {
         val validationResult = validateSignInUseCase(
             email = _uiState.value.email,
@@ -85,52 +101,52 @@ class SignInViewModel @Inject constructor(
         validateSignInData(validationResult)
     }
 
-    private fun validateSignInData(type: SignInResultValidation) {
+    private fun validateSignInData(type: SignInValidationError) {
         _uiState.update {
             when (type) {
-                SignInResultValidation.EmptyField -> {
+                SignInValidationError.EmptyField -> {
                     it.copy(
                         fieldErrorMessage = Constants.ValidationAuthMessages.EMPTY_FIELD,
                         isFormValid = false)
                 }
 
-                SignInResultValidation.NoEmail -> {
+                SignInValidationError.NoEmail -> {
                     it.copy(
                         fieldErrorMessage = Constants.ValidationAuthMessages.INVALID_EMAIL,
                         isFormValid = false)
                 }
 
-                SignInResultValidation.PasswordTooShort -> {
+                SignInValidationError.PasswordTooShort -> {
                     it.copy(
                         fieldErrorMessage = Constants.ValidationAuthMessages.PASSWORD_TOO_SHORT,
                         isFormValid = false)
                 }
 
-                SignInResultValidation.PasswordsDoNotMatch -> {
+                SignInValidationError.PasswordsDoNotMatch -> {
                     it.copy(
                         fieldErrorMessage = Constants.ValidationAuthMessages.PASSWORDS_DO_NOT_MATCH,
                         isFormValid = false)
                 }
 
-                SignInResultValidation.PasswordUpperCaseMissing -> {
+                SignInValidationError.PasswordUpperCaseMissing -> {
                     it.copy(
                         fieldErrorMessage = Constants.ValidationAuthMessages.PASSWORD_UPPERCASE_MISSING,
                         isFormValid = false)
                 }
 
-                SignInResultValidation.PasswordSpecialCharMissing -> {
+                SignInValidationError.PasswordSpecialCharMissing -> {
                     it.copy(
                         fieldErrorMessage = Constants.ValidationAuthMessages.PASSWORD_SPECIAL_CHAR_MISSING,
                         isFormValid = false)
                 }
 
-                SignInResultValidation.PasswordNumberMissing -> {
+                SignInValidationError.PasswordNumberMissing -> {
                     it.copy(
                         fieldErrorMessage = Constants.ValidationAuthMessages.PASSWORD_NUMBER_MISSING,
                         isFormValid = false)
                 }
 
-                SignInResultValidation.Valid -> {
+                SignInValidationError.Valid -> {
                     it.copy(
                         fieldErrorMessage = "Dados validados com sucesso",
                         isFormValid = true)

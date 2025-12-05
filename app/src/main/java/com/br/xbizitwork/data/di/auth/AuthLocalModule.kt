@@ -5,8 +5,8 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStoreFile
-import com.br.xbizitwork.data.local.auth.datastore.AuthSessionLocalDataSource
-import com.br.xbizitwork.data.local.auth.datastore.AuthSessionLocalDataSourceImpl
+import com.br.xbizitwork.data.local.auth.datastore.interfaces.AuthSessionLocalDataSource
+import com.br.xbizitwork.data.local.auth.datastore.implementations.AuthSessionLocalDataSourceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
