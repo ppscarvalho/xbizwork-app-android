@@ -15,11 +15,9 @@ interface SaveAuthSessionUseCase {
 
 class SaveAuthSessionUseCaseImpl @Inject constructor(
     private val authRepository: UserAuthRepository,
-    private val coroutineDispatcherProvider: CoroutineDispatcherProvider
 ): SaveAuthSessionUseCase, FlowUseCase<SaveAuthSessionUseCase.Parameters, Unit>() {
     override suspend fun executeTask(parameters: SaveAuthSessionUseCase.Parameters): UiState<Unit> {
         return try {
-            withContext(coroutineDispatcherProvider.io()) {
                 UiState.Success(
                     authRepository.saveSession(
                         name = parameters.name,
@@ -27,7 +25,6 @@ class SaveAuthSessionUseCaseImpl @Inject constructor(
                         token = parameters.token
                     )
                 )
-            }
         }catch (e: Exception){
             UiState.Error(e)
         }

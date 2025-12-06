@@ -1,8 +1,11 @@
-@file:Suppress("DEPRECATION")
+
 package com.br.xbizitwork.data.di
 
 import com.example.xbizitwork.BuildConfig
+import com.br.xbizitwork.core.network.AuthTokenInterceptor
+import com.br.xbizitwork.data.local.auth.datastore.interfaces.AuthSessionLocalDataSource
 import com.google.gson.Gson
+import com.google.gson.Strictness
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -129,6 +132,7 @@ object NetworkModule {
     @Singleton
     fun provideHttpClient(
         okHttpClient: OkHttpClient,
+        authSessionLocalDataSource: AuthSessionLocalDataSource
     ): HttpClient {
         return HttpClient(OkHttp) {
             /**
@@ -144,7 +148,8 @@ object NetworkModule {
              */
             engine {
                 preconfigured = okHttpClient
-                config { }
+                config {
+                }
             }
 
             /**
@@ -164,7 +169,7 @@ object NetworkModule {
              */
             install(ContentNegotiation) {
                 gson {
-                    setLenient()        // Permite JSON com pequenas inconsistências
+                    setStrictness(Strictness.LENIENT)        // Permite JSON com pequenas inconsistências
                     setPrettyPrinting() // Formata JSON para melhor leitura em logs
                     serializeNulls()    // Inclui campos nulos na serialização
                 }
@@ -173,6 +178,13 @@ object NetworkModule {
              * Habilita suporte a comunicação via WebSocket.
              */
             install(WebSockets) { }
+            
+            /**
+             * ✨ NOVO: Interceptor de autenticação
+             * Adiciona automaticamente o token JWT ao header Authorization de todas
+             * as requisições autenticadas. O token é buscado do DataStore encriptado.
+             */
+            install(AuthTokenInterceptor.create(authSessionLocalDataSource))
         }
     }
 }

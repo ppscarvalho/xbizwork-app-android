@@ -45,9 +45,8 @@ interface SignUpUseCase {
  * @property authRepository Repositório responsável pelas operações de autenticação.
  */
 class SignUpUseCaseImpl @Inject constructor(
-    private val authRepository: UserAuthRepository,
-    private val coroutineDispatcherProvider: CoroutineDispatcherProvider
-) : SignUpUseCase, FlowUseCase<SignUpUseCase.Parameters, SignUpResult>(){
+    private val authRepository: UserAuthRepository
+) : SignUpUseCase, FlowUseCase<SignUpUseCase.Parameters, SignUpResult>() {
 
     /**
      * Executa efetivamente a regra de negócio do cadastro.
@@ -64,25 +63,23 @@ class SignUpUseCaseImpl @Inject constructor(
      */
     override suspend fun executeTask(parameters: SignUpUseCase.Parameters): UiState<SignUpResult> {
         return try {
-            withContext(coroutineDispatcherProvider.io()) {
-                when (val response =  authRepository.signUp(parameters.signUpModel)) {
+            when (val response = authRepository.signUp(parameters.signUpModel)) {
 
-                    /**
-                     * Cadastro realizado com sucesso.
-                     * Retorna o resultado da API encapsulado em [UiState.Success].
-                     */
-                    is DomainDefaultResult.Success -> {
-                        UiState.Success(response.data)
-                    }
+                /**
+                 * Cadastro realizado com sucesso.
+                 * Retorna o resultado da API encapsulado em [UiState.Success].
+                 */
+                is DomainDefaultResult.Success -> {
+                    UiState.Success(response.data)
+                }
 
-                    /**
-                     * Erro de regra de negócio retornado pela API.
-                     * Converte a mensagem em um [Throwable] para a UI.
-                     */
+                /**
+                 * Erro de regra de negócio retornado pela API.
+                 * Converte a mensagem em um [Throwable] para a UI.
+                 */
 
-                    is DomainDefaultResult.Error -> {
-                        UiState.Error(Throwable(response.message))
-                    }
+                is DomainDefaultResult.Error -> {
+                    UiState.Error(Throwable(response.message))
                 }
             }
         } catch (e: Exception) {

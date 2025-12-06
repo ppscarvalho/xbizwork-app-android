@@ -18,18 +18,16 @@ interface SignInUseCase {
 
 class SignInUseCaseImpl @Inject constructor(
     private val authRepository: UserAuthRepository,
-    private val coroutineDispatcherProvider: CoroutineDispatcherProvider
-) : SignInUseCase, FlowUseCase<SignInUseCase.Parameters, SignInResult>(){
+) : SignInUseCase, FlowUseCase<SignInUseCase.Parameters, SignInResult>() {
     override suspend fun executeTask(parameters: SignInUseCase.Parameters): UiState<SignInResult> {
         return try {
-            withContext(coroutineDispatcherProvider.io()) {
-                when (val response =  authRepository.signIn(parameters.signInModel)) {
-                    is DomainDefaultResult.Success -> {
-                        UiState.Success(response.data)
-                    }
-                    is DomainDefaultResult.Error -> {
-                        UiState.Error(Throwable(response.message))
-                    }
+            when (val response = authRepository.signIn(parameters.signInModel)) {
+                is DomainDefaultResult.Success -> {
+                    UiState.Success(response.data)
+                }
+
+                is DomainDefaultResult.Error -> {
+                    UiState.Error(Throwable(response.message))
                 }
             }
         } catch (e: Exception) {

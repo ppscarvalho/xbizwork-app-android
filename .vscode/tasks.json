@@ -1,0 +1,76 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Build XBizWork App",
+			"type": "shell",
+			"command": "./gradlew",
+			"args": [
+				"clean",
+				"build"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$gradle"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Build XBizWork App - Corrigido",
+			"type": "shell",
+			"command": "./gradlew",
+			"args": [
+				"clean",
+				"build"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$gradle"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Build (sem tests)",
+			"type": "shell",
+			"command": "./gradlew",
+			"args": [
+				"build",
+				"-x",
+				"test"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$gradle"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Build Final",
+			"type": "shell",
+			"command": "./gradlew",
+			"args": [
+				"build",
+				"-x",
+				"test"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$gradle"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Compile Debug",
+			"type": "shell",
+			"command": "./gradlew",
+			"args": [
+				"compileDebugKotlin"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$gradle"
+			],
+			"group": "build"
+		}
+	]
+}
