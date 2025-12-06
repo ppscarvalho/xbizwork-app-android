@@ -1,20 +1,20 @@
-package com.br.xbizitwork.application.usecase.session
+package com.br.xbizitwork.domain.usecase.session
 
 import com.br.xbizitwork.core.usecase.RawFlowUseCase
-import com.br.xbizitwork.domain.session.AuthSession
 import com.br.xbizitwork.domain.repository.auth.UserAuthRepository
+import com.br.xbizitwork.domain.session.AuthSession
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.take
 import javax.inject.Inject
 
-interface GetAuthSessionUseCase{
+interface GetAuthSessionUseCase {
     suspend operator fun invoke(parameters: Unit = Unit): Flow<AuthSession>
 }
 
 class GetAuthSessionUseCaseImpl @Inject constructor(
     private val authRepository: UserAuthRepository
-) :  GetAuthSessionUseCase, RawFlowUseCase<Unit, AuthSession>() {
+) : GetAuthSessionUseCase, RawFlowUseCase<Unit, AuthSession>() {
     override suspend fun executeTaskFlow(parameters: Unit): Flow<AuthSession> {
         return authRepository.observeSession()
             .catch { error ->

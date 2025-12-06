@@ -1,7 +1,7 @@
 package com.br.xbizitwork.data.remote.auth.datasource.implementations
 
-import com.br.xbizitwork.application.request.SignInRequestModel
-import com.br.xbizitwork.application.response.ApplicationResponseModel
+import com.br.xbizitwork.data.remote.auth.dtos.requests.SignInRequestModel
+import com.br.xbizitwork.data.remote.auth.dtos.responses.ApplicationResponseModel
 import com.br.xbizitwork.core.result.DefaultResult
 import com.br.xbizitwork.data.remote.auth.api.UserAuthApiService
 import com.br.xbizitwork.data.remote.auth.dtos.requests.SignInRequest

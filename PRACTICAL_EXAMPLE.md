@@ -160,10 +160,10 @@ class UserRepositoryImpl @Inject constructor(
 
 ## 4️⃣ Criar o UseCase
 
-### Arquivo: `application/usecase/user/GetUsersUseCase.kt`
+### Arquivo: `domain/usecase/user/GetUsersUseCase.kt`
 
 ```kotlin
-package com.br.xbizitwork.application.usecase.user
+package com.br.xbizitwork.domain.usecase.user
 
 import com.br.xbizitwork.core.state.UiState
 import com.br.xbizitwork.core.usecase.FlowUseCase
@@ -208,7 +208,7 @@ package com.br.xbizitwork.ui.presentation.users
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.br.xbizitwork.application.usecase.user.GetUsersUseCase
+import com.br.xbizitwork.domain.usecase.user.GetUsersUseCase
 import com.br.xbizitwork.core.state.UiState
 import com.br.xbizitwork.domain.model.user.UserModel
 import dagger.hilt.android.lifecycle.HiltViewModel

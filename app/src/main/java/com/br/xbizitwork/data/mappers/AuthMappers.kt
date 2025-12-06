@@ -1,11 +1,11 @@
-package com.br.xbizitwork.application.mappers
+package com.br.xbizitwork.data.mappers
 
-import com.br.xbizitwork.application.request.SignInRequestModel
-import com.br.xbizitwork.application.response.ApplicationResponseModel
-import com.br.xbizitwork.application.response.ApplicationResultModel
+import com.br.xbizitwork.data.remote.auth.dtos.requests.SignInRequestModel
+import com.br.xbizitwork.data.remote.auth.dtos.responses.ApplicationResponseModel
+import com.br.xbizitwork.data.remote.auth.dtos.responses.ApplicationResultModel
 import com.br.xbizitwork.data.remote.auth.dtos.requests.SignInRequest
 import com.br.xbizitwork.data.remote.auth.dtos.requests.SignUpRequest
-import com.br.xbizitwork.application.request.SignUpRequestModel
+import com.br.xbizitwork.data.remote.auth.dtos.requests.SignUpRequestModel
 import com.br.xbizitwork.data.remote.auth.dtos.responses.SignInResponse
 import com.br.xbizitwork.data.remote.auth.dtos.responses.SignInResponseModel
 import com.br.xbizitwork.domain.model.auth.SignInModel

@@ -1,15 +1,15 @@
 package com.br.xbizitwork.data.di.auth
 
-import com.br.xbizitwork.application.usecase.auth.SignInUseCase
-import com.br.xbizitwork.application.usecase.auth.SignInUseCaseImpl
-import com.br.xbizitwork.application.usecase.auth.SignUpUseCase
-import com.br.xbizitwork.application.usecase.auth.SignUpUseCaseImpl
-import com.br.xbizitwork.application.usecase.session.GetAuthSessionUseCase
-import com.br.xbizitwork.application.usecase.session.GetAuthSessionUseCaseImpl
-import com.br.xbizitwork.application.usecase.session.RemoveAuthSessionUseCase
-import com.br.xbizitwork.application.usecase.session.RemoveAuthSessionUseCaseImpl
-import com.br.xbizitwork.application.usecase.session.SaveAuthSessionUseCase
-import com.br.xbizitwork.application.usecase.session.SaveAuthSessionUseCaseImpl
+import com.br.xbizitwork.domain.usecase.auth.SignInUseCase
+import com.br.xbizitwork.domain.usecase.auth.SignInUseCaseImpl
+import com.br.xbizitwork.domain.usecase.auth.SignUpUseCase
+import com.br.xbizitwork.domain.usecase.auth.SignUpUseCaseImpl
+import com.br.xbizitwork.domain.usecase.session.GetAuthSessionUseCase
+import com.br.xbizitwork.domain.usecase.session.GetAuthSessionUseCaseImpl
+import com.br.xbizitwork.domain.usecase.session.RemoveAuthSessionUseCase
+import com.br.xbizitwork.domain.usecase.session.RemoveAuthSessionUseCaseImpl
+import com.br.xbizitwork.domain.usecase.session.SaveAuthSessionUseCase
+import com.br.xbizitwork.domain.usecase.session.SaveAuthSessionUseCaseImpl
 import com.br.xbizitwork.domain.repository.auth.UserAuthRepository
 import dagger.Module
 import dagger.Provides

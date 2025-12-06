@@ -1,14 +1,12 @@
-package com.br.xbizitwork.application.usecase.auth
+package com.br.xbizitwork.domain.usecase.auth
 
-import com.br.xbizitwork.core.dispatcher.CoroutineDispatcherProvider
 import com.br.xbizitwork.core.state.UiState
 import com.br.xbizitwork.core.usecase.FlowUseCase
-import com.br.xbizitwork.domain.model.auth.SignInModel
-import com.br.xbizitwork.domain.result.auth.SignInResult
-import com.br.xbizitwork.domain.repository.auth.UserAuthRepository
 import com.br.xbizitwork.domain.common.DomainDefaultResult
+import com.br.xbizitwork.domain.model.auth.SignInModel
+import com.br.xbizitwork.domain.repository.auth.UserAuthRepository
+import com.br.xbizitwork.domain.result.auth.SignInResult
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 interface SignInUseCase {
@@ -35,4 +33,3 @@ class SignInUseCaseImpl @Inject constructor(
         }
     }
 }
-

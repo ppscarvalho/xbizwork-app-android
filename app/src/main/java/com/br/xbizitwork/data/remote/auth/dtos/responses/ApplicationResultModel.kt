@@ -1,4 +1,4 @@
-package com.br.xbizitwork.application.response
+package com.br.xbizitwork.data.remote.auth.dtos.responses
 
 data class ApplicationResultModel(
     val isSuccessful: Boolean,

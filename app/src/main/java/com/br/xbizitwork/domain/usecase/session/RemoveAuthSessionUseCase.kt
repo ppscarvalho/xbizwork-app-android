@@ -1,4 +1,4 @@
-package com.br.xbizitwork.application.usecase.session
+package com.br.xbizitwork.domain.usecase.session
 
 import com.br.xbizitwork.core.state.UiState
 import com.br.xbizitwork.core.usecase.RawFlowUseCase
@@ -13,13 +13,13 @@ interface RemoveAuthSessionUseCase {
 
 class RemoveAuthSessionUseCaseImpl @Inject constructor(
     private val authRepository: UserAuthRepository,
-): RemoveAuthSessionUseCase, RawFlowUseCase<Unit, UiState<Unit>>() {
+) : RemoveAuthSessionUseCase, RawFlowUseCase<Unit, UiState<Unit>>() {
     override suspend fun executeTaskFlow(parameters: Unit): Flow<UiState<Unit>> {
         return flow {
             try {
                 emit(UiState.Success(authRepository.clearSession()))
             } catch (e: Exception) {
-                UiState.Error(e)
+                emit(UiState.Error(e))
             }
         }
     }

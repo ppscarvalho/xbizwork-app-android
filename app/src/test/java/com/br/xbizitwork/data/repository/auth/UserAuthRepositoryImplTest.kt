@@ -1,6 +1,6 @@
 package com.br.xbizitwork.data.repository.auth
 
-import com.br.xbizitwork.application.response.ApplicationResponseModel
+import com.br.xbizitwork.data.remote.auth.dtos.responses.ApplicationResponseModel
 import com.br.xbizitwork.core.dispatcher.CoroutineDispatcherProvider
 import com.br.xbizitwork.core.result.DefaultResult
 import com.br.xbizitwork.data.local.auth.datastore.interfaces.AuthSessionLocalDataSource

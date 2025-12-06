@@ -1,4 +1,4 @@
-package com.br.xbizitwork.application.response
+package com.br.xbizitwork.data.remote.auth.dtos.responses
 
 data class ApplicationResponseModel(
     val name: String? = null,

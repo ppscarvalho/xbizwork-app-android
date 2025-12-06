@@ -1,9 +1,9 @@
 package com.br.xbizitwork.data.repository.auth
 
-import com.br.xbizitwork.application.mappers.toDomainResponse
-import com.br.xbizitwork.application.mappers.toDomainResult
-import com.br.xbizitwork.application.mappers.toSignInRequestModel
-import com.br.xbizitwork.application.mappers.toSignUpRequestModel
+import com.br.xbizitwork.data.mappers.toDomainResponse
+import com.br.xbizitwork.data.mappers.toDomainResult
+import com.br.xbizitwork.data.mappers.toSignInRequestModel
+import com.br.xbizitwork.data.mappers.toSignUpRequestModel
 import com.br.xbizitwork.core.dispatcher.CoroutineDispatcherProvider
 import com.br.xbizitwork.core.result.DefaultResult
 import com.br.xbizitwork.data.local.auth.datastore.interfaces.AuthSessionLocalDataSource

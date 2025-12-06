@@ -2,14 +2,14 @@ package com.br.xbizitwork.ui.presentation.features.auth.signin.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.br.xbizitwork.application.usecase.auth.SignInUseCase
+import com.br.xbizitwork.domain.usecase.auth.SignInUseCase
 import com.br.xbizitwork.core.config.Constants
 import com.br.xbizitwork.core.sideeffects.SideEffect
 import com.br.xbizitwork.core.util.extensions.collectUiState
 import com.br.xbizitwork.domain.validations.auth.SignInValidationError
 import com.br.xbizitwork.domain.model.auth.SignInModel
 import com.br.xbizitwork.domain.usecase.auth.signin.ValidateSignInUseCase
-import com.br.xbizitwork.application.usecase.session.SaveAuthSessionUseCase
+import com.br.xbizitwork.domain.usecase.session.SaveAuthSessionUseCase
 import com.br.xbizitwork.ui.presentation.features.auth.signin.events.SignInEvent
 import com.br.xbizitwork.ui.presentation.features.auth.signin.state.SignInState
 import dagger.hilt.android.lifecycle.HiltViewModel

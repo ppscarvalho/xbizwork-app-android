@@ -3,7 +3,7 @@ package com.br.xbizitwork.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.br.xbizitwork.core.util.logging.logInfo
-import com.br.xbizitwork.application.usecase.session.GetAuthSessionUseCase
+import com.br.xbizitwork.domain.usecase.session.GetAuthSessionUseCase
 import com.br.xbizitwork.ui.presentation.navigation.screens.Graphs
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
