@@ -85,7 +85,7 @@ fun AutoScrollingCarousel(
                     delay(pauseBetweenItemsMillis)
 
                     val steps = 30 // Número de passos para a animação de um item
-                    val durationPerItemMs = 1000L // Duração para rolar UM item
+                    val durationPerItemMs = 500L // Duração para rolar UM item
 
                     val currentItemOffsetPx = lazyListState.firstVisibleItemScrollOffset.toFloat()
                     val scrollAmountForNextItemPx = itemWidthWithSpacingPx - currentItemOffsetPx

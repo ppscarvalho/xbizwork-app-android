@@ -30,6 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.xbizitwork.R
+import com.br.xbizitwork.ui.presentation.common.StringAssets
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
 import com.br.xbizitwork.ui.theme.poppinsFOntFamily
 
@@ -69,7 +70,7 @@ fun AppTopBar(
                     modifier = Modifier.weight(1f)
                 ) {
                     Text(
-                        text = stringResource(id = R.string.welcome_text),
+                        text = stringResource(id = StringAssets.WELCOME_TEXT),
                         fontSize = 12.sp,
                         fontFamily = poppinsFOntFamily,
                         fontWeight = FontWeight.Normal,
@@ -92,7 +93,7 @@ fun AppTopBar(
                 ) {
                     Icon(
                         imageVector = Icons.Outlined.Person,
-                        contentDescription = stringResource(id = R.string.settings_text),
+                        contentDescription = stringResource(id = StringAssets.SETTINGS_TEXT),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier
                             .size(32.dp)
@@ -125,20 +126,20 @@ private fun CompanyLogo(modifier: Modifier = Modifier) {
             .padding(4.dp)
     ) {
         Text(
-            text = stringResource(id = R.string.app_name_xbiz),
-            fontSize = 10.sp,
+            text = stringResource(id = StringAssets.APP_NAME_XBIZ),
+            fontSize = 9.sp,
             fontFamily = poppinsFOntFamily,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.primary,
+            color = Color(0xFFFF6E10),
             textAlign = TextAlign.Center,
             lineHeight = 9.sp
         )
         Text(
-            text = stringResource(id = R.string.app_name_work),
-            fontSize = 12.sp,
+            text = stringResource(id = StringAssets.APP_NAME_WORK),
+            fontSize = 8.sp,
             fontFamily = poppinsFOntFamily,
             fontWeight = FontWeight.Bold,
-            color = Color.White,
+            color = Color.Black,
             textAlign = TextAlign.Center,
             lineHeight = 8.sp
         )
