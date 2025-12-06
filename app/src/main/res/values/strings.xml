@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">XBizWork</string>
+
+    <!--    App Bar-->
+    <string name="app_name_xbiz">XBiz</string>
+    <string name="app_name_work">Work</string>
+    <string name="welcome_text">Olá</string>
+    <string name="settings_text">Olá</string>
+
     <!--    Common-->
     <string name="xbizitwork_app_text">Central de Serviço App</string>
     <string name="xbizitwork_text">xbizitwork</string>
@@ -99,6 +106,21 @@
     <string name="unknown_user">Usuário Desconhecido</string>
     <string name="accept_connection">Aceitar Conexão</string>
     <string name="decline_connection">Recusar Conexão</string>
+
+    <!-- Strings de CardContainer -->
+    <string name="divulgue_text">Divulgue</string>
+    <string name="seu_trabalho_text">seu trabalho! Cadastra-se</string>
+    <string name="indique_text">Indique um</string>
+    <string name="profissional_text">seu trabalho! Cadastra-se</string>
+
+    <!-- Strings de CarouselImageItem Profissões-->
+    <string name="educacao_text">Educação</string>
+    <string name="saude_text">Saúde</string>
+    <string name="diarista_text">Diarista</string>
+    <string name="manicure_text">Manicure</string>
+    <string name="construcao_civil_text">Contrução Civil</string>
+    <string name="limpeza_terreno_text">Limpeza de Terreno</string>
+    <string name="refrigeracao_text">Refrigeração</string>
 
     <string-array name="categories">
         <item>Café da Manhã</item>

@@ -1,23 +1,20 @@
-package com.br.xbizitwork.ui.presentation.navigation.graphs
+package com.br.xbizitwork.ui.presentation.features.home.navigation
 
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavOptions
-import androidx.navigation.navigation
-import com.br.xbizitwork.ui.presentation.features.home.navigation.homeScreen
-import com.br.xbizitwork.ui.presentation.navigation.screens.Graphs
+import androidx.navigation.compose.composable
+import com.br.xbizitwork.ui.presentation.features.home.screen.DefaultScreen
 import com.br.xbizitwork.ui.presentation.navigation.screens.HomeScreens
 
-fun NavGraphBuilder.homeGraph(
-    onNavigateUp: () -> Unit,
+fun NavGraphBuilder.homeScreen(
     onNavigationToProfileScreen: () -> Unit,
     onNavigationToSearchScreen: () -> Unit,
     onNavigationToUsersConnectionScreen: () -> Unit,
     onNavigationToMenuScreen: () -> Unit,
     onProfileClick: () -> Unit
 ){
-    navigation<Graphs.HomeGraphs>(startDestination = HomeScreens.HomeScreen) {
-        homeScreen(
+    composable<HomeScreens.HomeScreen> {
+        DefaultScreen(
+            onLogout = {},
             onNavigationToProfileScreen = onNavigationToProfileScreen,
             onNavigationToSearchScreen = onNavigationToSearchScreen,
             onNavigationToUsersConnectionScreen = onNavigationToUsersConnectionScreen,
@@ -25,9 +22,4 @@ fun NavGraphBuilder.homeGraph(
             onProfileClick = onProfileClick
         )
     }
-}
-fun NavController.navigationToHomeGraph(
-    navOptions: NavOptions? = null
-){
-    navigate(Graphs.HomeGraphs, navOptions)
 }

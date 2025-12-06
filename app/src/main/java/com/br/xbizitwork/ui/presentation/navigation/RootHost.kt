@@ -33,7 +33,12 @@ fun RootHost(
         homeGraph(
             onNavigateUp = {
                 navController.navigateUp()
-            }
+            },
+            onNavigationToProfileScreen = {},
+            onNavigationToSearchScreen = {},
+            onNavigationToUsersConnectionScreen = {},
+            onNavigationToMenuScreen = {},
+            onProfileClick = {}
         )
     }
 }
