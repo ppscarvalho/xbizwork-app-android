@@ -96,7 +96,7 @@ private fun BottomBarItem(
         Icon(
             imageVector = icon,
             contentDescription = label,
-            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+            tint = MaterialTheme.colorScheme.onPrimary,
             modifier = Modifier
                 .size(26.dp)
                 .padding(bottom = 4.dp)
@@ -104,7 +104,7 @@ private fun BottomBarItem(
         Text(
             text = label,
             fontSize = 12.sp,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            color = MaterialTheme.colorScheme.onPrimary,
             textAlign = TextAlign.Center,
             fontFamily = MaterialTheme.typography.bodySmall.fontFamily
         )

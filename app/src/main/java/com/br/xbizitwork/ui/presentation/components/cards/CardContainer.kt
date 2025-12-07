@@ -1,5 +1,6 @@
 package com.br.xbizitwork.ui.presentation.components.cards
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -15,13 +16,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.br.xbizitwork.ui.theme.XBizWorkTheme
 import com.example.xbizitwork.R
 
 @Composable
 fun CardContainer(
     modifier: Modifier = Modifier,
-    onNavigateToSignScreen: () -> Unit
+    onNavigationToSignInScreen: () -> Unit
 ) {
     Row(
         modifier = modifier
@@ -35,7 +38,7 @@ fun CardContainer(
             title = stringResource(id = R.string.divulgue_text),
             subtitle = stringResource(id = R.string.seu_trabalho_text),
             backgroundColor = MaterialTheme.colorScheme.primaryContainer,
-            onClick = { onNavigateToSignScreen() },
+            onClick = { onNavigationToSignInScreen() },
             modifier = Modifier.weight(1f)
         )
         Spacer(modifier = Modifier.width(12.dp))
@@ -46,6 +49,17 @@ fun CardContainer(
             backgroundColor = MaterialTheme.colorScheme.secondaryContainer,
             onClick = { },
             modifier = Modifier.weight(1f)
+        )
+    }
+}
+
+@Preview (showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun CadContainerPreview() {
+    XBizWorkTheme {
+        CardContainer(
+            modifier = Modifier.fillMaxWidth(),
+            onNavigationToSignInScreen = {}
         )
     }
 }

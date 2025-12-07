@@ -1,5 +1,6 @@
 package com.br.xbizitwork.ui.presentation.components.professionalhighlight
 
+import android.content.res.Configuration
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -54,7 +55,7 @@ fun ProfessionalHighlight(
     ) {
         Row(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
                 .background(backgroundColor) // ✅ Aqui está o fundo aplicado
                 .padding(8.dp),
             verticalAlignment = Alignment.CenterVertically
@@ -78,14 +79,16 @@ fun ProfessionalHighlight(
                         fontWeight = FontWeight.Medium,
                         style = MaterialTheme.typography.titleMedium,
                         fontFamily = poppinsFOntFamily,
-                        fontSize = 14.sp
+                        fontSize = 14.sp,
+                        color = Color.Black
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
                         "⭐️ $rating ($recommendations)",
                         fontSize = 11.sp,
-                        fontFamily = poppinsFOntFamily
-                        )
+                        fontFamily = poppinsFOntFamily,
+                        color = Color.Black
+                    )
                 }
                 Text(role, fontSize = 12.sp, color = Color.Gray)
             }
@@ -93,7 +96,7 @@ fun ProfessionalHighlight(
     }
 }
 
-@Preview
+@Preview (showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun ProfessionalHighlightComponentPreview() {
     XBizWorkTheme {
@@ -103,7 +106,7 @@ private fun ProfessionalHighlightComponentPreview() {
             recommendations = 10,
             rating = 4.5f,
             imageRes = R.drawable.avatar_1,
-            backgroundColor = Color(0xFFC0DEDD),
+            backgroundColor = Color(0xFFE0F2FE),
             onProfileClick = ({})
         )
     }

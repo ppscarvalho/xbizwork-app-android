@@ -1,5 +1,6 @@
 package com.br.xbizitwork.ui.presentation.features.auth.signin.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -36,8 +37,7 @@ fun SignInContent(
     onNavigateToSignUpScreen: () -> Unit,
     onEmailChanged: (String) -> Unit,
     onPasswordChanged: (String) -> Unit,
-    onSignInClick: () -> Unit,
-    onNavigateToHomeGraph: () -> Unit
+    onSignInClick: () -> Unit
 ) {
    Box(
        modifier = modifier
@@ -124,7 +124,7 @@ fun SignInContent(
    }
 }
 
-@Preview (showBackground = true, backgroundColor = 0xFFF0EAE2)
+@Preview (showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun SignInContentPreview() {
     XBizWorkTheme {
@@ -137,8 +137,7 @@ private fun SignInContentPreview() {
             onNavigateToSignUpScreen = {},
             onEmailChanged = {},
             onPasswordChanged = {},
-            onSignInClick = {},
-            onNavigateToHomeGraph = {}
+            onSignInClick = {}
         )
     }
 }

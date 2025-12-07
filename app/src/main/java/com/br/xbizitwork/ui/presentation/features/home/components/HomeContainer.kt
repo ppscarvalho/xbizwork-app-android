@@ -1,5 +1,6 @@
 package com.br.xbizitwork.ui.presentation.features.home.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -10,12 +11,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.br.xbizitwork.ui.presentation.components.cards.PromotionalContainer
+import com.br.xbizitwork.ui.presentation.components.carousel.CarouselContainer
+import com.br.xbizitwork.ui.presentation.components.professionalhighlight.ProfessionalsHighlightContainer
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
 
 @Composable
 fun HomeContainer(
     modifier: Modifier = Modifier,
-    onNavigateToSignScreen: () -> Unit,
+    onNavigationToSignInScreen: () -> Unit,
     onProfileClick: () -> Unit
 ) {
     Column(
@@ -36,7 +40,7 @@ fun HomeContainer(
             item {
                 PromotionalContainer(
                     modifier = Modifier.fillMaxWidth(),
-                    onNavigateToSignScreen = onNavigateToSignScreen
+                    onNavigationToSignInScreen = onNavigationToSignInScreen
                 )
             }
 
@@ -50,13 +54,13 @@ fun HomeContainer(
     }
 }
 
-@Preview
+@Preview (showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun HomeContainerPreview() {
     XBizWorkTheme {
         HomeContainer(
             modifier = Modifier.fillMaxSize(),
-            onNavigateToSignScreen = {},
+            onNavigationToSignInScreen = {},
             onProfileClick = {}
         )
     }

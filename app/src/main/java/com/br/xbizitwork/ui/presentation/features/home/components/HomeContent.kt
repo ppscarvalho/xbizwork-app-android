@@ -11,7 +11,7 @@ import com.br.xbizitwork.ui.theme.XBizWorkTheme
 @Composable
 fun HomeContent(
     modifier: Modifier = Modifier,
-    onNavigateToSignScreen: () -> Unit,
+    onNavigationToSignInScreen: () -> Unit,
     onProfileClick: () -> Unit
 ) {
     Column(
@@ -21,7 +21,7 @@ fun HomeContent(
     ) {
         HomeContainer(
             modifier = Modifier.weight(1f),
-            onNavigateToSignScreen = onNavigateToSignScreen,
+            onNavigationToSignInScreen = onNavigationToSignInScreen,
             onProfileClick = onProfileClick
         )
     }
@@ -32,7 +32,7 @@ fun HomeContent(
 private fun HomeContentPreview() {
     XBizWorkTheme {
         HomeContent(
-            onNavigateToSignScreen = {},
+            onNavigationToSignInScreen = {},
             onProfileClick = {}
         )
     }

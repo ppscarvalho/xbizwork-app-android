@@ -10,19 +10,21 @@ import com.br.xbizitwork.ui.presentation.navigation.screens.HomeScreens
 
 fun NavGraphBuilder.homeGraph(
     onNavigateUp: () -> Unit,
-    onNavigationToProfileScreen: () -> Unit,
-    onNavigationToSearchScreen: () -> Unit,
-    onNavigationToUsersConnectionScreen: () -> Unit,
-    onNavigationToMenuScreen: () -> Unit,
-    onProfileClick: () -> Unit
+    onNavigateToSignInScreen: () -> Unit,
+    onNavigateToProfileScreen: () -> Unit,
+    onNavigateToSearchScreen: () -> Unit,
+    onNavigateToUsersConnectionScreen: () -> Unit,
+    onNavigateToMenuScreen: () -> Unit,
+    onNavigateProfileClick: () -> Unit
 ){
     navigation<Graphs.HomeGraphs>(startDestination = HomeScreens.HomeScreen) {
         homeScreen(
-            onNavigationToProfileScreen = onNavigationToProfileScreen,
-            onNavigationToSearchScreen = onNavigationToSearchScreen,
-            onNavigationToUsersConnectionScreen = onNavigationToUsersConnectionScreen,
-            onNavigationToMenuScreen = onNavigationToMenuScreen,
-            onProfileClick = onProfileClick
+            onNavigateToSignInScreen = onNavigateToSignInScreen,
+            onNavigateToProfileScreen = onNavigateToProfileScreen,
+            onNavigateToSearchScreen = onNavigateToSearchScreen,
+            onNavigateToUsersConnectionScreen = onNavigateToUsersConnectionScreen,
+            onNavigateToMenuScreen = onNavigateToMenuScreen,
+            onNavigateProfileClick = onNavigateProfileClick
         )
     }
 }

@@ -15,7 +15,10 @@ object ImageAssets {
     
     @DrawableRes
     val AVATAR_4 = R.drawable.avatar_4
-    
+
+    @DrawableRes
+    val AVATAR_2 = R.drawable.avatar_2
+
     // Categoria - Carousel
     @DrawableRes
     val CATEGORIA_EDUCACAO = R.drawable.educacao

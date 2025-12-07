@@ -51,8 +51,8 @@ fun SignInContainer(
             value = emailValue,
             onValueChange = onEmailChanged,
             leadingIcon = Icons.Outlined.Email,
-            textColor = colorScheme.onSurface,
-            cursorColor = colorScheme.onSurface
+            textColor = colorScheme.onSurfaceVariant,
+            cursorColor = colorScheme.onSurfaceVariant
         )
 
         // ✅ Campo Senha (NOVO)
@@ -63,8 +63,8 @@ fun SignInContainer(
             value = passwordValue,
             onValueChange = onPasswordChanged,
             leadingIcon = Icons.Outlined.Lock,
-            textColor = colorScheme.onSurface,
-            cursorColor = colorScheme.onSurface
+            textColor = colorScheme.onSurfaceVariant,
+            cursorColor = colorScheme.onSurfaceVariant
         )
 
         Column(

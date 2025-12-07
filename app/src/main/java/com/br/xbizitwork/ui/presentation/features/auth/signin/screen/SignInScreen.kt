@@ -1,11 +1,15 @@
 package com.br.xbizitwork.ui.presentation.features.auth.signin.screen
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.ArrowBack
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import com.br.xbizitwork.core.sideeffects.SideEffect
 import com.br.xbizitwork.core.state.LifecycleEventEffect
 import com.br.xbizitwork.core.util.extensions.toast
+import com.br.xbizitwork.ui.presentation.components.topbar.AppTopBar
 import com.br.xbizitwork.ui.presentation.features.auth.signin.components.SignInContent
 import com.br.xbizitwork.ui.presentation.features.auth.signin.events.SignInEvent
 import com.br.xbizitwork.ui.presentation.features.auth.signin.state.SignInState
@@ -36,6 +40,16 @@ fun SignInScreen(
     )
 
     Scaffold(
+        containerColor = MaterialTheme.colorScheme.background,
+        topBar = {
+            AppTopBar(
+                isHomeMode = false,
+                title = "Login",
+                navigationImageVector = Icons.AutoMirrored.Outlined.ArrowBack,
+                enableNavigationUp = true,
+                onNavigationIconButton = { onNavigateToHomeGraph() }
+            )
+        },
         content = {paddingValues ->
             SignInContent(
                 paddingValues = paddingValues,
@@ -44,7 +58,7 @@ fun SignInScreen(
                 onPasswordChanged = onPasswordChanged,
                 onSignInClick = {onEvent(SignInEvent.OnSignInClick)},
                 onNavigateToSignUpScreen = onNavigateToSignUpScreen,
-                onNavigateToHomeGraph = onNavigateToHomeGraph
+                //onNavigateToHomeGraph = onNavigateToHomeGraph
             )
         }
     )

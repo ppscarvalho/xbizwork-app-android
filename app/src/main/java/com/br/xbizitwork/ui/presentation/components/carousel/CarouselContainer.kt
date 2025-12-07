@@ -1,4 +1,4 @@
-package com.br.xbizitwork.ui.presentation.features.home.components
+package com.br.xbizitwork.ui.presentation.components.carousel
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,7 +12,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.br.xbizitwork.ui.presentation.common.ImageAssets
 import com.br.xbizitwork.ui.presentation.common.StringAssets
-import com.br.xbizitwork.ui.presentation.components.carousel.AutoScrollingCarousel
 import com.br.xbizitwork.ui.presentation.features.home.state.CarouselImageItem
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
 

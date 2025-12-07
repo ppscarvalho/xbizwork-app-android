@@ -34,11 +34,14 @@ fun RootHost(
             onNavigateUp = {
                 navController.navigateUp()
             },
-            onNavigationToProfileScreen = {},
-            onNavigationToSearchScreen = {},
-            onNavigationToUsersConnectionScreen = {},
-            onNavigationToMenuScreen = {},
-            onProfileClick = {}
+            onNavigateToProfileScreen = {},
+            onNavigateToSearchScreen = {},
+            onNavigateToUsersConnectionScreen = {},
+            onNavigateToMenuScreen = {},
+            onNavigateProfileClick = {},
+            onNavigateToSignInScreen ={
+                navController.navigateToSignInScreen()
+            }
         )
     }
 }

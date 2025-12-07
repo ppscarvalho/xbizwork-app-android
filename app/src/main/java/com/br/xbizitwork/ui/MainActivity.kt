@@ -12,6 +12,7 @@ import com.br.xbizitwork.ui.presentation.navigation.RootHost
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.compose.runtime.getValue
+import com.br.xbizitwork.ui.presentation.navigation.screens.Graphs
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -30,7 +31,7 @@ class MainActivity : ComponentActivity() {
                 val uiState by viewModel.uiState.collectAsStateWithLifecycle()
                 val navController: NavHostController = rememberNavController()
                 RootHost(
-                    startDestination = uiState.startDestination,
+                    startDestination = Graphs.HomeGraphs, //uiState.startDestination,
                     navController = navController,
                 )
             }
