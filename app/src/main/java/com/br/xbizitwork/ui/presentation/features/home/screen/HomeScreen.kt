@@ -47,7 +47,7 @@ fun DefaultScreen(
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
             AppTopBar(
-                username = uiState.userName ?: "Usuário",  // ✅ CORRIGIDO: Mostrar valor padrão quando null
+                username = if (uiState.userName.isNullOrEmpty()) "Usuário" else uiState.userName,  // ✅ CORRIGIDO: Trata null E string vazia
                 onRightIconClick = {onLogout()}
             )
         },

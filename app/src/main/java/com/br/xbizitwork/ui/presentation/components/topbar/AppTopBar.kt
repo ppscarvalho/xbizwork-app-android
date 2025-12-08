@@ -6,7 +6,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -34,7 +33,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.xbizitwork.R
 import com.br.xbizitwork.ui.presentation.common.StringAssets
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
 import com.br.xbizitwork.ui.theme.poppinsFOntFamily
@@ -57,7 +55,7 @@ fun AppTopBar(
     isHomeMode: Boolean = true,
     
     // Parâmetros modo Home
-    username: String = "João",
+    username: String? = null,
     onRightIconClick: () -> Unit = {},
     companyLogoContent: @Composable () -> Unit = { CompanyLogo() },
     
@@ -101,7 +99,7 @@ fun AppTopBar(
 @Composable
 private fun HomeTopBar(
     modifier: Modifier = Modifier,
-    username: String,
+    username: String? = null,
     onRightIconClick: () -> Unit,
     companyLogoContent: @Composable () -> Unit
 ) {
@@ -138,7 +136,7 @@ private fun HomeTopBar(
                         textAlign = TextAlign.Center
                     )
                     Text(
-                        text = username,
+                        text = if (username.isNullOrEmpty()) "Usuário" else username,  // ✅ CORRIGIDO: Trata null E string vazia
                         fontSize = 14.sp,
                         fontFamily = poppinsFOntFamily,
                         color = MaterialTheme.colorScheme.onPrimary,
