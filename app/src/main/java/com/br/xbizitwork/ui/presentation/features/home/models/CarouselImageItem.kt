@@ -1,4 +1,4 @@
-package com.br.xbizitwork.ui.presentation.features.home.state
+package com.br.xbizitwork.ui.presentation.features.home.models
 
 import androidx.annotation.DrawableRes
 

@@ -1,4 +1,4 @@
-package com.br.xbizitwork.data.local.auth.datastore.interfaces
+package com.br.xbizitwork.data.local.auth.datastore
 
 import com.br.xbizitwork.domain.session.AuthSession
 import kotlinx.coroutines.flow.Flow

@@ -6,6 +6,7 @@ import com.br.xbizitwork.domain.usecase.auth.signin.SignInUseCase
 import com.br.xbizitwork.core.config.Constants
 import com.br.xbizitwork.core.sideeffects.SideEffect
 import com.br.xbizitwork.core.util.extensions.collectUiState
+import com.br.xbizitwork.core.util.logging.logInfo
 import com.br.xbizitwork.domain.validations.auth.SignInValidationError
 import com.br.xbizitwork.domain.model.auth.SignInModel
 import com.br.xbizitwork.domain.usecase.auth.signin.ValidateSignInUseCase
@@ -65,11 +66,18 @@ class SignInViewModel @Inject constructor(
                     _uiState.update { it.copy(isLoading = true) }
                 },
                 onSuccess = {response ->
+                    logInfo("SIGN_IN_SUCCESS", "Response recebido: name=${response.name}, email=${response.email}, token=${response.token}")
                     _uiState.update {
                         it.copy(isLoading = false, isSuccess = response.isSuccessful )
                     }
                     _sideEffectChannel.send(SideEffect.ShowToast(response.message.toString()))
-                    saveLocalSession(response.name.toString(), response.email.toString(), response.token.toString())
+                    // ✅ CORRIGIDO: Verificar valores nulos antes de converter
+                    if (!response.name.isNullOrEmpty() && !response.email.isNullOrEmpty() && !response.token.isNullOrEmpty()) {
+                        saveLocalSession(response.name!!, response.email!!, response.token!!)
+                    } else {
+                        logInfo("SIGN_IN_ERROR", "Dados vazios recebidos: name=${response.name}, email=${response.email}, token=${response.token}")
+                        _sideEffectChannel.send(SideEffect.ShowToast("Erro: Dados vazios recebidos do servidor"))
+                    }
                 },
                 onFailure = {error ->
                     _uiState.update {
@@ -81,6 +89,7 @@ class SignInViewModel @Inject constructor(
     }
 
     private suspend fun saveLocalSession(name: String, email: String, token: String) {
+        logInfo("SAVE_SESSION", "Salvando sessão: name=$name, email=$email, token=$token")
         saveAuthSessionUseCase.invoke(
             SaveAuthSessionUseCase.Parameters(
                 name = name,
@@ -88,8 +97,12 @@ class SignInViewModel @Inject constructor(
                 token = token)
         ).collectUiState(
             onLoading = {/*NO-OP*/},
-            onSuccess = {/*NO-OP*/},
-            onFailure = {/*NO-OP*/}
+            onSuccess = {
+                logInfo("SAVE_SESSION", "Sessão salva com sucesso!")
+            },
+            onFailure = {error ->
+                logInfo("SAVE_SESSION", "Erro ao salvar sessão: ${error.message}")
+            }
         )
     }
 

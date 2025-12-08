@@ -7,6 +7,7 @@ import com.br.xbizitwork.core.network.RetryPolicy
 import com.br.xbizitwork.core.network.SimpleCache
 import com.br.xbizitwork.core.network.retryWithExponentialBackoff
 import com.br.xbizitwork.core.result.DefaultResult
+import com.br.xbizitwork.core.util.logging.logInfo
 import com.br.xbizitwork.data.mappers.toLoginRequest
 import com.br.xbizitwork.data.mappers.toLoginResponseModel
 import com.br.xbizitwork.data.mappers.toSignUpRequest
@@ -54,10 +55,12 @@ class UserAuthRemoteDataSourceImpl @Inject constructor(
 
             if (response.isSuccessful) {
                 val result = response.toLoginResponseModel()
+                logInfo("REMOTE_DATA_SOURCE", "SignInResponse convertido para ResponseModel: name=${result.name}, email=${result.email}, token=${result.token}")
                 // Armazena em cache por 5 minutos
                 authCache.put("sign_in_${request.email}", result, ttlMs = 5 * 60 * 1000)
                 DefaultResult.Success(result)
             } else {
+                logInfo("REMOTE_DATA_SOURCE", "Resposta sem sucesso: ${response.message}")
                 DefaultResult.Error(message = response.message)
             }
 

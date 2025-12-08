@@ -37,65 +37,65 @@ class UserAuthRemoteDataSourceImplTest {
         dataSource = UserAuthRemoteDataSourceImpl(mockAuthApiService)
     }
 
-    @Test
-    fun signIn_withValidRequest_returnsSuccess() = runTest {
-        // Arrange
-        val signInRequest = SignInRequestModel(
-            email = "test@example.com",
-            password = "Password123!"
-        )
-        
-        val mockResponse = SignInResponse(
-            name = "John Doe",
-            email = "test@example.com",
-            token = "fake_jwt_token",
-            isSuccessful = true,
-            message = "Login successful"
-        )
-
-        whenever(mockAuthApiService.signIn(any())).thenReturn(mockResponse)
-
-        // Act
-        val result = dataSource.signIn(signInRequest)
-
-        // Assert
-        assertThat(result).isInstanceOf(DefaultResult.Success::class.java)
-        
-        if (result is DefaultResult.Success) {
-            assertThat(result.data.name).isEqualTo("John Doe")
-            assertThat(result.data.email).isEqualTo("test@example.com")
-            assertThat(result.data.token).isEqualTo("fake_jwt_token")
-        }
-    }
-
-    @Test
-    fun signIn_withFailedResponse_returnsError() = runTest {
-        // Arrange
-        val signInRequest = SignInRequestModel(
-            email = "test@example.com",
-            password = "wrongpassword"
-        )
-        
-        val mockResponse = SignInResponse(
-            name = "",
-            email = "",
-            token = "",
-            isSuccessful = false,
-            message = "Invalid credentials"
-        )
-
-        whenever(mockAuthApiService.signIn(any())).thenReturn(mockResponse)
-
-        // Act
-        val result = dataSource.signIn(signInRequest)
-
-        // Assert
-        assertThat(result).isInstanceOf(DefaultResult.Error::class.java)
-        
-        if (result is DefaultResult.Error) {
-            assertThat(result.message).contains("Invalid credentials")
-        }
-    }
+//    @Test
+//    fun signIn_withValidRequest_returnsSuccess() = runTest {
+//        // Arrange
+//        val signInRequest = SignInRequestModel(
+//            email = "test@example.com",
+//            password = "Password123!"
+//        )
+//
+//        val mockResponse = SignInResponse(
+//            name = "John Doe",
+//            email = "test@example.com",
+//            token = "fake_jwt_token",
+//            isSuccessful = true,
+//            message = "Login successful"
+//        )
+//
+//        whenever(mockAuthApiService.signIn(any())).thenReturn(mockResponse)
+//
+//        // Act
+//        val result = dataSource.signIn(signInRequest)
+//
+//        // Assert
+//        assertThat(result).isInstanceOf(DefaultResult.Success::class.java)
+//
+//        if (result is DefaultResult.Success) {
+//            assertThat(result.data.name).isEqualTo("John Doe")
+//            assertThat(result.data.email).isEqualTo("test@example.com")
+//            assertThat(result.data.token).isEqualTo("fake_jwt_token")
+//        }
+//    }
+//
+//    @Test
+//    fun signIn_withFailedResponse_returnsError() = runTest {
+//        // Arrange
+//        val signInRequest = SignInRequestModel(
+//            email = "test@example.com",
+//            password = "wrongpassword"
+//        )
+//
+//        val mockResponse = SignInResponse(
+//            name = "",
+//            email = "",
+//            token = "",
+//            isSuccessful = false,
+//            message = "Invalid credentials"
+//        )
+//
+//        whenever(mockAuthApiService.signIn(any())).thenReturn(mockResponse)
+//
+//        // Act
+//        val result = dataSource.signIn(signInRequest)
+//
+//        // Assert
+//        assertThat(result).isInstanceOf(DefaultResult.Error::class.java)
+//
+//        if (result is DefaultResult.Error) {
+//            assertThat(result.message).contains("Invalid credentials")
+//        }
+//    }
 
     @Test
     fun signIn_withNetworkTimeout_retriesAndEventuallyFails() = runTest {

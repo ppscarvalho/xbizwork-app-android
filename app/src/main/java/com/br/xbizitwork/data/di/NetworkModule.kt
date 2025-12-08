@@ -3,7 +3,7 @@ package com.br.xbizitwork.data.di
 
 import com.example.xbizitwork.BuildConfig
 import com.br.xbizitwork.core.network.AuthTokenInterceptor
-import com.br.xbizitwork.data.local.auth.datastore.interfaces.AuthSessionLocalDataSource
+import com.br.xbizitwork.data.local.auth.datastore.AuthSessionLocalDataSource
 import com.google.gson.Gson
 import com.google.gson.Strictness
 import dagger.Module

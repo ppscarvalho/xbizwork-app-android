@@ -2,7 +2,7 @@ package com.br.xbizitwork.data.repository
 
 import com.br.xbizitwork.core.dispatcher.CoroutineDispatcherProvider
 import com.br.xbizitwork.core.result.DefaultResult
-import com.br.xbizitwork.data.local.auth.datastore.interfaces.AuthSessionLocalDataSource
+import com.br.xbizitwork.data.local.auth.datastore.AuthSessionLocalDataSource
 import com.br.xbizitwork.data.mappers.toDomainResponse
 import com.br.xbizitwork.data.mappers.toDomainResult
 import com.br.xbizitwork.data.mappers.toSignInRequestModel

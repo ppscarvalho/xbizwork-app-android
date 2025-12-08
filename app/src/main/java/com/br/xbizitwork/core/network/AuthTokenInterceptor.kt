@@ -2,7 +2,7 @@ package com.br.xbizitwork.core.network
 
 import com.br.xbizitwork.core.util.logging.logError
 import com.br.xbizitwork.core.util.logging.logInfo
-import com.br.xbizitwork.data.local.auth.datastore.interfaces.AuthSessionLocalDataSource
+import com.br.xbizitwork.data.local.auth.datastore.AuthSessionLocalDataSource
 import io.ktor.client.plugins.api.ClientPlugin
 import io.ktor.client.plugins.api.createClientPlugin
 import io.ktor.client.request.header

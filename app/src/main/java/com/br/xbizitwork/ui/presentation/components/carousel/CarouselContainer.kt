@@ -12,7 +12,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.br.xbizitwork.ui.presentation.common.ImageAssets
 import com.br.xbizitwork.ui.presentation.common.StringAssets
-import com.br.xbizitwork.ui.presentation.features.home.state.CarouselImageItem
+import com.br.xbizitwork.ui.presentation.features.home.models.CarouselImageItem
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
 
 @Composable

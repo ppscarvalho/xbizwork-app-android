@@ -36,7 +36,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.br.xbizitwork.ui.presentation.components.carouselitem.CarouselItemView
-import com.br.xbizitwork.ui.presentation.features.home.state.CarouselImageItem
+import com.br.xbizitwork.ui.presentation.features.home.models.CarouselImageItem
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
 import com.example.xbizitwork.R
 import kotlinx.coroutines.delay
