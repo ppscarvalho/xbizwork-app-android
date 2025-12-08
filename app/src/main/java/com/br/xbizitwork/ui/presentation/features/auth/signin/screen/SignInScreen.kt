@@ -57,8 +57,7 @@ fun SignInScreen(
                 onEmailChanged = onEmailChanged,
                 onPasswordChanged = onPasswordChanged,
                 onSignInClick = {onEvent(SignInEvent.OnSignInClick)},
-                onNavigateToSignUpScreen = onNavigateToSignUpScreen,
-                //onNavigateToHomeGraph = onNavigateToHomeGraph
+                onNavigateToSignUpScreen = onNavigateToSignUpScreen
             )
         }
     )

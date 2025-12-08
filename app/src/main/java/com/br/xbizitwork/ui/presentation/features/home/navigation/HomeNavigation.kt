@@ -15,7 +15,6 @@ fun NavGraphBuilder.homeScreen(
 ){
     composable<HomeScreens.HomeScreen> {
         DefaultScreen(
-            onLogout = {},
             onNavigateToSignInScreen = onNavigateToSignInScreen,
             onNavigateToProfileScreen = onNavigateToProfileScreen,
             onNavigateToSearchScreen = onNavigateToSearchScreen,

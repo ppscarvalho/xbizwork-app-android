@@ -1,20 +1,20 @@
-package com.br.xbizitwork.data.repository.auth
+package com.br.xbizitwork.data.repository
 
+import com.br.xbizitwork.core.dispatcher.CoroutineDispatcherProvider
+import com.br.xbizitwork.core.result.DefaultResult
+import com.br.xbizitwork.data.local.auth.datastore.interfaces.AuthSessionLocalDataSource
 import com.br.xbizitwork.data.mappers.toDomainResponse
 import com.br.xbizitwork.data.mappers.toDomainResult
 import com.br.xbizitwork.data.mappers.toSignInRequestModel
 import com.br.xbizitwork.data.mappers.toSignUpRequestModel
-import com.br.xbizitwork.core.dispatcher.CoroutineDispatcherProvider
-import com.br.xbizitwork.core.result.DefaultResult
-import com.br.xbizitwork.data.local.auth.datastore.interfaces.AuthSessionLocalDataSource
-import com.br.xbizitwork.data.remote.auth.datasource.interfaces.UserAuthRemoteDataSource
-import com.br.xbizitwork.domain.session.AuthSession
+import com.br.xbizitwork.data.remote.auth.datasource.UserAuthRemoteDataSource
+import com.br.xbizitwork.domain.common.DomainDefaultResult
 import com.br.xbizitwork.domain.model.auth.SignInModel
 import com.br.xbizitwork.domain.model.auth.SignUpModel
+import com.br.xbizitwork.domain.repository.UserAuthRepository
 import com.br.xbizitwork.domain.result.auth.SignInResult
 import com.br.xbizitwork.domain.result.auth.SignUpResult
-import com.br.xbizitwork.domain.repository.auth.UserAuthRepository
-import com.br.xbizitwork.domain.common.DomainDefaultResult
+import com.br.xbizitwork.domain.session.AuthSession
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
@@ -36,6 +36,7 @@ class UserAuthRepositoryImpl @Inject constructor(
                     val domainResponse = result.data.toDomainResponse()
                     DomainDefaultResult.Success(domainResponse)
                 }
+
                 is DefaultResult.Error -> {
                     DomainDefaultResult.Error(message = result.message)
                 }
@@ -52,6 +53,7 @@ class UserAuthRepositoryImpl @Inject constructor(
                     val domainResponse = result.data.toDomainResult()
                     DomainDefaultResult.Success(domainResponse)
                 }
+
                 is DefaultResult.Error -> {
                     DomainDefaultResult.Error(message = result.message)
                 }

@@ -18,7 +18,6 @@ import com.br.xbizitwork.ui.presentation.features.home.components.HomeContent
 
 @Composable
 fun DefaultScreen(
-    onLogout:() -> Unit,
     onNavigateToSignInScreen: () -> Unit,
     onNavigateToProfileScreen: () -> Unit,
     onNavigateToSearchScreen: () -> Unit,
@@ -31,7 +30,7 @@ fun DefaultScreen(
         topBar = {
             AppTopBar(
                 username = "Pedro Carvalho",
-                onRightIconClick = {onLogout()}
+                onRightIconClick = onNavigateToProfileScreen
             )
         },
         bottomBar = {
@@ -56,7 +55,7 @@ fun DefaultScreen(
                     HomeContent(
                         modifier = Modifier.fillMaxWidth(),
                         onNavigationToSignInScreen = onNavigateToSignInScreen,
-                        onProfileClick = { onNavigateProfileClick()}
+                        onNavigateToProfileScreen = { onNavigateProfileClick()}
                     )
                 }
             }

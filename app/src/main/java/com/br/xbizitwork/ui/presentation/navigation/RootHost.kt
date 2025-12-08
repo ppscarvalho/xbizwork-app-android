@@ -8,6 +8,7 @@ import com.br.xbizitwork.ui.presentation.features.auth.signup.navigation.navigat
 import com.br.xbizitwork.ui.presentation.navigation.graphs.authGraph
 import com.br.xbizitwork.ui.presentation.navigation.graphs.homeGraph
 import com.br.xbizitwork.ui.presentation.navigation.graphs.navigationToHomeGraph
+import com.br.xbizitwork.ui.presentation.navigation.graphs.navigateToMenuGraph
 import com.br.xbizitwork.ui.presentation.navigation.screens.Graphs
 
 @Composable
@@ -34,10 +35,14 @@ fun RootHost(
             onNavigateUp = {
                 navController.navigateUp()
             },
-            onNavigateToProfileScreen = {},
+            onNavigateToProfileScreen = {
+                navController.navigateUp()
+            },
             onNavigateToSearchScreen = {},
             onNavigateToUsersConnectionScreen = {},
-            onNavigateToMenuScreen = {},
+            onNavigateToMenuGraph = {
+                navController.navigateToMenuGraph()
+            },
             onNavigateProfileClick = {},
             onNavigateToSignInScreen ={
                 navController.navigateToSignInScreen()

@@ -1,16 +1,16 @@
 package com.br.xbizitwork.data.di.auth
 
-import com.br.xbizitwork.domain.usecase.auth.SignInUseCase
-import com.br.xbizitwork.domain.usecase.auth.SignInUseCaseImpl
-import com.br.xbizitwork.domain.usecase.auth.SignUpUseCase
-import com.br.xbizitwork.domain.usecase.auth.SignUpUseCaseImpl
+import com.br.xbizitwork.domain.usecase.auth.signin.SignInUseCase
+import com.br.xbizitwork.domain.usecase.auth.signin.SignInUseCaseImpl
+import com.br.xbizitwork.domain.usecase.auth.signup.SignUpUseCase
+import com.br.xbizitwork.domain.usecase.auth.signup.SignUpUseCaseImpl
 import com.br.xbizitwork.domain.usecase.session.GetAuthSessionUseCase
 import com.br.xbizitwork.domain.usecase.session.GetAuthSessionUseCaseImpl
 import com.br.xbizitwork.domain.usecase.session.RemoveAuthSessionUseCase
 import com.br.xbizitwork.domain.usecase.session.RemoveAuthSessionUseCaseImpl
 import com.br.xbizitwork.domain.usecase.session.SaveAuthSessionUseCase
 import com.br.xbizitwork.domain.usecase.session.SaveAuthSessionUseCaseImpl
-import com.br.xbizitwork.domain.repository.auth.UserAuthRepository
+import com.br.xbizitwork.domain.repository.UserAuthRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -2,7 +2,7 @@ package com.br.xbizitwork.ui.presentation.features.auth.signin.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.br.xbizitwork.domain.usecase.auth.SignInUseCase
+import com.br.xbizitwork.domain.usecase.auth.signin.SignInUseCase
 import com.br.xbizitwork.core.config.Constants
 import com.br.xbizitwork.core.sideeffects.SideEffect
 import com.br.xbizitwork.core.util.extensions.collectUiState

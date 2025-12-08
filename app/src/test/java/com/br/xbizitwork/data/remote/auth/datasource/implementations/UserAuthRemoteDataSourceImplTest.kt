@@ -1,11 +1,11 @@
 package com.br.xbizitwork.data.remote.auth.datasource.implementations
 
-import com.br.xbizitwork.data.remote.auth.dtos.requests.SignInRequestModel
-import com.br.xbizitwork.data.remote.auth.dtos.responses.ApplicationResponseModel
 import com.br.xbizitwork.core.result.DefaultResult
 import com.br.xbizitwork.data.remote.auth.api.UserAuthApiService
-import com.br.xbizitwork.data.remote.auth.dtos.requests.SignInRequest
+import com.br.xbizitwork.data.remote.auth.datasource.UserAuthRemoteDataSourceImpl
+import com.br.xbizitwork.data.remote.auth.dtos.requests.SignInRequestModel
 import com.br.xbizitwork.data.remote.auth.dtos.responses.SignInResponse
+import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
@@ -13,7 +13,6 @@ import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.mockito.kotlin.any
 import org.mockito.kotlin.whenever
-import com.google.common.truth.Truth.assertThat
 import java.util.concurrent.TimeoutException
 
 /**

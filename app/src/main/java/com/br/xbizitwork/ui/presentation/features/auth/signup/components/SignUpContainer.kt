@@ -59,8 +59,8 @@ fun SignUpContainer(
             value = nameValue,
             onValueChange = onNameChanged,
             leadingIcon = Icons.Outlined.Person,
-            textColor = colorScheme.onSurface,
-            cursorColor = colorScheme.onSurface
+            textColor = colorScheme.onSurfaceVariant,
+            cursorColor = colorScheme.onSurfaceVariant
         )
 
         // Campo E-mail (NOVO)
@@ -71,8 +71,8 @@ fun SignUpContainer(
             value = emailValue,
             onValueChange = onEmailChanged,
             leadingIcon = Icons.Outlined.Email,
-            textColor = colorScheme.onSurface,
-            cursorColor = colorScheme.onSurface
+            textColor = colorScheme.onSurfaceVariant,
+            cursorColor = colorScheme.onSurfaceVariant
         )
 
         // ✅ Campo Senha (NOVO)
@@ -83,8 +83,8 @@ fun SignUpContainer(
             value = passwordValue,
             onValueChange = onPasswordChanged,
             leadingIcon = Icons.Outlined.Lock,
-            textColor = colorScheme.onSurface,
-            cursorColor = colorScheme.onSurface
+            textColor = colorScheme.onSurfaceVariant,
+            cursorColor = colorScheme.onSurfaceVariant
         )
 
         // ✅ Confirmar Senha (NOVO)
@@ -95,8 +95,8 @@ fun SignUpContainer(
             value = confirmPasswordValue,
             onValueChange = onConfirmPasswordChanged,
             leadingIcon = Icons.Outlined.Lock,
-            textColor = colorScheme.onSurface,
-            cursorColor = colorScheme.onSurface
+            textColor = colorScheme.onSurfaceVariant,
+            cursorColor = colorScheme.onSurfaceVariant
         )
 
         Column(
@@ -106,7 +106,7 @@ fun SignUpContainer(
             AppButton(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(45.dp)
+                    .height(48.dp)
                     .shadow(5.dp, RoundedCornerShape(25.dp)),
                 text = stringResource(R.string.register_button_text),
                 contentColor = Color.White,

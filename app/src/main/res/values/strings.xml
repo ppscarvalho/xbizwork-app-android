@@ -122,6 +122,12 @@
     <string name="limpeza_terreno_text">Limpeza de Terreno</string>
     <string name="refrigeracao_text">Refrigeração</string>
 
+    <!-- Strings de ProfileScreen-->
+    <string name="perfil_text">Perfil</string>
+
+    <!-- Strings de MenuScreen-->
+    <string name="menu_text">Menu</string>
+
     <string-array name="categories">
         <item>Café da Manhã</item>
         <item>Almoço</item>

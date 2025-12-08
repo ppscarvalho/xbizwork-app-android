@@ -48,12 +48,12 @@ fun SignInContent(
        AppIcon(
            modifier = Modifier
                .align(Alignment.TopCenter)
-               .padding(top = 120.dp)
+               .padding(top = 100.dp)
        )
        Column(
            modifier = Modifier
                .fillMaxWidth()
-               .padding(top = 120.dp)
+               .padding(top = 80.dp)
                .align(Alignment.TopCenter),
            verticalArrangement = Arrangement.Center,
            horizontalAlignment = Alignment.CenterHorizontally

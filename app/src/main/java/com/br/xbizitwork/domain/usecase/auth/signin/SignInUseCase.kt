@@ -1,10 +1,10 @@
-package com.br.xbizitwork.domain.usecase.auth
+package com.br.xbizitwork.domain.usecase.auth.signin
 
 import com.br.xbizitwork.core.state.UiState
 import com.br.xbizitwork.core.usecase.FlowUseCase
 import com.br.xbizitwork.domain.common.DomainDefaultResult
 import com.br.xbizitwork.domain.model.auth.SignInModel
-import com.br.xbizitwork.domain.repository.auth.UserAuthRepository
+import com.br.xbizitwork.domain.repository.UserAuthRepository
 import com.br.xbizitwork.domain.result.auth.SignInResult
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

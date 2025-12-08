@@ -2,7 +2,7 @@ package com.br.xbizitwork.domain.usecase.session
 
 import com.br.xbizitwork.core.state.UiState
 import com.br.xbizitwork.core.usecase.RawFlowUseCase
-import com.br.xbizitwork.domain.repository.auth.UserAuthRepository
+import com.br.xbizitwork.domain.repository.UserAuthRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject

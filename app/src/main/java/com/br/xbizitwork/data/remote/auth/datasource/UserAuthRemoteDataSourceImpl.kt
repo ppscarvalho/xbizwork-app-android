@@ -1,12 +1,5 @@
-package com.br.xbizitwork.data.remote.auth.datasource.implementations
+package com.br.xbizitwork.data.remote.auth.datasource
 
-import com.br.xbizitwork.data.mappers.toLoginRequest
-import com.br.xbizitwork.data.mappers.toLoginResponseModel
-import com.br.xbizitwork.data.mappers.toSignUpRequest
-import com.br.xbizitwork.data.remote.auth.dtos.requests.SignInRequestModel
-import com.br.xbizitwork.data.remote.auth.dtos.requests.SignUpRequestModel
-import com.br.xbizitwork.data.remote.auth.dtos.responses.ApplicationResponseModel
-import com.br.xbizitwork.data.remote.auth.dtos.responses.ApplicationResultModel
 import com.br.xbizitwork.core.exceptions.ErrorResponseException
 import com.br.xbizitwork.core.mappers.toApplicationResultModel
 import com.br.xbizitwork.core.network.ErrorMapper
@@ -14,8 +7,14 @@ import com.br.xbizitwork.core.network.RetryPolicy
 import com.br.xbizitwork.core.network.SimpleCache
 import com.br.xbizitwork.core.network.retryWithExponentialBackoff
 import com.br.xbizitwork.core.result.DefaultResult
+import com.br.xbizitwork.data.mappers.toLoginRequest
+import com.br.xbizitwork.data.mappers.toLoginResponseModel
+import com.br.xbizitwork.data.mappers.toSignUpRequest
 import com.br.xbizitwork.data.remote.auth.api.UserAuthApiService
-import com.br.xbizitwork.data.remote.auth.datasource.interfaces.UserAuthRemoteDataSource
+import com.br.xbizitwork.data.remote.auth.dtos.requests.SignInRequestModel
+import com.br.xbizitwork.data.remote.auth.dtos.requests.SignUpRequestModel
+import com.br.xbizitwork.data.remote.auth.dtos.responses.SignUpResponseModel
+import com.br.xbizitwork.data.remote.auth.dtos.responses.SignInResponseModel
 import java.io.IOException
 import java.util.concurrent.TimeoutException
 import javax.inject.Inject
@@ -26,8 +25,8 @@ class UserAuthRemoteDataSourceImpl @Inject constructor(
 
     companion object {
         // Cache para respostas de autenticação (5 minutos de TTL)
-        private val authCache = SimpleCache<String, ApplicationResponseModel>()
-        
+        private val authCache = SimpleCache<String, SignInResponseModel>()
+
         // Política de retry: 3 tentativas, backoff exponencial
         private val retryPolicy = RetryPolicy(
             maxRetries = 3,
@@ -37,10 +36,10 @@ class UserAuthRemoteDataSourceImpl @Inject constructor(
         )
     }
 
-    override suspend fun signIn(signInRequestModel: SignInRequestModel): DefaultResult<ApplicationResponseModel> {
+    override suspend fun signIn(signInRequestModel: SignInRequestModel): DefaultResult<SignInResponseModel> {
         return try {
             val request = signInRequestModel.toLoginRequest()
-            
+
             // Tenta com retry automático
             val response = retryWithExponentialBackoff(
                 policy = retryPolicy,
@@ -71,10 +70,10 @@ class UserAuthRemoteDataSourceImpl @Inject constructor(
         }
     }
 
-    override suspend fun signUp(signUpRequestModel: SignUpRequestModel): DefaultResult<ApplicationResultModel> {
+    override suspend fun signUp(signUpRequestModel: SignUpRequestModel): DefaultResult<SignUpResponseModel> {
         return try {
             val request = signUpRequestModel.toSignUpRequest()
-            
+
             // Tenta com retry automático
             val response = retryWithExponentialBackoff(
                 policy = retryPolicy,

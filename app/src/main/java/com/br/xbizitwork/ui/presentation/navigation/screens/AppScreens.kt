@@ -9,6 +9,9 @@ sealed interface Graphs{
 
     @Serializable
     data object HomeGraphs: Graphs
+
+    @Serializable
+    data object MenuGraphs: Graphs
 }
 
 @Serializable
@@ -27,9 +30,6 @@ sealed interface HomeScreens{
 
     @Serializable
     data class SignUpScreen(val userId: String? = ""): HomeScreens
-
-    @Serializable
-    data object OptionScreen: HomeScreens
 
     @Serializable
     data object ProfileScreen: HomeScreens
@@ -54,4 +54,22 @@ sealed interface HomeScreens{
 
     @Serializable
     data object ChangePasswordScreen: HomeScreens
+}
+
+@Serializable
+sealed interface MenuScreens{
+    @Serializable
+    data object MenuScreen: MenuScreens
+
+    @Serializable
+    data object FinancialScreen: MenuScreens
+
+    @Serializable
+    data object CreateScheduleScreen: MenuScreens
+
+    @Serializable
+    data object ViewSchedulesScreen: MenuScreens
+
+    @Serializable
+    data object ProfessionalAgendaScreen: MenuScreens
 }

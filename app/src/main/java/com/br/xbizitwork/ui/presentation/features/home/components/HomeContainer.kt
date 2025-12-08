@@ -20,7 +20,7 @@ import com.br.xbizitwork.ui.theme.XBizWorkTheme
 fun HomeContainer(
     modifier: Modifier = Modifier,
     onNavigationToSignInScreen: () -> Unit,
-    onProfileClick: () -> Unit
+    onNavigateToProfileScreen: () -> Unit
 ) {
     Column(
         modifier = modifier,
@@ -47,7 +47,7 @@ fun HomeContainer(
             item {
                 ProfessionalsHighlightContainer(
                     modifier = Modifier.fillMaxWidth(),
-                    onProfileClick = onProfileClick
+                    onProfileClick = onNavigateToProfileScreen
                 )
             }
         }
@@ -61,7 +61,7 @@ private fun HomeContainerPreview() {
         HomeContainer(
             modifier = Modifier.fillMaxSize(),
             onNavigationToSignInScreen = {},
-            onProfileClick = {}
+            onNavigateToProfileScreen = {}
         )
     }
 }

@@ -12,7 +12,7 @@ import com.br.xbizitwork.ui.theme.XBizWorkTheme
 fun HomeContent(
     modifier: Modifier = Modifier,
     onNavigationToSignInScreen: () -> Unit,
-    onProfileClick: () -> Unit
+    onNavigateToProfileScreen: () -> Unit
 ) {
     Column(
         modifier = modifier,
@@ -22,7 +22,7 @@ fun HomeContent(
         HomeContainer(
             modifier = Modifier.weight(1f),
             onNavigationToSignInScreen = onNavigationToSignInScreen,
-            onProfileClick = onProfileClick
+            onNavigateToProfileScreen = onNavigateToProfileScreen
         )
     }
 }
@@ -33,7 +33,7 @@ private fun HomeContentPreview() {
     XBizWorkTheme {
         HomeContent(
             onNavigationToSignInScreen = {},
-            onProfileClick = {}
+            onNavigateToProfileScreen = {}
         )
     }
 }

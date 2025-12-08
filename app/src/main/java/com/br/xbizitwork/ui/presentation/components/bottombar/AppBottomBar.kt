@@ -26,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
+import androidx.compose.foundation.layout.navigationBarsPadding
 
 @Composable
 fun AppBottomBar(
@@ -36,7 +37,9 @@ fun AppBottomBar(
     onNavigationToMenuScreen: () -> Unit,
 ) {
     BottomAppBar(
-        modifier = modifier,
+        modifier = modifier
+            // Adiciona padding para respeitar a inset da navigation bar do sistema
+            .navigationBarsPadding(),
         containerColor = MaterialTheme.colorScheme.secondary,
         actions = {
             // Row com espaçamento uniforme para distribuir ícones
@@ -98,12 +101,12 @@ private fun BottomBarItem(
             contentDescription = label,
             tint = MaterialTheme.colorScheme.onPrimary,
             modifier = Modifier
-                .size(26.dp)
+                .size(24.dp)
                 .padding(bottom = 4.dp)
         )
         Text(
             text = label,
-            fontSize = 12.sp,
+            fontSize = 10.sp,
             color = MaterialTheme.colorScheme.onPrimary,
             textAlign = TextAlign.Center,
             fontFamily = MaterialTheme.typography.bodySmall.fontFamily

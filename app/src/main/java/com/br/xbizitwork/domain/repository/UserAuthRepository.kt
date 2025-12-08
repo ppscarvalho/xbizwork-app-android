@@ -1,11 +1,11 @@
-package com.br.xbizitwork.domain.repository.auth
+package com.br.xbizitwork.domain.repository
 
-import com.br.xbizitwork.domain.session.AuthSession
+import com.br.xbizitwork.domain.common.DomainDefaultResult
 import com.br.xbizitwork.domain.model.auth.SignInModel
 import com.br.xbizitwork.domain.model.auth.SignUpModel
 import com.br.xbizitwork.domain.result.auth.SignInResult
 import com.br.xbizitwork.domain.result.auth.SignUpResult
-import com.br.xbizitwork.domain.common.DomainDefaultResult
+import com.br.xbizitwork.domain.session.AuthSession
 import kotlinx.coroutines.flow.Flow
 
 interface UserAuthRepository {

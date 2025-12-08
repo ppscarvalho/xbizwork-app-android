@@ -1,34 +1,16 @@
 package com.br.xbizitwork.data.mappers
 
 import com.br.xbizitwork.data.remote.auth.dtos.requests.SignInRequestModel
-import com.br.xbizitwork.data.remote.auth.dtos.responses.ApplicationResponseModel
-import com.br.xbizitwork.data.remote.auth.dtos.responses.ApplicationResultModel
 import com.br.xbizitwork.data.remote.auth.dtos.requests.SignInRequest
 import com.br.xbizitwork.data.remote.auth.dtos.requests.SignUpRequest
 import com.br.xbizitwork.data.remote.auth.dtos.requests.SignUpRequestModel
 import com.br.xbizitwork.data.remote.auth.dtos.responses.SignInResponse
 import com.br.xbizitwork.data.remote.auth.dtos.responses.SignInResponseModel
+import com.br.xbizitwork.data.remote.auth.dtos.responses.SignUpResponseModel
 import com.br.xbizitwork.domain.model.auth.SignInModel
 import com.br.xbizitwork.domain.model.auth.SignUpModel
 import com.br.xbizitwork.domain.result.auth.SignInResult
 import com.br.xbizitwork.domain.result.auth.SignUpResult
-
-fun ApplicationResponseModel.toDomainResponse(): SignInResult {
-    return SignInResult(
-        name = this.name ?: "",
-        email = this.email ?: "",
-        token = this.token ?: "",
-        isSuccessful = this.isSuccessful,
-        message = this.message
-    )
-}
-
-fun ApplicationResultModel.toDomainResult(): SignUpResult {
-    return SignUpResult(
-        isSuccessful = this.isSuccessful,
-        message = this.message
-    )
-}
 
 fun SignInModel.toSignInRequestModel(): SignInRequestModel {
     return SignInRequestModel(
@@ -45,7 +27,6 @@ fun SignUpModel.toSignUpRequestModel(): SignUpRequestModel {
     )
 }
 
-
 fun SignInResponseModel.toDomainResponse(): SignInResult {
     return SignInResult(
         name = this.name ?: "",
@@ -56,8 +37,11 @@ fun SignInResponseModel.toDomainResponse(): SignInResult {
     )
 }
 
-fun SignInResponse.toLoginResponseModel(): ApplicationResponseModel {
-    return ApplicationResponseModel(
+/**
+ * Mapeia SignInResponse (compatível com versão atual) para SignInResponseModel
+ */
+fun SignInResponse.toLoginResponseModel(): SignInResponseModel {
+    return SignInResponseModel(
         name = name,
         email = email,
         token = token,
@@ -73,10 +57,17 @@ fun SignInRequestModel.toLoginRequest(): SignInRequest {
     )
 }
 
-fun SignUpRequestModel.toSignUpRequest(): SignUpRequest{
+fun SignUpRequestModel.toSignUpRequest(): SignUpRequest {
     return SignUpRequest(
         name = name,
         email = email,
         password = password
+    )
+}
+
+fun SignUpResponseModel.toDomainResult(): SignUpResult {
+    return SignUpResult(
+        isSuccessful = this.isSuccessful,
+        message = this.message
     )
 }

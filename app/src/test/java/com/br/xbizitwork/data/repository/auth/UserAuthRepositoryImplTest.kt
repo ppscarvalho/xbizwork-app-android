@@ -1,10 +1,11 @@
 package com.br.xbizitwork.data.repository.auth
 
-import com.br.xbizitwork.data.remote.auth.dtos.responses.ApplicationResponseModel
 import com.br.xbizitwork.core.dispatcher.CoroutineDispatcherProvider
 import com.br.xbizitwork.core.result.DefaultResult
 import com.br.xbizitwork.data.local.auth.datastore.interfaces.AuthSessionLocalDataSource
-import com.br.xbizitwork.data.remote.auth.datasource.interfaces.UserAuthRemoteDataSource
+import com.br.xbizitwork.data.remote.auth.datasource.UserAuthRemoteDataSource
+import com.br.xbizitwork.data.remote.auth.dtos.responses.SignInResponseModel
+import com.br.xbizitwork.data.repository.UserAuthRepositoryImpl
 import com.br.xbizitwork.domain.model.auth.SignInModel
 import com.br.xbizitwork.domain.common.DomainDefaultResult
 import com.br.xbizitwork.domain.session.AuthSession
@@ -67,7 +68,7 @@ class UserAuthRepositoryImplTest {
         )
 
         val mockRemoteResult = DefaultResult.Success(
-            data = ApplicationResponseModel(
+            data = SignInResponseModel(
                 name = "Test User",
                 email = "test@example.com",
                 token = "mock_token_123",

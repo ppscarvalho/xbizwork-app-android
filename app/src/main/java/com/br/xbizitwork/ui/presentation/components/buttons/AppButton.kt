@@ -65,7 +65,7 @@ private fun AppButtonPreview() {
             text = "Entrar",
             isLoading = false,
             contentColor = Color.White,
-            enabled = true,
+            enabled = false,
             onClick = {}
         )
     }

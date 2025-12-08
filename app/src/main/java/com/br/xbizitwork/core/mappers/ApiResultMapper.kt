@@ -1,9 +1,8 @@
 package com.br.xbizitwork.core.mappers
 
-import com.br.xbizitwork.data.remote.auth.dtos.responses.ApplicationResultModel
+import com.br.xbizitwork.data.remote.auth.dtos.responses.SignUpResponseModel
 import com.br.xbizitwork.core.model.api.ApiResultResponse
-import com.br.xbizitwork.core.model.api.ApiResultModel
 
-fun ApiResultResponse.toApplicationResultModel() : ApplicationResultModel{
-    return ApplicationResultModel(isSuccessful, message)
+fun ApiResultResponse.toApplicationResultModel() : SignUpResponseModel{
+    return SignUpResponseModel(isSuccessful, message)
 }

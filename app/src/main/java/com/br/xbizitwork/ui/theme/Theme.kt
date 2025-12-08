@@ -7,6 +7,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 
 private val DarkColorScheme = darkColorScheme(
     primary = DarkPrimary,
@@ -52,11 +53,11 @@ fun XBizWorkTheme(
     }
 
     // Configurar aparência das barras do sistema
-    // Status bar usa a cor secundária (mesmo da AppTopBar)
-    // Ícones ficam escuros quando não está em dark theme (para contraste)
+    // Status bar e navigation bar com preto (ícones sempre escuros na nav bar)
+    // Ícones ficam escuros quando não está em dark theme (para contraste na status bar)
     SetSystemBarsAppearance(
-        statusBarColor = colorScheme.secondary,
-        navigationBarColor = colorScheme.background,
+        statusBarColor = Color.Black,
+        navigationBarColor = Color.Black,
         darkStatusBarIcons = !darkTheme,
         darkNavigationBarIcons = !darkTheme
     )

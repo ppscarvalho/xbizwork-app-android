@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.br.xbizitwork.ui.theme
 
 import android.app.Activity
@@ -38,8 +40,9 @@ fun SetSystemBarsAppearance(
             }
 
             // Configurar aparência dos ícones
+            // Força ícones escuros na navigation bar para evitar transformações de brilho
             insetsController?.isAppearanceLightStatusBars = darkStatusBarIcons
-            insetsController?.isAppearanceLightNavigationBars = darkNavigationBarIcons
+            insetsController?.isAppearanceLightNavigationBars = false
         }
     }
 }

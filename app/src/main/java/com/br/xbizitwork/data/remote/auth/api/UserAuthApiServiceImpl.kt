@@ -15,10 +15,10 @@ import javax.inject.Inject
 class UserAuthApiServiceImpl @Inject constructor(
     private val httpClient: HttpClient
 ): UserAuthApiService {
-    override suspend fun signIn(authUserRequest: SignInRequest): SignInResponse {
+    override suspend fun signIn(signInRequest: SignInRequest): SignInResponse {
         val response = httpClient.post("auth/signin") {
             contentType(ContentType.Application.Json)
-            setBody(authUserRequest)
+            setBody(signInRequest)
         }
         return response.body()
     }

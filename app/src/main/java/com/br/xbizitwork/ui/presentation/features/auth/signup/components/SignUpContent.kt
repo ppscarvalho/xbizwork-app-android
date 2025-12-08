@@ -50,12 +50,12 @@ fun SignUpContent(
         AppIcon(
             modifier = Modifier
                 .align(Alignment.TopCenter)
-                .padding(top = 20.dp)
+                .padding(top = 100.dp)
         )
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 20.dp)
+                .padding(top = 80.dp)
                 .align(Alignment.TopCenter),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
@@ -132,7 +132,7 @@ fun SignUpContent(
 
 @Preview(
     showBackground = true,
-    uiMode = Configuration.UI_MODE_NIGHT_NO)
+    uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun SignUpContentPreview() {
     XBizWorkTheme {

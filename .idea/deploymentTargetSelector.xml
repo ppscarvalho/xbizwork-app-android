@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="XBizWork.app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-12-06T23:22:55.698832100Z">
+        <DropdownSelection timestamp="2025-12-08T01:37:43.080779200Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="PhysicalDevice" identifier="serial=RX8W503Q7PH" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\pedro\.android\avd\Pixel_9_Pro_API_36.avd" />
             </handle>
           </Target>
         </DropdownSelection>
