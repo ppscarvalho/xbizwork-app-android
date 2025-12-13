@@ -4,41 +4,93 @@ import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Assignment
+import androidx.compose.material.icons.automirrored.filled.ExitToApp
+import androidx.compose.material.icons.automirrored.filled.Help
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Event
 import androidx.compose.material.icons.filled.Key
+import androidx.compose.material.icons.filled.MobileScreenShare
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.ViewModule
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.br.xbizitwork.ui.presentation.components.buttons.MenuButton
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
 
 @Composable
 fun MenuContainer(
     modifier: Modifier = Modifier,
+    onClickUpdateProfile: () -> Unit,
     onClickChangerPassword: () -> Unit,
     onClickDateRange: () -> Unit,
     onClickAssignment: () -> Unit,
     onClickEvent: () -> Unit,
-    onClickViewModule: () -> Unit
+    onClickViewModule: () -> Unit,
+    onClickFAQ: () -> Unit,
+    onClickAppVersion: () -> Unit,
+    onClickRateApp: () -> Unit,
+    onClickLogout: () -> Unit
 ) {
     Column(
-        modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(15.dp)
+        modifier = modifier
     ) {
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
-            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 16.dp)
+            verticalArrangement = Arrangement.spacedBy(1.dp),
+            contentPadding = PaddingValues(vertical = 8.dp)
         ) {
+            // ========== SEÇÃO PERFIL ==========
+            item {
+                Text(
+                    text = "Perfil",
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 16.dp, vertical = 8.dp)
+                )
+            }
+
+            item {
+                MenuButton(
+                    leftIcon = Icons.Filled.Person,
+                    text = "Alterar Perfil",
+                    onClick = onClickUpdateProfile,
+                    hasDividerAfter = false
+                )
+            }
+
+            item {
+                Spacer(modifier = Modifier.fillMaxSize())
+            }
+
+            // ========== SEÇÃO SERVIÇO ==========
+            item {
+                Text(
+                    text = "Serviço",
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 16.dp, vertical = 8.dp)
+                )
+            }
+
             item {
                 MenuButton(
                     leftIcon = Icons.Filled.Key,
@@ -75,7 +127,76 @@ fun MenuContainer(
                 MenuButton(
                     leftIcon = Icons.Filled.ViewModule,
                     text = "Agenda profissional",
-                    onClick = onClickViewModule
+                    onClick = onClickViewModule,
+                    hasDividerAfter = false
+                )
+            }
+
+            item {
+                Spacer(modifier = Modifier.fillMaxSize())
+            }
+
+            // ========== SEÇÃO SOBRE O APP ==========
+            item {
+                Text(
+                    text = "Sobre o app",
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 16.dp, vertical = 8.dp)
+                )
+            }
+
+            item {
+                MenuButton(
+                    leftIcon = Icons.AutoMirrored.Filled.Help,
+                    text = "Dúvidas frequentes",
+                    onClick = onClickFAQ
+                )
+            }
+
+            item {
+                MenuButton(
+                    leftIcon = Icons.Filled.MobileScreenShare,
+                    text = "Versão do aplicativo",
+                    onClick = onClickAppVersion
+                )
+            }
+
+            item {
+                MenuButton(
+                    leftIcon = Icons.Filled.Star,
+                    text = "Avalie nosso aplicativo",
+                    onClick = onClickRateApp,
+                    hasDividerAfter = false
+                )
+            }
+
+            item {
+                Spacer(modifier = Modifier.fillMaxSize())
+            }
+
+            // ========== SEÇÃO GERENCIAR O APP ==========
+            item {
+                Text(
+                    text = "Gerenciar o App",
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 16.dp, vertical = 8.dp)
+                )
+            }
+
+            item {
+                MenuButton(
+                    leftIcon = Icons.AutoMirrored.Filled.ExitToApp,
+                    text = "Sair",
+                    onClick = onClickLogout,
+                    hasDividerAfter = false
                 )
             }
         }
@@ -88,11 +209,16 @@ private fun MenuContainerPreView() {
     XBizWorkTheme {
         MenuContainer(
             modifier = Modifier.fillMaxSize(),
+            onClickUpdateProfile = {},
             onClickChangerPassword = {},
             onClickDateRange = {},
             onClickAssignment = {},
             onClickEvent = {},
-            onClickViewModule = {}
+            onClickViewModule = {},
+            onClickFAQ = {},
+            onClickAppVersion = {},
+            onClickRateApp = {},
+            onClickLogout = {}
         )
     }
 }

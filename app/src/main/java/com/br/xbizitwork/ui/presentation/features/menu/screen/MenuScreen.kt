@@ -8,24 +8,43 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import com.br.xbizitwork.core.sideeffects.SideEffect
+import com.br.xbizitwork.core.state.LifecycleEventEffect
+import com.br.xbizitwork.core.util.extensions.toast
 import com.br.xbizitwork.ui.presentation.components.topbar.AppTopBar
 import com.br.xbizitwork.ui.presentation.features.menu.components.MenuContent
 import com.example.xbizitwork.R
+import kotlinx.coroutines.flow.Flow
 
 @Composable
 fun MenuScreen(
     onNavigateToHomeGraph: () -> Unit,
+    sideEffectFlow: Flow<SideEffect>,
+    onClickUpdateProfile: () -> Unit,
     onClickChangerPassword: () -> Unit,
     onClickDateRange: () -> Unit,
     onClickAssignment: () -> Unit,
     onClickEvent: () -> Unit,
-    onClickViewModule: () -> Unit
+    onClickViewModule: () -> Unit,
+    onClickFAQ: () -> Unit,
+    onClickAppVersion: () -> Unit,
+    onClickRateApp: () -> Unit,
+    onClickLogout: () -> Unit
 ) {
+    val context = LocalContext.current
+
+    // ✅ NOVO: Usar LifecycleEventEffect para tratar SideEffects
+    LifecycleEventEffect(sideEffectFlow) { sideEffect ->
+        when(sideEffect) {
+            is SideEffect.ShowToast -> context.toast(sideEffect.message)
+        }
+    }
+
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
         topBar = {
@@ -45,11 +64,16 @@ fun MenuScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 MenuContent(
+                    onClickUpdateProfile = onClickUpdateProfile,
                     onClickChangerPassword = onClickChangerPassword,
                     onClickDateRange = onClickDateRange,
                     onClickAssignment = onClickAssignment,
                     onClickEvent = onClickEvent,
-                    onClickViewModule = onClickViewModule
+                    onClickViewModule = onClickViewModule,
+                    onClickFAQ = onClickFAQ,
+                    onClickAppVersion = onClickAppVersion,
+                    onClickRateApp = onClickRateApp,
+                    onClickLogout = onClickLogout
                 )
             }
         }
