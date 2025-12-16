@@ -27,9 +27,7 @@ class HomeViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _uiState: MutableStateFlow<HomeUIState> =  MutableStateFlow(HomeUIState())
-    val uState: StateFlow<HomeUIState> = _uiState.onStart {
-        fetchUserName()
-    }.stateIn(
+    val uState: StateFlow<HomeUIState> = _uiState.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
         initialValue = HomeUIState()
@@ -38,6 +36,11 @@ class HomeViewModel @Inject constructor(
     // ✅ NOVO: SideEffect Channel para notificações (Toast, etc)
     private val _sideEffectChannel = Channel<SideEffect>(capacity = Channel.Factory.BUFFERED)
     val sideEffectChannel = _sideEffectChannel.receiveAsFlow()
+
+    init {
+        // ✅ CORRIGIDO: Observar sessão continuamente em vez de apenas no onStart
+        fetchUserName()
+    }
 
     private fun fetchUserName() {
         viewModelScope.launch {

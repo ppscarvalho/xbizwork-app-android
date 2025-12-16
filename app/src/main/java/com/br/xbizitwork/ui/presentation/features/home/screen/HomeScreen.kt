@@ -53,6 +53,7 @@ fun DefaultScreen(
         },
         bottomBar = {
             AppBottomBar(
+                isLoggedIn = !uiState.userName.isNullOrEmpty(),
                 onNavigationToProfileScreen = onNavigateToProfileScreen,
                 onNavigationToSearchScreen = onNavigateToSearchScreen,
                 onNavigationToUsersConnectionScreen = onNavigateToUsersConnectionScreen,

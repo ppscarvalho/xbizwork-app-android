@@ -5,7 +5,6 @@ import com.br.xbizitwork.domain.repository.UserAuthRepository
 import com.br.xbizitwork.domain.session.AuthSession
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.take
 import javax.inject.Inject
 
 interface GetAuthSessionUseCase {
@@ -19,6 +18,6 @@ class GetAuthSessionUseCaseImpl @Inject constructor(
         return authRepository.observeSession()
             .catch { error ->
                 emit(AuthSession(errorMessage = error.message ?: "Erro desconhecido"))
-            }.take(1)
+            }
     }
 }

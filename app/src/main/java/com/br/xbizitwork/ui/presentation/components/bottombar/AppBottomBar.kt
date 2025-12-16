@@ -31,6 +31,7 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 @Composable
 fun AppBottomBar(
     modifier: Modifier = Modifier,
+    isLoggedIn: Boolean = false,
     onNavigationToProfileScreen: () -> Unit,
     onNavigationToSearchScreen: () -> Unit,
     onNavigationToUsersConnectionScreen: () -> Unit,
@@ -71,12 +72,14 @@ fun AppBottomBar(
                     onClick = onNavigationToProfileScreen
                 )
 
-                // Menu
-                BottomBarItem(
-                    icon = Icons.Outlined.Menu,
-                    label = "Menu",
-                    onClick = onNavigationToMenuScreen
-                )
+                // Menu - Somente exibir se usuário estiver logado
+                if (isLoggedIn) {
+                    BottomBarItem(
+                        icon = Icons.Outlined.Menu,
+                        label = "Menu",
+                        onClick = onNavigationToMenuScreen
+                    )
+                }
             }
         }
     )

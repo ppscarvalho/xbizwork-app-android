@@ -29,7 +29,10 @@ fun NavGraphBuilder.menuScreen(
             onClickFAQ = {},
             onClickAppVersion = {},
             onClickRateApp = {},
-            onClickLogout = { viewModel.logout() }
+            onClickLogout = { 
+                viewModel.logout()
+                onNavigateToHomeGraph()
+            }
         )
     }
 }
