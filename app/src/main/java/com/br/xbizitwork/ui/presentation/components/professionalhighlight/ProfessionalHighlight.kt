@@ -4,10 +4,10 @@ import android.content.res.Configuration
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -72,6 +72,8 @@ fun ProfessionalHighlight(
 
             Column {
                 Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
@@ -80,9 +82,9 @@ fun ProfessionalHighlight(
                         style = MaterialTheme.typography.titleMedium,
                         fontFamily = poppinsFOntFamily,
                         fontSize = 14.sp,
-                        color = Color.Black
+                        color = Color.Black,
+                        modifier = Modifier.weight(1f, fill = false)
                     )
-                    Spacer(modifier = Modifier.width(4.dp))
                     Text(
                         "⭐️ $rating ($recommendations)",
                         fontSize = 11.sp,
