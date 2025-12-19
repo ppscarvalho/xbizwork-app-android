@@ -5,6 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.navigation
 import com.br.xbizitwork.ui.presentation.features.menu.navigation.menuScreen
+import com.br.xbizitwork.ui.presentation.features.schedule.navigation.scheduleScreen
 import com.br.xbizitwork.ui.presentation.navigation.screens.Graphs
 import com.br.xbizitwork.ui.presentation.navigation.screens.MenuScreens
 
@@ -20,17 +21,22 @@ import com.br.xbizitwork.ui.presentation.navigation.screens.MenuScreens
  */
 fun NavGraphBuilder.menuGraph(
     onNavigateUp: () -> Unit,
-    onNavigateToEditProfile: () -> Unit
+    onNavigateToEditProfile: () -> Unit,
+    onNavigateToCreateSchedule: () -> Unit
 ){
     navigation<Graphs.MenuGraphs>(startDestination = MenuScreens.MenuScreen) {
         menuScreen(
             onNavigateToHomeGraph = onNavigateUp,
-            onNavigateToEditProfile = onNavigateToEditProfile
+            onNavigateToEditProfile = onNavigateToEditProfile,
+            onNavigateToCreateSchedule = onNavigateToCreateSchedule
+        )
+        
+        scheduleScreen(
+            onNavigateUp = onNavigateUp
         )
         
         // Aqui você adicionará as outras screens
         // financialScreen(onNavigateUp = onNavigateUp)
-        // createScheduleScreen(onNavigateUp = onNavigateUp)
         // viewSchedulesScreen(onNavigateUp = onNavigateUp)
     }
 }

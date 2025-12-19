@@ -10,7 +10,8 @@ import com.br.xbizitwork.ui.presentation.navigation.screens.MenuScreens
 
 fun NavGraphBuilder.menuScreen(
     onNavigateToHomeGraph: () -> Unit,
-    onNavigateToEditProfile: () -> Unit
+    onNavigateToEditProfile: () -> Unit,
+    onNavigateToCreateSchedule: () -> Unit
 ){
     composable<MenuScreens.MenuScreen> {
         val viewModel: MenuViewModel = hiltViewModel()
@@ -21,7 +22,7 @@ fun NavGraphBuilder.menuScreen(
             sideEffectFlow = sideEffect,
             onClickUpdateProfile = { onNavigateToEditProfile() },
             onClickChangerPassword = {},
-            onClickDateRange = {},
+            onClickDateRange = { onNavigateToCreateSchedule() },
             onClickAssignment = {},
             onClickEvent = {},
             onClickViewModule = {},
@@ -38,6 +39,12 @@ fun NavGraphBuilder.menuScreen(
 
 fun NavController.navigateToMenuScreen(){
     navigate(MenuScreens.MenuScreen){
+        launchSingleTop = true
+    }
+}
+
+fun NavController.navigateToCreateScheduleScreen(){
+    navigate(MenuScreens.CreateScheduleScreen){
         launchSingleTop = true
     }
 }

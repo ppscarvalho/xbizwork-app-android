@@ -5,6 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.navigation
 import com.br.xbizitwork.ui.presentation.features.home.navigation.homeScreen
+import com.br.xbizitwork.ui.presentation.features.menu.navigation.navigateToCreateScheduleScreen
 import com.br.xbizitwork.ui.presentation.features.profile.navigation.editProfileScreen
 import com.br.xbizitwork.ui.presentation.features.profile.navigation.navigateToEditProfileScreen
 import com.br.xbizitwork.ui.presentation.navigation.screens.Graphs
@@ -40,6 +41,9 @@ fun NavGraphBuilder.homeGraph(
             onNavigateUp = onNavigateUp,
             onNavigateToEditProfile = {
                 navController.navigateToEditProfileScreen()
+            },
+            onNavigateToCreateSchedule = {
+                navController.navigateToCreateScheduleScreen()
             }
         )
     }
