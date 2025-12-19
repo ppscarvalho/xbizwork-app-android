@@ -44,9 +44,10 @@ fun RootHost(
                 navController.navigateToMenuGraph()
             },
             onNavigateProfileClick = {},
-            onNavigateToSignInScreen ={
+            onNavigateToSignInScreen = {
                 navController.navigateToSignInScreen()
-            }
+            },
+            navController = navController
         )
     }
 }

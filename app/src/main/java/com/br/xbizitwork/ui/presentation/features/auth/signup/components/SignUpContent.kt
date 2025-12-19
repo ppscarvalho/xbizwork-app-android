@@ -1,6 +1,7 @@
 package com.br.xbizitwork.ui.presentation.features.auth.signup.components
 
 import android.content.res.Configuration
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -12,11 +13,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -25,9 +30,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.br.xbizitwork.ui.presentation.components.icons.AppIcon
 import com.br.xbizitwork.ui.presentation.features.auth.signup.state.SignUpState
+import com.br.xbizitwork.ui.theme.BeigeBackground
+import com.br.xbizitwork.ui.theme.GrayText
+import com.br.xbizitwork.ui.theme.TealPrimary
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
 import com.br.xbizitwork.ui.theme.poppinsFOntFamily
 import com.example.xbizitwork.R
+
 
 @Composable
 fun SignUpContent(
@@ -44,49 +53,63 @@ fun SignUpContent(
     Box(
         modifier = modifier
             .fillMaxSize()
+            .background(Color.White)
             .padding(paddingValues)
-            .padding(horizontal = 16.dp)
     ) {
-        AppIcon(
-            modifier = Modifier
-                .align(Alignment.TopCenter)
-                .padding(top = 100.dp)
-        )
-        Column(
+        // Header curvo com fundo bege
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 80.dp)
-                .align(Alignment.TopCenter),
-            verticalArrangement = Arrangement.Center,
+                .height(220.dp)
+                .clip(RoundedCornerShape(bottomStart = 40.dp, bottomEnd = 40.dp))
+                .background(BeigeBackground)
+        ) {
+            AppIcon(
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .padding(top = 20.dp)
+            )
+        }
+
+        // Conteúdo scrollável
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp)
+                .padding(top = 180.dp)
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Column(
-                modifier = Modifier.fillMaxWidth()
-                    .padding(top = 140.dp),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = stringResource(R.string.signUp_text),
-                    fontFamily = poppinsFOntFamily,
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 20.sp,
-                    textAlign = TextAlign.Center,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.fillMaxWidth()
-                )
+            Spacer(modifier = Modifier.height(60.dp))
 
+            // Título
+            Text(
+                text = stringResource(R.string.signUp_text),
+                fontFamily = poppinsFOntFamily,
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 22.sp,
+                textAlign = TextAlign.Center,
+                color = TealPrimary,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            // Mensagem de erro (se houver)
+            if (!uiState.signUpErrorMessage.isNullOrEmpty() || !uiState.fieldErrorMessage.isNullOrEmpty()) {
                 Text(
-                    text =uiState.signUpErrorMessage ?: uiState.fieldErrorMessage.orEmpty(),
+                    text = uiState.signUpErrorMessage ?: uiState.fieldErrorMessage.orEmpty(),
                     fontFamily = poppinsFOntFamily,
                     fontSize = 14.sp,
                     textAlign = TextAlign.Center,
-                    color = MaterialTheme.colorScheme.error,
+                    color = Color(0xFFD32F2F),
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(5.dp))
+                        .padding(vertical = 8.dp)
+                )
             }
 
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Formulário
             SignUpContainer(
                 modifier = Modifier.fillMaxWidth(),
                 isLoading = uiState.isLoading,
@@ -101,29 +124,30 @@ fun SignUpContent(
                 onConfirmPasswordChanged = onConfirmPasswordChanged,
                 onSignUpClick = onSignUpClick
             )
-            Spacer(modifier = Modifier.height(14.dp))
 
+            Spacer(modifier = Modifier.height(24.dp))
+
+            // Link para login
             Row(
-                modifier = Modifier.padding(bottom = 20.dp),
+                modifier = Modifier.padding(bottom = 32.dp),
                 horizontalArrangement = Arrangement.Center
             ) {
-
                 Text(
                     text = stringResource(R.string.already_have_an_account),
-                    fontSize = 16.sp,
+                    fontSize = 14.sp,
                     fontFamily = poppinsFOntFamily,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = GrayText
                 )
 
                 Text(
                     text = stringResource(R.string.login_text),
-                    fontSize = 16.sp,
+                    fontSize = 14.sp,
                     fontFamily = poppinsFOntFamily,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = TealPrimary,
                     modifier = Modifier
                         .padding(start = 5.dp)
-                        .clickable() { onNavigateToSignInScreen() }
+                        .clickable { onNavigateToSignInScreen() }
                 )
             }
         }
@@ -132,12 +156,12 @@ fun SignUpContent(
 
 @Preview(
     showBackground = true,
-    uiMode = Configuration.UI_MODE_NIGHT_YES)
+    uiMode = Configuration.UI_MODE_NIGHT_NO)
 @Composable
 private fun SignUpContentPreview() {
     XBizWorkTheme {
         SignUpContent(
-            modifier = Modifier.fillMaxSize().padding(10.dp),
+            modifier = Modifier.fillMaxSize(),
             uiState = SignUpState(
                 name = "Pedro Carvalho",
                 email = "ppscarvalho@gmail.com",

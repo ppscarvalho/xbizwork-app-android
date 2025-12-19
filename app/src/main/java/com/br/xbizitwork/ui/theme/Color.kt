@@ -24,6 +24,13 @@ val LightOnSurface = Color(0xFF212121)
 val LightChip = Color(0xFFFF3131)
 val LightText = Color(0xFF000000)
 
+// Profile/Edit Theme Colors
+val TealPrimary = Color(0xFF1A5D5D)
+val BeigeBackground = Color(0xFFF5F0E8)
+val GrayText = Color(0xFF6B6B6B)
+val ErrorRed = Color(0xFFD32F2F)
+val DarkHeaderBackground = Color(0xFF082f49)
+
 
 // Dark Theme
 val DarkPrimary = Color(0xFFFF6E10)

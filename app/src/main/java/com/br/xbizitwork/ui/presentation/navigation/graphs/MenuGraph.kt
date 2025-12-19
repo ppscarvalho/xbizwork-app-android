@@ -19,11 +19,13 @@ import com.br.xbizitwork.ui.presentation.navigation.screens.MenuScreens
  * - E outros submenus
  */
 fun NavGraphBuilder.menuGraph(
-    onNavigateUp: () -> Unit
+    onNavigateUp: () -> Unit,
+    onNavigateToEditProfile: () -> Unit
 ){
     navigation<Graphs.MenuGraphs>(startDestination = MenuScreens.MenuScreen) {
         menuScreen(
-            onNavigateToHomeGraph = onNavigateUp
+            onNavigateToHomeGraph = onNavigateUp,
+            onNavigateToEditProfile = onNavigateToEditProfile
         )
         
         // Aqui você adicionará as outras screens

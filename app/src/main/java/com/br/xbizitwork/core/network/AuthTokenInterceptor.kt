@@ -7,16 +7,19 @@ import io.ktor.client.plugins.api.ClientPlugin
 import io.ktor.client.plugins.api.createClientPlugin
 import io.ktor.client.request.header
 import io.ktor.http.HttpHeaders
+import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
 /**
- * Plugin Ktor que adiciona automaticamente o token JWT ao header Authorization.
+ * Plugin Ktor que adiciona automaticamente o token JWT ao header Authorization
+ * e detecta quando o token expira (401 Unauthorized).
  *
  * ## Responsabilidades:
  * - Intercepta todas as requisições HTTP saídas
  * - Busca o token JWT armazenado localmente (DataStore criptografado)
  * - Adiciona o token ao header Authorization (formato: "Bearer {token}")
+ * - Intercepta respostas 401 e limpa sessão automaticamente
  * - Trata erros silenciosamente (requisições públicas não falham)
  *
  * ## Padrão Google:
@@ -38,6 +41,8 @@ import javax.inject.Inject
  * 3. Se sucesso: adiciona "Authorization: Bearer {token}"
  * 4. Se falha: continua sem header (pode ser requisição pública)
  * 5. Requisição segue seu caminho
+ * 6. Resposta volta → Plugin verifica status
+ * 7. Se 401: limpa sessão e força reautenticação
  */
 object AuthTokenInterceptor {
     
@@ -49,6 +54,8 @@ object AuthTokenInterceptor {
      */
     fun create(authSessionLocalDataSource: AuthSessionLocalDataSource): ClientPlugin<Unit> =
         createClientPlugin(name = "AuthTokenInterceptor") {
+
+            // ✅ INTERCEPTOR DE REQUISIÇÃO (adiciona token)
             onRequest { request, _ ->
                 try {
                     // Busca o token do DataStore (assíncrono, sem bloqueio)
@@ -68,6 +75,22 @@ object AuthTokenInterceptor {
                     // Se houver erro, continua sem token
                     // Isso permite requisições públicas funcionarem mesmo sem token
                     logError("AUTH_INTERCEPTOR", "Erro ao buscar token: ${e.message}")
+                }
+            }
+
+            // ✅ INTERCEPTOR DE RESPOSTA (detecta 401 e limpa sessão)
+            onResponse { response ->
+                try {
+                    if (response.status == HttpStatusCode.Unauthorized) {
+                        logInfo("AUTH_INTERCEPTOR", "⚠️ Token inválido/expirado (401) - Limpando sessão...")
+
+                        // Limpa a sessão automaticamente
+                        authSessionLocalDataSource.clearSession()
+
+                        logInfo("AUTH_INTERCEPTOR", "✅ Sessão limpa! Usuário precisa fazer login novamente.")
+                    }
+                } catch (e: Exception) {
+                    logError("AUTH_INTERCEPTOR", "Erro ao processar resposta 401: ${e.message}")
                 }
             }
         }

@@ -24,13 +24,20 @@ fun SignInScreen(
     onNavigateToSignUpScreen: () -> Unit,
     onEmailChanged: (String) -> Unit,
     onPasswordChanged: (String) -> Unit,
-    onNavigateToHomeGraph: () -> Unit
+    onNavigateToHomeGraph: () -> Unit,
+    onNavigateBack: () -> Unit = {}
 ) {
 
     val context = LocalContext.current
     LifecycleEventEffect(sideEffectFlow){ sideEffect ->
         when(sideEffect){
             is SideEffect.ShowToast -> context.toast(sideEffect.message)
+            is SideEffect.NavigateToLogin -> {
+                // Já estamos na tela de login, não faz nada
+            }
+            is SideEffect.NavigateBack -> {
+                // Não usado nesta tela, mas precisa estar aqui por causa do sealed interface
+            }
         }
     }
 
@@ -47,7 +54,7 @@ fun SignInScreen(
                 title = "Login",
                 navigationImageVector = Icons.AutoMirrored.Outlined.ArrowBack,
                 enableNavigationUp = true,
-                onNavigationIconButton = { onNavigateToHomeGraph() }
+                onNavigationIconButton = { onNavigateBack() }
             )
         },
         content = {paddingValues ->

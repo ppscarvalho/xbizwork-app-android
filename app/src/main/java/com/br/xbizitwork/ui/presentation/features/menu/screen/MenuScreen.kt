@@ -38,10 +38,16 @@ fun MenuScreen(
 ) {
     val context = LocalContext.current
 
-    // ✅ NOVO: Usar LifecycleEventEffect para tratar SideEffects
+    // Tratar SideEffects (Toast)
     LifecycleEventEffect(sideEffectFlow) { sideEffect ->
         when(sideEffect) {
             is SideEffect.ShowToast -> context.toast(sideEffect.message)
+            is SideEffect.NavigateToLogin -> {
+                // MenuScreen não trata NavigateToLogin, ignora
+            }
+            is SideEffect.NavigateBack -> {
+                // MenuScreen não trata NavigateBack, ignora
+            }
         }
     }
 
@@ -56,9 +62,10 @@ fun MenuScreen(
                 onNavigationIconButton = { onNavigateToHomeGraph() }
             )
         },
-        content = {paddingValues ->
+        content = { paddingValues ->
             Column(
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier
+                    .fillMaxSize()
                     .padding(paddingValues),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally

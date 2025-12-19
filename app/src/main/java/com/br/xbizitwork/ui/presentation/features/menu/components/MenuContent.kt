@@ -1,10 +1,13 @@
 package com.br.xbizitwork.ui.presentation.features.menu.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import com.br.xbizitwork.ui.theme.XBizWorkTheme
 
 @Composable
 fun MenuContent(
@@ -37,6 +40,25 @@ fun MenuContent(
             onClickAppVersion = onClickAppVersion,
             onClickRateApp = onClickRateApp,
             onClickLogout = onClickLogout
+        )
+    }
+}
+
+@Preview (showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun MenuContentPreview() {
+    XBizWorkTheme {
+        MenuContent(
+            onClickUpdateProfile = {},
+            onClickChangerPassword = {},
+            onClickDateRange = {},
+            onClickAssignment = {},
+            onClickEvent = {},
+            onClickViewModule = {},
+            onClickFAQ = {},
+            onClickAppVersion = {},
+            onClickRateApp = {},
+            onClickLogout = {}
         )
     }
 }

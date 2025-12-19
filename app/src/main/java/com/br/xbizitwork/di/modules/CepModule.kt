@@ -1,0 +1,48 @@
+package com.br.xbizitwork.di.modules
+
+import com.br.xbizitwork.data.remote.cep.api.CepApiService
+import com.br.xbizitwork.data.remote.cep.api.CepApiServiceImpl
+import com.br.xbizitwork.data.remote.cep.datasource.CepRemoteDataSourceImpl
+import com.br.xbizitwork.data.repository.cep.CepRepositoryImpl
+import com.br.xbizitwork.domain.repository.cep.CepRepository
+import com.br.xbizitwork.domain.source.cep.CepRemoteDataSource
+import com.br.xbizitwork.domain.usecase.cep.GetCepUseCase
+import com.br.xbizitwork.domain.usecase.cep.GetCepUseCaseImpl
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
+
+/**
+ * Módulo Hilt para injeção de dependências do CEP
+ */
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class CepModule {
+
+    @Binds
+    @Singleton
+    abstract fun bindCepApiService(
+        impl: CepApiServiceImpl
+    ): CepApiService
+
+    @Binds
+    @Singleton
+    abstract fun bindCepRemoteDataSource(
+        impl: CepRemoteDataSourceImpl
+    ): CepRemoteDataSource
+
+    @Binds
+    @Singleton
+    abstract fun bindCepRepository(
+        impl: CepRepositoryImpl
+    ): CepRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindGetCepUseCase(
+        impl: GetCepUseCaseImpl
+    ): GetCepUseCase
+}
+

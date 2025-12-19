@@ -35,6 +35,9 @@ sealed interface HomeScreens{
     data object ProfileScreen: HomeScreens
 
     @Serializable
+    data object EditProfileScreen: HomeScreens
+
+    @Serializable
     data object ReserveScreen: HomeScreens
 
     @Serializable

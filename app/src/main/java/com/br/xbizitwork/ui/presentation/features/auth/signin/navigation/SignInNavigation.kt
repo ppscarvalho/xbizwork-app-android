@@ -13,6 +13,7 @@ import com.br.xbizitwork.ui.presentation.navigation.screens.AuthScreens
 fun NavGraphBuilder.signInScreen(
     onNavigateToHomeGraph: () -> Unit,
     onNavigateToSignUpScreen: () -> Unit,
+    onNavigateBack: () -> Unit = {}
 ) {
     composable<AuthScreens.SignInScreen> {
         val viewModel: SignInViewModel = hiltViewModel()
@@ -26,7 +27,8 @@ fun NavGraphBuilder.signInScreen(
             onNavigateToSignUpScreen = onNavigateToSignUpScreen,
             onEmailChanged = viewModel::onEmailChange,
             onPasswordChanged = viewModel::onPasswordChange,
-            onNavigateToHomeGraph = onNavigateToHomeGraph
+            onNavigateToHomeGraph = onNavigateToHomeGraph,
+            onNavigateBack = onNavigateBack
         )
     }
 }
