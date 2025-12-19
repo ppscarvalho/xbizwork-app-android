@@ -5,10 +5,13 @@ import kotlinx.serialization.Serializable
 @Serializable
 sealed interface Graphs{
     @Serializable
-    data object AuthGraph: Graphs
+    data object AuthGraphs: Graphs
 
     @Serializable
-    data object HomeGraph: Graphs
+    data object HomeGraphs: Graphs
+
+    @Serializable
+    data object MenuGraphs: Graphs
 }
 
 @Serializable
@@ -29,10 +32,10 @@ sealed interface HomeScreens{
     data class SignUpScreen(val userId: String? = ""): HomeScreens
 
     @Serializable
-    data object OptionScreen: HomeScreens
+    data object ProfileScreen: HomeScreens
 
     @Serializable
-    data object ProfileScreen: HomeScreens
+    data object EditProfileScreen: HomeScreens
 
     @Serializable
     data object ReserveScreen: HomeScreens
@@ -54,4 +57,22 @@ sealed interface HomeScreens{
 
     @Serializable
     data object ChangePasswordScreen: HomeScreens
+}
+
+@Serializable
+sealed interface MenuScreens{
+    @Serializable
+    data object MenuScreen: MenuScreens
+
+    @Serializable
+    data object FinancialScreen: MenuScreens
+
+    @Serializable
+    data object CreateScheduleScreen: MenuScreens
+
+    @Serializable
+    data object ViewSchedulesScreen: MenuScreens
+
+    @Serializable
+    data object ProfessionalAgendaScreen: MenuScreens
 }

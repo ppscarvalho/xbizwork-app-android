@@ -3,11 +3,12 @@ package com.br.xbizitwork.ui.presentation.navigation
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import com.br.xbizitwork.ui.presentation.features.auth.presentation.signin.navigation.navigateToSignInScreen
-import com.br.xbizitwork.ui.presentation.features.auth.presentation.signup.navigation.navigateToSignUpScreen
+import com.br.xbizitwork.ui.presentation.features.auth.signin.navigation.navigateToSignInScreen
+import com.br.xbizitwork.ui.presentation.features.auth.signup.navigation.navigateToSignUpScreen
 import com.br.xbizitwork.ui.presentation.navigation.graphs.authGraph
 import com.br.xbizitwork.ui.presentation.navigation.graphs.homeGraph
-import com.br.xbizitwork.ui.presentation.navigation.screens.AuthScreens
+import com.br.xbizitwork.ui.presentation.navigation.graphs.navigationToHomeGraph
+import com.br.xbizitwork.ui.presentation.navigation.graphs.navigateToMenuGraph
 import com.br.xbizitwork.ui.presentation.navigation.screens.Graphs
 
 @Composable
@@ -20,8 +21,8 @@ fun RootHost(
         startDestination = startDestination
     ){
         authGraph(
-            onNavigateToHomeGraph = {
-                navController.navigate(Graphs.HomeGraph)
+            onNavigateToHomeGraph = {navOptions ->
+                navController.navigationToHomeGraph(navOptions)
             },
             onNavigateToSignUpScreen = {
                 navController.navigateToSignUpScreen()
@@ -33,7 +34,20 @@ fun RootHost(
         homeGraph(
             onNavigateUp = {
                 navController.navigateUp()
-            }
+            },
+            onNavigateToProfileScreen = {
+                navController.navigateUp()
+            },
+            onNavigateToSearchScreen = {},
+            onNavigateToUsersConnectionScreen = {},
+            onNavigateToMenuGraph = {
+                navController.navigateToMenuGraph()
+            },
+            onNavigateProfileClick = {},
+            onNavigateToSignInScreen = {
+                navController.navigateToSignInScreen()
+            },
+            navController = navController
         )
     }
 }
