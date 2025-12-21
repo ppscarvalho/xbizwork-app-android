@@ -66,16 +66,16 @@ class SignInViewModel @Inject constructor(
                     _uiState.update { it.copy(isLoading = true) }
                 },
                 onSuccess = {response ->
-                    logInfo("SIGN_IN_SUCCESS", "Response recebido: name=${response.name}, email=${response.email}, token=${response.token}")
+                    logInfo("SIGN_IN_SUCCESS", "Response recebido: id=${response.id}, name=${response.name}, email=${response.email}, token=${response.token}")
                     _uiState.update {
                         it.copy(isLoading = false, isSuccess = response.isSuccessful )
                     }
                     _sideEffectChannel.send(SideEffect.ShowToast(response.message.toString()))
                     // ✅ CORRIGIDO: Verificar valores nulos antes de converter
-                    if (!response.name.isNullOrEmpty() && !response.email.isNullOrEmpty() && !response.token.isNullOrEmpty()) {
-                        saveLocalSession(response.name!!, response.email!!, response.token!!)
+                    if (response.id != null && !response.name.isNullOrEmpty() && !response.email.isNullOrEmpty() && !response.token.isNullOrEmpty()) {
+                        saveLocalSession(response.id!!, response.name!!, response.email!!, response.token!!)
                     } else {
-                        logInfo("SIGN_IN_ERROR", "Dados vazios recebidos: name=${response.name}, email=${response.email}, token=${response.token}")
+                        logInfo("SIGN_IN_ERROR", "Dados vazios recebidos: id=${response.id}, name=${response.name}, email=${response.email}, token=${response.token}")
                         _sideEffectChannel.send(SideEffect.ShowToast("Erro: Dados vazios recebidos do servidor"))
                     }
                 },
@@ -88,10 +88,11 @@ class SignInViewModel @Inject constructor(
         }
     }
 
-    private suspend fun saveLocalSession(name: String, email: String, token: String) {
-        logInfo("SAVE_SESSION", "Salvando sessão: name=$name, email=$email, token=$token")
+    private suspend fun saveLocalSession(id: Int, name: String, email: String, token: String) {
+        logInfo("SAVE_SESSION", "Salvando sessão: id=$id, name=$name, email=$email, token=$token")
         saveAuthSessionUseCase.invoke(
             SaveAuthSessionUseCase.Parameters(
+                id = id,
                 name = name,
                 email = email,
                 token = token)

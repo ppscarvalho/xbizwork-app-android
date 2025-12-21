@@ -4,6 +4,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.br.xbizitwork.core.util.logging.logError
 import com.br.xbizitwork.data.local.auth.datastore.AuthSessionLocalDataSource
@@ -19,6 +20,7 @@ class AuthSessionLocalDataSourceImpl @Inject constructor(
 ) : AuthSessionLocalDataSource {
 
     private object PreferencesKeys {
+        val ID_KEY = intPreferencesKey(name = "id_key")
         val NAME_KEY = stringPreferencesKey(name = "name_key")
         val EMAIL_KEY = stringPreferencesKey(name = "email_key")
         val TOKEN_KEY = stringPreferencesKey(name = "token_key")
@@ -33,11 +35,13 @@ class AuthSessionLocalDataSourceImpl @Inject constructor(
                 emit(emptyPreferences())
             }
             .map { preferences ->
+                val id = preferences[PreferencesKeys.ID_KEY] ?: 0
                 val token = preferences[PreferencesKeys.TOKEN_KEY] ?: ""
                 val name = preferences[PreferencesKeys.NAME_KEY] ?: ""
                 val email = preferences[PreferencesKeys.EMAIL_KEY] ?: ""
 
                 AuthSession(
+                    id = id,
                     name = name,
                     email = email,
                     token = token

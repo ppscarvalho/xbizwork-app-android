@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 interface SaveAuthSessionUseCase {
     operator fun invoke(parameters: Parameters): Flow<UiState<Unit>>
-    data class Parameters(val name: String, val email: String, val token: String)
+    data class Parameters(val id: Int, val name: String, val email: String, val token: String)
 }
 
 class SaveAuthSessionUseCaseImpl @Inject constructor(
@@ -18,6 +18,7 @@ class SaveAuthSessionUseCaseImpl @Inject constructor(
         return try {
             UiState.Success(
                 authRepository.saveSession(
+                    id = parameters.id,
                     name = parameters.name,
                     email = parameters.email,
                     token = parameters.token

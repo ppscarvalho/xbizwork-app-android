@@ -65,11 +65,13 @@ class UserAuthRepositoryImpl @Inject constructor(
             .flowOn(coroutineDispatcherProvider.io())
 
     override suspend fun saveSession(
+        id: Int,
         name: String,
         email: String,
         token: String,
     ) = withContext(coroutineDispatcherProvider.io()) {
         localDataSource.saveSession(
+            id = id,
             name = name,
             email = email,
             token = token

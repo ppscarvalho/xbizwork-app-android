@@ -13,7 +13,7 @@ interface UserAuthRepository {
     suspend fun signUp(signUpModel: SignUpModel): DomainDefaultResult<SignUpResult>
 
     fun observeSession() : Flow<AuthSession>
-    suspend fun saveSession(name: String, email: String, token: String)
+    suspend fun saveSession(id: Int, name: String, email: String, token: String)
     suspend fun getSession(): AuthSession?
     suspend fun clearSession()
 }
