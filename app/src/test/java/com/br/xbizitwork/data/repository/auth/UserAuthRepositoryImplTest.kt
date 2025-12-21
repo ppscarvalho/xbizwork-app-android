@@ -118,15 +118,17 @@ class UserAuthRepositoryImplTest {
     @Test
     fun saveSession_callsLocalDataSource() = runTest {
         // Arrange
+        val id = 1
         val name = "John Doe"
         val email = "test@example.com"
         val token = "jwt_token"
 
         // Act
-        repository.saveSession(name, email, token)
+        repository.saveSession(id, name, email, token)
 
         // Assert
         verify(mockLocalDataSource).saveSession(
+            id = id,
             name = name,
             email = email,
             token = token

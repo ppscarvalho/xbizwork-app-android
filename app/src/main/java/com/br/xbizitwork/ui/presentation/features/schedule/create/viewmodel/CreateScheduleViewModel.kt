@@ -157,6 +157,90 @@ class CreateScheduleViewModel @Inject constructor(
         
         if (!state.canAddTimeSlot) return
         
+        // ========================================
+        // VALIDAÇÃO 1: Hora final > Hora inicial
+        // ========================================
+        val startHour = state.startTime.substringBefore(":").toIntOrNull() ?: 0
+        val startMinute = state.startTime.substringAfter(":").toIntOrNull() ?: 0
+        val endHour = state.endTime.substringBefore(":").toIntOrNull() ?: 0
+        val endMinute = state.endTime.substringAfter(":").toIntOrNull() ?: 0
+
+        val startTimeInMinutes = startHour * 60 + startMinute
+        val endTimeInMinutes = endHour * 60 + endMinute
+
+        if (endTimeInMinutes <= startTimeInMinutes) {
+            viewModelScope.launch {
+                _sideEffectChannel.send(
+                    SideEffect.ShowToast("❌ Hora final deve ser maior que hora inicial!")
+                )
+            }
+            return
+        }
+
+        // ========================================
+        // VALIDAÇÃO 2: Horário duplicado
+        // ========================================
+        val isDuplicate = state.scheduleTimeSlots.any { slot ->
+            slot.categoryId == state.selectedCategoryId &&
+            slot.specialtyId == state.selectedSpecialtyId &&
+            slot.weekDay == state.selectedWeekDay &&
+            slot.startTime == state.startTime &&
+            slot.endTime == state.endTime
+        }
+
+        if (isDuplicate) {
+            viewModelScope.launch {
+                _sideEffectChannel.send(
+                    SideEffect.ShowToast("❌ Este horário já foi adicionado!")
+                )
+            }
+            return
+        }
+
+        // ========================================
+        // VALIDAÇÃO 3: Sobreposição de horários E horários sequenciais
+        // ========================================
+        val hasOverlapOrSequential = state.scheduleTimeSlots.any { slot ->
+            // Mesma categoria, especialidade e dia da semana
+            if (slot.categoryId == state.selectedCategoryId &&
+                slot.specialtyId == state.selectedSpecialtyId &&
+                slot.weekDay == state.selectedWeekDay) {
+
+                val slotStartMinutes = slot.startTime.substringBefore(":").toInt() * 60 +
+                                     slot.startTime.substringAfter(":").toInt()
+                val slotEndMinutes = slot.endTime.substringBefore(":").toInt() * 60 +
+                                   slot.endTime.substringAfter(":").toInt()
+
+                // Verifica sobreposição
+                val startsInside = startTimeInMinutes >= slotStartMinutes &&
+                                 startTimeInMinutes < slotEndMinutes
+                val endsInside = endTimeInMinutes > slotStartMinutes &&
+                               endTimeInMinutes <= slotEndMinutes
+                val encompasses = startTimeInMinutes <= slotStartMinutes &&
+                                endTimeInMinutes >= slotEndMinutes
+
+                // ✅ NOVA REGRA: Bloquear horários sequenciais (sem intervalo)
+                val isSequentialStart = startTimeInMinutes == slotEndMinutes // Novo começa quando antigo termina
+                val isSequentialEnd = endTimeInMinutes == slotStartMinutes   // Novo termina quando antigo começa
+
+                startsInside || endsInside || encompasses || isSequentialStart || isSequentialEnd
+            } else {
+                false
+            }
+        }
+
+        if (hasOverlapOrSequential) {
+            viewModelScope.launch {
+                _sideEffectChannel.send(
+                    SideEffect.ShowToast("❌ Horários devem ter intervalo entre eles!")
+                )
+            }
+            return
+        }
+
+        // ========================================
+        // ✅ VALIDAÇÕES OK - Adicionar horário
+        // ========================================
         val newSlot = ScheduleTimeSlot(
             id = UUID.randomUUID().toString(),
             categoryId = state.selectedCategoryId!!,
@@ -176,7 +260,7 @@ class CreateScheduleViewModel @Inject constructor(
         }
         
         viewModelScope.launch {
-            _sideEffectChannel.send(SideEffect.ShowToast("Horário adicionado!"))
+            _sideEffectChannel.send(SideEffect.ShowToast("✅ Horário adicionado!"))
         }
     }
     
@@ -232,10 +316,15 @@ class CreateScheduleViewModel @Inject constructor(
                         )
                     }
                 } else {
+                    // ✅ Limpar lista temporária após salvar com sucesso
                     _uiState.update {
-                        it.copy(isLoading = false, isSuccess = true)
+                        it.copy(
+                            isLoading = false,
+                            isSuccess = true,
+                            scheduleTimeSlots = emptyList() // ← Limpa a lista
+                        )
                     }
-                    _sideEffectChannel.send(SideEffect.ShowToast("Agenda criada com sucesso!"))
+                    _sideEffectChannel.send(SideEffect.ShowToast("✅ Agenda criada com sucesso!"))
                     _sideEffectChannel.send(SideEffect.NavigateBack)
                 }
             } catch (e: Exception) {

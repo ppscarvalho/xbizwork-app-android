@@ -66,18 +66,31 @@ class SignInViewModel @Inject constructor(
                     _uiState.update { it.copy(isLoading = true) }
                 },
                 onSuccess = {response ->
-                    logInfo("SIGN_IN_SUCCESS", "Response recebido: id=${response.id}, name=${response.name}, email=${response.email}, token=${response.token}")
+                    logInfo("SIGN_IN_SUCCESS", "✅ Response recebido:")
+                    logInfo("SIGN_IN_SUCCESS", "  - id: ${response.id} (type: ${response.id?.javaClass?.simpleName})")
+                    logInfo("SIGN_IN_SUCCESS", "  - name: '${response.name}' (empty: ${response.name.isNullOrEmpty()})")
+                    logInfo("SIGN_IN_SUCCESS", "  - email: '${response.email}' (empty: ${response.email.isNullOrEmpty()})")
+                    logInfo("SIGN_IN_SUCCESS", "  - token: '${response.token?.take(20)}...' (empty: ${response.token.isNullOrEmpty()})")
+                    logInfo("SIGN_IN_SUCCESS", "  - isSuccessful: ${response.isSuccessful}")
+
                     _uiState.update {
                         it.copy(isLoading = false, isSuccess = response.isSuccessful )
                     }
                     _sideEffectChannel.send(SideEffect.ShowToast(response.message.toString()))
-                    // ✅ CORRIGIDO: Verificar valores nulos antes de converter
-                    if (response.id != null && !response.name.isNullOrEmpty() && !response.email.isNullOrEmpty() && !response.token.isNullOrEmpty()) {
-                        saveLocalSession(response.id!!, response.name!!, response.email!!, response.token!!)
-                    } else {
-                        logInfo("SIGN_IN_ERROR", "Dados vazios recebidos: id=${response.id}, name=${response.name}, email=${response.email}, token=${response.token}")
-                        _sideEffectChannel.send(SideEffect.ShowToast("Erro: Dados vazios recebidos do servidor"))
-                    }
+
+                    // Salvar sessão com os dados recebidos
+                    val userId = response.id ?: 0
+                    val userName = response.name.orEmpty()
+                    val userEmail = response.email.orEmpty()
+                    val userToken = response.token.orEmpty()
+
+                    logInfo("SIGN_IN_SESSION", "💾 Salvando sessão:")
+                    logInfo("SIGN_IN_SESSION", "  - userId: $userId")
+                    logInfo("SIGN_IN_SESSION", "  - userName: '$userName'")
+                    logInfo("SIGN_IN_SESSION", "  - userEmail: '$userEmail'")
+                    logInfo("SIGN_IN_SESSION", "  - userToken: '${userToken.take(20)}...'")
+
+                    saveLocalSession(userId, userName, userEmail, userToken)
                 },
                 onFailure = {error ->
                     _uiState.update {

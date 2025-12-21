@@ -3,6 +3,24 @@ package com.br.xbizitwork.data.remote.schedule.dtos.responses
 import kotlinx.serialization.Serializable
 
 @Serializable
+data class CategoryResponse(
+    val id: Int,
+    val description: String
+)
+
+@Serializable
+data class SpecialtyResponse(
+    val id: Int,
+    val description: String
+)
+
+@Serializable
+data class UserResponse(
+    val id: Int,
+    val name: String
+)
+
+@Serializable
 data class TimeSlotResponse(
     val id: String,
     val dayOfWeek: String,
@@ -35,14 +53,15 @@ data class AvailabilityResponse(
 
 @Serializable
 data class ScheduleResponse(
-    val id: String,
-    val professionalId: String,
-    val category: String,
-    val specialty: String,
-    val availability: AvailabilityResponse,
-    val timeSlots: List<TimeSlotResponse> = emptyList(),
-    val serviceDurationMinutes: Int,
-    val isActive: Boolean,
-    val createdAt: String,
-    val updatedAt: String
+    val scheduleId: Int,
+    val userId: Int,
+    val categoryId: Int,
+    val specialtyId: Int,
+    val weekDays: List<Int>,
+    val startTime: String,
+    val endTime: String,
+    val status: Boolean,
+    val user: UserResponse,
+    val category: CategoryResponse,
+    val specialty: SpecialtyResponse
 )

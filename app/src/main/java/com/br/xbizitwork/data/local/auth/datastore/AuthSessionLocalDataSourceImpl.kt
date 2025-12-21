@@ -7,7 +7,6 @@ import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.br.xbizitwork.core.util.logging.logError
-import com.br.xbizitwork.data.local.auth.datastore.AuthSessionLocalDataSource
 import com.br.xbizitwork.domain.session.AuthSession
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -62,6 +61,7 @@ class AuthSessionLocalDataSourceImpl @Inject constructor(
             preferences[PreferencesKeys.TOKEN_KEY] = token
         }
     }
+
 
     override suspend fun getSession(): AuthSession? {
         val preferences = dataStorePreferences.data.first()

@@ -9,7 +9,6 @@ import com.br.xbizitwork.ui.presentation.navigation.graphs.authGraph
 import com.br.xbizitwork.ui.presentation.navigation.graphs.homeGraph
 import com.br.xbizitwork.ui.presentation.navigation.graphs.navigationToHomeGraph
 import com.br.xbizitwork.ui.presentation.navigation.graphs.navigateToMenuGraph
-import com.br.xbizitwork.ui.presentation.navigation.screens.AuthScreens
 import com.br.xbizitwork.ui.presentation.navigation.screens.Graphs
 
 @Composable
@@ -30,6 +29,9 @@ fun RootHost(
             },
             onNavigateToSignInScreen = {
                 navController.navigateToSignInScreen()
+            },
+            onNavigateBack = {
+                navController.navigateUp()
             }
         )
         homeGraph(

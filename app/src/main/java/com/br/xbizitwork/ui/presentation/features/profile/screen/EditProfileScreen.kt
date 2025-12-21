@@ -1,15 +1,11 @@
-package com.br.xbizitwork.ui.presentation.features.profile.views
+package com.br.xbizitwork.ui.presentation.features.profile.screen
 
 import android.app.Activity
-import android.net.Uri
 import android.widget.Toast
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -21,17 +17,17 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
-import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.br.xbizitwork.core.sideeffects.SideEffect
+import com.br.xbizitwork.ui.presentation.components.topbar.AppTopBar
 import com.br.xbizitwork.ui.presentation.features.profile.components.EditProfileContent
 import com.br.xbizitwork.ui.presentation.features.profile.events.EditProfileEvent
 import com.br.xbizitwork.ui.presentation.features.profile.viewmodel.EditProfileViewModel
@@ -73,14 +69,14 @@ fun EditProfileScreen(
     LaunchedEffect(Unit) {
         viewModel.sideEffectChannel.collectLatest { sideEffect ->
             when (sideEffect) {
-                is com.br.xbizitwork.core.sideeffects.SideEffect.ShowToast -> {
+                is SideEffect.ShowToast -> {
                     Toast.makeText(context, sideEffect.message, Toast.LENGTH_SHORT).show()
                 }
-                is com.br.xbizitwork.core.sideeffects.SideEffect.NavigateToLogin -> {
+                is SideEffect.NavigateToLogin -> {
                     // Token expirado, volta ao login
                     onNavigateToLogin()
                 }
-                is com.br.xbizitwork.core.sideeffects.SideEffect.NavigateBack -> {
+                is SideEffect.NavigateBack -> {
                     // Navega de volta para MenuScreen
                     onNavigateBack()
                 }
@@ -91,30 +87,40 @@ fun EditProfileScreen(
     Scaffold(
         modifier = modifier.fillMaxSize(),
         topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = "Editar Perfil",
-                        color = Color.White,
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                },
-                navigationIcon = {
-                    IconButton(onClick = { viewModel.onEvent(EditProfileEvent.OnCancelClick) }) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Voltar",
-                            tint = Color.White
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = DarkHeaderBackground,
-                    navigationIconContentColor = Color.White,
-                    titleContentColor = Color.White
-                )
+            AppTopBar(
+                isHomeMode = false,
+                title = "Editar Perfil",
+                navigationImageVector = Icons.AutoMirrored.Outlined.ArrowBack,
+                enableNavigationUp = true,
+                onNavigationIconButton = { viewModel.onEvent(EditProfileEvent.OnCancelClick) }
             )
-        }
+        },
+
+//        topBar = {
+//            TopAppBar(
+//                title = {
+//                    Text(
+//                        text = "Editar Perfil",
+//                        color = Color.White,
+//                        style = MaterialTheme.typography.titleMedium
+//                    )
+//                },
+//                navigationIcon = {
+//                    IconButton(onClick = { viewModel.onEvent(EditProfileEvent.OnCancelClick) }) {
+//                        Icon(
+//                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+//                            contentDescription = "Voltar",
+//                            tint = Color.White
+//                        )
+//                    }
+//                },
+//                colors = TopAppBarDefaults.topAppBarColors(
+//                    containerColor = DarkHeaderBackground,
+//                    navigationIconContentColor = Color.White,
+//                    titleContentColor = Color.White
+//                )
+//            )
+//        }
     ) { paddingValues ->
         EditProfileContent(
             modifier = Modifier.fillMaxSize(),

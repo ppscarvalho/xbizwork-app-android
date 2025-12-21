@@ -8,6 +8,7 @@ import com.br.xbizitwork.domain.usecase.schedule.DeleteScheduleUseCase
 import com.br.xbizitwork.domain.usecase.schedule.GetProfessionalSchedulesUseCase
 import com.br.xbizitwork.domain.usecase.session.GetAuthSessionUseCase
 import com.br.xbizitwork.ui.presentation.features.schedule.list.events.ViewSchedulesEvent
+import com.br.xbizitwork.ui.presentation.features.schedule.list.state.ViewSchedulesUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -67,10 +68,21 @@ class ViewSchedulesViewModel @Inject constructor(
                     }
                 },
                 onFailure = { throwable ->
+                    val errorMessage = throwable.message ?: "Erro ao carregar agendas"
+
+                    // Verificar se é erro de autenticação (token inválido)
+                    if (errorMessage.contains("401") ||
+                        errorMessage.contains("Token inválido") ||
+                        errorMessage.contains("Unauthorized")) {
+                        viewModelScope.launch {
+                            _sideEffectChannel.send(SideEffect.NavigateToLogin)
+                        }
+                    }
+
                     _uiState.update {
                         it.copy(
                             isLoading = false,
-                            errorMessage = throwable.message ?: "Erro ao carregar agendas"
+                            errorMessage = errorMessage
                         )
                     }
                 }

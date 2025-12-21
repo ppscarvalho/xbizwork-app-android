@@ -12,7 +12,8 @@ import com.br.xbizitwork.ui.presentation.navigation.screens.Graphs
 fun NavGraphBuilder.authGraph(
     onNavigateToHomeGraph: (NavOptions) -> Unit,
     onNavigateToSignInScreen: () -> Unit,
-    onNavigateToSignUpScreen: () -> Unit
+    onNavigateToSignUpScreen: () -> Unit,
+    onNavigateBack: () -> Unit = {}
 ){
     navigation<Graphs.AuthGraphs>(
         startDestination = AuthScreens.SignInScreen
@@ -21,7 +22,8 @@ fun NavGraphBuilder.authGraph(
             onNavigateToHomeGraph = { onNavigateToHomeGraph(navOptions{
                 popUpTo(Graphs.AuthGraphs)
             }) },
-            onNavigateToSignUpScreen = onNavigateToSignUpScreen
+            onNavigateToSignUpScreen = onNavigateToSignUpScreen,
+            onNavigateBack = onNavigateBack
         )
         signUpScreen(
             onNavigateToSignInScreen = onNavigateToSignInScreen

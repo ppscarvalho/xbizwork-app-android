@@ -52,7 +52,8 @@ fun NavGraphBuilder.homeGraph(
             },
             onNavigateToProfessionalAgendaScreen = {
                 navController.navigateToProfessionalAgenda()
-            }
+            },
+            onNavigateToLogin = onNavigateToSignInScreen
         )
     }
 }

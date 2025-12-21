@@ -45,7 +45,7 @@ fun ScheduleTableHeader(
         
         // Hora Início (20%)
         Text(
-            text = "Hora Início",
+            text = "Início",
             style = MaterialTheme.typography.bodyMedium,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onSurface,
@@ -55,7 +55,7 @@ fun ScheduleTableHeader(
         
         // Hora Fim (20%)
         Text(
-            text = "Hora Fim",
+            text = "Fim",
             style = MaterialTheme.typography.bodyMedium,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onSurface,

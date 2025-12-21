@@ -5,8 +5,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
-import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -19,6 +18,23 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
+
+/**
+ * Abrevia o nome do dia da semana para 3 letras
+ * Ex: "Segunda-feira" -> "Seg"
+ */
+private fun abbreviateDayOfWeek(dayOfWeek: String): String {
+    return when {
+        dayOfWeek.startsWith("Segunda", ignoreCase = true) -> "Seg"
+        dayOfWeek.startsWith("Terça", ignoreCase = true) -> "Ter"
+        dayOfWeek.startsWith("Quarta", ignoreCase = true) -> "Qua"
+        dayOfWeek.startsWith("Quinta", ignoreCase = true) -> "Qui"
+        dayOfWeek.startsWith("Sexta", ignoreCase = true) -> "Sex"
+        dayOfWeek.startsWith("Sábado", ignoreCase = true) -> "Sáb"
+        dayOfWeek.startsWith("Domingo", ignoreCase = true) -> "Dom"
+        else -> dayOfWeek.take(3) // Fallback: pega 3 primeiras letras
+    }
+}
 
 /**
  * Linha individual de horário da agenda
@@ -44,11 +60,11 @@ fun ScheduleTimeSlotRow(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        // Dia da Semana (40%)
+        // Dia da Semana (40%) - Abreviado para 3 letras
         Text(
-            text = dayOfWeek,
+            text = abbreviateDayOfWeek(dayOfWeek),
             style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurface,
+            color = MaterialTheme.colorScheme.onSurfaceVariant, // Cinza mais claro
             modifier = Modifier.weight(0.4f),
             textAlign = TextAlign.Start
         )
@@ -57,7 +73,7 @@ fun ScheduleTimeSlotRow(
         Text(
             text = startTime,
             style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            color = MaterialTheme.colorScheme.onSurfaceVariant, // Cinza mais claro
             modifier = Modifier.weight(0.2f),
             textAlign = TextAlign.Center
         )
@@ -66,7 +82,7 @@ fun ScheduleTimeSlotRow(
         Text(
             text = endTime,
             style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            color = MaterialTheme.colorScheme.onSurfaceVariant, // Cinza mais claro
             modifier = Modifier.weight(0.2f),
             textAlign = TextAlign.Center
         )
@@ -77,7 +93,7 @@ fun ScheduleTimeSlotRow(
             modifier = Modifier.weight(0.2f)
         ) {
             Icon(
-                imageVector = Icons.Default.Close,
+                imageVector = Icons.Default.Delete,
                 contentDescription = "Remover horário",
                 tint = Color(0xFFD32F2F) // ErrorRed
             )

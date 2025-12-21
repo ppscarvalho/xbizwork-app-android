@@ -4,15 +4,15 @@ import com.br.xbizitwork.core.result.DefaultResult
 import com.br.xbizitwork.data.remote.schedule.datasource.ScheduleRemoteDataSource
 import com.br.xbizitwork.data.remote.schedule.dtos.requests.CreateScheduleRequest
 import com.br.xbizitwork.data.remote.schedule.dtos.responses.ScheduleResponse
-import com.br.xbizitwork.data.remote.schedule.mappers.toDomain
-import com.br.xbizitwork.data.remote.schedule.mappers.toUpdateRequest
+import com.br.xbizitwork.data.remote.schedule.mappers.*
 import com.br.xbizitwork.domain.model.schedule.Availability
 import com.br.xbizitwork.domain.model.schedule.DayOfWeek
 import com.br.xbizitwork.domain.model.schedule.Schedule
 import com.br.xbizitwork.domain.model.schedule.TimeSlot
 import com.br.xbizitwork.domain.repository.ScheduleRepository
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 import javax.inject.Inject
 
 /**
@@ -108,10 +108,13 @@ class ScheduleRepositoryImpl @Inject constructor(
     
     override suspend fun getAvailableTimeSlots(
         scheduleId: String,
-        date: LocalDate,
+        date: java.time.LocalDate,
         dayOfWeek: DayOfWeek
     ): DefaultResult<List<TimeSlot>> {
-        val dateStr = date.format(DateTimeFormatter.ISO_LOCAL_DATE)
+        // Converter LocalDate para String sem usar métodos de API 26
+        // LocalDate toString() retorna formato ISO (yyyy-MM-dd) e funciona em todas APIs
+        val dateStr = date.toString()
+
         val response = remoteDataSource.getAvailableTimeSlots(
             scheduleId,
             dateStr,
