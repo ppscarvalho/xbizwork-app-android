@@ -5,6 +5,9 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.navigation
 import com.br.xbizitwork.ui.presentation.features.menu.navigation.menuScreen
+import com.br.xbizitwork.ui.presentation.features.schedule.agenda.navigation.professionalAgendaScreen
+import com.br.xbizitwork.ui.presentation.features.schedule.create.navigation.createScheduleScreen
+import com.br.xbizitwork.ui.presentation.features.schedule.list.navigation.viewSchedulesScreen
 import com.br.xbizitwork.ui.presentation.navigation.screens.Graphs
 import com.br.xbizitwork.ui.presentation.navigation.screens.MenuScreens
 
@@ -16,22 +19,33 @@ import com.br.xbizitwork.ui.presentation.navigation.screens.MenuScreens
  * - FinancialScreen
  * - CreateScheduleScreen
  * - ViewSchedulesScreen
+ * - ProfessionalAgendaScreen
  * - E outros submenus
  */
 fun NavGraphBuilder.menuGraph(
     onNavigateUp: () -> Unit,
-    onNavigateToEditProfile: () -> Unit
+    onNavigateToEditProfile: () -> Unit,
+    onNavigateToCreateSchedule: () -> Unit,
+    onNavigateToViewSchedulesScreen: () -> Unit,
+    onNavigateToProfessionalAgendaScreen: () -> Unit
 ){
     navigation<Graphs.MenuGraphs>(startDestination = MenuScreens.MenuScreen) {
         menuScreen(
             onNavigateToHomeGraph = onNavigateUp,
-            onNavigateToEditProfile = onNavigateToEditProfile
+            onNavigateToEditProfile = onNavigateToEditProfile,
+            onNavigateToViewSchedulesScreen = onNavigateToViewSchedulesScreen,
+            onNavigateToProfessionalAgendaScreen = onNavigateToProfessionalAgendaScreen
         )
         
-        // Aqui você adicionará as outras screens
-        // financialScreen(onNavigateUp = onNavigateUp)
-        // createScheduleScreen(onNavigateUp = onNavigateUp)
-        // viewSchedulesScreen(onNavigateUp = onNavigateUp)
+        // Schedule Screens
+        createScheduleScreen(onNavigateUp = onNavigateUp)
+        
+        viewSchedulesScreen(
+            onNavigateUp = onNavigateUp,
+            onNavigateToCreate = onNavigateToCreateSchedule
+        )
+        
+        professionalAgendaScreen(onNavigateUp = onNavigateUp)
     }
 }
 

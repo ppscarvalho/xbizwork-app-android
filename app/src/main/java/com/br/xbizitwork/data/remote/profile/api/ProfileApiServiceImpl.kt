@@ -10,20 +10,11 @@ import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import javax.inject.Inject
 
-/**
- * Implementação do ProfileApiService usando Ktor HttpClient
- * Realiza chamadas HTTP para a API de perfil
- */
 class ProfileApiServiceImpl @Inject constructor(
-    private val client: HttpClient
-) : ProfileApiService {
-
-    /**
-     * Atualiza o perfil do usuário via PUT request
-     * Endpoint: PUT /users/{userId}
-     */
+    private val httpClient: HttpClient
+): ProfileApiService {
     override suspend fun updateProfile(request: UpdateProfileRequest): ApiResultResponse {
-        val response = client.put("user/${request.id}") {
+        val response = httpClient.put("users/${request.id}") {
             contentType(ContentType.Application.Json)
             setBody(request)
         }

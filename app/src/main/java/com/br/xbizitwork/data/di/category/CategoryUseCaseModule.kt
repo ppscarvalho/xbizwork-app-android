@@ -3,6 +3,7 @@ package com.br.xbizitwork.data.di.category
 import com.br.xbizitwork.domain.repository.CategoryRepository
 import com.br.xbizitwork.domain.usecase.category.GetAllCategoryUseCase
 import com.br.xbizitwork.domain.usecase.category.GetAllCategoryUseCaseImpl
+import com.br.xbizitwork.domain.usecase.category.GetCategoriesUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,5 +20,13 @@ object CategoryUseCaseModule {
         repository: CategoryRepository
     ) : GetAllCategoryUseCase {
         return GetAllCategoryUseCaseImpl(repository)
+    }
+    
+    @Provides
+    @Singleton
+    fun provideGetCategoriesUseCase(
+        repository: CategoryRepository
+    ): GetCategoriesUseCase {
+        return GetCategoriesUseCase(repository)
     }
 }

@@ -1,4 +1,4 @@
-package com.br.xbizitwork.di.modules
+package com.br.xbizitwork.data.di.cep
 
 import com.br.xbizitwork.data.remote.cep.api.CepApiService
 import com.br.xbizitwork.data.remote.cep.api.CepApiServiceImpl
