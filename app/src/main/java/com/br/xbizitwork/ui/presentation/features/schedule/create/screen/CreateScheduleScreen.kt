@@ -4,10 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import com.br.xbizitwork.core.sideeffects.AppSideEffect
 import com.br.xbizitwork.core.state.LifecycleEventEffect
@@ -24,7 +21,7 @@ fun CreateScheduleScreen(
     appSideEffectFlow: Flow<AppSideEffect>,
     onEvent: (CreateScheduleEvent) -> Unit,
     onNavigateBack: () -> Unit,
-    onNavigateToViewSchedules: () -> Unit
+    onNavigateToListSchedulesScreen: () -> Unit
 ) {
     val context = LocalContext.current
     LifecycleEventEffect(appSideEffectFlow) { sideEffect ->
@@ -32,7 +29,7 @@ fun CreateScheduleScreen(
             is AppSideEffect.ShowToast -> context.toast(sideEffect.message)
 
             is AppSideEffect.NavigateToLogin -> {
-                onNavigateToViewSchedules()
+                onNavigateToListSchedulesScreen()
             }
             else -> Unit
         }

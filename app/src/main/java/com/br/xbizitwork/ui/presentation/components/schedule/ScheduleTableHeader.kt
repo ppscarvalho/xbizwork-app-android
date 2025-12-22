@@ -1,5 +1,6 @@
 package com.br.xbizitwork.ui.presentation.components.schedule
 
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -37,8 +38,8 @@ fun ScheduleTableHeader(
         Text(
             text = "Dia da Semana",
             style = MaterialTheme.typography.bodyMedium,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onSurface,
+            fontWeight = FontWeight.Normal,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.weight(0.4f),
             textAlign = TextAlign.Start
         )
@@ -47,8 +48,8 @@ fun ScheduleTableHeader(
         Text(
             text = "Início",
             style = MaterialTheme.typography.bodyMedium,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onSurface,
+            fontWeight = FontWeight.Normal,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.weight(0.2f),
             textAlign = TextAlign.Center
         )
@@ -57,8 +58,8 @@ fun ScheduleTableHeader(
         Text(
             text = "Fim",
             style = MaterialTheme.typography.bodyMedium,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onSurface,
+            fontWeight = FontWeight.Normal,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.weight(0.2f),
             textAlign = TextAlign.Center
         )
@@ -67,8 +68,8 @@ fun ScheduleTableHeader(
         Text(
             text = "Ação",
             style = MaterialTheme.typography.bodyMedium,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onSurface,
+            fontWeight = FontWeight.Normal,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.weight(0.2f),
             textAlign = TextAlign.Center
         )
@@ -77,7 +78,15 @@ fun ScheduleTableHeader(
 
 @Preview(showBackground = true)
 @Composable
-private fun ScheduleTableHeaderPreview() {
+private fun ScheduleTableHeaderLightPreview() {
+    XBizWorkTheme {
+        ScheduleTableHeader()
+    }
+}
+
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun ScheduleTableHeaderDarkPreview() {
     XBizWorkTheme {
         ScheduleTableHeader()
     }

@@ -47,7 +47,7 @@ fun NavGraphBuilder.homeGraph(
             onNavigateToCreateSchedule = {
                 navController.navigateToCreateSchedule()
             },
-            onNavigateToViewSchedulesScreen = {
+            onNavigateToListSchedulesScreen = {
                 navController.navigateToViewSchedules()
             },
             onNavigateToProfessionalAgendaScreen = {

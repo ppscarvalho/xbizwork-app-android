@@ -1,5 +1,6 @@
 package com.br.xbizitwork.ui.presentation.components.schedule
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -12,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.br.xbizitwork.ui.theme.BeigeBackground
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
 
 /**
@@ -41,7 +43,7 @@ fun ProfessionalScheduleCard(
         modifier = modifier.fillMaxWidth(),
         shape = MaterialTheme.shapes.medium,
         colors = CardDefaults.cardColors(
-            containerColor = Color(0xFFF5F0E8) // BeigeBackground
+            containerColor = BeigeBackground
         ),
         elevation = CardDefaults.cardElevation(
             defaultElevation = 4.dp
@@ -89,35 +91,53 @@ fun ProfessionalScheduleCard(
 
 @Preview(showBackground = true)
 @Composable
-private fun ProfessionalScheduleCardPreview() {
+private fun ProfessionalScheduleCardLightPreview() {
     XBizWorkTheme {
-        val sampleSlots = listOf(
-            TimeSlotItem(
-                id = "1",
-                dayOfWeek = "Segunda-feira",
-                startTime = "08:00",
-                endTime = "10:00"
-            ),
-            TimeSlotItem(
-                id = "2",
-                dayOfWeek = "Quarta-feira",
-                startTime = "10:00",
-                endTime = "12:00"
-            ),
-            TimeSlotItem(
-                id = "3",
-                dayOfWeek = "Sexta-feira",
-                startTime = "12:00",
-                endTime = "14:00"
-            )
-        )
-        
         ProfessionalScheduleCard(
             category = "Educador Físico",
             specialty = "Treino para Emagrecimento",
-            timeSlots = sampleSlots,
+            timeSlots = previewTimeSlots(),
             onRemoveSlot = {},
             modifier = Modifier.padding(16.dp)
         )
     }
 }
+
+@Preview(
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
+@Composable
+private fun ProfessionalScheduleCardDarkPreview() {
+    XBizWorkTheme {
+        ProfessionalScheduleCard(
+            category = "Educador Físico",
+            specialty = "Treino para Emagrecimento",
+            timeSlots = previewTimeSlots(),
+            onRemoveSlot = {},
+            modifier = Modifier.padding(16.dp)
+        )
+    }
+}
+
+private fun previewTimeSlots(): List<TimeSlotItem> =
+    listOf(
+        TimeSlotItem(
+            id = "1",
+            dayOfWeek = "Segunda-feira",
+            startTime = "08:00",
+            endTime = "10:00"
+        ),
+        TimeSlotItem(
+            id = "2",
+            dayOfWeek = "Quarta-feira",
+            startTime = "10:00",
+            endTime = "12:00"
+        ),
+        TimeSlotItem(
+            id = "3",
+            dayOfWeek = "Sexta-feira",
+            startTime = "12:00",
+            endTime = "14:00"
+        )
+    )

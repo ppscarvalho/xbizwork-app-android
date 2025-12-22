@@ -11,7 +11,7 @@ import com.br.xbizitwork.ui.presentation.navigation.screens.MenuScreens
 fun NavGraphBuilder.menuScreen(
     onNavigateToHomeGraph: () -> Unit,
     onNavigateToEditProfile: () -> Unit,
-    onNavigateToViewSchedulesScreen: () -> Unit,
+    onNavigateToListSchedulesScreen: () -> Unit,
     onNavigateToProfessionalAgendaScreen: () -> Unit
 ){
     composable<MenuScreens.MenuScreen> {
@@ -23,7 +23,7 @@ fun NavGraphBuilder.menuScreen(
             appSideEffectFlow = sideEffect,
             onClickUpdateProfile = { onNavigateToEditProfile() },
             onClickChangePassword = {},
-            onClickSetupSchedule = { onNavigateToViewSchedulesScreen() },
+            onClickSetupSchedule = { onNavigateToListSchedulesScreen() },
             onClickYourPlan = {},
             onClickMyAppointments = {},
             onClickProfessionalAgenda = { onNavigateToProfessionalAgendaScreen() },

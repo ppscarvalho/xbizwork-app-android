@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.br.xbizitwork.ui.presentation.components.buttons.AppButton
@@ -92,7 +93,8 @@ fun CreateScheduleContainer(
             enabled = uiState.canAddTimeSlot,
             isLoading = uiState.isLoading,
             onClick = { onEvent(CreateScheduleEvent.OnAddTimeSlot) },
-            contentColor = MaterialTheme.colorScheme.onPrimary
+            contentColor = MaterialTheme.colorScheme.onPrimary,
+            color = Color.White
         )
     }
 }

@@ -26,7 +26,7 @@ fun NavGraphBuilder.menuGraph(
     onNavigateUp: () -> Unit,
     onNavigateToEditProfile: () -> Unit,
     onNavigateToCreateSchedule: () -> Unit,
-    onNavigateToViewSchedulesScreen: () -> Unit,
+    onNavigateToListSchedulesScreen: () -> Unit,
     onNavigateToProfessionalAgendaScreen: () -> Unit,
     onNavigateToLogin: () -> Unit
 ){
@@ -34,19 +34,19 @@ fun NavGraphBuilder.menuGraph(
         menuScreen(
             onNavigateToHomeGraph = onNavigateUp,
             onNavigateToEditProfile = onNavigateToEditProfile,
-            onNavigateToViewSchedulesScreen = onNavigateToViewSchedulesScreen,
+            onNavigateToListSchedulesScreen = onNavigateToListSchedulesScreen,
             onNavigateToProfessionalAgendaScreen = onNavigateToProfessionalAgendaScreen
         )
         
         // Schedule Screens
         createScheduleScreen(
             onNavigateUp = onNavigateUp,
-            onNavigateToViewSchedules = onNavigateToViewSchedulesScreen
+            onNavigateToListSchedulesScreen = onNavigateToListSchedulesScreen
         )
 
         viewSchedulesScreen(
             onNavigateUp = onNavigateUp,
-            onNavigateToCreate = onNavigateToCreateSchedule,
+            onNavigateToCreateSchedule = onNavigateToCreateSchedule,
             onNavigateToLogin = onNavigateToLogin
         )
         

@@ -24,6 +24,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.br.xbizitwork.ui.presentation.features.schedule.create.state.ScheduleTimeSlot
+import com.br.xbizitwork.ui.theme.BeigeBackground
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
 import com.br.xbizitwork.ui.theme.poppinsFOntFamily
 
@@ -49,7 +50,7 @@ fun AddedScheduleTimeSlotsCard(
     Card(
         modifier = modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
+            containerColor = BeigeBackground
         ),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
@@ -63,7 +64,7 @@ fun AddedScheduleTimeSlotsCard(
                 text = "Visualização",
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.primary,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 fontFamily = poppinsFOntFamily
             )
 
@@ -116,7 +117,7 @@ private fun CategoryHeader(categoryName: String) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.primaryContainer)
+            .background(MaterialTheme.colorScheme.background)
             .padding(vertical = 12.dp, horizontal = 16.dp),
         horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.CenterVertically
@@ -124,8 +125,8 @@ private fun CategoryHeader(categoryName: String) {
         Text(
             text = "Categoria:",
             style = MaterialTheme.typography.bodyLarge,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onPrimaryContainer,
+            fontWeight = FontWeight.SemiBold,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             fontFamily = poppinsFOntFamily
         )
 
@@ -133,7 +134,7 @@ private fun CategoryHeader(categoryName: String) {
             text = " $categoryName",
             style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight.SemiBold,
-            color = MaterialTheme.colorScheme.onPrimaryContainer,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             fontFamily = poppinsFOntFamily
         )
     }
@@ -147,7 +148,7 @@ private fun SpecialtyHeader(specialtyName: String) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.tertiaryContainer)
+            .background(MaterialTheme.colorScheme.background)
             .padding(vertical = 10.dp, horizontal = 16.dp),
         horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.CenterVertically
@@ -155,8 +156,8 @@ private fun SpecialtyHeader(specialtyName: String) {
         Text(
             text = "Modalidade:",
             style = MaterialTheme.typography.bodyMedium,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onTertiaryContainer,
+            fontWeight = FontWeight.SemiBold,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             fontFamily = poppinsFOntFamily
         )
 
@@ -164,38 +165,6 @@ private fun SpecialtyHeader(specialtyName: String) {
             text = " $specialtyName",
             style = MaterialTheme.typography.bodyMedium,
             fontWeight = FontWeight.SemiBold,
-            color = MaterialTheme.colorScheme.onTertiaryContainer,
-            fontFamily = poppinsFOntFamily
-        )
-    }
-}
-
-/**
- * Linha de informação (Label: Valor) - DEPRECATED, mantido para compatibilidade
- */
-@Composable
-private fun InfoRow(
-    label: String,
-    value: String
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 4.dp),
-        horizontalArrangement = Arrangement.Start,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(
-            text = label,
-            style = MaterialTheme.typography.bodyMedium,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onSurface,
-            fontFamily = poppinsFOntFamily
-        )
-
-        Text(
-            text = " $value",
-            style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             fontFamily = poppinsFOntFamily
         )
@@ -218,27 +187,27 @@ private fun TableHeader() {
         Text(
             text = "Dia da Semana",
             style = MaterialTheme.typography.labelMedium,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onPrimaryContainer,
+            fontWeight = FontWeight.Normal,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             fontFamily = poppinsFOntFamily,
             modifier = Modifier.weight(2f)
         )
 
         Text(
-            text = "Hora Início",
+            text = "Início",
             style = MaterialTheme.typography.labelMedium,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onPrimaryContainer,
+            fontWeight = FontWeight.Normal  ,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             fontFamily = poppinsFOntFamily,
             textAlign = TextAlign.Center,
             modifier = Modifier.weight(1f)
         )
 
         Text(
-            text = "Hora Fim",
+            text = "Fim",
             style = MaterialTheme.typography.labelMedium,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onPrimaryContainer,
+            fontWeight = FontWeight.Normal,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             fontFamily = poppinsFOntFamily,
             textAlign = TextAlign.Center,
             modifier = Modifier.weight(1f)
@@ -247,8 +216,8 @@ private fun TableHeader() {
         Text(
             text = "Ação",
             style = MaterialTheme.typography.labelMedium,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onPrimaryContainer,
+            fontWeight = FontWeight.Normal,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             fontFamily = poppinsFOntFamily,
             textAlign = TextAlign.Center,
             modifier = Modifier.weight(0.8f)
@@ -267,14 +236,15 @@ private fun TableRow(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 12.dp, horizontal = 8.dp),
+            .background(MaterialTheme.colorScheme.background)
+            .padding(vertical = 8.dp, horizontal = 8.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
             text = slot.weekDayName,
             style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurface,
+            color = MaterialTheme.colorScheme.primary,
             fontFamily = poppinsFOntFamily,
             modifier = Modifier.weight(2f)
         )
@@ -282,7 +252,7 @@ private fun TableRow(
         Text(
             text = slot.startTime,
             style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurface,
+            color = MaterialTheme.colorScheme.primary,
             fontFamily = poppinsFOntFamily,
             textAlign = TextAlign.Center,
             modifier = Modifier.weight(1f)
@@ -291,7 +261,7 @@ private fun TableRow(
         Text(
             text = slot.endTime,
             style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurface,
+            color = MaterialTheme.colorScheme.primary,
             fontFamily = poppinsFOntFamily,
             textAlign = TextAlign.Center,
             modifier = Modifier.weight(1f)

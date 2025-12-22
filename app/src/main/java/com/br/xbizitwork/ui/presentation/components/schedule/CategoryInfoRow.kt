@@ -1,5 +1,7 @@
 package com.br.xbizitwork.ui.presentation.components.schedule
 
+import android.content.res.Configuration
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.br.xbizitwork.ui.theme.BeigeBackground
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
 
 /**
@@ -35,7 +38,9 @@ fun CategoryInfoRow(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp),
+            .padding(vertical = 8.dp).
+                background(BeigeBackground)
+        ,
         horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -43,7 +48,7 @@ fun CategoryInfoRow(
             text = categoryLabel,
             style = MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onSurface,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(end = 8.dp)
         )
         
@@ -65,10 +70,6 @@ private fun CategoryInfoRowPreview() {
         Surface {
             Column(modifier = Modifier.padding(16.dp)) {
                 CategoryInfoRow(
-                    categoryValue = "Educador Físico"
-                )
-                
-                CategoryInfoRow(
                     categoryLabel = "Especialidade:",
                     categoryValue = "Personal Trainer"
                 )
@@ -83,7 +84,8 @@ private fun CategoryInfoRowPreview() {
 
 @Preview(
     name = "Category Info Row - Dark",
-    showBackground = true
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES
 )
 @Composable
 private fun CategoryInfoRowDarkPreview() {
@@ -93,7 +95,7 @@ private fun CategoryInfoRowDarkPreview() {
                 CategoryInfoRow(
                     categoryValue = "Educador Físico"
                 )
-                
+
                 CategoryInfoRow(
                     categoryLabel = "Especialidade:",
                     categoryValue = "Personal Trainer"

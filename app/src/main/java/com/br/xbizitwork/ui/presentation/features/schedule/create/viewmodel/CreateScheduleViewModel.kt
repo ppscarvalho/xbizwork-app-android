@@ -32,8 +32,8 @@ class CreateScheduleViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(CreateScheduleUIState())
     val uiState: StateFlow<CreateScheduleUIState> = _uiState.asStateFlow()
     
-    private val _App_sideEffectChannel = Channel<AppSideEffect>()
-    val sideEffectChannel = _App_sideEffectChannel.receiveAsFlow()
+    private val _appSideEffectChannel = Channel<AppSideEffect>()
+    val sideEffectChannel = _appSideEffectChannel.receiveAsFlow()
     
     init {
         loadCategories()
@@ -170,7 +170,7 @@ class CreateScheduleViewModel @Inject constructor(
 
         if (endTimeInMinutes <= startTimeInMinutes) {
             viewModelScope.launch {
-                _App_sideEffectChannel.send(
+                _appSideEffectChannel.send(
                     AppSideEffect.ShowToast("❌ Hora final deve ser maior que hora inicial!")
                 )
             }
@@ -190,7 +190,7 @@ class CreateScheduleViewModel @Inject constructor(
 
         if (isDuplicate) {
             viewModelScope.launch {
-                _App_sideEffectChannel.send(
+                _appSideEffectChannel.send(
                     AppSideEffect.ShowToast("❌ Este horário já foi adicionado!")
                 )
             }
@@ -231,7 +231,7 @@ class CreateScheduleViewModel @Inject constructor(
 
         if (hasOverlapOrSequential) {
             viewModelScope.launch {
-                _App_sideEffectChannel.send(
+                _appSideEffectChannel.send(
                     AppSideEffect.ShowToast("❌ Horários devem ter intervalo entre eles!")
                 )
             }
@@ -260,7 +260,7 @@ class CreateScheduleViewModel @Inject constructor(
         }
         
         viewModelScope.launch {
-            _App_sideEffectChannel.send(AppSideEffect.ShowToast("✅ Horário adicionado!"))
+            _appSideEffectChannel.send(AppSideEffect.ShowToast("✅ Horário adicionado!"))
         }
     }
     
@@ -324,8 +324,8 @@ class CreateScheduleViewModel @Inject constructor(
                             scheduleTimeSlots = emptyList() // ← Limpa a lista
                         )
                     }
-                    _App_sideEffectChannel.send(AppSideEffect.ShowToast("✅ Agenda criada com sucesso!"))
-                    _App_sideEffectChannel.send(AppSideEffect.NavigateBack)
+                    _appSideEffectChannel.send(AppSideEffect.ShowToast("✅ Agenda criada com sucesso!"))
+                    _appSideEffectChannel.send(AppSideEffect.NavigateBack)
                 }
             } catch (e: Exception) {
                 _uiState.update {
