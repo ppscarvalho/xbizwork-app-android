@@ -1,6 +1,6 @@
 package com.br.xbizitwork.ui.presentation.features.schedule.create.navigation
 
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -19,7 +19,7 @@ fun NavGraphBuilder.createScheduleScreen(
 
         CreateScheduleScreen(
             uiState = uiState.value,
-            sideEffectFlow = viewModel.sideEffectChannel,
+            appSideEffectFlow = viewModel.sideEffectChannel,
             onEvent = viewModel::onEvent,
             onNavigateBack = onNavigateUp,
             onNavigateToViewSchedules = onNavigateToViewSchedules

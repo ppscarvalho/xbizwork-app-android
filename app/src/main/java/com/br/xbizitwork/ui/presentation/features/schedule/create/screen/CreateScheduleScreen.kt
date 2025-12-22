@@ -8,7 +8,10 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
-import com.br.xbizitwork.core.sideeffects.SideEffect
+import androidx.compose.ui.platform.LocalContext
+import com.br.xbizitwork.core.sideeffects.AppSideEffect
+import com.br.xbizitwork.core.state.LifecycleEventEffect
+import com.br.xbizitwork.core.util.extensions.toast
 import com.br.xbizitwork.ui.presentation.components.topbar.AppTopBar
 import com.br.xbizitwork.ui.presentation.features.schedule.create.components.CreateScheduleContent
 import com.br.xbizitwork.ui.presentation.features.schedule.create.events.CreateScheduleEvent
@@ -18,23 +21,20 @@ import kotlinx.coroutines.flow.Flow
 @Composable
 fun CreateScheduleScreen(
     uiState: CreateScheduleUIState,
-    sideEffectFlow: Flow<SideEffect>,
+    appSideEffectFlow: Flow<AppSideEffect>,
     onEvent: (CreateScheduleEvent) -> Unit,
     onNavigateBack: () -> Unit,
     onNavigateToViewSchedules: () -> Unit
 ) {
-    val snackbarHostState = remember { SnackbarHostState() }
+    val context = LocalContext.current
+    LifecycleEventEffect(appSideEffectFlow) { sideEffect ->
+        when (sideEffect) {
+            is AppSideEffect.ShowToast -> context.toast(sideEffect.message)
 
-    // Side Effects
-    LaunchedEffect(Unit) {
-        sideEffectFlow.collect { sideEffect ->
-            when (sideEffect) {
-                is SideEffect.ShowToast -> {
-                    snackbarHostState.showSnackbar(sideEffect.message)
-                }
-                SideEffect.NavigateBack -> onNavigateToViewSchedules() // ← Vai para lista
-                else -> Unit
+            is AppSideEffect.NavigateToLogin -> {
+                onNavigateToViewSchedules()
             }
+            else -> Unit
         }
     }
 
@@ -57,24 +57,4 @@ fun CreateScheduleScreen(
             )
         }
     )
-
-//    Scaffold(
-//        topBar = {
-//            AppTopBar(
-//                isHomeMode = false,
-//                title = "Criar Agenda",
-//                enableNavigationUp = true,
-//                onNavigationIconButton = onNavigateBack
-//            )
-//        },
-//        snackbarHost = { SnackbarHost(snackbarHostState) }
-//    ) { paddingValues ->
-//
-//        // 🔥 Conteúdo SEM scroll aqui
-//        CreateScheduleContent(
-//            paddingValues = paddingValues,
-//            uiState = uiState,
-//            onEvent = onEvent
-//        )
-//    }
 }

@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.br.xbizitwork.domain.usecase.auth.signin.SignInUseCase
 import com.br.xbizitwork.core.config.Constants
-import com.br.xbizitwork.core.sideeffects.SideEffect
+import com.br.xbizitwork.core.sideeffects.AppSideEffect
 import com.br.xbizitwork.core.util.extensions.collectUiState
 import com.br.xbizitwork.core.util.logging.logInfo
 import com.br.xbizitwork.domain.validations.auth.SignInValidationError
@@ -33,8 +33,8 @@ class SignInViewModel @Inject constructor(
     private val _uiState: MutableStateFlow<SignInState> = MutableStateFlow(SignInState())
     val uiState: StateFlow<SignInState> = _uiState.asStateFlow()
 
-    private val _sideEffectChannel = Channel<SideEffect>(capacity = Channel.Factory.BUFFERED)
-    val sideEffectChannel = _sideEffectChannel.receiveAsFlow()
+    private val _App_sideEffectChannel = Channel<AppSideEffect>(capacity = Channel.Factory.BUFFERED)
+    val sideEffectChannel = _App_sideEffectChannel.receiveAsFlow()
 
     fun onEvent(event: SignInEvent){
         when(event){
@@ -76,7 +76,7 @@ class SignInViewModel @Inject constructor(
                     _uiState.update {
                         it.copy(isLoading = false, isSuccess = response.isSuccessful )
                     }
-                    _sideEffectChannel.send(SideEffect.ShowToast(response.message.toString()))
+                    _App_sideEffectChannel.send(AppSideEffect.ShowToast(response.message.toString()))
 
                     // Salvar sessão com os dados recebidos
                     val userId = response.id ?: 0

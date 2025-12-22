@@ -20,7 +20,7 @@ fun NavGraphBuilder.menuScreen(
 
         MenuScreen(
             onNavigateToHomeGraph = onNavigateToHomeGraph,
-            sideEffectFlow = sideEffect,
+            appSideEffectFlow = sideEffect,
             onClickUpdateProfile = { onNavigateToEditProfile() },
             onClickChangePassword = {},
             onClickSetupSchedule = { onNavigateToViewSchedulesScreen() },

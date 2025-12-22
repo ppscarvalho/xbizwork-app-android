@@ -3,7 +3,7 @@ package com.br.xbizitwork.ui.presentation.features.schedule.create.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.br.xbizitwork.core.result.DefaultResult
-import com.br.xbizitwork.core.sideeffects.SideEffect
+import com.br.xbizitwork.core.sideeffects.AppSideEffect
 import com.br.xbizitwork.data.remote.schedule.dtos.requests.CreateScheduleRequest
 import com.br.xbizitwork.domain.usecase.category.GetCategoriesUseCase
 import com.br.xbizitwork.domain.usecase.schedule.CreateScheduleFromRequestUseCase
@@ -32,8 +32,8 @@ class CreateScheduleViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(CreateScheduleUIState())
     val uiState: StateFlow<CreateScheduleUIState> = _uiState.asStateFlow()
     
-    private val _sideEffectChannel = Channel<SideEffect>()
-    val sideEffectChannel = _sideEffectChannel.receiveAsFlow()
+    private val _App_sideEffectChannel = Channel<AppSideEffect>()
+    val sideEffectChannel = _App_sideEffectChannel.receiveAsFlow()
     
     init {
         loadCategories()
@@ -170,8 +170,8 @@ class CreateScheduleViewModel @Inject constructor(
 
         if (endTimeInMinutes <= startTimeInMinutes) {
             viewModelScope.launch {
-                _sideEffectChannel.send(
-                    SideEffect.ShowToast("❌ Hora final deve ser maior que hora inicial!")
+                _App_sideEffectChannel.send(
+                    AppSideEffect.ShowToast("❌ Hora final deve ser maior que hora inicial!")
                 )
             }
             return
@@ -190,8 +190,8 @@ class CreateScheduleViewModel @Inject constructor(
 
         if (isDuplicate) {
             viewModelScope.launch {
-                _sideEffectChannel.send(
-                    SideEffect.ShowToast("❌ Este horário já foi adicionado!")
+                _App_sideEffectChannel.send(
+                    AppSideEffect.ShowToast("❌ Este horário já foi adicionado!")
                 )
             }
             return
@@ -231,8 +231,8 @@ class CreateScheduleViewModel @Inject constructor(
 
         if (hasOverlapOrSequential) {
             viewModelScope.launch {
-                _sideEffectChannel.send(
-                    SideEffect.ShowToast("❌ Horários devem ter intervalo entre eles!")
+                _App_sideEffectChannel.send(
+                    AppSideEffect.ShowToast("❌ Horários devem ter intervalo entre eles!")
                 )
             }
             return
@@ -260,7 +260,7 @@ class CreateScheduleViewModel @Inject constructor(
         }
         
         viewModelScope.launch {
-            _sideEffectChannel.send(SideEffect.ShowToast("✅ Horário adicionado!"))
+            _App_sideEffectChannel.send(AppSideEffect.ShowToast("✅ Horário adicionado!"))
         }
     }
     
@@ -324,8 +324,8 @@ class CreateScheduleViewModel @Inject constructor(
                             scheduleTimeSlots = emptyList() // ← Limpa a lista
                         )
                     }
-                    _sideEffectChannel.send(SideEffect.ShowToast("✅ Agenda criada com sucesso!"))
-                    _sideEffectChannel.send(SideEffect.NavigateBack)
+                    _App_sideEffectChannel.send(AppSideEffect.ShowToast("✅ Agenda criada com sucesso!"))
+                    _App_sideEffectChannel.send(AppSideEffect.NavigateBack)
                 }
             } catch (e: Exception) {
                 _uiState.update {

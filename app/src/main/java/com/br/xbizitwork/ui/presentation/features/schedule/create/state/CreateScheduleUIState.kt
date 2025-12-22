@@ -1,24 +1,7 @@
 package com.br.xbizitwork.ui.presentation.features.schedule.create.state
 
-import com.br.xbizitwork.domain.model.schedule.DayOfWeek
 import com.br.xbizitwork.domain.result.category.CategoryResult
 import com.br.xbizitwork.domain.result.specialty.SpecialtyResult
-import java.time.LocalTime
-
-/**
- * Representa um horário temporário antes de ser salvo
- */
-data class ScheduleTimeSlot(
-    val id: String,
-    val categoryId: Int,
-    val categoryName: String,
-    val specialtyId: Int,
-    val specialtyName: String,
-    val weekDay: Int,
-    val weekDayName: String,
-    val startTime: String,
-    val endTime: String
-)
 
 /**
  * Estado da tela de criar agenda - Novo fluxo UX

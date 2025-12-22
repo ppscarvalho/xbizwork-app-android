@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.br.xbizitwork.domain.usecase.auth.signup.SignUpUseCase
 import com.br.xbizitwork.core.config.Constants
-import com.br.xbizitwork.core.sideeffects.SideEffect
+import com.br.xbizitwork.core.sideeffects.AppSideEffect
 import com.br.xbizitwork.core.util.extensions.collectUiState
 import com.br.xbizitwork.domain.validations.auth.SignUpValidationError
 import com.br.xbizitwork.domain.model.auth.SignUpModel
@@ -30,8 +30,8 @@ class SignUpViewModel @Inject constructor(
     private val _uiState: MutableStateFlow<SignUpState> = MutableStateFlow(SignUpState())
     val uiState: StateFlow<SignUpState> = _uiState.asStateFlow()
 
-    private val _sideEffectChannel = Channel<SideEffect>(capacity = Channel.Factory.BUFFERED)
-    val sideEffectChannel = _sideEffectChannel.receiveAsFlow()
+    private val _App_sideEffectChannel = Channel<AppSideEffect>(capacity = Channel.Factory.BUFFERED)
+    val sideEffectChannel = _App_sideEffectChannel.receiveAsFlow()
 
     fun onEvent(event: SignUpEvent){
         when(event){
@@ -77,7 +77,7 @@ class SignUpViewModel @Inject constructor(
                     _uiState.update {
                         it.copy(isLoading = false, isSuccess = response.isSuccessful )
                     }
-                    _sideEffectChannel.send(SideEffect.ShowToast(response.message))
+                    _App_sideEffectChannel.send(AppSideEffect.ShowToast(response.message))
                 },
                 onFailure = {error ->
                     _uiState.update {

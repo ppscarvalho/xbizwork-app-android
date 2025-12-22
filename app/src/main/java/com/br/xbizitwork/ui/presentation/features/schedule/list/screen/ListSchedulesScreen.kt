@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material.icons.filled.Add
@@ -20,9 +19,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.br.xbizitwork.core.sideeffects.SideEffect
+import com.br.xbizitwork.core.sideeffects.AppSideEffect
+import com.br.xbizitwork.core.state.LifecycleEventEffect
+import com.br.xbizitwork.core.util.extensions.toast
 import com.br.xbizitwork.ui.presentation.components.schedule.ProfessionalScheduleCard
 import com.br.xbizitwork.ui.presentation.components.schedule.TimeSlotItem
 import com.br.xbizitwork.ui.presentation.components.state.EmptyState
@@ -37,30 +39,28 @@ import kotlinx.coroutines.flow.Flow
 
 @SuppressLint("NewApi")
 @Composable
-fun ViewSchedulesScreen(
+fun ListSchedulesScreen(
     uiState: ViewSchedulesUIState,
-    sideEffectFlow: Flow<SideEffect>,
+    appSideEffectFlow: Flow<AppSideEffect>,
     onEvent: (ViewSchedulesEvent) -> Unit,
     onNavigateBack: () -> Unit,
     onNavigateToCreate: () -> Unit,
     onNavigateToLogin: () -> Unit = {}
 ) {
-    val snackbarHostState = remember { SnackbarHostState() }
-    
-    LaunchedEffect(Unit) {
-        sideEffectFlow.collect { sideEffect ->
-            when (sideEffect) {
-                is SideEffect.ShowToast -> {
-                    snackbarHostState.showSnackbar(sideEffect.message)
-                }
-                is SideEffect.NavigateToLogin -> {
-                    onNavigateToLogin()
-                }
-                else -> {}
+    val context = LocalContext.current
+
+    // Side effects (igual SignUp)
+    LifecycleEventEffect(appSideEffectFlow) { sideEffect ->
+        when (sideEffect) {
+            is AppSideEffect.ShowToast -> context.toast(sideEffect.message)
+
+            is AppSideEffect.NavigateToLogin -> {
+                onNavigateToLogin()
             }
+            else -> {}
         }
     }
-    
+
     Scaffold(
         topBar = {
             AppTopBar(
@@ -79,7 +79,6 @@ fun ViewSchedulesScreen(
                 Icon(Icons.Default.Add, contentDescription = "Criar Agenda")
             }
         },
-        snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { paddingValues ->
         Box(
             modifier = Modifier

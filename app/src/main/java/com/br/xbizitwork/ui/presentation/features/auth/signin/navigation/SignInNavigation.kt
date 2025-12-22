@@ -22,7 +22,7 @@ fun NavGraphBuilder.signInScreen(
 
         SignInScreen(
             uiState = uiState,
-            sideEffectFlow = sideEffect,
+            appSideEffectFlow = sideEffect,
             onEvent = viewModel::onEvent,
             onNavigateToSignUpScreen = onNavigateToSignUpScreen,
             onEmailChanged = viewModel::onEmailChange,

@@ -2,7 +2,7 @@ package com.br.xbizitwork.ui.presentation.features.profile.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.br.xbizitwork.core.sideeffects.SideEffect
+import com.br.xbizitwork.core.sideeffects.AppSideEffect
 import com.br.xbizitwork.core.util.extensions.collectUiState
 import com.br.xbizitwork.core.util.logging.logInfo
 import com.br.xbizitwork.domain.model.profile.ProfileResultValidation
@@ -47,8 +47,8 @@ class EditProfileViewModel @Inject constructor(
     )
 
     // ============= SIDE EFFECTS =============
-    private val _sideEffectChannel = Channel<SideEffect>(capacity = Channel.Factory.BUFFERED)
-    val sideEffectChannel = _sideEffectChannel.receiveAsFlow()
+    private val _App_sideEffectChannel = Channel<AppSideEffect>(capacity = Channel.Factory.BUFFERED)
+    val sideEffectChannel = _App_sideEffectChannel.receiveAsFlow()
 
     // ============= INIT =============
     init {
@@ -204,7 +204,7 @@ class EditProfileViewModel @Inject constructor(
                             logInfo("LOAD_PROFILE", "🔐 Token expirado! Navegando ao login...")
 
                             viewModelScope.launch {
-                                _sideEffectChannel.send(SideEffect.NavigateToLogin)
+                                _App_sideEffectChannel.send(AppSideEffect.NavigateToLogin)
                             }
 
                             _uiState.update {
@@ -333,11 +333,11 @@ class EditProfileViewModel @Inject constructor(
                             hasChanges = false
                         )
                     }
-                    _sideEffectChannel.send(SideEffect.ShowToast(response.message))
+                    _App_sideEffectChannel.send(AppSideEffect.ShowToast(response.message))
                     logInfo("UPDATE_PROFILE", "Success: ${response.message}")
 
                     // ✅ NAVEGA DE VOLTA AUTOMATICAMENTE APÓS SUCESSO!
-                    _sideEffectChannel.send(SideEffect.NavigateBack)
+                    _App_sideEffectChannel.send(AppSideEffect.NavigateBack)
                 },
                 onFailure = { error ->
                     _uiState.update {
@@ -346,8 +346,8 @@ class EditProfileViewModel @Inject constructor(
                             errorMessage = error.message ?: "Erro ao atualizar perfil"
                         )
                     }
-                    _sideEffectChannel.send(
-                        SideEffect.ShowToast(error.message ?: "Erro ao atualizar perfil")
+                    _App_sideEffectChannel.send(
+                        AppSideEffect.ShowToast(error.message ?: "Erro ao atualizar perfil")
                     )
                     logInfo("UPDATE_PROFILE", "Error: ${error.message}")
                 }
@@ -386,12 +386,12 @@ class EditProfileViewModel @Inject constructor(
                             hasChanges = true
                         )
                     }
-                    _sideEffectChannel.send(SideEffect.ShowToast("Endereço encontrado!"))
+                    _App_sideEffectChannel.send(AppSideEffect.ShowToast("Endereço encontrado!"))
                     logInfo("SEARCH_CEP", "CEP encontrado: ${cepModel.logradouro}, ${cepModel.bairro}")
                 },
                 onFailure = { error ->
-                    _sideEffectChannel.send(
-                        SideEffect.ShowToast(error.message ?: "CEP não encontrado")
+                    _App_sideEffectChannel.send(
+                        AppSideEffect.ShowToast(error.message ?: "CEP não encontrado")
                     )
                     logInfo("SEARCH_CEP", "Erro: ${error.message}")
                 }
@@ -405,7 +405,7 @@ class EditProfileViewModel @Inject constructor(
      */
     private fun handleCancel() {
         viewModelScope.launch {
-            _sideEffectChannel.send(SideEffect.NavigateBack)
+            _App_sideEffectChannel.send(AppSideEffect.NavigateBack)
         }
     }
 }

@@ -2,7 +2,7 @@ package com.br.xbizitwork.ui.presentation.features.schedule.list.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.br.xbizitwork.core.sideeffects.SideEffect
+import com.br.xbizitwork.core.sideeffects.AppSideEffect
 import com.br.xbizitwork.core.util.extensions.collectUiState
 import com.br.xbizitwork.domain.usecase.schedule.DeleteScheduleUseCase
 import com.br.xbizitwork.domain.usecase.schedule.GetProfessionalSchedulesUseCase
@@ -30,8 +30,8 @@ class ViewSchedulesViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(ViewSchedulesUIState())
     val uiState: StateFlow<ViewSchedulesUIState> = _uiState.asStateFlow()
     
-    private val _sideEffectChannel = Channel<SideEffect>()
-    val sideEffectChannel = _sideEffectChannel.receiveAsFlow()
+    private val _appSideEffectChannel = Channel<AppSideEffect>()
+    val sideEffectChannel = _appSideEffectChannel.receiveAsFlow()
     
     init {
         loadSchedules()
@@ -69,13 +69,12 @@ class ViewSchedulesViewModel @Inject constructor(
                 },
                 onFailure = { throwable ->
                     val errorMessage = throwable.message ?: "Erro ao carregar agendas"
-
                     // Verificar se é erro de autenticação (token inválido)
                     if (errorMessage.contains("401") ||
                         errorMessage.contains("Token inválido") ||
                         errorMessage.contains("Unauthorized")) {
                         viewModelScope.launch {
-                            _sideEffectChannel.send(SideEffect.NavigateToLogin)
+                            _appSideEffectChannel.send(AppSideEffect.NavigateToLogin)
                         }
                     }
 
@@ -96,12 +95,12 @@ class ViewSchedulesViewModel @Inject constructor(
                 .collectUiState(
                     onLoading = {},
                     onSuccess = {
-                        _sideEffectChannel.send(SideEffect.ShowToast("Agenda excluída"))
+                        _appSideEffectChannel.send(AppSideEffect.ShowToast("Agenda excluída"))
                         loadSchedules() // Recarrega lista
                     },
                     onFailure = { throwable ->
-                        _sideEffectChannel.send(
-                            SideEffect.ShowToast(throwable.message ?: "Erro ao excluir")
+                        _appSideEffectChannel.send(
+                            AppSideEffect.ShowToast(throwable.message ?: "Erro ao excluir")
                         )
                     }
                 )
@@ -110,15 +109,13 @@ class ViewSchedulesViewModel @Inject constructor(
     
     private fun navigateToScheduleDetails(scheduleId: String) {
         viewModelScope.launch {
-            // TODO: Implementar navegação para detalhes
-            _sideEffectChannel.send(SideEffect.ShowToast("Detalhes: $scheduleId"))
+            _appSideEffectChannel.send(AppSideEffect.ShowToast("Detalhes: $scheduleId"))
         }
     }
     
     private fun navigateToCreateSchedule() {
         viewModelScope.launch {
-            // TODO: Implementar navegação para criar agenda
-            _sideEffectChannel.send(SideEffect.ShowToast("Navegar para criar agenda"))
+            _appSideEffectChannel.send(AppSideEffect.ShowToast("Navegar para criar agenda"))
         }
     }
 }
