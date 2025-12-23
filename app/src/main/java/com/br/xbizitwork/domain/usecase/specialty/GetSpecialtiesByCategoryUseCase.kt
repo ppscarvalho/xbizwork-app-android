@@ -1,17 +1,35 @@
 package com.br.xbizitwork.domain.usecase.specialty
 
 import com.br.xbizitwork.core.result.DefaultResult
+import com.br.xbizitwork.core.state.UiState
+import com.br.xbizitwork.core.usecase.FlowUseCase
 import com.br.xbizitwork.domain.repository.SpecialtyRepository
 import com.br.xbizitwork.domain.result.specialty.SpecialtyResult
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 /**
- * Use Case para obter especialidades por categoria
+ * Implementação do GetSpecialtiesByCategoryUseCase
  */
-class GetSpecialtiesByCategoryUseCase @Inject constructor(
+class GetSpecialtiesByCategoryUseCaseImpl @Inject constructor(
     private val repository: SpecialtyRepository
-) {
-    suspend operator fun invoke(categoryId: Int): DefaultResult<List<SpecialtyResult>> {
-        return repository.getSpecialtiesByCategory(categoryId)
+) : FlowUseCase<Int, List<SpecialtyResult>>() {
+
+    override suspend fun executeTask(parameters: Int): UiState<List<SpecialtyResult>> {
+        return try {
+            when (val result = repository.getSpecialtiesByCategory(parameters)) {
+                is DefaultResult.Success -> {
+                    UiState.Success(result.data)
+                }
+                is DefaultResult.Error -> {
+                    UiState.Error(Throwable(result.message))
+                }
+            }
+        } catch (e: Exception) {
+            UiState.Error(e)
+        }
     }
 }
+
+typealias GetSpecialtiesByCategoryUseCase = GetSpecialtiesByCategoryUseCaseImpl
+

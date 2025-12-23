@@ -1,24 +1,34 @@
 package com.br.xbizitwork.domain.usecase.schedule
 
+import com.br.xbizitwork.core.model.api.ApiResultModel
 import com.br.xbizitwork.core.result.DefaultResult
 import com.br.xbizitwork.core.state.UiState
 import com.br.xbizitwork.core.usecase.FlowUseCase
 import com.br.xbizitwork.domain.model.schedule.Schedule
 import com.br.xbizitwork.domain.repository.ScheduleRepository
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 /**
- * Use Case para criar uma nova agenda do profissional
+ * Caso de uso responsável pela criação de uma nova agenda.
+ * Retorna ApiResultModel (isSuccessful, message)
  */
-class CreateScheduleUseCase @Inject constructor(
-    private val scheduleRepository: ScheduleRepository
-) : FlowUseCase<CreateScheduleUseCase.Parameters, Schedule>() {
-    
+interface CreateScheduleUseCase {
+    operator fun invoke(parameters: Parameters): Flow<UiState<ApiResultModel>>
+
     data class Parameters(
         val schedule: Schedule
     )
-    
-    override suspend fun executeTask(parameters: Parameters): UiState<Schedule> {
+}
+
+/**
+ * Implementação do CreateScheduleUseCase
+ */
+class CreateScheduleUseCaseImpl @Inject constructor(
+    private val scheduleRepository: ScheduleRepository
+) : CreateScheduleUseCase, FlowUseCase<CreateScheduleUseCase.Parameters, ApiResultModel>() {
+
+    override suspend fun executeTask(parameters: CreateScheduleUseCase.Parameters): UiState<ApiResultModel> {
         // Validação básica
         if (parameters.schedule.category.isBlank()) {
             return UiState.Error(IllegalArgumentException("Categoria não pode ser vazia"))

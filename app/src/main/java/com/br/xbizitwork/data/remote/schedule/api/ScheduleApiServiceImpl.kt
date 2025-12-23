@@ -1,6 +1,7 @@
 package com.br.xbizitwork.data.remote.schedule.api
 
 import com.br.xbizitwork.core.model.api.ApiResponse
+import com.br.xbizitwork.core.model.api.ApiResultResponse
 import com.br.xbizitwork.data.remote.schedule.dtos.requests.CreateScheduleRequest
 import com.br.xbizitwork.data.remote.schedule.dtos.requests.UpdateAvailabilityRequest
 import com.br.xbizitwork.data.remote.schedule.dtos.requests.UpdateScheduleRequest
@@ -21,7 +22,7 @@ class ScheduleApiServiceImpl @Inject constructor(
     private val httpClient: HttpClient
 ) : ScheduleApiService {
     
-    override suspend fun createSchedule(request: CreateScheduleRequest): ApiResponse<ScheduleResponse> {
+    override suspend fun createSchedule(request: CreateScheduleRequest): ApiResultResponse {
         val response = httpClient.post("schedule/create") {
             contentType(ContentType.Application.Json)
             setBody(request)
@@ -42,7 +43,7 @@ class ScheduleApiServiceImpl @Inject constructor(
     override suspend fun updateSchedule(
         scheduleId: String,
         request: UpdateScheduleRequest
-    ): ApiResponse<ScheduleResponse> {
+    ): ApiResultResponse {
         val response = httpClient.put("schedule/$scheduleId") {
             contentType(ContentType.Application.Json)
             setBody(request)
@@ -50,7 +51,7 @@ class ScheduleApiServiceImpl @Inject constructor(
         return response.body()
     }
     
-    override suspend fun deleteSchedule(scheduleId: String): ApiResponse<Unit> {
+    override suspend fun deleteSchedule(scheduleId: String): ApiResultResponse {
         val response = httpClient.delete("schedule/$scheduleId")
         return response.body()
     }
@@ -58,7 +59,7 @@ class ScheduleApiServiceImpl @Inject constructor(
     override suspend fun updateAvailability(
         scheduleId: String,
         request: UpdateAvailabilityRequest
-    ): ApiResponse<ScheduleResponse> {
+    ): ApiResultResponse {
         val response = httpClient.put("schedule/$scheduleId/availability") {
             contentType(ContentType.Application.Json)
             setBody(request)
@@ -82,6 +83,14 @@ class ScheduleApiServiceImpl @Inject constructor(
     
     override suspend fun getActiveSchedules(professionalId: String): ApiResponse<List<ScheduleResponse>> {
         val response = httpClient.get("schedule/professional/$professionalId/active")
+        return response.body()
+    }
+
+    override suspend fun validateSchedule(request: CreateScheduleRequest): ApiResultResponse {
+        val response = httpClient.post("schedule/validate") {
+            contentType(ContentType.Application.Json)
+            setBody(request)
+        }
         return response.body()
     }
 }

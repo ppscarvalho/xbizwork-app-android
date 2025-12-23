@@ -1,4 +1,4 @@
-package com.br.xbizitwork.domain.repository.profile
+package com.br.xbizitwork.domain.repository
 
 import com.br.xbizitwork.core.model.api.ApiResultModel
 import com.br.xbizitwork.core.result.DefaultResult
@@ -17,4 +17,3 @@ interface ProfileRepository {
      */
     suspend fun updateProfile(model: UpdateProfileRequestModel): DefaultResult<ApiResultModel>
 }
-

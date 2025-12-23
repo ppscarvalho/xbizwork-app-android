@@ -2,6 +2,7 @@ package com.br.xbizitwork.data.di.specialty
 
 import com.br.xbizitwork.domain.repository.SpecialtyRepository
 import com.br.xbizitwork.domain.usecase.specialty.GetSpecialtiesByCategoryUseCase
+import com.br.xbizitwork.domain.usecase.specialty.GetSpecialtiesByCategoryUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,6 +18,6 @@ object SpecialtyUseCaseModule {
     fun provideGetSpecialtiesByCategoryUseCase(
         repository: SpecialtyRepository
     ): GetSpecialtiesByCategoryUseCase {
-        return GetSpecialtiesByCategoryUseCase(repository)
+        return GetSpecialtiesByCategoryUseCaseImpl(repository)
     }
 }

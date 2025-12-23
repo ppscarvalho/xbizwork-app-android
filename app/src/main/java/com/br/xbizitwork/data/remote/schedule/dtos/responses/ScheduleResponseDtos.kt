@@ -65,3 +65,9 @@ data class ScheduleResponse(
     val category: CategoryResponse,
     val specialty: SpecialtyResponse
 )
+
+@Serializable
+data class ScheduleValidationResult(
+    val exists: Boolean,
+    val existingSchedule: ScheduleResponse? = null
+)

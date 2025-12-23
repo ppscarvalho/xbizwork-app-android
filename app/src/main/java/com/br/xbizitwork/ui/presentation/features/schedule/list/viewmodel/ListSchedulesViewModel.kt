@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ViewSchedulesViewModel @Inject constructor(
+class ListSchedulesViewModel @Inject constructor(
     private val getProfessionalSchedulesUseCase: GetProfessionalSchedulesUseCase,
     private val deleteScheduleUseCase: DeleteScheduleUseCase,
     private val getAuthSessionUseCase: GetAuthSessionUseCase

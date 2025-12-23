@@ -1,20 +1,28 @@
 package com.br.xbizitwork.data.di.specialty
 
+import com.br.xbizitwork.core.dispatcher.CoroutineDispatcherProvider
+import com.br.xbizitwork.data.remote.specialty.datasource.SpecialtyRemoteDataSource
 import com.br.xbizitwork.data.repository.SpecialtyRepositoryImpl
 import com.br.xbizitwork.domain.repository.SpecialtyRepository
-import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class SpecialtyRepositoryModule {
-    
-    @Binds
+object SpecialtyRepositoryModule {
+
+    @Provides
     @Singleton
-    abstract fun bindSpecialtyRepository(
-        impl: SpecialtyRepositoryImpl
-    ): SpecialtyRepository
+    fun provideSpecialtyRepository(
+        remoteDataSource: SpecialtyRemoteDataSource,
+        coroutineDispatcherProvider: CoroutineDispatcherProvider
+    ): SpecialtyRepository {
+        return SpecialtyRepositoryImpl(
+            remoteDataSource = remoteDataSource,
+            coroutineDispatcherProvider = coroutineDispatcherProvider
+        )
+    }
 }

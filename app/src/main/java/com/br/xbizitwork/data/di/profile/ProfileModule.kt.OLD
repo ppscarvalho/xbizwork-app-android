@@ -4,8 +4,8 @@ import com.br.xbizitwork.core.dispatcher.CoroutineDispatcherProvider
 import com.br.xbizitwork.data.remote.profile.api.ProfileApiService
 import com.br.xbizitwork.data.remote.profile.api.ProfileApiServiceImpl
 import com.br.xbizitwork.data.remote.profile.datasource.ProfileRemoteDataSourceImpl
-import com.br.xbizitwork.data.repository.profile.ProfileRepositoryImpl
-import com.br.xbizitwork.domain.repository.profile.ProfileRepository
+import com.br.xbizitwork.data.repository.ProfileRepositoryImpl
+import com.br.xbizitwork.domain.repository.ProfileRepository
 import com.br.xbizitwork.domain.source.profile.ProfileRemoteDataSource
 import com.br.xbizitwork.domain.usecase.profile.UpdateProfileUseCase
 import com.br.xbizitwork.domain.usecase.profile.UpdateProfileUseCaseImpl
@@ -52,9 +52,13 @@ object ProfileModule {
     @Provides
     @Singleton
     fun provideProfileRepository(
-        remoteDataSource: ProfileRemoteDataSource
+        remoteDataSource: ProfileRemoteDataSource,
+        coroutineDispatcherProvider: CoroutineDispatcherProvider
     ): ProfileRepository {
-        return ProfileRepositoryImpl(remoteDataSource)
+        return ProfileRepositoryImpl(
+            remoteDataSource = remoteDataSource,
+            coroutineDispatcherProvider = coroutineDispatcherProvider
+        )
     }
 
     /**
@@ -63,10 +67,11 @@ object ProfileModule {
     @Provides
     @Singleton
     fun provideUpdateProfileUseCase(
-        repository: ProfileRepository,
-        coroutineDispatcherProvider: CoroutineDispatcherProvider
+        repository: ProfileRepository
     ): UpdateProfileUseCase {
-        return UpdateProfileUseCaseImpl(repository, coroutineDispatcherProvider)
+        return UpdateProfileUseCaseImpl(
+            repository = repository
+        )
     }
 
     /**

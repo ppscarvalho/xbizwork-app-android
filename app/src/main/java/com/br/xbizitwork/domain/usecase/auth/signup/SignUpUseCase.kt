@@ -2,7 +2,7 @@ package com.br.xbizitwork.domain.usecase.auth.signup
 
 import com.br.xbizitwork.core.state.UiState
 import com.br.xbizitwork.core.usecase.FlowUseCase
-import com.br.xbizitwork.domain.common.DomainDefaultResult
+import com.br.xbizitwork.core.result.DefaultResult
 import com.br.xbizitwork.domain.model.auth.SignUpModel
 import com.br.xbizitwork.domain.repository.UserAuthRepository
 import com.br.xbizitwork.domain.result.auth.SignUpResult
@@ -39,7 +39,7 @@ interface SignUpUseCase {
  * Implementação do [SignUpUseCase].
  *
  * Esta classe executa a lógica de cadastro utilizando o [UserAuthRepository],
- * convertendo o resultado da camada de domínio ([DomainDefaultResult]) em estado de UI ([UiState]).
+ * convertendo o resultado da camada de domínio ([DefaultResult]) em estado de UI ([UiState]).
  *
  * @property authRepository Repositório responsável pelas operações de autenticação.
  */
@@ -50,11 +50,11 @@ class SignUpUseCaseImpl @Inject constructor(
     override suspend fun executeTask(parameters: SignUpUseCase.Parameters): UiState<SignUpResult> {
         return try {
             when (val response = authRepository.signUp(parameters.signUpModel)) {
-                is DomainDefaultResult.Success -> {
+                is DefaultResult.Success -> {
                     UiState.Success(response.data)
                 }
 
-                is DomainDefaultResult.Error -> {
+                is DefaultResult.Error -> {
                     UiState.Error(Throwable(response.message))
                 }
             }

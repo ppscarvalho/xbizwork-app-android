@@ -4,6 +4,7 @@ import com.br.xbizitwork.domain.repository.CategoryRepository
 import com.br.xbizitwork.domain.usecase.category.GetAllCategoryUseCase
 import com.br.xbizitwork.domain.usecase.category.GetAllCategoryUseCaseImpl
 import com.br.xbizitwork.domain.usecase.category.GetCategoriesUseCase
+import com.br.xbizitwork.domain.usecase.category.GetCategoriesUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,6 +28,6 @@ object CategoryUseCaseModule {
     fun provideGetCategoriesUseCase(
         repository: CategoryRepository
     ): GetCategoriesUseCase {
-        return GetCategoriesUseCase(repository)
+        return GetCategoriesUseCaseImpl(repository)
     }
 }

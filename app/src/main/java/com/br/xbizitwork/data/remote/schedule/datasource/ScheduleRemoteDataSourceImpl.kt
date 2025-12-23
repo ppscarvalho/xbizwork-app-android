@@ -1,6 +1,7 @@
 package com.br.xbizitwork.data.remote.schedule.datasource
 
 import com.br.xbizitwork.core.model.api.ApiResponse
+import com.br.xbizitwork.core.model.api.ApiResultResponse
 import com.br.xbizitwork.data.remote.schedule.api.ScheduleApiService
 import com.br.xbizitwork.data.remote.schedule.dtos.requests.CreateScheduleRequest
 import com.br.xbizitwork.data.remote.schedule.dtos.requests.UpdateAvailabilityRequest
@@ -16,7 +17,7 @@ class ScheduleRemoteDataSourceImpl @Inject constructor(
     private val apiService: ScheduleApiService
 ) : ScheduleRemoteDataSource {
     
-    override suspend fun createSchedule(request: CreateScheduleRequest): ApiResponse<ScheduleResponse> {
+    override suspend fun createSchedule(request: CreateScheduleRequest): ApiResultResponse {
         return apiService.createSchedule(request)
     }
     
@@ -31,18 +32,18 @@ class ScheduleRemoteDataSourceImpl @Inject constructor(
     override suspend fun updateSchedule(
         scheduleId: String,
         request: UpdateScheduleRequest
-    ): ApiResponse<ScheduleResponse> {
+    ): ApiResultResponse {
         return apiService.updateSchedule(scheduleId, request)
     }
     
-    override suspend fun deleteSchedule(scheduleId: String): ApiResponse<Unit> {
+    override suspend fun deleteSchedule(scheduleId: String): ApiResultResponse {
         return apiService.deleteSchedule(scheduleId)
     }
     
     override suspend fun updateAvailability(
         scheduleId: String,
         request: UpdateAvailabilityRequest
-    ): ApiResponse<ScheduleResponse> {
+    ): ApiResultResponse {
         return apiService.updateAvailability(scheduleId, request)
     }
     
@@ -56,5 +57,9 @@ class ScheduleRemoteDataSourceImpl @Inject constructor(
     
     override suspend fun getActiveSchedules(professionalId: String): ApiResponse<List<ScheduleResponse>> {
         return apiService.getActiveSchedules(professionalId)
+    }
+
+    override suspend fun validateSchedule(request: CreateScheduleRequest): ApiResultResponse {
+        return apiService.validateSchedule(request)
     }
 }

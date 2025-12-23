@@ -1,4 +1,4 @@
-package com.br.xbizitwork.domain.repository.cep
+package com.br.xbizitwork.domain.repository
 
 import com.br.xbizitwork.core.result.DefaultResult
 import com.br.xbizitwork.domain.model.cep.CepModel
@@ -9,4 +9,3 @@ import com.br.xbizitwork.domain.model.cep.CepModel
 interface CepRepository {
     suspend fun getCep(cep: String): DefaultResult<CepModel>
 }
-

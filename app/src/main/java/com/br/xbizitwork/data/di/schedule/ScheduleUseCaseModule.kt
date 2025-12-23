@@ -2,20 +2,27 @@ package com.br.xbizitwork.data.di.schedule
 
 import com.br.xbizitwork.domain.repository.ScheduleRepository
 import com.br.xbizitwork.domain.usecase.schedule.CreateScheduleUseCase
+import com.br.xbizitwork.domain.usecase.schedule.CreateScheduleUseCaseImpl
 import com.br.xbizitwork.domain.usecase.schedule.CreateScheduleFromRequestUseCase
+import com.br.xbizitwork.domain.usecase.schedule.CreateScheduleFromRequestUseCaseImpl
 import com.br.xbizitwork.domain.usecase.schedule.DeleteScheduleUseCase
+import com.br.xbizitwork.domain.usecase.schedule.DeleteScheduleUseCaseImpl
 import com.br.xbizitwork.domain.usecase.schedule.GetAvailableTimeSlotsUseCase
+import com.br.xbizitwork.domain.usecase.schedule.GetAvailableTimeSlotsUseCaseImpl
 import com.br.xbizitwork.domain.usecase.schedule.GetProfessionalSchedulesUseCase
+import com.br.xbizitwork.domain.usecase.schedule.GetProfessionalSchedulesUseCaseImpl
 import com.br.xbizitwork.domain.usecase.schedule.UpdateAvailabilityUseCase
+import com.br.xbizitwork.domain.usecase.schedule.UpdateAvailabilityUseCaseImpl
+import com.br.xbizitwork.domain.usecase.schedule.ValidateScheduleOnBackendUseCase
+import com.br.xbizitwork.domain.usecase.schedule.ValidateScheduleOnBackendUseCaseImpl
+import com.br.xbizitwork.domain.usecase.schedule.ValidateScheduleTimeSlotUseCase
+import com.br.xbizitwork.domain.usecase.schedule.ValidateScheduleTimeSlotUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-/**
- * Módulo DI para Schedule Use Cases
- */
 @Module
 @InstallIn(SingletonComponent::class)
 object ScheduleUseCaseModule {
@@ -25,7 +32,7 @@ object ScheduleUseCaseModule {
     fun provideCreateScheduleUseCase(
         repository: ScheduleRepository
     ): CreateScheduleUseCase {
-        return CreateScheduleUseCase(repository)
+        return CreateScheduleUseCaseImpl(repository)
     }
     
     @Provides
@@ -33,7 +40,7 @@ object ScheduleUseCaseModule {
     fun provideCreateScheduleFromRequestUseCase(
         repository: ScheduleRepository
     ): CreateScheduleFromRequestUseCase {
-        return CreateScheduleFromRequestUseCase(repository)
+        return CreateScheduleFromRequestUseCaseImpl(repository)
     }
     
     @Provides
@@ -41,7 +48,7 @@ object ScheduleUseCaseModule {
     fun provideGetProfessionalSchedulesUseCase(
         repository: ScheduleRepository
     ): GetProfessionalSchedulesUseCase {
-        return GetProfessionalSchedulesUseCase(repository)
+        return GetProfessionalSchedulesUseCaseImpl(repository)
     }
     
     @Provides
@@ -49,7 +56,7 @@ object ScheduleUseCaseModule {
     fun provideUpdateAvailabilityUseCase(
         repository: ScheduleRepository
     ): UpdateAvailabilityUseCase {
-        return UpdateAvailabilityUseCase(repository)
+        return UpdateAvailabilityUseCaseImpl(repository)
     }
     
     @Provides
@@ -57,7 +64,7 @@ object ScheduleUseCaseModule {
     fun provideGetAvailableTimeSlotsUseCase(
         repository: ScheduleRepository
     ): GetAvailableTimeSlotsUseCase {
-        return GetAvailableTimeSlotsUseCase(repository)
+        return GetAvailableTimeSlotsUseCaseImpl(repository)
     }
     
     @Provides
@@ -65,6 +72,20 @@ object ScheduleUseCaseModule {
     fun provideDeleteScheduleUseCase(
         repository: ScheduleRepository
     ): DeleteScheduleUseCase {
-        return DeleteScheduleUseCase(repository)
+        return DeleteScheduleUseCaseImpl(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideValidateScheduleOnBackendUseCase(
+        repository: ScheduleRepository
+    ): ValidateScheduleOnBackendUseCase {
+        return ValidateScheduleOnBackendUseCaseImpl(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideValidateScheduleTimeSlotUseCase(): ValidateScheduleTimeSlotUseCase {
+        return ValidateScheduleTimeSlotUseCaseImpl()
     }
 }

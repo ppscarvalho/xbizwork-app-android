@@ -1,25 +1,25 @@
 package com.br.xbizitwork.data.mappers
 
+import com.br.xbizitwork.data.model.category.CategoryModel
 import com.br.xbizitwork.data.remote.category.dtos.response.CategoryResponse
-import com.br.xbizitwork.data.remote.category.dtos.response.CategoryResponseModel
 import com.br.xbizitwork.domain.result.category.CategoryResult
 
 /**
- * Mapeia CategoryResponse (DTO da API com @SerializedName)
- * para CategoryResponseModel (modelo interno da Data Layer)
+ * Converte CategoryResponse (DTO da API com @SerializedName)
+ * para CategoryModel (modelo interno da Data Layer)
  */
-fun CategoryResponse.toCategoryResponseModel(): CategoryResponseModel {
-    return CategoryResponseModel(
+fun CategoryResponse.toCategoryModel(): CategoryModel {
+    return CategoryModel(
         id = this.id,
         description = this.description
     )
 }
 
 /**
- * Mapeia CategoryResponseModel (Data Layer)
+ * Mapeia CategoryModel (Data Layer)
  * para CategoryResult (Domain Layer)
  */
-fun CategoryResponseModel.toDomainResult(): CategoryResult {
+fun CategoryModel.toDomainResult(): CategoryResult {
     return CategoryResult(
         id = this.id,
         description = this.description

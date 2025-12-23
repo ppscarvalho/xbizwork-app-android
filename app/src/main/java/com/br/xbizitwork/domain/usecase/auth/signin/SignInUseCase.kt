@@ -2,7 +2,7 @@ package com.br.xbizitwork.domain.usecase.auth.signin
 
 import com.br.xbizitwork.core.state.UiState
 import com.br.xbizitwork.core.usecase.FlowUseCase
-import com.br.xbizitwork.domain.common.DomainDefaultResult
+import com.br.xbizitwork.core.result.DefaultResult
 import com.br.xbizitwork.domain.model.auth.SignInModel
 import com.br.xbizitwork.domain.repository.UserAuthRepository
 import com.br.xbizitwork.domain.result.auth.SignInResult
@@ -20,11 +20,11 @@ class SignInUseCaseImpl @Inject constructor(
     override suspend fun executeTask(parameters: SignInUseCase.Parameters): UiState<SignInResult> {
         return try {
             when (val response = authRepository.signIn(parameters.signInModel)) {
-                is DomainDefaultResult.Success -> {
+                is DefaultResult.Success -> {
                     UiState.Success(response.data)
                 }
 
-                is DomainDefaultResult.Error -> {
+                is DefaultResult.Error -> {
                     UiState.Error(Throwable(response.message))
                 }
             }
