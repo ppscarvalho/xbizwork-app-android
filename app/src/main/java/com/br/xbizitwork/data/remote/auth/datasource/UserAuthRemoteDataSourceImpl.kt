@@ -8,12 +8,16 @@ import com.br.xbizitwork.core.network.SimpleCache
 import com.br.xbizitwork.core.network.retryWithExponentialBackoff
 import com.br.xbizitwork.core.result.DefaultResult
 import com.br.xbizitwork.core.util.logging.logInfo
+import com.br.xbizitwork.data.mappers.toChangePasswordRequest
+import com.br.xbizitwork.data.mappers.toChangePasswordResponseModel
 import com.br.xbizitwork.data.mappers.toLoginRequest
 import com.br.xbizitwork.data.mappers.toLoginResponseModel
 import com.br.xbizitwork.data.mappers.toSignUpRequest
 import com.br.xbizitwork.data.remote.auth.api.UserAuthApiService
+import com.br.xbizitwork.data.remote.auth.dtos.requests.ChangePasswordRequestModel
 import com.br.xbizitwork.data.remote.auth.dtos.requests.SignInRequestModel
 import com.br.xbizitwork.data.remote.auth.dtos.requests.SignUpRequestModel
+import com.br.xbizitwork.data.remote.auth.dtos.responses.ChangePasswordResponseModel
 import com.br.xbizitwork.data.remote.auth.dtos.responses.SignUpResponseModel
 import com.br.xbizitwork.data.remote.auth.dtos.responses.SignInResponseModel
 import java.io.IOException
@@ -90,6 +94,38 @@ class UserAuthRemoteDataSourceImpl @Inject constructor(
 
             if (response.isSuccessful) {
                 DefaultResult.Success(response.toApplicationResultModel())
+            } else {
+                DefaultResult.Error(message = response.message)
+            }
+
+        } catch (e: ErrorResponseException) {
+            DefaultResult.Error(code = e.error.httpCode.toString(), message = e.error.message)
+        } catch (e: Exception) {
+            // Mapeia exceção genérica para NetworkError
+            val networkError = ErrorMapper.mapThrowableToNetworkError(e)
+            DefaultResult.Error(message = networkError.message)
+        }
+    }
+
+    override suspend fun changePassword(changePasswordRequestModel: ChangePasswordRequestModel): DefaultResult<ChangePasswordResponseModel> {
+        return try {
+            val request = changePasswordRequestModel.toChangePasswordRequest()
+
+            // Tenta com retry automático
+            val response = retryWithExponentialBackoff(
+                policy = retryPolicy,
+                shouldRetry = { exception ->
+                    // Faz retry apenas em erros de conexão/timeout
+                    exception is IOException || exception is TimeoutException
+                },
+                operation = {
+                    authApiService.changePassword(request)
+                }
+            )
+
+            if (response.isSuccessful) {
+                val result = response.toChangePasswordResponseModel()
+                DefaultResult.Success(result)
             } else {
                 DefaultResult.Error(message = response.message)
             }

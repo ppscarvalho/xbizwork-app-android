@@ -1,5 +1,7 @@
 package com.br.xbizitwork.data.di.auth
 
+import com.br.xbizitwork.domain.usecase.auth.changepassword.ValidatePasswordUseCase
+import com.br.xbizitwork.domain.usecase.auth.changepassword.ValidatePasswordUseCaseImpl
 import com.br.xbizitwork.domain.usecase.auth.signin.ValidateSignInUseCase
 import com.br.xbizitwork.domain.usecase.auth.signin.ValidateSignInUseCaseImpl
 import com.br.xbizitwork.domain.usecase.auth.signup.ValidateSignUpUseCase
@@ -24,5 +26,11 @@ object AuthValidationModule {
     @Singleton
     fun provideValidateSignInUseCase(): ValidateSignInUseCase {
         return ValidateSignInUseCaseImpl()
+    }
+
+    @Provides
+    @Singleton
+    fun provideValidatePasswordUseCase(): ValidatePasswordUseCase {
+        return ValidatePasswordUseCaseImpl()
     }
 }

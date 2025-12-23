@@ -1,15 +1,21 @@
 package com.br.xbizitwork.data.mappers
 
 import com.br.xbizitwork.core.util.logging.logInfo
+import com.br.xbizitwork.data.remote.auth.dtos.requests.ChangePasswordRequest
+import com.br.xbizitwork.data.remote.auth.dtos.requests.ChangePasswordRequestModel
 import com.br.xbizitwork.data.remote.auth.dtos.requests.SignInRequestModel
 import com.br.xbizitwork.data.remote.auth.dtos.requests.SignInRequest
 import com.br.xbizitwork.data.remote.auth.dtos.requests.SignUpRequest
 import com.br.xbizitwork.data.remote.auth.dtos.requests.SignUpRequestModel
+import com.br.xbizitwork.data.remote.auth.dtos.responses.ChangePasswordResponse
+import com.br.xbizitwork.data.remote.auth.dtos.responses.ChangePasswordResponseModel
 import com.br.xbizitwork.data.remote.auth.dtos.responses.SignInResponse
 import com.br.xbizitwork.data.remote.auth.dtos.responses.SignInResponseModel
 import com.br.xbizitwork.data.remote.auth.dtos.responses.SignUpResponseModel
+import com.br.xbizitwork.domain.model.auth.ChangePasswordModel
 import com.br.xbizitwork.domain.model.auth.SignInModel
 import com.br.xbizitwork.domain.model.auth.SignUpModel
+import com.br.xbizitwork.domain.result.auth.ChangePasswordResult
 import com.br.xbizitwork.domain.result.auth.SignInResult
 import com.br.xbizitwork.domain.result.auth.SignUpResult
 
@@ -25,6 +31,13 @@ fun SignUpModel.toSignUpRequestModel(): SignUpRequestModel {
         email = email,
         name = name,
         password = password
+    )
+}
+
+fun ChangePasswordModel.toChangePasswordRequestModel(): ChangePasswordRequestModel {
+    return ChangePasswordRequestModel(
+        currentPassword = currentPassword,
+        newPassword = newPassword
     )
 }
 
@@ -72,6 +85,27 @@ fun SignUpRequestModel.toSignUpRequest(): SignUpRequest {
         name = name,
         email = email,
         password = password
+    )
+}
+
+fun ChangePasswordRequestModel.toChangePasswordRequest(): ChangePasswordRequest {
+    return ChangePasswordRequest(
+        currentPassword = currentPassword,
+        newPassword = newPassword
+    )
+}
+
+fun ChangePasswordResponse.toChangePasswordResponseModel(): ChangePasswordResponseModel {
+    return ChangePasswordResponseModel(
+        isSuccessful = isSuccessful,
+        message = message
+    )
+}
+
+fun ChangePasswordResponseModel.toDomainResult(): ChangePasswordResult {
+    return ChangePasswordResult(
+        isSuccessful = this.isSuccessful,
+        message = this.message
     )
 }
 
