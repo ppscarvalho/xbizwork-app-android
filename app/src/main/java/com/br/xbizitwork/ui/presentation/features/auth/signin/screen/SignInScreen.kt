@@ -6,7 +6,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
-import com.br.xbizitwork.core.sideeffects.SideEffect
+import com.br.xbizitwork.core.sideeffects.AppSideEffect
 import com.br.xbizitwork.core.state.LifecycleEventEffect
 import com.br.xbizitwork.core.util.extensions.toast
 import com.br.xbizitwork.ui.presentation.components.topbar.AppTopBar
@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.Flow
 @Composable
 fun SignInScreen(
     uiState: SignInState,
-    sideEffectFlow: Flow<SideEffect>,
+    appSideEffectFlow: Flow<AppSideEffect>,
     onEvent: (SignInEvent) -> Unit,
     onNavigateToSignUpScreen: () -> Unit,
     onEmailChanged: (String) -> Unit,
@@ -29,13 +29,13 @@ fun SignInScreen(
 ) {
 
     val context = LocalContext.current
-    LifecycleEventEffect(sideEffectFlow){ sideEffect ->
+    LifecycleEventEffect(appSideEffectFlow){ sideEffect ->
         when(sideEffect){
-            is SideEffect.ShowToast -> context.toast(sideEffect.message)
-            is SideEffect.NavigateToLogin -> {
+            is AppSideEffect.ShowToast -> context.toast(sideEffect.message)
+            is AppSideEffect.NavigateToLogin -> {
                 // Já estamos na tela de login, não faz nada
             }
-            is SideEffect.NavigateBack -> {
+            is AppSideEffect.NavigateBack -> {
                 // Não usado nesta tela, mas precisa estar aqui por causa do sealed interface
             }
         }

@@ -6,9 +6,9 @@ import com.br.xbizitwork.core.network.RetryPolicy
 import com.br.xbizitwork.core.network.SimpleCache
 import com.br.xbizitwork.core.network.retryWithExponentialBackoff
 import com.br.xbizitwork.core.result.DefaultResult
-import com.br.xbizitwork.data.mappers.toCategoryResponseModel
+import com.br.xbizitwork.data.mappers.toCategoryModel
+import com.br.xbizitwork.data.model.category.CategoryModel
 import com.br.xbizitwork.data.remote.category.api.CategoryApiService
-import com.br.xbizitwork.data.remote.category.dtos.response.CategoryResponseModel
 import java.io.IOException
 import java.util.concurrent.TimeoutException
 import javax.inject.Inject
@@ -22,14 +22,7 @@ import javax.inject.Inject
  * - Retry automático com backoff exponencial
  * - Cache de respostas para evitar múltiplas requisições
  * - Mapeamento de exceções para DefaultResult
- * - Conversão de CategoryResponse → CategoryResponseModel
- *
- * Padrão de fluxo:
- * 1. Tenta chamada com retry automático
- * 2. Se sucesso: mapeia CategoryResponse → CategoryResponseModel e retorna DefaultResult.Success
- * 3. Se erro HTTP: lança ErrorResponseException (capturada) → DefaultResult.Error
- * 4. Se erro de conexão: retry automático, depois falha
- * 5. Se erro genérico: mapeia para NetworkError → DefaultResult.Error
+ * - Conversão de CategoryResponse → CategoryModel
  */
 class CategoryRemoteDataSourceImpl @Inject constructor(
     private val categoryApiService: CategoryApiService
@@ -37,7 +30,7 @@ class CategoryRemoteDataSourceImpl @Inject constructor(
 
     companion object {
         // Cache para respostas de categorias (10 minutos de TTL)
-        private val categoryCache = SimpleCache<String, List<CategoryResponseModel>>()
+        private val categoryCache = SimpleCache<String, List<CategoryModel>>()
 
         // Política de retry: 3 tentativas, backoff exponencial (100ms até 2s)
         private val retryPolicy = RetryPolicy(
@@ -48,7 +41,7 @@ class CategoryRemoteDataSourceImpl @Inject constructor(
         )
     }
 
-    override suspend fun getAllCategory(): DefaultResult<List<CategoryResponseModel>> {
+    override suspend fun getAllCategory(): DefaultResult<List<CategoryModel>> {
         return try {
             // Tenta obter do cache primeiro
             val cached = categoryCache.get("all_categories")
@@ -71,7 +64,7 @@ class CategoryRemoteDataSourceImpl @Inject constructor(
 
             // Se sucesso: mapeia, armazena em cache e retorna
             if (response.isSuccessful && response.data != null) {
-                val models = response.data!!.map { it.toCategoryResponseModel() }
+                val models = response.data!!.map { it.toCategoryModel() }
                 categoryCache.put("all_categories", models, ttlMs = 10 * 60 * 1000)
                 DefaultResult.Success(data = models)
             } else {

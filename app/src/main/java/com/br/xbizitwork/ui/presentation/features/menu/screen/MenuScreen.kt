@@ -13,7 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import com.br.xbizitwork.core.sideeffects.SideEffect
+import com.br.xbizitwork.core.sideeffects.AppSideEffect
 import com.br.xbizitwork.core.state.LifecycleEventEffect
 import com.br.xbizitwork.core.util.extensions.toast
 import com.br.xbizitwork.ui.presentation.components.topbar.AppTopBar
@@ -24,13 +24,13 @@ import kotlinx.coroutines.flow.Flow
 @Composable
 fun MenuScreen(
     onNavigateToHomeGraph: () -> Unit,
-    sideEffectFlow: Flow<SideEffect>,
+    appSideEffectFlow: Flow<AppSideEffect>,
     onClickUpdateProfile: () -> Unit,
-    onClickChangerPassword: () -> Unit,
-    onClickDateRange: () -> Unit,
-    onClickAssignment: () -> Unit,
-    onClickEvent: () -> Unit,
-    onClickViewModule: () -> Unit,
+    onClickChangePassword: () -> Unit,
+    onClickSetupSchedule: () -> Unit,
+    onClickYourPlan: () -> Unit,
+    onClickMyAppointments: () -> Unit,
+    onClickProfessionalAgenda: () -> Unit,
     onClickFAQ: () -> Unit,
     onClickAppVersion: () -> Unit,
     onClickRateApp: () -> Unit,
@@ -39,13 +39,13 @@ fun MenuScreen(
     val context = LocalContext.current
 
     // Tratar SideEffects (Toast)
-    LifecycleEventEffect(sideEffectFlow) { sideEffect ->
+    LifecycleEventEffect(appSideEffectFlow) { sideEffect ->
         when(sideEffect) {
-            is SideEffect.ShowToast -> context.toast(sideEffect.message)
-            is SideEffect.NavigateToLogin -> {
+            is AppSideEffect.ShowToast -> context.toast(sideEffect.message)
+            is AppSideEffect.NavigateToLogin -> {
                 // MenuScreen não trata NavigateToLogin, ignora
             }
-            is SideEffect.NavigateBack -> {
+            is AppSideEffect.NavigateBack -> {
                 // MenuScreen não trata NavigateBack, ignora
             }
         }
@@ -72,11 +72,11 @@ fun MenuScreen(
             ) {
                 MenuContent(
                     onClickUpdateProfile = onClickUpdateProfile,
-                    onClickChangerPassword = onClickChangerPassword,
-                    onClickDateRange = onClickDateRange,
-                    onClickAssignment = onClickAssignment,
-                    onClickEvent = onClickEvent,
-                    onClickViewModule = onClickViewModule,
+                    onClickChangePassword = onClickChangePassword,
+                    onClickSetupSchedule = onClickSetupSchedule,
+                    onClickYourPlan = onClickYourPlan,
+                    onClickMyAppointments = onClickMyAppointments,
+                    onClickProfessionalAgenda = onClickProfessionalAgenda,
                     onClickFAQ = onClickFAQ,
                     onClickAppVersion = onClickAppVersion,
                     onClickRateApp = onClickRateApp,

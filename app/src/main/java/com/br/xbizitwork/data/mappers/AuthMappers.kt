@@ -29,15 +29,16 @@ fun SignUpModel.toSignUpRequestModel(): SignUpRequestModel {
 }
 
 fun SignInResponseModel.toDomainResponse(): SignInResult {
-    logInfo("DOMAIN_MAPPER_DEBUG", "SignInResponseModel mapeado: name=$name, email=$email, token=$token")
+    logInfo("DOMAIN_MAPPER_DEBUG", "SignInResponseModel mapeado: id=$id, name=$name, email=$email, token=$token")
     return SignInResult(
+        id = this.id ?: 0,
         name = this.name ?: "",
         email = this.email ?: "",
         token = this.token ?: "",
         isSuccessful = this.isSuccessful,
         message = this.message
     ).also {
-        logInfo("DOMAIN_MAPPER_DEBUG", "SignInResult criado: name=${it.name}, email=${it.email}, token=${it.token}")
+        logInfo("DOMAIN_MAPPER_DEBUG", "SignInResult criado: id=${it.id}, name=${it.name}, email=${it.email}, token=${it.token}")
     }
 }
 
@@ -46,15 +47,16 @@ fun SignInResponseModel.toDomainResponse(): SignInResult {
  * Extrai os dados do objeto "data" da resposta
  */
 fun SignInResponse.toLoginResponseModel(): SignInResponseModel {
-    logInfo("MAPPER_DEBUG", "SignInResponse recebido: data.name=${data.name}, data.email=${data.email}, data.token=${data.token}, isSuccessful=$isSuccessful")
+    logInfo("MAPPER_DEBUG", "SignInResponse recebido: data.id=${data.id}, data.name=${data.name}, data.email=${data.email}, data.token=${data.token}, isSuccessful=$isSuccessful")
     return SignInResponseModel(
+        id = data.id,
         name = data.name,
         email = data.email,
         token = data.token,
         isSuccessful = isSuccessful,
         message = message
     ).also {
-        logInfo("MAPPER_DEBUG", "SignInResponseModel criado: name=${it.name}, email=${it.email}, token=${it.token}")
+        logInfo("MAPPER_DEBUG", "SignInResponseModel criado: id=${it.id}, name=${it.name}, email=${it.email}, token=${it.token}")
     }
 }
 

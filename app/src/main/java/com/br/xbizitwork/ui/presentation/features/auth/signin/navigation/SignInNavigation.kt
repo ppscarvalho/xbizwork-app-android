@@ -22,7 +22,7 @@ fun NavGraphBuilder.signInScreen(
 
         SignInScreen(
             uiState = uiState,
-            sideEffectFlow = sideEffect,
+            appSideEffectFlow = sideEffect,
             onEvent = viewModel::onEvent,
             onNavigateToSignUpScreen = onNavigateToSignUpScreen,
             onEmailChanged = viewModel::onEmailChange,
@@ -33,8 +33,13 @@ fun NavGraphBuilder.signInScreen(
     }
 }
 
-fun NavController.navigateToSignInScreen(){
+fun NavController.navigateToSignInScreen(clearBackStack: Boolean = false){
     navigate(AuthScreens.SignInScreen){
-        popUpTo(0)
+        if (clearBackStack) {
+            popUpTo(0) { inclusive = true }
+        } else {
+            popUpTo(0)
+        }
+        launchSingleTop = true
     }
 }

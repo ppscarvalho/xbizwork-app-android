@@ -19,7 +19,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
-import com.br.xbizitwork.core.sideeffects.SideEffect as AppSideEffect
+import com.br.xbizitwork.core.sideeffects.AppSideEffect as AppSideEffect
 import com.br.xbizitwork.core.state.LifecycleEventEffect
 import com.br.xbizitwork.core.util.extensions.toast
 import com.br.xbizitwork.ui.presentation.components.bottombar.AppBottomBar

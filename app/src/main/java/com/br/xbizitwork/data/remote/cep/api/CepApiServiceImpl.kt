@@ -10,15 +10,10 @@ import javax.inject.Inject
  * Implementação do CepApiService usando Ktor HttpClient
  */
 class CepApiServiceImpl @Inject constructor(
-    private val client: HttpClient
-) : CepApiService {
-
-    /**
-     * Busca dados de endereço por CEP
-     * Endpoint: GET /api/v1/cep/{cep}
-     */
+    private val httpClient: HttpClient
+): CepApiService {
     override suspend fun getCep(cep: String): CepResponse {
-        val response = client.get("cep/$cep")
+        val response = httpClient.get("cep/$cep")
         return response.body()
     }
 }

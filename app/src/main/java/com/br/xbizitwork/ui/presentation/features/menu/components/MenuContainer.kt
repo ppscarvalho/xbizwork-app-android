@@ -34,11 +34,11 @@ import com.br.xbizitwork.ui.theme.XBizWorkTheme
 fun MenuContainer(
     modifier: Modifier = Modifier,
     onClickUpdateProfile: () -> Unit,
-    onClickChangerPassword: () -> Unit,
-    onClickDateRange: () -> Unit,
-    onClickAssignment: () -> Unit,
-    onClickEvent: () -> Unit,
-    onClickViewModule: () -> Unit,
+    onClickChangePassword: () -> Unit,
+    onClickSetupSchedule: () -> Unit,
+    onClickYourPlan: () -> Unit,
+    onClickMyAppointments: () -> Unit,
+    onClickProfessionalAgenda: () -> Unit,
     onClickFAQ: () -> Unit,
     onClickAppVersion: () -> Unit,
     onClickRateApp: () -> Unit,
@@ -95,7 +95,7 @@ fun MenuContainer(
                 MenuButton(
                     leftIcon = Icons.Filled.Key,
                     text = "Alterar Senha",
-                    onClick = onClickChangerPassword
+                    onClick = onClickChangePassword
                 )
             }
 
@@ -103,7 +103,7 @@ fun MenuContainer(
                 MenuButton(
                     leftIcon = Icons.Filled.DateRange,
                     text = "Monte sua agenda",
-                    onClick = onClickDateRange
+                    onClick = onClickSetupSchedule
                 )
             }
 
@@ -111,7 +111,7 @@ fun MenuContainer(
                 MenuButton(
                     leftIcon = Icons.AutoMirrored.Filled.Assignment,
                     text = "Seu plano",
-                    onClick = onClickAssignment
+                    onClick = onClickYourPlan
                 )
             }
 
@@ -119,7 +119,7 @@ fun MenuContainer(
                 MenuButton(
                     leftIcon = Icons.Filled.Event,
                     text = "Meus compromissos",
-                    onClick = onClickEvent
+                    onClick = onClickMyAppointments
                 )
             }
 
@@ -127,7 +127,7 @@ fun MenuContainer(
                 MenuButton(
                     leftIcon = Icons.Filled.ViewModule,
                     text = "Agenda profissional",
-                    onClick = onClickViewModule,
+                    onClick = onClickProfessionalAgenda,
                     hasDividerAfter = false
                 )
             }
@@ -210,11 +210,11 @@ private fun MenuContainerPreView() {
         MenuContainer(
             modifier = Modifier.fillMaxSize(),
             onClickUpdateProfile = {},
-            onClickChangerPassword = {},
-            onClickDateRange = {},
-            onClickAssignment = {},
-            onClickEvent = {},
-            onClickViewModule = {},
+            onClickChangePassword = {},
+            onClickSetupSchedule = {},
+            onClickYourPlan = {},
+            onClickMyAppointments = {},
+            onClickProfessionalAgenda = {},
             onClickFAQ = {},
             onClickAppVersion = {},
             onClickRateApp = {},

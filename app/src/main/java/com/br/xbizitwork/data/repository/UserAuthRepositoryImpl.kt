@@ -8,7 +8,6 @@ import com.br.xbizitwork.data.mappers.toDomainResult
 import com.br.xbizitwork.data.mappers.toSignInRequestModel
 import com.br.xbizitwork.data.mappers.toSignUpRequestModel
 import com.br.xbizitwork.data.remote.auth.datasource.UserAuthRemoteDataSource
-import com.br.xbizitwork.domain.common.DomainDefaultResult
 import com.br.xbizitwork.domain.model.auth.SignInModel
 import com.br.xbizitwork.domain.model.auth.SignUpModel
 import com.br.xbizitwork.domain.repository.UserAuthRepository
@@ -26,7 +25,7 @@ class UserAuthRepositoryImpl @Inject constructor(
     private val coroutineDispatcherProvider: CoroutineDispatcherProvider
 ): UserAuthRepository {
 
-    override suspend fun signIn(signInModel: SignInModel): DomainDefaultResult<SignInResult> =
+    override suspend fun signIn(signInModel: SignInModel): DefaultResult<SignInResult> =
         withContext(coroutineDispatcherProvider.io()) {
             val loginRequest = signInModel.toSignInRequestModel()
             val result = remoteDataSource.signIn(loginRequest)
@@ -34,16 +33,16 @@ class UserAuthRepositoryImpl @Inject constructor(
             when (result) {
                 is DefaultResult.Success -> {
                     val domainResponse = result.data.toDomainResponse()
-                    DomainDefaultResult.Success(domainResponse)
+                    DefaultResult.Success(domainResponse)
                 }
 
                 is DefaultResult.Error -> {
-                    DomainDefaultResult.Error(message = result.message)
+                    DefaultResult.Error(message = result.message)
                 }
             }
         }
 
-    override suspend fun signUp(signUpModel: SignUpModel): DomainDefaultResult<SignUpResult> =
+    override suspend fun signUp(signUpModel: SignUpModel): DefaultResult<SignUpResult> =
         withContext(coroutineDispatcherProvider.io()) {
             val sigUpnRequest = signUpModel.toSignUpRequestModel()
             val result = remoteDataSource.signUp(sigUpnRequest)
@@ -51,11 +50,11 @@ class UserAuthRepositoryImpl @Inject constructor(
             when (result) {
                 is DefaultResult.Success -> {
                     val domainResponse = result.data.toDomainResult()
-                    DomainDefaultResult.Success(domainResponse)
+                    DefaultResult.Success(domainResponse)
                 }
 
                 is DefaultResult.Error -> {
-                    DomainDefaultResult.Error(message = result.message)
+                    DefaultResult.Error(message = result.message)
                 }
             }
         }
@@ -65,11 +64,13 @@ class UserAuthRepositoryImpl @Inject constructor(
             .flowOn(coroutineDispatcherProvider.io())
 
     override suspend fun saveSession(
+        id: Int,
         name: String,
         email: String,
         token: String,
     ) = withContext(coroutineDispatcherProvider.io()) {
         localDataSource.saveSession(
+            id = id,
             name = name,
             email = email,
             token = token

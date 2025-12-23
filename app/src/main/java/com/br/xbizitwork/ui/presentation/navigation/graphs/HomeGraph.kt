@@ -7,6 +7,9 @@ import androidx.navigation.navigation
 import com.br.xbizitwork.ui.presentation.features.home.navigation.homeScreen
 import com.br.xbizitwork.ui.presentation.features.profile.navigation.editProfileScreen
 import com.br.xbizitwork.ui.presentation.features.profile.navigation.navigateToEditProfileScreen
+import com.br.xbizitwork.ui.presentation.features.schedule.agenda.navigation.navigateToProfessionalAgenda
+import com.br.xbizitwork.ui.presentation.features.schedule.create.navigation.navigateToCreateSchedule
+import com.br.xbizitwork.ui.presentation.features.schedule.list.navigation.navigateToViewSchedules
 import com.br.xbizitwork.ui.presentation.navigation.screens.Graphs
 import com.br.xbizitwork.ui.presentation.navigation.screens.HomeScreens
 
@@ -40,7 +43,17 @@ fun NavGraphBuilder.homeGraph(
             onNavigateUp = onNavigateUp,
             onNavigateToEditProfile = {
                 navController.navigateToEditProfileScreen()
-            }
+            },
+            onNavigateToCreateSchedule = {
+                navController.navigateToCreateSchedule()
+            },
+            onNavigateToListSchedulesScreen = {
+                navController.navigateToViewSchedules()
+            },
+            onNavigateToProfessionalAgendaScreen = {
+                navController.navigateToProfessionalAgenda()
+            },
+            onNavigateToLogin = onNavigateToSignInScreen
         )
     }
 }

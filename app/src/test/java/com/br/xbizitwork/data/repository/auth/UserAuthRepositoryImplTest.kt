@@ -7,10 +7,7 @@ import com.br.xbizitwork.data.remote.auth.datasource.UserAuthRemoteDataSource
 import com.br.xbizitwork.data.remote.auth.dtos.responses.SignInResponseModel
 import com.br.xbizitwork.data.repository.UserAuthRepositoryImpl
 import com.br.xbizitwork.domain.model.auth.SignInModel
-import com.br.xbizitwork.domain.common.DomainDefaultResult
-import com.br.xbizitwork.domain.session.AuthSession
-import kotlinx.coroutines.test.TestCoroutineScheduler
-import kotlinx.coroutines.test.TestDispatcher
+import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
@@ -19,8 +16,6 @@ import org.mockito.MockitoAnnotations
 import org.mockito.kotlin.any
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
-import com.google.common.truth.Truth.assertThat
-import kotlinx.coroutines.test.StandardTestDispatcher
 
 /**
  * Testes unitários para UserAuthRepositoryImpl.
@@ -83,7 +78,7 @@ class UserAuthRepositoryImplTest {
         val result = repository.signIn(signInModel)
 
         // Assert
-        assertThat(result).isInstanceOf(DomainDefaultResult.Success::class.java)
+        assertThat(result).isInstanceOf(DefaultResult.Success::class.java)
         
         // Verifica que o remote datasource foi chamado
         verify(mockRemoteDataSource).signIn(any())
@@ -108,9 +103,9 @@ class UserAuthRepositoryImplTest {
         val result = repository.signIn(signInModel)
 
         // Assert
-        assertThat(result).isInstanceOf(DomainDefaultResult.Error::class.java)
+        assertThat(result).isInstanceOf(DefaultResult.Error::class.java)
         
-        if (result is DomainDefaultResult.Error) {
+        if (result is DefaultResult.Error) {
             assertThat(result.message).contains("Unauthorized")
         }
     }
@@ -118,15 +113,17 @@ class UserAuthRepositoryImplTest {
     @Test
     fun saveSession_callsLocalDataSource() = runTest {
         // Arrange
+        val id = 1
         val name = "John Doe"
         val email = "test@example.com"
         val token = "jwt_token"
 
         // Act
-        repository.saveSession(name, email, token)
+        repository.saveSession(id, name, email, token)
 
         // Assert
         verify(mockLocalDataSource).saveSession(
+            id = id,
             name = name,
             email = email,
             token = token

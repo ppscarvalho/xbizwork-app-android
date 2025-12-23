@@ -1,5 +1,6 @@
 package com.br.xbizitwork.ui.presentation.components.buttons
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -23,6 +24,7 @@ fun AppButton(
     text: String,
     isLoading: Boolean,
     contentColor: Color,
+    color: Color = Color.White,
     enabled: Boolean,
     onClick: () -> Unit
 ) {
@@ -48,18 +50,29 @@ fun AppButton(
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
                 fontFamily = poppinsFOntFamily,
-                color = Color.White
+                color = color
             )
         }
     }
 }
 
-@Preview(
-    showBackground = true,
-    backgroundColor = 0xFFFFFFFF
-)
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-private fun AppButtonPreview() {
+private fun AppButtonPreviewDark() {
+    XBizWorkTheme {
+        AppButton(
+            text = "Entrar",
+            isLoading = false,
+            contentColor = Color.White,
+            enabled = false,
+            onClick = {}
+        )
+    }
+}
+
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
+@Composable
+private fun AppButtonPreviewLight() {
     XBizWorkTheme {
         AppButton(
             text = "Entrar",

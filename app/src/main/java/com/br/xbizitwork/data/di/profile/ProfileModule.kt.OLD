@@ -1,0 +1,86 @@
+package com.br.xbizitwork.data.di.profile
+
+import com.br.xbizitwork.core.dispatcher.CoroutineDispatcherProvider
+import com.br.xbizitwork.data.remote.profile.api.ProfileApiService
+import com.br.xbizitwork.data.remote.profile.api.ProfileApiServiceImpl
+import com.br.xbizitwork.data.remote.profile.datasource.ProfileRemoteDataSourceImpl
+import com.br.xbizitwork.data.repository.ProfileRepositoryImpl
+import com.br.xbizitwork.domain.repository.ProfileRepository
+import com.br.xbizitwork.domain.source.profile.ProfileRemoteDataSource
+import com.br.xbizitwork.domain.usecase.profile.UpdateProfileUseCase
+import com.br.xbizitwork.domain.usecase.profile.UpdateProfileUseCaseImpl
+import com.br.xbizitwork.domain.usecase.profile.ValidateProfileUseCase
+import com.br.xbizitwork.domain.usecase.profile.ValidateProfileUseCaseImpl
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import io.ktor.client.HttpClient
+import javax.inject.Singleton
+
+/**
+ * Módulo Hilt para injeção de dependências relacionadas ao Profile
+ * Segue o mesmo padrão dos módulos Auth
+ */
+@Module
+@InstallIn(SingletonComponent::class)
+object ProfileModule {
+
+    /**
+     * Provê a implementação do ProfileApiService
+     */
+    @Provides
+    @Singleton
+    fun provideProfileApiService(httpClient: HttpClient): ProfileApiService {
+        return ProfileApiServiceImpl(httpClient)
+    }
+
+    /**
+     * Provê a implementação do ProfileRemoteDataSource
+     */
+    @Provides
+    @Singleton
+    fun provideProfileRemoteDataSource(
+        profileApiService: ProfileApiService
+    ): ProfileRemoteDataSource {
+        return ProfileRemoteDataSourceImpl(profileApiService)
+    }
+
+    /**
+     * Provê a implementação do ProfileRepository
+     */
+    @Provides
+    @Singleton
+    fun provideProfileRepository(
+        remoteDataSource: ProfileRemoteDataSource,
+        coroutineDispatcherProvider: CoroutineDispatcherProvider
+    ): ProfileRepository {
+        return ProfileRepositoryImpl(
+            remoteDataSource = remoteDataSource,
+            coroutineDispatcherProvider = coroutineDispatcherProvider
+        )
+    }
+
+    /**
+     * Provê a implementação do UpdateProfileUseCase
+     */
+    @Provides
+    @Singleton
+    fun provideUpdateProfileUseCase(
+        repository: ProfileRepository
+    ): UpdateProfileUseCase {
+        return UpdateProfileUseCaseImpl(
+            repository = repository
+        )
+    }
+
+    /**
+     * Provê a implementação do ValidateProfileUseCase
+     */
+    @Provides
+    @Singleton
+    fun provideValidateProfileUseCase(): ValidateProfileUseCase {
+        return ValidateProfileUseCaseImpl()
+    }
+}
+

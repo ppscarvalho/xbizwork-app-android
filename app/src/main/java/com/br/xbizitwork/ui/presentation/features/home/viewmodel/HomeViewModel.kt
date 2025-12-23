@@ -2,7 +2,7 @@ package com.br.xbizitwork.ui.presentation.features.home.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.br.xbizitwork.core.sideeffects.SideEffect
+import com.br.xbizitwork.core.sideeffects.AppSideEffect
 import com.br.xbizitwork.core.util.extensions.collectUiState
 import com.br.xbizitwork.core.util.logging.logInfo
 import com.br.xbizitwork.domain.usecase.session.GetAuthSessionUseCase
@@ -13,7 +13,6 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -34,8 +33,8 @@ class HomeViewModel @Inject constructor(
     )
 
     // ✅ NOVO: SideEffect Channel para notificações (Toast, etc)
-    private val _sideEffectChannel = Channel<SideEffect>(capacity = Channel.Factory.BUFFERED)
-    val sideEffectChannel = _sideEffectChannel.receiveAsFlow()
+    private val _App_sideEffectChannel = Channel<AppSideEffect>(capacity = Channel.Factory.BUFFERED)
+    val sideEffectChannel = _App_sideEffectChannel.receiveAsFlow()
 
     init {
         // ✅ CORRIGIDO: Observar sessão continuamente em vez de apenas no onStart
@@ -59,7 +58,7 @@ class HomeViewModel @Inject constructor(
                 onFailure = {
                     logInfo("REMOVE_TOKEN", "Erro ao remover token: ${it.message}")
                     _uiState.update { it.copy(isLoading = false) }
-                    _sideEffectChannel.send(SideEffect.ShowToast("Erro ao fazer logout"))
+                    _App_sideEffectChannel.send(AppSideEffect.ShowToast("Erro ao fazer logout"))
                 },
                 onSuccess = {
                     logInfo("REMOVE_TOKEN", "Token removido com sucesso!")
@@ -71,7 +70,7 @@ class HomeViewModel @Inject constructor(
                     ) }
                     // ✅ NOVO: Enviar SideEffect via Channel em vez de atualizar state
                     viewModelScope.launch {
-                        _sideEffectChannel.send(SideEffect.ShowToast("Você foi deslogado com sucesso!"))
+                        _App_sideEffectChannel.send(AppSideEffect.ShowToast("Você foi deslogado com sucesso!"))
                     }
                 },
             )

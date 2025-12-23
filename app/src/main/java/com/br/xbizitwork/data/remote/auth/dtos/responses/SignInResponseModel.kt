@@ -7,6 +7,7 @@ package com.br.xbizitwork.data.remote.auth.dtos.responses
  * Usado em Repositories, Use Cases e Domain Models
  */
 data class SignInResponseModel(
+    val id: Int? = null,
     val name: String? = null,
     val email: String?=null,
     val token: String? = null,

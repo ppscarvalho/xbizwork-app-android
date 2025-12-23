@@ -1,7 +1,6 @@
 package com.br.xbizitwork.core.model.api
 
 import com.br.xbizitwork.core.result.DefaultResult
-import com.br.xbizitwork.domain.common.DomainDefaultResult
 
 /**
  * Mappers genéricos para converter ApiResponse para DefaultResult
@@ -20,14 +19,14 @@ fun <T> ApiResponse<T>.toDefaultResult(): DefaultResult<T?> {
 }
 
 /**
- * Converte ApiResponse<T> para DomainDefaultResult<T>
+ * Converte ApiResponse<T> para DefaultResult<T>
  * Usa para Domain Layer
  */
-fun <T> ApiResponse<T>.toDomainResult(): DomainDefaultResult<T?> {
+fun <T> ApiResponse<T>.toDomainResult(): DefaultResult<T?> {
     return if (isSuccessful) {
-        DomainDefaultResult.Success(data = data)
+        DefaultResult.Success(data = data)
     } else {
-        DomainDefaultResult.Error(message = message)
+        DefaultResult.Error(message = message)
     }
 }
 

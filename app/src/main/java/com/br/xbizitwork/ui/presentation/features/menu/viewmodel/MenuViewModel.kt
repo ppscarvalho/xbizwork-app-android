@@ -2,7 +2,7 @@ package com.br.xbizitwork.ui.presentation.features.menu.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.br.xbizitwork.core.sideeffects.SideEffect
+import com.br.xbizitwork.core.sideeffects.AppSideEffect
 import com.br.xbizitwork.core.util.extensions.collectUiState
 import com.br.xbizitwork.core.util.logging.logInfo
 import com.br.xbizitwork.domain.usecase.session.RemoveAuthSessionUseCase
@@ -25,8 +25,8 @@ class MenuViewModel @Inject constructor(
 ) : ViewModel() {
 
     // SideEffect Channel para notificações (Toast, etc)
-    private val _sideEffectChannel = Channel<SideEffect>(capacity = Channel.Factory.BUFFERED)
-    val sideEffectChannel = _sideEffectChannel.receiveAsFlow()
+    private val _App_sideEffectChannel = Channel<AppSideEffect>(capacity = Channel.Factory.BUFFERED)
+    val sideEffectChannel = _App_sideEffectChannel.receiveAsFlow()
 
     /**
      * Realiza logout do usuário
@@ -40,11 +40,11 @@ class MenuViewModel @Inject constructor(
                 },
                 onFailure = {
                     logInfo("REMOVE_TOKEN", "Erro ao remover token: ${it.message}")
-                    _sideEffectChannel.send(SideEffect.ShowToast("Erro ao fazer logout"))
+                    _App_sideEffectChannel.send(AppSideEffect.ShowToast("Erro ao fazer logout"))
                 },
                 onSuccess = {
                     logInfo("REMOVE_TOKEN", "Token removido com sucesso!")
-                    _sideEffectChannel.send(SideEffect.ShowToast("Você foi deslogado com sucesso!"))
+                    _App_sideEffectChannel.send(AppSideEffect.ShowToast("Você foi deslogado com sucesso!"))
                 },
             )
         }

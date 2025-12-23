@@ -10,7 +10,9 @@ import com.br.xbizitwork.ui.presentation.navigation.screens.MenuScreens
 
 fun NavGraphBuilder.menuScreen(
     onNavigateToHomeGraph: () -> Unit,
-    onNavigateToEditProfile: () -> Unit
+    onNavigateToEditProfile: () -> Unit,
+    onNavigateToListSchedulesScreen: () -> Unit,
+    onNavigateToProfessionalAgendaScreen: () -> Unit
 ){
     composable<MenuScreens.MenuScreen> {
         val viewModel: MenuViewModel = hiltViewModel()
@@ -18,13 +20,13 @@ fun NavGraphBuilder.menuScreen(
 
         MenuScreen(
             onNavigateToHomeGraph = onNavigateToHomeGraph,
-            sideEffectFlow = sideEffect,
+            appSideEffectFlow = sideEffect,
             onClickUpdateProfile = { onNavigateToEditProfile() },
-            onClickChangerPassword = {},
-            onClickDateRange = {},
-            onClickAssignment = {},
-            onClickEvent = {},
-            onClickViewModule = {},
+            onClickChangePassword = {},
+            onClickSetupSchedule = { onNavigateToListSchedulesScreen() },
+            onClickYourPlan = {},
+            onClickMyAppointments = {},
+            onClickProfessionalAgenda = { onNavigateToProfessionalAgendaScreen() },
             onClickFAQ = {},
             onClickAppVersion = {},
             onClickRateApp = {},
