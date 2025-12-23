@@ -22,5 +22,6 @@ object Constants {
         const val PASSWORD_SPECIAL_CHAR_MISSING = "A senha precisa conter pelo menos um caractere especial"
         const val PASSWORD_NUMBER_MISSING = "A senha precisa conter pelo menos um número"
         const val PHONE_NUMBER_INVALID = "O número de telefone precisa conter 11 caracteres"
+        const val NEW_PASSWORD_SAME_AS_OLD = "A nova senha não pode ser igual à senha atual"
     }
 }
