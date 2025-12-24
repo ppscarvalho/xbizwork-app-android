@@ -1,5 +1,6 @@
 package com.br.xbizitwork.ui.presentation.features.profile.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -12,7 +13,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
@@ -27,6 +30,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.br.xbizitwork.ui.presentation.components.profile.UserAvatar
 import com.br.xbizitwork.ui.presentation.components.state.LoadingIndicator
 import com.br.xbizitwork.ui.presentation.features.profile.state.EditProfileUIState
 import com.br.xbizitwork.ui.theme.BeigeBackground
@@ -34,7 +38,6 @@ import com.br.xbizitwork.ui.theme.GrayText
 import com.br.xbizitwork.ui.theme.TealPrimary
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
 import com.br.xbizitwork.ui.theme.poppinsFOntFamily
-
 
 @Composable
 fun EditProfileContent(
@@ -48,7 +51,7 @@ fun EditProfileContent(
     onEmailChanged: (String) -> Unit,
     onPhoneChanged: (String) -> Unit,
     onZipCodeChanged: (String) -> Unit,
-    onZipCodeBlur: () -> Unit,  // ✅ NOVO: Busca endereço quando sai do campo
+    onZipCodeBlur: () -> Unit,
     onAddressChanged: (String) -> Unit,
     onNumberChanged: (String) -> Unit,
     onNeighborhoodChanged: (String) -> Unit,
@@ -63,35 +66,51 @@ fun EditProfileContent(
             .background(Color.White)
             .padding(paddingValues)
     ) {
-        // Header curvo com fundo bege - SEM ÍCONE
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(220.dp)
-                .clip(RoundedCornerShape(bottomStart = 40.dp, bottomEnd = 40.dp))
-                .background(BeigeBackground)
-        )
 
-        // Conteúdo scrollável - EXATAMENTE IGUAL SignUp
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 16.dp)
-                .padding(top = 5.dp)
-                .verticalScroll(rememberScrollState()),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Spacer(modifier = Modifier.height(16.dp))
+        // 🔄 LOADING cobre tudo
+        if (uiState.isLoading) {
+            LoadingIndicator(
+                modifier = Modifier.fillMaxSize(),
+                message = "Carregando perfil..."
+            )
+        } else {
 
-            // ✅ LOADING COBRE TODA A TELA!
-            if (uiState.isLoading) {
-                LoadingIndicator(
-                    modifier = Modifier.fillMaxSize(),
-                    message = "Carregando perfil..."
+            // 🔹 HEADER (só renderiza com dados carregados)
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(220.dp)
+                    .clip(
+                        RoundedCornerShape(
+                            bottomStart = 40.dp,
+                            bottomEnd = 40.dp
+                        )
+                    )
+                    .background(BeigeBackground)
+            ) {
+                UserAvatar(
+                    modifier = Modifier
+                        .size(120.dp)
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.primary)
+                        .align(Alignment.Center)
+                        .padding(top = 20.dp),
+                    userName = uiState.name
                 )
-            } else {
+            }
 
-                // Mensagem de erro (se houver) - EXATAMENTE IGUAL SignUp
+            // 🔹 CONTEÚDO
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = 16.dp)
+                    .padding(top = 200.dp)
+                    .verticalScroll(rememberScrollState()),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+
+                Spacer(modifier = Modifier.height(16.dp))
+
                 if (!uiState.errorMessage.isNullOrEmpty()) {
                     Text(
                         text = uiState.errorMessage,
@@ -107,10 +126,9 @@ fun EditProfileContent(
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                // Formulário - PASSA TODOS OS PARÂMETROS!
                 EditProfileContainer(
                     modifier = Modifier.fillMaxWidth(),
-                    isLoading = uiState.isLoading,
+                    isLoading = false,
                     buttonEnabled = uiState.isFormValid,
                     nameValue = uiState.name,
                     cpfValue = uiState.cpf,
@@ -131,7 +149,7 @@ fun EditProfileContent(
                     onEmailChanged = onEmailChanged,
                     onPhoneChanged = onPhoneChanged,
                     onZipCodeChanged = onZipCodeChanged,
-                    onZipCodeBlur = onZipCodeBlur,  // ✅ Busca endereço quando sai do campo
+                    onZipCodeBlur = onZipCodeBlur,
                     onAddressChanged = onAddressChanged,
                     onNumberChanged = onNumberChanged,
                     onNeighborhoodChanged = onNeighborhoodChanged,
@@ -142,7 +160,6 @@ fun EditProfileContent(
 
                 Spacer(modifier = Modifier.height(24.dp))
 
-                // Link para cancelar - EXATAMENTE IGUAL SignUp
                 Row(
                     modifier = Modifier.padding(bottom = 32.dp),
                     horizontalArrangement = Arrangement.Center
@@ -170,7 +187,11 @@ fun EditProfileContent(
     }
 }
 
-@Preview
+
+@Preview(
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
 @Composable
 private fun EditProfileContentPreview() {
     XBizWorkTheme {
@@ -188,7 +209,8 @@ private fun EditProfileContentPreview() {
                 isLoading = false,
                 errorMessage = null
             ),
-            paddingValues = PaddingValues(0.dp),
+            // 🔥 Importante: simula padding real do Scaffold
+            paddingValues = PaddingValues(top = 0.dp),
             onNameChanged = {},
             onCpfChanged = {},
             onDateOfBirthChanged = {},

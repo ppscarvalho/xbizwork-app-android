@@ -8,6 +8,7 @@ import com.br.xbizitwork.core.util.extensions.collectUiState
 import com.br.xbizitwork.domain.model.auth.ChangePasswordModel
 import com.br.xbizitwork.domain.usecase.auth.changepassword.ChangePasswordUseCase
 import com.br.xbizitwork.domain.usecase.auth.changepassword.ValidateChangePasswordUseCase
+import com.br.xbizitwork.domain.usecase.session.GetAuthSessionUseCase
 import com.br.xbizitwork.domain.validations.auth.ChangePasswordValidationError
 import com.br.xbizitwork.domain.validations.auth.SignUpValidationError
 import com.br.xbizitwork.ui.presentation.features.auth.changepassword.events.ChangePasswordEvent
@@ -17,6 +18,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -29,7 +31,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ChangePasswordViewModel @Inject constructor(
     private val changePasswordUseCase: ChangePasswordUseCase,
-    private val validateChangePasswordUseCase: ValidateChangePasswordUseCase
+    private val validateChangePasswordUseCase: ValidateChangePasswordUseCase,
+    private val getAuthSessionUseCase: GetAuthSessionUseCase
 ) : ViewModel() {
 
     private val _uiState: MutableStateFlow<ChangePasswordState> = MutableStateFlow(ChangePasswordState())
@@ -37,6 +40,17 @@ class ChangePasswordViewModel @Inject constructor(
 
     private val _appSideEffectChannel = Channel<AppSideEffect>(capacity = Channel.Factory.BUFFERED)
     val sideEffectChannel = _appSideEffectChannel.receiveAsFlow()
+
+    init {
+        loadingUserSession()
+    }
+
+    private fun loadingUserSession() {
+        viewModelScope.launch {
+            val session = getAuthSessionUseCase.invoke().first()
+            _uiState.update { it.copy(results = session)}
+        }
+    }
 
     fun onEvent(event: ChangePasswordEvent) {
         when (event) {

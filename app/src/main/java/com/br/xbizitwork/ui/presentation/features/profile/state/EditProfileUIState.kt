@@ -1,6 +1,7 @@
 package com.br.xbizitwork.ui.presentation.features.profile.state
 
 import android.net.Uri
+import com.br.xbizitwork.domain.session.AuthSession
 import java.time.LocalDate
 
 /**
@@ -49,5 +50,5 @@ data class EditProfileUIState(
 
     // Mensagens
     val errorMessage: String? = null,
-    val successMessage: String? = null
+    val successMessage: String? = null,
 )
