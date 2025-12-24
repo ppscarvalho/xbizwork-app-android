@@ -4,6 +4,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.navigation
+import com.br.xbizitwork.ui.presentation.features.auth.changepassword.navigation.changePasswordScreen
 import com.br.xbizitwork.ui.presentation.features.home.navigation.homeScreen
 import com.br.xbizitwork.ui.presentation.features.profile.navigation.editProfileScreen
 import com.br.xbizitwork.ui.presentation.features.profile.navigation.navigateToEditProfileScreen
@@ -36,6 +37,10 @@ fun NavGraphBuilder.homeGraph(
         editProfileScreen(
             onNavigateBack = onNavigateUp,
             onNavigateToLogin = onNavigateToSignInScreen
+        )
+
+        changePasswordScreen(
+            onNavigateBack = onNavigateUp
         )
         
         // Menu é um nested graph com suas próprias screens
