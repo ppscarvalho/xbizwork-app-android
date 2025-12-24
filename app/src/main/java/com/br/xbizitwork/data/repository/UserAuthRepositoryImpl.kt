@@ -3,11 +3,13 @@ package com.br.xbizitwork.data.repository
 import com.br.xbizitwork.core.dispatcher.CoroutineDispatcherProvider
 import com.br.xbizitwork.core.result.DefaultResult
 import com.br.xbizitwork.data.local.auth.datastore.AuthSessionLocalDataSource
+import com.br.xbizitwork.data.mappers.toChangePasswordRequestModel
 import com.br.xbizitwork.data.mappers.toDomainResponse
 import com.br.xbizitwork.data.mappers.toDomainResult
 import com.br.xbizitwork.data.mappers.toSignInRequestModel
 import com.br.xbizitwork.data.mappers.toSignUpRequestModel
 import com.br.xbizitwork.data.remote.auth.datasource.UserAuthRemoteDataSource
+import com.br.xbizitwork.domain.model.auth.ChangePasswordModel
 import com.br.xbizitwork.domain.model.auth.SignInModel
 import com.br.xbizitwork.domain.model.auth.SignUpModel
 import com.br.xbizitwork.domain.repository.UserAuthRepository
@@ -46,6 +48,23 @@ class UserAuthRepositoryImpl @Inject constructor(
         withContext(coroutineDispatcherProvider.io()) {
             val sigUpnRequest = signUpModel.toSignUpRequestModel()
             val result = remoteDataSource.signUp(sigUpnRequest)
+
+            when (result) {
+                is DefaultResult.Success -> {
+                    val domainResponse = result.data.toDomainResult()
+                    DefaultResult.Success(domainResponse)
+                }
+
+                is DefaultResult.Error -> {
+                    DefaultResult.Error(message = result.message)
+                }
+            }
+        }
+
+    override suspend fun changePassword(changePasswordModel: ChangePasswordModel): DefaultResult<SignUpResult> =
+        withContext(coroutineDispatcherProvider.io()) {
+            val changePasswordRequest = changePasswordModel.toChangePasswordRequestModel()
+            val result = remoteDataSource.changePassword(changePasswordRequest)
 
             when (result) {
                 is DefaultResult.Success -> {
