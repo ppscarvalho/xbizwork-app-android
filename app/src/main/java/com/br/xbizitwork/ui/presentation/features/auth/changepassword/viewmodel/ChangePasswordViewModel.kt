@@ -115,7 +115,7 @@ class ChangePasswordViewModel @Inject constructor(
 
                 ChangePasswordValidationError.Valid -> {
                     it.copy(
-                        fieldErrorMessage = "Dados validados com sucesso",
+                        fieldErrorMessage = null,
                         isFormValid = true
                     )
                 }
