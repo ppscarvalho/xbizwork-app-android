@@ -5,6 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.navigation
 import com.br.xbizitwork.ui.presentation.features.auth.changepassword.navigation.changePasswordScreen
+import com.br.xbizitwork.ui.presentation.features.auth.changepassword.navigation.navigateToChangePasswordScreen
 import com.br.xbizitwork.ui.presentation.features.home.navigation.homeScreen
 import com.br.xbizitwork.ui.presentation.features.profile.navigation.editProfileScreen
 import com.br.xbizitwork.ui.presentation.features.profile.navigation.navigateToEditProfileScreen
@@ -21,7 +22,7 @@ fun NavGraphBuilder.homeGraph(
     onNavigateToSearchScreen: () -> Unit,
     onNavigateToUsersConnectionScreen: () -> Unit,
     onNavigateToMenuGraph: () -> Unit,
-    onNavigateProfileClick: () -> Unit,
+    onNavigateProfileScreen: () -> Unit,
     navController: NavController
 ){
     navigation<Graphs.HomeGraphs>(startDestination = HomeScreens.HomeScreen) {
@@ -31,7 +32,7 @@ fun NavGraphBuilder.homeGraph(
             onNavigateToSearchScreen = onNavigateToSearchScreen,
             onNavigateToUsersConnectionScreen = onNavigateToUsersConnectionScreen,
             onNavigateToMenuScreen = onNavigateToMenuGraph,
-            onNavigateProfileClick = onNavigateProfileClick
+            onNavigateProfileClick = onNavigateProfileScreen
         )
 
         editProfileScreen(
@@ -57,6 +58,9 @@ fun NavGraphBuilder.homeGraph(
             },
             onNavigateToProfessionalAgendaScreen = {
                 navController.navigateToProfessionalAgenda()
+            },
+            onNavigateChangePasswordScreen = {
+                navController.navigateToChangePasswordScreen()
             },
             onNavigateToLogin = onNavigateToSignInScreen
         )

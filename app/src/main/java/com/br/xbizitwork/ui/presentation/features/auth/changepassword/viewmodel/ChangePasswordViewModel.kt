@@ -9,6 +9,7 @@ import com.br.xbizitwork.domain.model.auth.ChangePasswordModel
 import com.br.xbizitwork.domain.usecase.auth.changepassword.ChangePasswordUseCase
 import com.br.xbizitwork.domain.usecase.auth.changepassword.ValidateChangePasswordUseCase
 import com.br.xbizitwork.domain.validations.auth.ChangePasswordValidationError
+import com.br.xbizitwork.domain.validations.auth.SignUpValidationError
 import com.br.xbizitwork.ui.presentation.features.auth.changepassword.events.ChangePasswordEvent
 import com.br.xbizitwork.ui.presentation.features.auth.changepassword.state.ChangePasswordState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -34,8 +35,8 @@ class ChangePasswordViewModel @Inject constructor(
     private val _uiState: MutableStateFlow<ChangePasswordState> = MutableStateFlow(ChangePasswordState())
     val uiState: StateFlow<ChangePasswordState> = _uiState.asStateFlow()
 
-    private val _App_sideEffectChannel = Channel<AppSideEffect>(capacity = Channel.Factory.BUFFERED)
-    val sideEffectChannel = _App_sideEffectChannel.receiveAsFlow()
+    private val _appSideEffectChannel = Channel<AppSideEffect>(capacity = Channel.Factory.BUFFERED)
+    val sideEffectChannel = _appSideEffectChannel.receiveAsFlow()
 
     fun onEvent(event: ChangePasswordEvent) {
         when (event) {
@@ -76,7 +77,7 @@ class ChangePasswordViewModel @Inject constructor(
                     _uiState.update {
                         it.copy(isLoading = false, isSuccess = response.isSuccessful)
                     }
-                    _App_sideEffectChannel.send(AppSideEffect.ShowToast(response.message))
+                    _appSideEffectChannel.send(AppSideEffect.ShowToast(response.message))
                 },
                 onFailure = { error ->
                     _uiState.update {
@@ -111,6 +112,30 @@ class ChangePasswordViewModel @Inject constructor(
                         fieldErrorMessage = Constants.ValidationAuthMessages.PASSWORDS_DO_NOT_MATCH,
                         isFormValid = false
                     )
+                }
+
+                ChangePasswordValidationError.PasswordTooShort -> {
+                    it.copy(
+                        fieldErrorMessage = Constants.ValidationAuthMessages.PASSWORD_TOO_SHORT,
+                        isFormValid = false)
+                }
+
+                ChangePasswordValidationError.PasswordUpperCaseMissing -> {
+                    it.copy(
+                        fieldErrorMessage = Constants.ValidationAuthMessages.PASSWORD_UPPERCASE_MISSING,
+                        isFormValid = false)
+                }
+
+                ChangePasswordValidationError.PasswordSpecialCharMissing -> {
+                    it.copy(
+                        fieldErrorMessage = Constants.ValidationAuthMessages.PASSWORD_SPECIAL_CHAR_MISSING,
+                        isFormValid = false)
+                }
+
+                ChangePasswordValidationError.PasswordNumberMissing -> {
+                    it.copy(
+                        fieldErrorMessage = Constants.ValidationAuthMessages.PASSWORD_NUMBER_MISSING,
+                        isFormValid = false)
                 }
 
                 ChangePasswordValidationError.Valid -> {

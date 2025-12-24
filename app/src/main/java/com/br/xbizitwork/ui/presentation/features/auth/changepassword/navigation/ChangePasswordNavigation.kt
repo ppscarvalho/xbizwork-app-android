@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import com.br.xbizitwork.ui.presentation.features.auth.changepassword.screen.ChangePasswordScreen
 import com.br.xbizitwork.ui.presentation.features.auth.changepassword.viewmodel.ChangePasswordViewModel
 import com.br.xbizitwork.ui.presentation.navigation.screens.HomeScreens
+import com.br.xbizitwork.ui.presentation.navigation.screens.MenuScreens
 
 /**
  * Navegação para a tela de alteração de senha
@@ -17,7 +18,7 @@ import com.br.xbizitwork.ui.presentation.navigation.screens.HomeScreens
 fun NavGraphBuilder.changePasswordScreen(
     onNavigateBack: () -> Unit,
 ) {
-    composable<HomeScreens.ChangePasswordScreen> {
+    composable<MenuScreens.ChangePasswordScreen> {
         val viewModel: ChangePasswordViewModel = hiltViewModel()
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
         val sideEffect = viewModel.sideEffectChannel
@@ -35,5 +36,5 @@ fun NavGraphBuilder.changePasswordScreen(
 }
 
 fun NavController.navigateToChangePasswordScreen() {
-    navigate(HomeScreens.ChangePasswordScreen)
+    navigate(MenuScreens.ChangePasswordScreen)
 }

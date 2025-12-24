@@ -9,12 +9,12 @@ import com.br.xbizitwork.ui.presentation.features.schedule.list.screen.ListSched
 import com.br.xbizitwork.ui.presentation.features.schedule.list.viewmodel.ListSchedulesViewModel
 import com.br.xbizitwork.ui.presentation.navigation.screens.MenuScreens
 
-fun NavGraphBuilder.viewSchedulesScreen(
+fun NavGraphBuilder.listSchedulesScreen(
     onNavigateUp: () -> Unit,
     onNavigateToCreateSchedule: () -> Unit,
     onNavigateToLogin: () -> Unit
 ) {
-    composable<MenuScreens.ViewSchedulesScreen> {
+    composable<MenuScreens.ListSchedulesScreen> {
         val viewModel: ListSchedulesViewModel = hiltViewModel()
         val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -30,5 +30,5 @@ fun NavGraphBuilder.viewSchedulesScreen(
 }
 
 fun NavController.navigateToViewSchedules() {
-    navigate(MenuScreens.ViewSchedulesScreen)
+    navigate(MenuScreens.ListSchedulesScreen)
 }

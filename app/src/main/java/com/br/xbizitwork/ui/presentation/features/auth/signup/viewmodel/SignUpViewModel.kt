@@ -30,8 +30,8 @@ class SignUpViewModel @Inject constructor(
     private val _uiState: MutableStateFlow<SignUpState> = MutableStateFlow(SignUpState())
     val uiState: StateFlow<SignUpState> = _uiState.asStateFlow()
 
-    private val _App_sideEffectChannel = Channel<AppSideEffect>(capacity = Channel.Factory.BUFFERED)
-    val sideEffectChannel = _App_sideEffectChannel.receiveAsFlow()
+    private val _appSideEffectChannel = Channel<AppSideEffect>(capacity = Channel.Factory.BUFFERED)
+    val sideEffectChannel = _appSideEffectChannel.receiveAsFlow()
 
     fun onEvent(event: SignUpEvent){
         when(event){
@@ -77,7 +77,7 @@ class SignUpViewModel @Inject constructor(
                     _uiState.update {
                         it.copy(isLoading = false, isSuccess = response.isSuccessful )
                     }
-                    _App_sideEffectChannel.send(AppSideEffect.ShowToast(response.message))
+                    _appSideEffectChannel.send(AppSideEffect.ShowToast(response.message))
                 },
                 onFailure = {error ->
                     _uiState.update {

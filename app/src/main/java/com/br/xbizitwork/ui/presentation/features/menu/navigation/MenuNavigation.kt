@@ -12,7 +12,8 @@ fun NavGraphBuilder.menuScreen(
     onNavigateToHomeGraph: () -> Unit,
     onNavigateToEditProfile: () -> Unit,
     onNavigateToListSchedulesScreen: () -> Unit,
-    onNavigateToProfessionalAgendaScreen: () -> Unit
+    onNavigateToProfessionalAgendaScreen: () -> Unit,
+    onNavigateChangePasswordScreen: () -> Unit
 ){
     composable<MenuScreens.MenuScreen> {
         val viewModel: MenuViewModel = hiltViewModel()
@@ -22,7 +23,7 @@ fun NavGraphBuilder.menuScreen(
             onNavigateToHomeGraph = onNavigateToHomeGraph,
             appSideEffectFlow = sideEffect,
             onClickUpdateProfile = { onNavigateToEditProfile() },
-            onClickChangePassword = {},
+            onClickChangePassword = {onNavigateChangePasswordScreen()},
             onClickSetupSchedule = { onNavigateToListSchedulesScreen() },
             onClickYourPlan = {},
             onClickMyAppointments = {},

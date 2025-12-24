@@ -4,10 +4,11 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.navigation
+import com.br.xbizitwork.ui.presentation.features.auth.changepassword.navigation.changePasswordScreen
 import com.br.xbizitwork.ui.presentation.features.menu.navigation.menuScreen
 import com.br.xbizitwork.ui.presentation.features.schedule.agenda.navigation.professionalAgendaScreen
 import com.br.xbizitwork.ui.presentation.features.schedule.create.navigation.createScheduleScreen
-import com.br.xbizitwork.ui.presentation.features.schedule.list.navigation.viewSchedulesScreen
+import com.br.xbizitwork.ui.presentation.features.schedule.list.navigation.listSchedulesScreen
 import com.br.xbizitwork.ui.presentation.navigation.screens.Graphs
 import com.br.xbizitwork.ui.presentation.navigation.screens.MenuScreens
 
@@ -28,6 +29,7 @@ fun NavGraphBuilder.menuGraph(
     onNavigateToCreateSchedule: () -> Unit,
     onNavigateToListSchedulesScreen: () -> Unit,
     onNavigateToProfessionalAgendaScreen: () -> Unit,
+    onNavigateChangePasswordScreen: () -> Unit,
     onNavigateToLogin: () -> Unit
 ){
     navigation<Graphs.MenuGraphs>(startDestination = MenuScreens.MenuScreen) {
@@ -35,7 +37,8 @@ fun NavGraphBuilder.menuGraph(
             onNavigateToHomeGraph = onNavigateUp,
             onNavigateToEditProfile = onNavigateToEditProfile,
             onNavigateToListSchedulesScreen = onNavigateToListSchedulesScreen,
-            onNavigateToProfessionalAgendaScreen = onNavigateToProfessionalAgendaScreen
+            onNavigateToProfessionalAgendaScreen = onNavigateToProfessionalAgendaScreen,
+            onNavigateChangePasswordScreen = onNavigateChangePasswordScreen
         )
         
         // Schedule Screens
@@ -44,12 +47,15 @@ fun NavGraphBuilder.menuGraph(
             onNavigateToListSchedulesScreen = onNavigateToListSchedulesScreen
         )
 
-        viewSchedulesScreen(
+        listSchedulesScreen(
             onNavigateUp = onNavigateUp,
             onNavigateToCreateSchedule = onNavigateToCreateSchedule,
             onNavigateToLogin = onNavigateToLogin
         )
-        
+        changePasswordScreen(
+            onNavigateBack = onNavigateUp
+        )
+
         professionalAgendaScreen(onNavigateUp = onNavigateUp)
     }
 }

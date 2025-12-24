@@ -47,8 +47,8 @@ class EditProfileViewModel @Inject constructor(
     )
 
     // ============= SIDE EFFECTS =============
-    private val _App_sideEffectChannel = Channel<AppSideEffect>(capacity = Channel.Factory.BUFFERED)
-    val sideEffectChannel = _App_sideEffectChannel.receiveAsFlow()
+    private val _appSideEffectChannel = Channel<AppSideEffect>(capacity = Channel.Factory.BUFFERED)
+    val sideEffectChannel = _appSideEffectChannel.receiveAsFlow()
 
     // ============= INIT =============
     init {
@@ -204,7 +204,7 @@ class EditProfileViewModel @Inject constructor(
                             logInfo("LOAD_PROFILE", "🔐 Token expirado! Navegando ao login...")
 
                             viewModelScope.launch {
-                                _App_sideEffectChannel.send(AppSideEffect.NavigateToLogin)
+                                _appSideEffectChannel.send(AppSideEffect.NavigateToLogin)
                             }
 
                             _uiState.update {
@@ -333,11 +333,11 @@ class EditProfileViewModel @Inject constructor(
                             hasChanges = false
                         )
                     }
-                    _App_sideEffectChannel.send(AppSideEffect.ShowToast(response.message))
+                    _appSideEffectChannel.send(AppSideEffect.ShowToast(response.message))
                     logInfo("UPDATE_PROFILE", "Success: ${response.message}")
 
                     // ✅ NAVEGA DE VOLTA AUTOMATICAMENTE APÓS SUCESSO!
-                    _App_sideEffectChannel.send(AppSideEffect.NavigateBack)
+                    _appSideEffectChannel.send(AppSideEffect.NavigateBack)
                 },
                 onFailure = { error ->
                     _uiState.update {
@@ -346,7 +346,7 @@ class EditProfileViewModel @Inject constructor(
                             errorMessage = error.message ?: "Erro ao atualizar perfil"
                         )
                     }
-                    _App_sideEffectChannel.send(
+                    _appSideEffectChannel.send(
                         AppSideEffect.ShowToast(error.message ?: "Erro ao atualizar perfil")
                     )
                     logInfo("UPDATE_PROFILE", "Error: ${error.message}")
@@ -386,11 +386,11 @@ class EditProfileViewModel @Inject constructor(
                             hasChanges = true
                         )
                     }
-                    _App_sideEffectChannel.send(AppSideEffect.ShowToast("Endereço encontrado!"))
+                    _appSideEffectChannel.send(AppSideEffect.ShowToast("Endereço encontrado!"))
                     logInfo("SEARCH_CEP", "CEP encontrado: ${cepModel.logradouro}, ${cepModel.bairro}")
                 },
                 onFailure = { error ->
-                    _App_sideEffectChannel.send(
+                    _appSideEffectChannel.send(
                         AppSideEffect.ShowToast(error.message ?: "CEP não encontrado")
                     )
                     logInfo("SEARCH_CEP", "Erro: ${error.message}")
@@ -405,7 +405,7 @@ class EditProfileViewModel @Inject constructor(
      */
     private fun handleCancel() {
         viewModelScope.launch {
-            _App_sideEffectChannel.send(AppSideEffect.NavigateBack)
+            _appSideEffectChannel.send(AppSideEffect.NavigateBack)
         }
     }
 }

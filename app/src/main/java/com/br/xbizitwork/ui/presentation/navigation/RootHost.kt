@@ -46,7 +46,7 @@ fun RootHost(
             onNavigateToMenuGraph = {
                 navController.navigateToMenuGraph()
             },
-            onNavigateProfileClick = {},
+            onNavigateProfileScreen = {},
             onNavigateToSignInScreen = {
                 navController.navigateToSignInScreen(clearBackStack = true)
             },

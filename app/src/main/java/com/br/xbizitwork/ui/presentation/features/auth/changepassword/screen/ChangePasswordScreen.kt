@@ -1,6 +1,9 @@
 package com.br.xbizitwork.ui.presentation.features.auth.changepassword.screen
 
 import android.app.Activity
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.ArrowBack
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
@@ -11,6 +14,7 @@ import androidx.core.view.WindowCompat
 import com.br.xbizitwork.core.sideeffects.AppSideEffect
 import com.br.xbizitwork.core.state.LifecycleEventEffect
 import com.br.xbizitwork.core.util.extensions.toast
+import com.br.xbizitwork.ui.presentation.components.topbar.AppTopBar
 import com.br.xbizitwork.ui.presentation.features.auth.changepassword.components.ChangePasswordContent
 import com.br.xbizitwork.ui.presentation.features.auth.changepassword.events.ChangePasswordEvent
 import com.br.xbizitwork.ui.presentation.features.auth.changepassword.state.ChangePasswordState
@@ -34,16 +38,6 @@ fun ChangePasswordScreen(
     onConfirmPasswordChanged: (String) -> Unit
 ) {
     val context = LocalContext.current
-    val view = LocalView.current
-
-    // Configura a status bar com fundo bege e ícones escuros
-    if (!view.isInEditMode) {
-        SideEffect {
-            val window = (context as Activity).window
-            window.statusBarColor = BeigeBackground.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = true
-        }
-    }
 
     LifecycleEventEffect(sideEffectFlow) { sideEffect ->
         when (sideEffect) {
@@ -63,6 +57,16 @@ fun ChangePasswordScreen(
     )
 
     Scaffold(
+        containerColor = MaterialTheme.colorScheme.background,
+        topBar = {
+            AppTopBar(
+                isHomeMode = false,
+                title = "Alteração de Senha",
+                navigationImageVector = Icons.AutoMirrored.Outlined.ArrowBack,
+                enableNavigationUp = true,
+                onNavigationIconButton = { onNavigateBack() }
+            )
+        },
         content = { paddingValues ->
             ChangePasswordContent(
                 paddingValues = paddingValues,
