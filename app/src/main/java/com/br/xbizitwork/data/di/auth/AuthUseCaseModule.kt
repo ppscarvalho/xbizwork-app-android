@@ -1,5 +1,7 @@
 package com.br.xbizitwork.data.di.auth
 
+import com.br.xbizitwork.domain.usecase.auth.changepassword.ChangePasswordUseCase
+import com.br.xbizitwork.domain.usecase.auth.changepassword.ChangePasswordUseCaseImpl
 import com.br.xbizitwork.domain.usecase.auth.signin.SignInUseCase
 import com.br.xbizitwork.domain.usecase.auth.signin.SignInUseCaseImpl
 import com.br.xbizitwork.domain.usecase.auth.signup.SignUpUseCase
@@ -60,5 +62,15 @@ object AuthUseCaseModule {
         authRepository: UserAuthRepository
     ): RemoveAuthSessionUseCase {
         return RemoveAuthSessionUseCaseImpl(authRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideChangePasswordUseCase(
+        authRepository: UserAuthRepository
+    ): ChangePasswordUseCase {
+        return ChangePasswordUseCaseImpl(
+            authRepository = authRepository
+        )
     }
 }
