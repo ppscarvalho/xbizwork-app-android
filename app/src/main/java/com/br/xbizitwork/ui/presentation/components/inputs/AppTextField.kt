@@ -29,7 +29,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
-import com.br.xbizitwork.ui.theme.poppinsFOntFamily
+import com.br.xbizitwork.ui.theme.poppinsFontFamily
 
 @Composable
 fun AppTextField(
@@ -70,7 +70,7 @@ fun AppTextField(
             onValueChange = onValueChange,
 
             textStyle = TextStyle(
-                fontFamily = poppinsFOntFamily,
+                fontFamily = poppinsFontFamily,
                 textAlign = TextAlign.Start,
                 color = textColor
             ),
@@ -79,14 +79,14 @@ fun AppTextField(
                 Text(
                     text = label,
                     color = textColor,
-                    fontFamily = poppinsFOntFamily
+                    fontFamily = poppinsFontFamily
                 )
             },
 
             placeholder = {
                 Text(
                     text = placeholder,
-                    fontFamily = poppinsFOntFamily,
+                    fontFamily = poppinsFontFamily,
                     color = colorScheme.onSurfaceVariant,
                 )
             },

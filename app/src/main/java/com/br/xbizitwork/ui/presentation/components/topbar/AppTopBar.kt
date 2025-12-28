@@ -35,7 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.br.xbizitwork.ui.presentation.common.StringAssets
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
-import com.br.xbizitwork.ui.theme.poppinsFOntFamily
+import com.br.xbizitwork.ui.theme.poppinsFontFamily
 
 /**
  * AppTopBar flexível com suporte a dois modos:
@@ -130,7 +130,7 @@ private fun HomeTopBar(
                     Text(
                         text = stringResource(id = StringAssets.WELCOME_TEXT),
                         fontSize = 12.sp,
-                        fontFamily = poppinsFOntFamily,
+                        fontFamily = poppinsFontFamily,
                         fontWeight = FontWeight.Normal,
                         color = MaterialTheme.colorScheme.onPrimary,
                         textAlign = TextAlign.Center
@@ -138,7 +138,7 @@ private fun HomeTopBar(
                     Text(
                         text = if (username.isNullOrEmpty()) "Usuário" else username,  // ✅ CORRIGIDO: Trata null E string vazia
                         fontSize = 14.sp,
-                        fontFamily = poppinsFOntFamily,
+                        fontFamily = poppinsFontFamily,
                         color = MaterialTheme.colorScheme.onPrimary,
                         textAlign = TextAlign.Center
                     )
@@ -192,7 +192,7 @@ private fun NavigationTopBar(
             Text(
                 text = title,
                 maxLines = 1,
-                fontFamily = poppinsFOntFamily,
+                fontFamily = poppinsFontFamily,
                 overflow = TextOverflow.Ellipsis,
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onPrimary
@@ -247,7 +247,7 @@ private fun CompanyLogo(modifier: Modifier = Modifier) {
         Text(
             text = stringResource(id = StringAssets.APP_NAME_XBIZ),
             fontSize = 12.sp,
-            fontFamily = poppinsFOntFamily,
+            fontFamily = poppinsFontFamily,
             fontWeight = FontWeight.SemiBold,
             color = Color(0xFFFF6E10),
             textAlign = TextAlign.Center,
@@ -256,7 +256,7 @@ private fun CompanyLogo(modifier: Modifier = Modifier) {
         Text(
             text = stringResource(id = StringAssets.APP_NAME_WORK),
             fontSize = 10.sp,
-            fontFamily = poppinsFOntFamily,
+            fontFamily = poppinsFontFamily,
             fontWeight = FontWeight.SemiBold,
             style = MaterialTheme.typography.titleSmall,
             color = Color.Black,

@@ -1,7 +1,6 @@
 package com.br.xbizitwork.ui.presentation.components.buttons
 
 import android.content.res.Configuration
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -28,7 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
-import com.br.xbizitwork.ui.theme.poppinsFOntFamily
+import com.br.xbizitwork.ui.theme.poppinsFontFamily
 
 /**
  * Componente de botão para menu com layout:
@@ -76,7 +75,7 @@ fun MenuButton(
                 text = text,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Medium,
-                fontFamily = poppinsFOntFamily,
+                fontFamily = poppinsFontFamily,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.weight(1f)
             )

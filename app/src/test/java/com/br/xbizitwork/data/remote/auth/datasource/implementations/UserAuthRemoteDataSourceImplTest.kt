@@ -41,13 +41,13 @@ class UserAuthRemoteDataSourceImplTest {
 //    fun signIn_withValidRequest_returnsSuccess() = runTest {
 //        // Arrange
 //        val signInRequest = SignInRequestModel(
-//            email = "test@example.com",
+//            email = "test@br.com",
 //            password = "Password123!"
 //        )
 //
 //        val mockResponse = SignInResponse(
 //            name = "John Doe",
-//            email = "test@example.com",
+//            email = "test@br.com",
 //            token = "fake_jwt_token",
 //            isSuccessful = true,
 //            message = "Login successful"
@@ -63,7 +63,7 @@ class UserAuthRemoteDataSourceImplTest {
 //
 //        if (result is DefaultResult.Success) {
 //            assertThat(result.data.name).isEqualTo("John Doe")
-//            assertThat(result.data.email).isEqualTo("test@example.com")
+//            assertThat(result.data.email).isEqualTo("test@br.com")
 //            assertThat(result.data.token).isEqualTo("fake_jwt_token")
 //        }
 //    }
@@ -72,7 +72,7 @@ class UserAuthRemoteDataSourceImplTest {
 //    fun signIn_withFailedResponse_returnsError() = runTest {
 //        // Arrange
 //        val signInRequest = SignInRequestModel(
-//            email = "test@example.com",
+//            email = "test@br.com",
 //            password = "wrongpassword"
 //        )
 //
@@ -101,7 +101,7 @@ class UserAuthRemoteDataSourceImplTest {
     fun signIn_withNetworkTimeout_retriesAndEventuallyFails() = runTest {
         // Arrange
         val signInRequest = SignInRequestModel(
-            email = "test@example.com",
+            email = "test@br.com",
             password = "Password123!"
         )
 

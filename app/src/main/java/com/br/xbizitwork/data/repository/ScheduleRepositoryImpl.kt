@@ -176,4 +176,17 @@ class ScheduleRepositoryImpl @Inject constructor(
                     DefaultResult.Error(message = response.message)
             }
         }
+
+    override suspend fun getCategoryByDescription(description: String): DefaultResult<List<Schedule>> =
+        withContext(coroutineDispatcherProvider.io()) {
+            val response = remoteDataSource.getCategoryByDescription(description)
+            when {
+                response.isSuccessful && response.data != null -> {
+                    DefaultResult.Success(response.data.map { it.toDomain() })
+                }
+                else -> {
+                    DefaultResult.Error(null, response.message)
+                }
+            }
+        }
 }

@@ -1,4 +1,4 @@
-package com.br.xbizitwork.ui.presentation.components.schedule
+package com.br.xbizitwork.ui.presentation.features.schedule.create.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -24,10 +24,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.br.xbizitwork.ui.theme.XBizWorkTheme
 
 @Composable
-fun TimeDropdown(
+private fun TimeDropdown(
     label: String,
     selectedTime: String,
     onTimeSelected: (String) -> Unit,
@@ -90,4 +92,28 @@ fun TimeDropdown(
         }
     }
 }
-
+//
+//@Preview(showBackground = true)
+//@Composable
+//private fun TimeDropdown() {
+//    XBizWorkTheme() {
+//        Row(
+//            modifier = Modifier.fillMaxWidth(),
+//            horizontalArrangement = Arrangement.spacedBy(16.dp)
+//        ) {
+//            TimeDropdown(
+//                modifier = Modifier.weight(1f),
+//                label = "Hora Início",
+//                selectedTime = "08:00",
+//                onTimeSelected = {}
+//            )
+//
+//            TimeDropdown(
+//                modifier = Modifier.weight(1f),
+//                label = "Hora Fim",
+//                selectedTime = "10:00",
+//                onTimeSelected = {}
+//            )
+//        }
+//    }
+//}

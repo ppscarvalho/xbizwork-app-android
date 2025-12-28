@@ -2,9 +2,6 @@ package com.br.xbizitwork.data.di.user
 
 import com.br.xbizitwork.data.remote.user.api.UserApiService
 import com.br.xbizitwork.data.remote.user.api.UserApiServiceImpl
-import com.br.xbizitwork.domain.usecase.user.GetUserByIdUseCase
-import com.br.xbizitwork.domain.usecase.user.GetUserByIdUseCaseImpl
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,7 +14,7 @@ import javax.inject.Singleton
  */
 @Module
 @InstallIn(SingletonComponent::class)
-object UserModule {
+object UserNetworkModule {
 
     @Provides
     @Singleton
@@ -27,15 +24,3 @@ object UserModule {
         return UserApiServiceImpl(httpClient)
     }
 }
-
-@Module
-@InstallIn(SingletonComponent::class)
-interface UserBindsModule {
-
-    @Binds
-    @Singleton
-    fun bindGetUserByIdUseCase(
-        impl: GetUserByIdUseCaseImpl
-    ): GetUserByIdUseCase
-}
-

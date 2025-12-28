@@ -1,4 +1,4 @@
-package com.br.xbizitwork.ui.presentation.components.schedule
+package com.br.xbizitwork.ui.presentation.components.schedule.state
 
 /**
  * Representa um slot de horário na agenda do profissional

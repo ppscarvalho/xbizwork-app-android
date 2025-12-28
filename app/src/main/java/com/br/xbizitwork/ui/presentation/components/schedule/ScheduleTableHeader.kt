@@ -6,12 +6,14 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,21 +31,23 @@ fun ScheduleTableHeader(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f))
-            .padding(horizontal = 12.dp, vertical = 12.dp),
+            .background(
+                MaterialTheme.colorScheme
+                    .primaryContainer.copy(alpha = 0.5f)
+            ).padding(vertical = 8.dp, horizontal = 8.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         // Dia da Semana (40%)
         Text(
-            text = "Dia da Semana",
+            text = "Dia",
             style = MaterialTheme.typography.bodyMedium,
             fontWeight = FontWeight.Normal,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.weight(0.4f),
             textAlign = TextAlign.Start
         )
-        
+
         // Hora Início (20%)
         Text(
             text = "Início",
@@ -53,7 +57,7 @@ fun ScheduleTableHeader(
             modifier = Modifier.weight(0.2f),
             textAlign = TextAlign.Center
         )
-        
+
         // Hora Fim (20%)
         Text(
             text = "Fim",
@@ -63,7 +67,7 @@ fun ScheduleTableHeader(
             modifier = Modifier.weight(0.2f),
             textAlign = TextAlign.Center
         )
-        
+
         // Ação (20%)
         Text(
             text = "Ação",
@@ -84,7 +88,8 @@ private fun ScheduleTableHeaderLightPreview() {
     }
 }
 
-@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun ScheduleTableHeaderDarkPreview() {
     XBizWorkTheme {

@@ -29,9 +29,6 @@ sealed interface HomeScreens{
     data object HomeScreen: HomeScreens
 
     @Serializable
-    data class SignUpScreen(val userId: String? = ""): HomeScreens
-
-    @Serializable
     data object ProfileScreen: HomeScreens
 
     @Serializable

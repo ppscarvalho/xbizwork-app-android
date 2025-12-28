@@ -18,7 +18,7 @@ import com.br.xbizitwork.core.state.LifecycleEventEffect
 import com.br.xbizitwork.core.util.extensions.toast
 import com.br.xbizitwork.ui.presentation.components.topbar.AppTopBar
 import com.br.xbizitwork.ui.presentation.features.menu.components.MenuContent
-import com.example.xbizitwork.R
+import com.br.xbizitwork.R
 import kotlinx.coroutines.flow.Flow
 
 @Composable

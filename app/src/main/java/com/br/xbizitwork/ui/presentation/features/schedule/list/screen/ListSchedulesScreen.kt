@@ -14,17 +14,17 @@ import com.br.xbizitwork.core.state.LifecycleEventEffect
 import com.br.xbizitwork.core.util.extensions.toast
 import com.br.xbizitwork.ui.presentation.components.topbar.AppTopBar
 import com.br.xbizitwork.ui.presentation.features.schedule.list.components.ListSchedulesContent
-import com.br.xbizitwork.ui.presentation.features.schedule.list.events.ViewSchedulesEvent
-import com.br.xbizitwork.ui.presentation.features.schedule.list.state.ViewSchedulesUIState
+import com.br.xbizitwork.ui.presentation.features.schedule.list.events.ListSchedulesEvent
+import com.br.xbizitwork.ui.presentation.features.schedule.list.state.ListSchedulesUIState
 import kotlinx.coroutines.flow.Flow
 
 
 @SuppressLint("NewApi")
 @Composable
 fun ListSchedulesScreen(
-    uiState: ViewSchedulesUIState,
+    uiState: ListSchedulesUIState,
     appSideEffectFlow: Flow<AppSideEffect>,
-    onEvent: (ViewSchedulesEvent) -> Unit,
+    onEvent: (ListSchedulesEvent) -> Unit,
     onNavigateBack: () -> Unit,
     onNavigateToCreateSchedule: () -> Unit,
     onNavigateToLogin: () -> Unit = {}

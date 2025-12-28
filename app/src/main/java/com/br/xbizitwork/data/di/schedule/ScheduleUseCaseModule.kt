@@ -9,6 +9,8 @@ import com.br.xbizitwork.domain.usecase.schedule.DeleteScheduleUseCase
 import com.br.xbizitwork.domain.usecase.schedule.DeleteScheduleUseCaseImpl
 import com.br.xbizitwork.domain.usecase.schedule.GetAvailableTimeSlotsUseCase
 import com.br.xbizitwork.domain.usecase.schedule.GetAvailableTimeSlotsUseCaseImpl
+import com.br.xbizitwork.domain.usecase.schedule.GetCategoryByDescriptionUseCase
+import com.br.xbizitwork.domain.usecase.schedule.GetCategoryByDescriptionUseCaseImpl
 import com.br.xbizitwork.domain.usecase.schedule.GetProfessionalSchedulesUseCase
 import com.br.xbizitwork.domain.usecase.schedule.GetProfessionalSchedulesUseCaseImpl
 import com.br.xbizitwork.domain.usecase.schedule.UpdateAvailabilityUseCase
@@ -17,6 +19,8 @@ import com.br.xbizitwork.domain.usecase.schedule.ValidateScheduleOnBackendUseCas
 import com.br.xbizitwork.domain.usecase.schedule.ValidateScheduleOnBackendUseCaseImpl
 import com.br.xbizitwork.domain.usecase.schedule.ValidateScheduleTimeSlotUseCase
 import com.br.xbizitwork.domain.usecase.schedule.ValidateScheduleTimeSlotUseCaseImpl
+import com.br.xbizitwork.domain.usecase.schedule.ValidateScheduleUseCase
+import com.br.xbizitwork.domain.usecase.schedule.ValidateScheduleUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -87,5 +91,19 @@ object ScheduleUseCaseModule {
     @Singleton
     fun provideValidateScheduleTimeSlotUseCase(): ValidateScheduleTimeSlotUseCase {
         return ValidateScheduleTimeSlotUseCaseImpl()
+    }
+
+    @Provides
+    @Singleton
+    fun provideValidateScheduleUseCase(): ValidateScheduleUseCase {
+        return ValidateScheduleUseCaseImpl()
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetCategoryByDescriptionUseCase(
+        repository: ScheduleRepository
+    ): GetCategoryByDescriptionUseCase {
+        return GetCategoryByDescriptionUseCaseImpl(repository)
     }
 }

@@ -5,7 +5,7 @@ import com.br.xbizitwork.domain.model.schedule.Schedule
 /**
  * Estado da tela de listar agendas
  */
-data class ViewSchedulesUIState(
+data class ListSchedulesUIState(
     val schedules: List<Schedule> = emptyList(),
     val isLoading: Boolean = false,
     val errorMessage: String? = null,

@@ -31,16 +31,14 @@ import com.br.xbizitwork.ui.theme.XBizWorkTheme
  */
 @Composable
 fun CategoryInfoRow(
+    modifier: Modifier = Modifier,
     categoryLabel: String = "Categoria:",
     categoryValue: String,
-    modifier: Modifier = Modifier
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp).
-                background(BeigeBackground)
-        ,
+            .padding(vertical = 8.dp, horizontal = 8.dp),
         horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.CenterVertically
     ) {

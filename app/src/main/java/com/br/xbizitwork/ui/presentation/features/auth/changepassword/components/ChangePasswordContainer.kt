@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.br.xbizitwork.ui.presentation.components.buttons.AppButton
 import com.br.xbizitwork.ui.presentation.components.inputs.AppPasswordField
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
-import com.example.xbizitwork.R
+import com.br.xbizitwork.R
 
 /**
  * Container com os campos de alteração de senha

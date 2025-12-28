@@ -7,8 +7,8 @@ import com.br.xbizitwork.core.util.extensions.collectUiState
 import com.br.xbizitwork.domain.usecase.schedule.DeleteScheduleUseCase
 import com.br.xbizitwork.domain.usecase.schedule.GetProfessionalSchedulesUseCase
 import com.br.xbizitwork.domain.usecase.session.GetAuthSessionUseCase
-import com.br.xbizitwork.ui.presentation.features.schedule.list.events.ViewSchedulesEvent
-import com.br.xbizitwork.ui.presentation.features.schedule.list.state.ViewSchedulesUIState
+import com.br.xbizitwork.ui.presentation.features.schedule.list.events.ListSchedulesEvent
+import com.br.xbizitwork.ui.presentation.features.schedule.list.state.ListSchedulesUIState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -27,8 +27,8 @@ class ListSchedulesViewModel @Inject constructor(
     private val getAuthSessionUseCase: GetAuthSessionUseCase
 ) : ViewModel() {
     
-    private val _uiState = MutableStateFlow(ViewSchedulesUIState())
-    val uiState: StateFlow<ViewSchedulesUIState> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow(ListSchedulesUIState())
+    val uiState: StateFlow<ListSchedulesUIState> = _uiState.asStateFlow()
     
     private val _appSideEffectChannel = Channel<AppSideEffect>()
     val sideEffectChannel = _appSideEffectChannel.receiveAsFlow()
@@ -37,12 +37,12 @@ class ListSchedulesViewModel @Inject constructor(
         loadSchedules()
     }
     
-    fun onEvent(event: ViewSchedulesEvent) {
+    fun onEvent(event: ListSchedulesEvent) {
         when (event) {
-            ViewSchedulesEvent.OnRefresh -> loadSchedules()
-            is ViewSchedulesEvent.OnScheduleClick -> navigateToScheduleDetails(event.scheduleId)
-            is ViewSchedulesEvent.OnDeleteSchedule -> deleteSchedule(event.scheduleId)
-            ViewSchedulesEvent.OnCreateScheduleClick -> navigateToCreateSchedule()
+            ListSchedulesEvent.OnRefresh -> loadSchedules()
+            is ListSchedulesEvent.OnScheduleClick -> navigateToScheduleDetails(event.scheduleId)
+            is ListSchedulesEvent.OnDeleteSchedule -> deleteSchedule(event.scheduleId)
+            ListSchedulesEvent.OnCreateScheduleClick -> navigateToCreateSchedule()
         }
     }
     

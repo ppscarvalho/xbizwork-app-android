@@ -3,8 +3,6 @@ package com.br.xbizitwork.domain.repository
 import com.br.xbizitwork.core.model.api.ApiResultModel
 import com.br.xbizitwork.core.result.DefaultResult
 import com.br.xbizitwork.data.remote.schedule.dtos.requests.CreateScheduleRequest
-import com.br.xbizitwork.data.remote.schedule.dtos.responses.ScheduleResponse
-import com.br.xbizitwork.data.remote.schedule.dtos.responses.ScheduleValidationResult
 import com.br.xbizitwork.domain.model.schedule.Availability
 import com.br.xbizitwork.domain.model.schedule.DayOfWeek
 import com.br.xbizitwork.domain.model.schedule.Schedule
@@ -99,4 +97,9 @@ interface ScheduleRepository {
      * Retorna ApiResultModel com isSuccessful e message
      */
     suspend fun validateSchedule(request: CreateScheduleRequest): DefaultResult<ApiResultModel>
+
+    /**
+     * Obtém agendas com base em uma descrição de categoria
+     */
+    suspend fun getCategoryByDescription(description: String): DefaultResult<List<Schedule>>
 }

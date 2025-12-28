@@ -1,4 +1,4 @@
-package com.br.xbizitwork.ui.presentation.components.schedule
+package com.br.xbizitwork.ui.presentation.features.schedule.list.components
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
@@ -10,9 +10,13 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.br.xbizitwork.ui.presentation.components.schedule.CategoryInfoRow
+import com.br.xbizitwork.ui.presentation.components.schedule.SpecialtyInfoRow
+import com.br.xbizitwork.ui.presentation.components.schedule.state.TimeSlotItem
+import com.br.xbizitwork.ui.presentation.components.schedule.ScheduleTableHeader
+import com.br.xbizitwork.ui.presentation.components.schedule.ScheduleTimeSlotList
 import com.br.xbizitwork.ui.theme.BeigeBackground
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
 
@@ -89,7 +93,9 @@ fun ProfessionalScheduleCard(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_NO
+)
 @Composable
 private fun ProfessionalScheduleCardLightPreview() {
     XBizWorkTheme {

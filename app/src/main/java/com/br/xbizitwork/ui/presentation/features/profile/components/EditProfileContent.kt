@@ -37,7 +37,7 @@ import com.br.xbizitwork.ui.theme.BeigeBackground
 import com.br.xbizitwork.ui.theme.GrayText
 import com.br.xbizitwork.ui.theme.TealPrimary
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
-import com.br.xbizitwork.ui.theme.poppinsFOntFamily
+import com.br.xbizitwork.ui.theme.poppinsFontFamily
 
 @Composable
 fun EditProfileContent(
@@ -114,7 +114,7 @@ fun EditProfileContent(
                 if (!uiState.errorMessage.isNullOrEmpty()) {
                     Text(
                         text = uiState.errorMessage,
-                        fontFamily = poppinsFOntFamily,
+                        fontFamily = poppinsFontFamily,
                         fontSize = 14.sp,
                         textAlign = TextAlign.Center,
                         color = MaterialTheme.colorScheme.onPrimaryContainer,
@@ -167,14 +167,14 @@ fun EditProfileContent(
                     Text(
                         text = "Deseja ",
                         fontSize = 14.sp,
-                        fontFamily = poppinsFOntFamily,
+                        fontFamily = poppinsFontFamily,
                         color = GrayText
                     )
 
                     Text(
                         text = "cancelar?",
                         fontSize = 14.sp,
-                        fontFamily = poppinsFOntFamily,
+                        fontFamily = poppinsFontFamily,
                         fontWeight = FontWeight.Bold,
                         color = TealPrimary,
                         modifier = Modifier

@@ -26,8 +26,8 @@ import androidx.compose.ui.unit.sp
 import com.br.xbizitwork.ui.presentation.components.icons.AppIcon
 import com.br.xbizitwork.ui.presentation.features.auth.signin.state.SignInState
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
-import com.br.xbizitwork.ui.theme.poppinsFOntFamily
-import com.example.xbizitwork.R
+import com.br.xbizitwork.ui.theme.poppinsFontFamily
+import com.br.xbizitwork.R
 
 @Composable
 fun SignInContent(
@@ -66,7 +66,7 @@ fun SignInContent(
            ) {
                Text(
                    text = stringResource(R.string.signIn_text),
-                   fontFamily = poppinsFOntFamily,
+                   fontFamily = poppinsFontFamily,
                    fontWeight = FontWeight.SemiBold,
                    fontSize = 20.sp,
                    textAlign = TextAlign.Center,
@@ -76,7 +76,7 @@ fun SignInContent(
 
                Text(
                    text =uiState.signUpErrorMessage ?: uiState.fieldErrorMessage.orEmpty(),
-                   fontFamily = poppinsFOntFamily,
+                   fontFamily = poppinsFontFamily,
                    fontSize = 14.sp,
                    textAlign = TextAlign.Center,
                    color = MaterialTheme.colorScheme.error,
@@ -105,14 +105,14 @@ fun SignInContent(
                Text(
                    text = stringResource(R.string.no_have_account_text),
                    fontSize = 16.sp,
-                   fontFamily = poppinsFOntFamily,
+                   fontFamily = poppinsFontFamily,
                    color = MaterialTheme.colorScheme.onSurfaceVariant
                )
 
                Text(
                    text = stringResource(R.string.signUp_text),
                    fontSize = 16.sp,
-                   fontFamily = poppinsFOntFamily,
+                   fontFamily = poppinsFontFamily,
                    fontWeight = FontWeight.Bold,
                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                    modifier = Modifier

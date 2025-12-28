@@ -26,7 +26,7 @@ import com.br.xbizitwork.ui.presentation.components.inputs.AppTextField
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import com.example.xbizitwork.R
+import com.br.xbizitwork.R
 
 
 @Composable

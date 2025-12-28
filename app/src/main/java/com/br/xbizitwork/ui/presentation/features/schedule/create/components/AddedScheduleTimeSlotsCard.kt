@@ -1,32 +1,24 @@
-package com.br.xbizitwork.ui.presentation.components.schedule
+package com.br.xbizitwork.ui.presentation.features.schedule.create.components
 
 import android.content.res.Configuration
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.br.xbizitwork.ui.presentation.components.schedule.ScheduleTableHeader
 import com.br.xbizitwork.ui.presentation.features.schedule.create.state.ScheduleTimeSlot
 import com.br.xbizitwork.ui.theme.BeigeBackground
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
-import com.br.xbizitwork.ui.theme.poppinsFOntFamily
+import com.br.xbizitwork.ui.theme.poppinsFontFamily
 
 /**
  * Card que exibe os horários adicionados antes de salvar
@@ -65,7 +57,7 @@ fun AddedScheduleTimeSlotsCard(
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
-                fontFamily = poppinsFOntFamily
+                fontFamily = poppinsFontFamily
             )
 
             HorizontalDivider(
@@ -86,9 +78,9 @@ fun AddedScheduleTimeSlotsCard(
                 groupedBySpecialty.forEach { (specialtyName, slotsInSpecialty) ->
                     // 📌 Especialidade (Modalidade)
                     SpecialtyHeader(specialtyName = specialtyName)
-
                     // 📌 Cabeçalho da Tabela
-                    TableHeader()
+                    //TableHeader()
+                    ScheduleTableHeader()
 
                     // 📌 Linhas da Tabela
                     slotsInSpecialty.forEachIndexed { index, slot ->
@@ -105,177 +97,6 @@ fun AddedScheduleTimeSlotsCard(
                     }
                 }
             }
-        }
-    }
-}
-
-/**
- * Cabeçalho de Categoria
- */
-@Composable
-private fun CategoryHeader(categoryName: String) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.background)
-            .padding(vertical = 12.dp, horizontal = 16.dp),
-        horizontalArrangement = Arrangement.Start,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(
-            text = "Categoria:",
-            style = MaterialTheme.typography.bodyLarge,
-            fontWeight = FontWeight.SemiBold,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            fontFamily = poppinsFOntFamily
-        )
-
-        Text(
-            text = " $categoryName",
-            style = MaterialTheme.typography.bodyLarge,
-            fontWeight = FontWeight.SemiBold,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            fontFamily = poppinsFOntFamily
-        )
-    }
-}
-
-/**
- * Cabeçalho de Especialidade (Modalidade)
- */
-@Composable
-private fun SpecialtyHeader(specialtyName: String) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.background)
-            .padding(vertical = 10.dp, horizontal = 16.dp),
-        horizontalArrangement = Arrangement.Start,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(
-            text = "Modalidade:",
-            style = MaterialTheme.typography.bodyMedium,
-            fontWeight = FontWeight.SemiBold,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            fontFamily = poppinsFOntFamily
-        )
-
-        Text(
-            text = " $specialtyName",
-            style = MaterialTheme.typography.bodyMedium,
-            fontWeight = FontWeight.SemiBold,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            fontFamily = poppinsFOntFamily
-        )
-    }
-}
-
-/**
- * Cabeçalho da tabela de horários
- */
-@Composable
-private fun TableHeader() {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.primaryContainer)
-            .padding(vertical = 8.dp, horizontal = 8.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(
-            text = "Dia da Semana",
-            style = MaterialTheme.typography.labelMedium,
-            fontWeight = FontWeight.Normal,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            fontFamily = poppinsFOntFamily,
-            modifier = Modifier.weight(2f)
-        )
-
-        Text(
-            text = "Início",
-            style = MaterialTheme.typography.labelMedium,
-            fontWeight = FontWeight.Normal  ,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            fontFamily = poppinsFOntFamily,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.weight(1f)
-        )
-
-        Text(
-            text = "Fim",
-            style = MaterialTheme.typography.labelMedium,
-            fontWeight = FontWeight.Normal,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            fontFamily = poppinsFOntFamily,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.weight(1f)
-        )
-
-        Text(
-            text = "Ação",
-            style = MaterialTheme.typography.labelMedium,
-            fontWeight = FontWeight.Normal,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            fontFamily = poppinsFOntFamily,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.weight(0.8f)
-        )
-    }
-}
-
-/**
- * Linha da tabela com os dados do horário
- */
-@Composable
-private fun TableRow(
-    slot: ScheduleTimeSlot,
-    onRemove: () -> Unit
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.background)
-            .padding(vertical = 8.dp, horizontal = 8.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(
-            text = slot.weekDayName,
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.primary,
-            fontFamily = poppinsFOntFamily,
-            modifier = Modifier.weight(2f)
-        )
-
-        Text(
-            text = slot.startTime,
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.primary,
-            fontFamily = poppinsFOntFamily,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.weight(1f)
-        )
-
-        Text(
-            text = slot.endTime,
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.primary,
-            fontFamily = poppinsFOntFamily,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.weight(1f)
-        )
-
-        IconButton(
-            onClick = onRemove,
-            modifier = Modifier.weight(0.8f)
-        ) {
-            Icon(
-                imageVector = Icons.Default.Delete,
-                contentDescription = "Remover",
-                tint = MaterialTheme.colorScheme.error
-            )
         }
     }
 }

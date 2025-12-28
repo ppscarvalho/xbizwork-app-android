@@ -16,11 +16,11 @@ val apiKeyProperties = Properties()
 apiKeyProperties.load(FileInputStream(apiKeyPropertiesFile))
 
 android {
-    namespace = "com.example.xbizitwork"
+    namespace = "com.br.xbizitwork"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.xbizitwork"
+        applicationId = "com.br.xbizitwork"
         minSdk = 24
         targetSdk = 36
         versionCode = 1

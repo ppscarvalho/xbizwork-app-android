@@ -6,7 +6,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.example.xbizitwork.R
+import com.br.xbizitwork.R
 
 // Set of Material typography styles to start with
 // Set of Material typography styles to start with
@@ -37,7 +37,7 @@ val Typography = Typography(
 )
 
 //Poppins
-val poppinsFOntFamily = FontFamily(
+val poppinsFontFamily = FontFamily(
     Font(R.font.poppins_black, FontWeight.Black),
     Font(R.font.poppins_bold, FontWeight.Bold),
     Font(R.font.poppins_extra_bold, FontWeight.ExtraBold),

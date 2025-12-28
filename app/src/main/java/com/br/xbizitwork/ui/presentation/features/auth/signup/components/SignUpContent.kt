@@ -34,8 +34,8 @@ import com.br.xbizitwork.ui.theme.BeigeBackground
 import com.br.xbizitwork.ui.theme.GrayText
 import com.br.xbizitwork.ui.theme.TealPrimary
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
-import com.br.xbizitwork.ui.theme.poppinsFOntFamily
-import com.example.xbizitwork.R
+import com.br.xbizitwork.ui.theme.poppinsFontFamily
+import com.br.xbizitwork.R
 
 
 @Composable
@@ -85,7 +85,7 @@ fun SignUpContent(
             // Título
             Text(
                 text = stringResource(R.string.signUp_text),
-                fontFamily = poppinsFOntFamily,
+                fontFamily = poppinsFontFamily,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 22.sp,
                 textAlign = TextAlign.Center,
@@ -97,7 +97,7 @@ fun SignUpContent(
             if (!uiState.signUpErrorMessage.isNullOrEmpty() || !uiState.fieldErrorMessage.isNullOrEmpty()) {
                 Text(
                     text = uiState.signUpErrorMessage ?: uiState.fieldErrorMessage.orEmpty(),
-                    fontFamily = poppinsFOntFamily,
+                    fontFamily = poppinsFontFamily,
                     fontSize = 14.sp,
                     textAlign = TextAlign.Center,
                     color = Color(0xFFD32F2F),
@@ -135,14 +135,14 @@ fun SignUpContent(
                 Text(
                     text = stringResource(R.string.already_have_an_account),
                     fontSize = 14.sp,
-                    fontFamily = poppinsFOntFamily,
+                    fontFamily = poppinsFontFamily,
                     color = GrayText
                 )
 
                 Text(
                     text = stringResource(R.string.login_text),
                     fontSize = 14.sp,
-                    fontFamily = poppinsFOntFamily,
+                    fontFamily = poppinsFontFamily,
                     fontWeight = FontWeight.Bold,
                     color = TealPrimary,
                     modifier = Modifier

@@ -1,4 +1,4 @@
-package com.br.xbizitwork.ui.presentation.components.schedule
+package com.br.xbizitwork.ui.presentation.features.schedule.create.components
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
@@ -8,7 +8,6 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -23,7 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
-import com.br.xbizitwork.ui.theme.poppinsFOntFamily
+import com.br.xbizitwork.ui.theme.poppinsFontFamily
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -64,7 +63,7 @@ fun WeekDayDropdown(
                 Text(
                     text = "Dia da Semana",
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    fontFamily = poppinsFOntFamily
+                    fontFamily = poppinsFontFamily
                 )
             },
             placeholder = { Text("Selecione um dia") },

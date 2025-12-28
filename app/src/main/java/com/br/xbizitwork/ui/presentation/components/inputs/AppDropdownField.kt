@@ -27,7 +27,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.br.xbizitwork.ui.theme.poppinsFOntFamily
+import com.br.xbizitwork.ui.theme.poppinsFontFamily
 
 /**
  * Dropdown Field customizado para seleção de opções
@@ -60,7 +60,7 @@ fun AppDropdownField(
         // Label
         Text(
             text = label,
-            fontFamily = poppinsFOntFamily,
+            fontFamily = poppinsFontFamily,
             fontWeight = FontWeight.Medium,
             fontSize = 14.sp,
             color = textColor,
@@ -98,7 +98,7 @@ fun AppDropdownField(
                 // Texto selecionado
                 Text(
                     text = displayText,
-                    fontFamily = poppinsFOntFamily,
+                    fontFamily = poppinsFontFamily,
                     fontSize = 14.sp,
                     color = if (selectedValue.isEmpty()) Color(0xFF999999) else textColor,
                     modifier = Modifier.weight(1f)
@@ -125,7 +125,7 @@ fun AppDropdownField(
                         text = {
                             Text(
                                 text = option.displayText,
-                                fontFamily = poppinsFOntFamily,
+                                fontFamily = poppinsFontFamily,
                                 fontSize = 14.sp,
                                 color = textColor
                             )

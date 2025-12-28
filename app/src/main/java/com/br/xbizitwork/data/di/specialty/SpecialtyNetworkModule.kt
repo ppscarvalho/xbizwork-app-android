@@ -1,6 +1,7 @@
 package com.br.xbizitwork.data.di.specialty
 
 import com.br.xbizitwork.data.remote.specialty.api.SpecialtyApiService
+import com.br.xbizitwork.data.remote.specialty.api.SpecialtyApiServiceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,6 +16,6 @@ object SpecialtyNetworkModule {
     @Provides
     @Singleton
     fun provideSpecialtyApiService(httpClient: HttpClient): SpecialtyApiService {
-        return com.br.xbizitwork.data.remote.specialty.api.SpecialtyApiServiceImpl(httpClient)
+        return SpecialtyApiServiceImpl(httpClient)
     }
 }

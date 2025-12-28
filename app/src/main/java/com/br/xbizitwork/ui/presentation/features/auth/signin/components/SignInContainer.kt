@@ -24,7 +24,7 @@ import com.br.xbizitwork.ui.presentation.components.buttons.AppButton
 import com.br.xbizitwork.ui.presentation.components.inputs.AppPasswordField
 import com.br.xbizitwork.ui.presentation.components.inputs.AppTextField
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
-import com.example.xbizitwork.R
+import com.br.xbizitwork.R
 
 @Composable
 fun SignInContainer(
