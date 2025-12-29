@@ -9,7 +9,7 @@ import jakarta.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import java.lang.IllegalArgumentException
 
-interface GetCategoryByDescriptionUseCase{
+interface SearchScheduleUseCase{
     operator fun invoke(parameters: Parameters): Flow<UiState<List<Schedule>>>
 
     data class Parameters(
@@ -17,10 +17,10 @@ interface GetCategoryByDescriptionUseCase{
     )
 }
 
-class GetCategoryByDescriptionUseCaseImpl @Inject constructor(
+class SearchScheduleUseCaseImpl @Inject constructor(
     private val scheduleRepository: ScheduleRepository
-) : GetCategoryByDescriptionUseCase, FlowUseCase<GetCategoryByDescriptionUseCase.Parameters, List<Schedule>>() {
-    override suspend fun executeTask(parameters: GetCategoryByDescriptionUseCase.Parameters): UiState<List<Schedule>> {
+) : SearchScheduleUseCase, FlowUseCase<SearchScheduleUseCase.Parameters, List<Schedule>>() {
+    override suspend fun executeTask(parameters: SearchScheduleUseCase.Parameters): UiState<List<Schedule>> {
         return try {
             if (parameters.description.isBlank()) {
                 return UiState.Error(IllegalArgumentException("ID do profissional inválido"))

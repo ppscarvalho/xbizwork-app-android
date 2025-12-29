@@ -9,8 +9,8 @@ import com.br.xbizitwork.domain.usecase.schedule.DeleteScheduleUseCase
 import com.br.xbizitwork.domain.usecase.schedule.DeleteScheduleUseCaseImpl
 import com.br.xbizitwork.domain.usecase.schedule.GetAvailableTimeSlotsUseCase
 import com.br.xbizitwork.domain.usecase.schedule.GetAvailableTimeSlotsUseCaseImpl
-import com.br.xbizitwork.domain.usecase.schedule.GetCategoryByDescriptionUseCase
-import com.br.xbizitwork.domain.usecase.schedule.GetCategoryByDescriptionUseCaseImpl
+import com.br.xbizitwork.domain.usecase.schedule.SearchScheduleUseCase
+import com.br.xbizitwork.domain.usecase.schedule.SearchScheduleUseCaseImpl
 import com.br.xbizitwork.domain.usecase.schedule.GetProfessionalSchedulesUseCase
 import com.br.xbizitwork.domain.usecase.schedule.GetProfessionalSchedulesUseCaseImpl
 import com.br.xbizitwork.domain.usecase.schedule.UpdateAvailabilityUseCase
@@ -101,9 +101,9 @@ object ScheduleUseCaseModule {
 
     @Provides
     @Singleton
-    fun provideGetCategoryByDescriptionUseCase(
+    fun provideSearchScheduleUseCase(
         repository: ScheduleRepository
-    ): GetCategoryByDescriptionUseCase {
-        return GetCategoryByDescriptionUseCaseImpl(repository)
+    ): SearchScheduleUseCase {
+        return SearchScheduleUseCaseImpl(repository)
     }
 }

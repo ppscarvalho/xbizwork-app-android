@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.br.xbizitwork.ui.presentation.features.auth.signin.navigation.navigateToSignInScreen
 import com.br.xbizitwork.ui.presentation.features.auth.signup.navigation.navigateToSignUpScreen
+import com.br.xbizitwork.ui.presentation.features.schedule.search.navigation.navigateToSearchScheduleScreen
 import com.br.xbizitwork.ui.presentation.navigation.graphs.authGraph
 import com.br.xbizitwork.ui.presentation.navigation.graphs.homeGraph
 import com.br.xbizitwork.ui.presentation.navigation.graphs.navigationToHomeGraph
@@ -41,7 +42,9 @@ fun RootHost(
             onNavigateToProfileScreen = {
                 navController.navigateUp()
             },
-            onNavigateToSearchScreen = {},
+            onNavigateToSearchScreen = {
+                navController.navigateToSearchScheduleScreen()
+            },
             onNavigateToUsersConnectionScreen = {},
             onNavigateToMenuGraph = {
                 navController.navigateToMenuGraph()

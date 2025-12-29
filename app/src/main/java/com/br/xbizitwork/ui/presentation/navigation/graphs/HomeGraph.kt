@@ -12,6 +12,7 @@ import com.br.xbizitwork.ui.presentation.features.profile.navigation.navigateToE
 import com.br.xbizitwork.ui.presentation.features.schedule.agenda.navigation.navigateToProfessionalAgenda
 import com.br.xbizitwork.ui.presentation.features.schedule.create.navigation.navigateToCreateSchedule
 import com.br.xbizitwork.ui.presentation.features.schedule.list.navigation.navigateToViewSchedules
+import com.br.xbizitwork.ui.presentation.features.schedule.search.navigation.searchScheduleScreen
 import com.br.xbizitwork.ui.presentation.navigation.screens.Graphs
 import com.br.xbizitwork.ui.presentation.navigation.screens.HomeScreens
 
@@ -34,15 +35,19 @@ fun NavGraphBuilder.homeGraph(
             onNavigateToMenuScreen = onNavigateToMenuGraph,
             onNavigateProfileClick = onNavigateProfileScreen
         )
-
-        editProfileScreen(
+        searchScheduleScreen(
             onNavigateBack = onNavigateUp,
-            onNavigateToLogin = onNavigateToSignInScreen
+            onNavigateToScheduleDetail = {}
         )
 
-        changePasswordScreen(
-            onNavigateBack = onNavigateUp
-        )
+//        editProfileScreen(
+//            onNavigateBack = onNavigateUp,
+//            onNavigateToLogin = onNavigateToSignInScreen
+//        )
+//
+//        changePasswordScreen(
+//            onNavigateBack = onNavigateUp
+//        )
         
         // Menu é um nested graph com suas próprias screens
         menuGraph(
