@@ -29,10 +29,10 @@ fun RootHost(
                 navController.navigateToSignUpScreen()
             },
             onNavigateToSignInScreen = {
-                navController.navigateToSignInScreen()
+                navController.popBackStack()
             },
             onNavigateBack = {
-                navController.navigateUp()
+                navController.popBackStack()
             }
         )
         homeGraph(
@@ -51,7 +51,7 @@ fun RootHost(
             },
             onNavigateProfileScreen = {},
             onNavigateToSignInScreen = {
-                navController.navigateToSignInScreen(clearBackStack = true)
+                navController.navigateToSignInScreen()
             },
             navController = navController
         )

@@ -9,12 +9,13 @@ import androidx.compose.runtime.getValue
 import com.br.xbizitwork.ui.presentation.features.profile.screen.EditProfileScreen
 import com.br.xbizitwork.ui.presentation.features.profile.viewmodel.EditProfileViewModel
 import com.br.xbizitwork.ui.presentation.navigation.screens.HomeScreens
+import com.br.xbizitwork.ui.presentation.navigation.screens.MenuScreens
 
 fun NavGraphBuilder.editProfileScreen(
     onNavigateBack: () -> Unit,
-    onNavigateToLogin: () -> Unit
+    onNavigateToLogin: () -> Unit,
 ) {
-    composable<HomeScreens.EditProfileScreen> {
+    composable<MenuScreens.EditProfileScreen> {
 
         val viewModel: EditProfileViewModel = hiltViewModel()
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -31,7 +32,7 @@ fun NavGraphBuilder.editProfileScreen(
 }
 
 fun NavController.navigateToEditProfileScreen() {
-    navigate(HomeScreens.EditProfileScreen) {
+    navigate(MenuScreens.EditProfileScreen) {
         launchSingleTop = true
     }
 }

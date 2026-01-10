@@ -4,15 +4,14 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.navigation
-import com.br.xbizitwork.ui.presentation.features.auth.changepassword.navigation.changePasswordScreen
 import com.br.xbizitwork.ui.presentation.features.auth.changepassword.navigation.navigateToChangePasswordScreen
 import com.br.xbizitwork.ui.presentation.features.home.navigation.homeScreen
-import com.br.xbizitwork.ui.presentation.features.profile.navigation.editProfileScreen
 import com.br.xbizitwork.ui.presentation.features.profile.navigation.navigateToEditProfileScreen
 import com.br.xbizitwork.ui.presentation.features.schedule.agenda.navigation.navigateToProfessionalAgenda
 import com.br.xbizitwork.ui.presentation.features.schedule.create.navigation.navigateToCreateSchedule
 import com.br.xbizitwork.ui.presentation.features.schedule.list.navigation.navigateToViewSchedules
 import com.br.xbizitwork.ui.presentation.features.schedule.search.navigation.searchScheduleScreen
+import com.br.xbizitwork.ui.presentation.features.skills.navigation.navigateToCreateSkillsScreen
 import com.br.xbizitwork.ui.presentation.navigation.screens.Graphs
 import com.br.xbizitwork.ui.presentation.navigation.screens.HomeScreens
 
@@ -40,20 +39,14 @@ fun NavGraphBuilder.homeGraph(
             onNavigateToScheduleDetail = {}
         )
 
-//        editProfileScreen(
-//            onNavigateBack = onNavigateUp,
-//            onNavigateToLogin = onNavigateToSignInScreen
-//        )
-//
-//        changePasswordScreen(
-//            onNavigateBack = onNavigateUp
-//        )
-        
         // Menu é um nested graph com suas próprias screens
         menuGraph(
             onNavigateUp = onNavigateUp,
             onNavigateToEditProfile = {
                 navController.navigateToEditProfileScreen()
+            },
+            onNavigateToCreateSkills = {
+              navController.navigateToCreateSkillsScreen()
             },
             onNavigateToCreateSchedule = {
                 navController.navigateToCreateSchedule()

@@ -87,7 +87,7 @@ fun AppTextField(
                 Text(
                     text = placeholder,
                     fontFamily = poppinsFontFamily,
-                    color = colorScheme.onSurfaceVariant,
+                    color = colorScheme.onPrimary,
                 )
             },
 
@@ -96,7 +96,7 @@ fun AppTextField(
                     Icon(
                         imageVector = it,
                         contentDescription = "Leading Icon",
-                        tint = colorScheme.onSurfaceVariant
+                        tint = colorScheme.onPrimary
                     )
                 }
             },
@@ -106,7 +106,7 @@ fun AppTextField(
                     Icon(
                         imageVector = it,
                         contentDescription = "Trailing Icon",
-                        tint = colorScheme.onSurfaceVariant,
+                        tint = colorScheme.onPrimary,
                         modifier = Modifier
                             .padding(end = 8.dp)
                             .clickable { onTrailingIconClick?.invoke() }
@@ -121,21 +121,23 @@ fun AppTextField(
 
             colors = OutlinedTextFieldDefaults.colors(
                 cursorColor = cursorColor,
-                focusedBorderColor = Color.Black,
-                unfocusedBorderColor = Color.Black,
+                focusedBorderColor = Color.White,
+                unfocusedBorderColor = Color.White,
                 errorBorderColor = Color.Red,
                 // ✅ Cores para estado desabilitado - mantém a borda visível
-                disabledBorderColor = Color.Gray,
-                disabledTextColor = Color.Gray,
-                disabledLabelColor = Color.Gray,
+                disabledBorderColor = Color.White,
+                disabledTextColor = Color.White,
+                disabledLabelColor = Color.White,
                 disabledPlaceholderColor = Color.LightGray,
-                disabledLeadingIconColor = Color.Gray
+                disabledLeadingIconColor = Color.White
             )
         )
     }
 }
 
-@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    backgroundColor = 0xFF0f344e)
 @Composable
 private fun AppTextFieldPreview() {
     var name by remember { mutableStateOf("") }

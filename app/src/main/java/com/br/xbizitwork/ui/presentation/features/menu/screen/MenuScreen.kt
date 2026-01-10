@@ -1,25 +1,23 @@
 package com.br.xbizitwork.ui.presentation.features.menu.screen
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import android.content.res.Configuration
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import com.br.xbizitwork.core.sideeffects.AppSideEffect
 import com.br.xbizitwork.core.state.LifecycleEventEffect
 import com.br.xbizitwork.core.util.extensions.toast
 import com.br.xbizitwork.ui.presentation.components.topbar.AppTopBar
 import com.br.xbizitwork.ui.presentation.features.menu.components.MenuContent
 import com.br.xbizitwork.R
+import com.br.xbizitwork.ui.theme.XBizWorkTheme
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
 
 @Composable
 fun MenuScreen(
@@ -27,6 +25,7 @@ fun MenuScreen(
     appSideEffectFlow: Flow<AppSideEffect>,
     onClickUpdateProfile: () -> Unit,
     onClickChangePassword: () -> Unit,
+    onClickCreateSkills: () -> Unit,
     onClickSetupSchedule: () -> Unit,
     onClickYourPlan: () -> Unit,
     onClickMyAppointments: () -> Unit,
@@ -63,16 +62,11 @@ fun MenuScreen(
             )
         },
         content = { paddingValues ->
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                MenuContent(
+            MenuContent(
+                paddingValues = paddingValues,
                     onClickUpdateProfile = onClickUpdateProfile,
                     onClickChangePassword = onClickChangePassword,
+                    onClickCreateSkills = onClickCreateSkills,
                     onClickSetupSchedule = onClickSetupSchedule,
                     onClickYourPlan = onClickYourPlan,
                     onClickMyAppointments = onClickMyAppointments,
@@ -82,7 +76,32 @@ fun MenuScreen(
                     onClickRateApp = onClickRateApp,
                     onClickLogout = onClickLogout
                 )
-            }
         }
     )
+}
+
+
+@Preview(
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
+@Composable
+private fun MenuScreenPreview() {
+    XBizWorkTheme {
+        MenuScreen(
+            onNavigateToHomeGraph = {},
+            appSideEffectFlow = emptyFlow(),
+            onClickUpdateProfile = {},
+            onClickChangePassword = {},
+            onClickCreateSkills = {},
+            onClickSetupSchedule = {},
+            onClickYourPlan = {},
+            onClickMyAppointments = {},
+            onClickProfessionalAgenda = {},
+            onClickFAQ = {},
+            onClickAppVersion = {},
+            onClickRateApp = {},
+            onClickLogout = {}
+        )
+    }
 }

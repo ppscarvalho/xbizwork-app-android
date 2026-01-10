@@ -12,7 +12,7 @@ sealed class EditProfileEvent {
     data class OnNameChanged(val name: String) : EditProfileEvent()
     data class OnCpfChanged(val cpf: String) : EditProfileEvent()
     data class OnDateOfBirthChanged(val date: LocalDate?) : EditProfileEvent()
-    data class OnGenderChanged(val gender: String) : EditProfileEvent()
+    //data class OnGenderChanged(val gender: String) : EditProfileEvent()
 
     // Contato
     data class OnEmailChanged(val email: String) : EditProfileEvent()

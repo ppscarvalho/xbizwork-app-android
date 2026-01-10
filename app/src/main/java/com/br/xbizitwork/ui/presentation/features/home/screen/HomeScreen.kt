@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
 import com.br.xbizitwork.core.sideeffects.AppSideEffect as AppSideEffect
@@ -26,6 +27,7 @@ import com.br.xbizitwork.ui.presentation.components.bottombar.AppBottomBar
 import com.br.xbizitwork.ui.presentation.components.topbar.AppTopBar
 import com.br.xbizitwork.ui.presentation.features.home.components.HomeContent
 import com.br.xbizitwork.ui.presentation.features.home.state.HomeUIState
+import com.br.xbizitwork.ui.theme.XBizWorkTheme
 import kotlinx.coroutines.flow.Flow
 
 // Cor da AppTopBar
@@ -86,9 +88,6 @@ fun DefaultScreen(
             )
         },
         content = {paddingValues ->
-            Box(
-                modifier = Modifier.fillMaxSize().padding(paddingValues)
-            ){
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -98,11 +97,32 @@ fun DefaultScreen(
                 ) {
                     HomeContent(
                         modifier = Modifier.fillMaxWidth(),
+                        paddingValues = paddingValues,
                         onNavigationToSignInScreen = onNavigateToSignInScreen,
                         onNavigateToProfileScreen = { onNavigateProfileClick()}
                     )
                 }
-            }
         }
     )
+}
+
+@Preview
+@Composable
+private fun DefaultScreenPreview() {
+    XBizWorkTheme{
+        DefaultScreen(
+            uiState = HomeUIState(
+                userName = "João Silva"
+            ),
+            sideEffectFlow = kotlinx.coroutines.flow.flowOf(),
+            onNavigateToSignInScreen = {},
+            onNavigateToProfileScreen = {},
+            onNavigateToSearchScreen = {},
+            onNavigateToUsersConnectionScreen = {},
+            onNavigateToMenuScreen = {},
+            onNavigateProfileClick = {},
+            onLogout = {}
+        )
+    }
+    
 }

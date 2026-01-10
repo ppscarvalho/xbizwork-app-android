@@ -21,7 +21,7 @@ data class UpdateProfileRequestModel(
     val name: String,
     val cpf: String?,
     val dateOfBirth: LocalDate?,
-    val gender: String?,
+    //val gender: String?,
 
     // Contato
     val email: String,

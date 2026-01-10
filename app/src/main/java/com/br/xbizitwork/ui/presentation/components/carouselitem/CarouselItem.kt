@@ -45,7 +45,7 @@ fun CarouselItemView(
             text = item.label,
             fontSize = 14.sp,
             fontWeight = FontWeight.Medium,
-            color = Color.DarkGray,
+            color = Color.White,
             modifier = Modifier.padding(horizontal = 4.dp)
         )
     }

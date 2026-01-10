@@ -32,9 +32,6 @@ sealed interface HomeScreens{
     data object ProfileScreen: HomeScreens
 
     @Serializable
-    data object EditProfileScreen: HomeScreens
-
-    @Serializable
     data object ReserveScreen: HomeScreens
 
     @Serializable
@@ -59,7 +56,16 @@ sealed interface MenuScreens{
     data object MenuScreen: MenuScreens
 
     @Serializable
-    data object FinancialScreen: MenuScreens
+    data object EditProfileScreen: HomeScreens
+
+    @Serializable
+    data object CreateDefaultScheduleScreen: MenuScreens
+
+    @Serializable
+    data object CreateSkillsScreen: MenuScreens
+
+    @Serializable
+    data object NewScheduleSuccessScreen: MenuScreens
 
     @Serializable
     data object CreateScheduleScreen: MenuScreens

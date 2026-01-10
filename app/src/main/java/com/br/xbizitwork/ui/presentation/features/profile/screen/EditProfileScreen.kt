@@ -9,14 +9,20 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import com.br.xbizitwork.core.sideeffects.AppSideEffect
 import com.br.xbizitwork.core.state.LifecycleEventEffect
 import com.br.xbizitwork.core.util.extensions.toast
 import com.br.xbizitwork.ui.presentation.components.topbar.AppTopBar
+import com.br.xbizitwork.ui.presentation.features.auth.changepassword.components.ChangePasswordContent
+import com.br.xbizitwork.ui.presentation.features.auth.changepassword.events.ChangePasswordEvent
 import com.br.xbizitwork.ui.presentation.features.profile.components.EditProfileContent
 import com.br.xbizitwork.ui.presentation.features.profile.events.EditProfileEvent
 import com.br.xbizitwork.ui.presentation.features.profile.state.EditProfileUIState
+import com.br.xbizitwork.ui.theme.XBizWorkTheme
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
+
 
 /**
  * Tela de Edição de Perfil do Usuário
@@ -68,28 +74,40 @@ fun EditProfileScreen(
                     onEvent(EditProfileEvent.OnCancelClick)
                 }
             )
+        },
+        content = { paddingValues ->
+            EditProfileContent(
+                paddingValues = paddingValues,
+                uiState = uiState,
+                onNameChanged = { onEvent(EditProfileEvent.OnNameChanged(it)) },
+                onCpfChanged = { onEvent(EditProfileEvent.OnCpfChanged(it)) },
+                onDateOfBirthChanged = { onEvent(EditProfileEvent.OnDateOfBirthChanged(it)) },
+                onEmailChanged = { onEvent(EditProfileEvent.OnEmailChanged(it)) },
+                onPhoneChanged = { onEvent(EditProfileEvent.OnPhoneChanged(it)) },
+                onZipCodeChanged = { onEvent(EditProfileEvent.OnZipCodeChanged(it)) },
+                onZipCodeBlur = { onEvent(EditProfileEvent.OnZipCodeBlur) },
+                onAddressChanged = { onEvent(EditProfileEvent.OnAddressChanged(it)) },
+                onNumberChanged = { onEvent(EditProfileEvent.OnNumberChanged(it)) },
+                onNeighborhoodChanged = { onEvent(EditProfileEvent.OnNeighborhoodChanged(it)) },
+                onCityChanged = { onEvent(EditProfileEvent.OnCityChanged(it)) },
+                onStateChanged = { onEvent(EditProfileEvent.OnStateChanged(it)) },
+                onSaveClick = { onEvent(EditProfileEvent.OnSaveClick) },
+                onCancelClick = { onEvent(EditProfileEvent.OnCancelClick) }
+            )
         }
-    ) { paddingValues ->
-        EditProfileContent(
-            modifier = Modifier.fillMaxSize(),
-            paddingValues = paddingValues,
-            uiState = uiState,
+    )
+}
 
-            onNameChanged = { onEvent(EditProfileEvent.OnNameChanged(it)) },
-            onCpfChanged = { onEvent(EditProfileEvent.OnCpfChanged(it)) },
-            onDateOfBirthChanged = { onEvent(EditProfileEvent.OnDateOfBirthChanged(it)) },
-            onGenderChanged = { onEvent(EditProfileEvent.OnGenderChanged(it)) },
-            onEmailChanged = { onEvent(EditProfileEvent.OnEmailChanged(it)) },
-            onPhoneChanged = { onEvent(EditProfileEvent.OnPhoneChanged(it)) },
-            onZipCodeChanged = { onEvent(EditProfileEvent.OnZipCodeChanged(it)) },
-            onZipCodeBlur = { onEvent(EditProfileEvent.OnZipCodeBlur) },
-            onAddressChanged = { onEvent(EditProfileEvent.OnAddressChanged(it)) },
-            onNumberChanged = { onEvent(EditProfileEvent.OnNumberChanged(it)) },
-            onNeighborhoodChanged = { onEvent(EditProfileEvent.OnNeighborhoodChanged(it)) },
-            onCityChanged = { onEvent(EditProfileEvent.OnCityChanged(it)) },
-            onStateChanged = { onEvent(EditProfileEvent.OnStateChanged(it)) },
-            onSaveClick = { onEvent(EditProfileEvent.OnSaveClick) },
-            onCancelClick = { onEvent(EditProfileEvent.OnCancelClick) }
+@Preview
+@Composable
+private fun EditProfileScreenPreview() {
+    XBizWorkTheme {
+        EditProfileScreen(
+            uiState = EditProfileUIState(),
+            appSideEffectFlow = flowOf() ,
+            onEvent = {},
+            onNavigateBack = {},
+            onNavigateToLogin = {}
         )
     }
 }

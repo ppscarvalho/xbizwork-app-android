@@ -1,12 +1,17 @@
 package com.br.xbizitwork.ui.presentation.features.profile.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Email
+import androidx.compose.material.icons.outlined.FolderZip
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.LocationCity
 import androidx.compose.material.icons.outlined.Person
@@ -16,13 +21,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.br.xbizitwork.ui.presentation.components.buttons.AppButton
 import com.br.xbizitwork.ui.presentation.components.inputs.AppDateField
 import com.br.xbizitwork.ui.presentation.components.inputs.AppDropdownField
 import com.br.xbizitwork.ui.presentation.components.inputs.AppTextField
 import com.br.xbizitwork.ui.presentation.components.inputs.DropdownOption
+import com.br.xbizitwork.ui.presentation.features.profile.state.CepVisualTransformation
+import com.br.xbizitwork.ui.presentation.features.profile.state.CpfVisualTransformation
+import com.br.xbizitwork.ui.presentation.features.profile.state.PhoneVisualTransformation
+import com.br.xbizitwork.ui.theme.XBizWorkTheme
 import java.time.LocalDate
+
+private val CPF_ALLOWED_REGEX = Regex("[0-9.-]*")
+private val ONLY_NUMBERS_REGEX = Regex("[0-9]*")
 
 /**
  * Container com formulário COMPLETO de edição de perfil
@@ -38,7 +52,6 @@ fun EditProfileContainer(
     nameValue: String,
     cpfValue: String,
     dateOfBirthValue: LocalDate?,
-    genderValue: String,
 
     // Contato
     emailValue: String,
@@ -56,7 +69,6 @@ fun EditProfileContainer(
     onNameChanged: (String) -> Unit,
     onCpfChanged: (String) -> Unit,
     onDateOfBirthChanged: (LocalDate?) -> Unit,
-    onGenderChanged: (String) -> Unit,
     onEmailChanged: (String) -> Unit,
     onPhoneChanged: (String) -> Unit,
     onZipCodeChanged: (String) -> Unit,
@@ -70,7 +82,7 @@ fun EditProfileContainer(
 ) {
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.spacedBy(15.dp)
+        verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         // ========== DADOS BÁSICOS ==========
 
@@ -82,20 +94,31 @@ fun EditProfileContainer(
             value = nameValue,
             onValueChange = onNameChanged,
             leadingIcon = Icons.Outlined.Person,
-            textColor = colorScheme.onSurfaceVariant,
-            cursorColor = colorScheme.onSurfaceVariant
+            textColor = colorScheme.onPrimary,
+            cursorColor = colorScheme.onPrimary
         )
-
         // CPF
         AppTextField(
             modifier = Modifier.fillMaxWidth(),
             label = "CPF",
             placeholder = "000.000.000-00",
-            value = cpfValue,
-            onValueChange = onCpfChanged,
+
+            // 1. Passe o valor PURO (apenas números) vindo do ViewModel/State
+            value = cpfValue.filter { it.isDigit() },
+
+            onValueChange = { input ->
+                // 2. Filtra apenas números e limita a 11 caracteres
+                val digits = input.filter { it.isDigit() }.take(11)
+                onCpfChanged(digits)
+            },
+
+            // 3. Adicione esta linha (seu AppTextField deve repassar isso ao BasicTextField/OutlinedTextField)
+            visualTransformation = CpfVisualTransformation(),
+
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             leadingIcon = Icons.Outlined.Person,
-            textColor = colorScheme.onSurfaceVariant,
-            cursorColor = colorScheme.onSurfaceVariant
+            textColor = colorScheme.onPrimary,
+            cursorColor = colorScheme.onPrimary
         )
 
         // Data de Nascimento - USA AppDateField!
@@ -105,27 +128,9 @@ fun EditProfileContainer(
             placeholder = "DD/MM/AAAA",
             value = dateOfBirthValue,
             onValueChange = onDateOfBirthChanged,
-            textColor = colorScheme.onSurfaceVariant,
-            cursorColor = colorScheme.onSurfaceVariant
+            textColor = colorScheme.onPrimary,
+            cursorColor = colorScheme.onPrimary
         )
-
-        // Gênero - DROPDOWN!
-        AppDropdownField(
-            modifier = Modifier.fillMaxWidth(),
-            label = "Gênero",
-            placeholder = "Selecione seu gênero",
-            selectedValue = genderValue,
-            options = listOf(
-                DropdownOption("M", "Masculino"),
-                DropdownOption("F", "Feminino"),
-                DropdownOption("Outro", "Outro"),
-                DropdownOption("Prefiro não informar", "Prefiro não informar")
-            ),
-            onValueChange = onGenderChanged,
-            leadingIcon = Icons.Outlined.Person,
-            textColor = colorScheme.onSurfaceVariant
-        )
-
         // ========== CONTATO ==========
 
         // E-mail
@@ -136,8 +141,8 @@ fun EditProfileContainer(
             value = emailValue,
             onValueChange = onEmailChanged,
             leadingIcon = Icons.Outlined.Email,
-            textColor = colorScheme.onSurfaceVariant,
-            cursorColor = colorScheme.onSurfaceVariant,
+            textColor = colorScheme.onPrimary,
+            cursorColor = colorScheme.onPrimary,
             enabled = false  // ✅ Email não pode ser alterado
         )
 
@@ -145,28 +150,55 @@ fun EditProfileContainer(
         AppTextField(
             modifier = Modifier.fillMaxWidth(),
             label = "Telefone",
-            placeholder = "(11) 98765-4321",
-            value = phoneValue,
-            onValueChange = onPhoneChanged,
+            placeholder = "(00) 00000-0000",
+            // Passa apenas os números para o componente
+            value = phoneValue.filter { it.isDigit() },
+            onValueChange = { input ->
+                val digits = input.filter { it.isDigit() }.take(11)
+                onPhoneChanged(digits)
+            },
+            // Aplica a transformação visual
+            visualTransformation = PhoneVisualTransformation(),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             leadingIcon = Icons.Outlined.Phone,
-            textColor = colorScheme.onSurfaceVariant,
-            cursorColor = colorScheme.onSurfaceVariant
+            textColor = colorScheme.onPrimary,
+            cursorColor = colorScheme.onPrimary
         )
+
+        Row(modifier = Modifier.fillMaxWidth()) {
+            // CEP
+            AppTextField(
+                modifier = Modifier.weight(2f).padding(end = 2.dp),
+                label = "CEP",
+                placeholder = "00000-000",
+                // Passa apenas os números para o componente
+                value = zipCodeValue.filter { it.isDigit() },
+                onValueChange = { input ->
+                    val digits = input.filter { it.isDigit() }.take(8)
+                    onZipCodeChanged(digits)
+                },
+                // Aplica a transformação visual
+                visualTransformation = CepVisualTransformation(),
+                onFocusLost = onZipCodeBlur,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                leadingIcon = Icons.Outlined.LocationCity,
+                textColor = colorScheme.onPrimary,
+                cursorColor = colorScheme.onPrimary
+            )
+
+            AppTextField(
+                modifier = Modifier.weight(2f),
+                label = "Número",
+                placeholder = "123",
+                value = numberValue,
+                onValueChange = onNumberChanged,
+                leadingIcon = Icons.Outlined.Home,
+                textColor = colorScheme.onPrimary,
+                cursorColor = colorScheme.onPrimary
+            )
+        }
 
         // ========== ENDEREÇO ==========
-
-        // CEP
-        AppTextField(
-            modifier = Modifier.fillMaxWidth(),
-            label = "CEP",
-            placeholder = "00000-000",
-            value = zipCodeValue,
-            onValueChange = onZipCodeChanged,
-            onFocusLost = onZipCodeBlur,  // ✅ Busca endereço quando sai do campo
-            leadingIcon = Icons.Outlined.LocationCity,
-            textColor = colorScheme.onSurfaceVariant,
-            cursorColor = colorScheme.onSurfaceVariant
-        )
 
         // Endereço
         AppTextField(
@@ -176,21 +208,9 @@ fun EditProfileContainer(
             value = addressValue,
             onValueChange = onAddressChanged,
             leadingIcon = Icons.Outlined.Home,
-            textColor = colorScheme.onSurfaceVariant,
-            cursorColor = colorScheme.onSurfaceVariant,
+            textColor = colorScheme.onPrimary,
+            cursorColor = colorScheme.onPrimary,
             enabled = false  // ✅ Preenchido automaticamente pelo CEP
-        )
-
-        // Número
-        AppTextField(
-            modifier = Modifier.fillMaxWidth(),
-            label = "Número",
-            placeholder = "123",
-            value = numberValue,
-            onValueChange = onNumberChanged,
-            leadingIcon = Icons.Outlined.Home,
-            textColor = colorScheme.onSurfaceVariant,
-            cursorColor = colorScheme.onSurfaceVariant
         )
 
         // Bairro
@@ -201,36 +221,40 @@ fun EditProfileContainer(
             value = neighborhoodValue,
             onValueChange = onNeighborhoodChanged,
             leadingIcon = Icons.Outlined.LocationCity,
-            textColor = colorScheme.onSurfaceVariant,
-            cursorColor = colorScheme.onSurfaceVariant,
+            textColor = colorScheme.onPrimary,
+            cursorColor = colorScheme.onPrimary,
             enabled = false  // ✅ Preenchido automaticamente pelo CEP
         )
 
-        // Cidade
-        AppTextField(
-            modifier = Modifier.fillMaxWidth(),
-            label = "Cidade",
-            placeholder = "São Paulo",
-            value = cityValue,
-            onValueChange = onCityChanged,
-            leadingIcon = Icons.Outlined.LocationCity,
-            textColor = colorScheme.onSurfaceVariant,
-            cursorColor = colorScheme.onSurfaceVariant,
-            enabled = false  // ✅ Preenchido automaticamente pelo CEP
-        )
+        Row(modifier = Modifier.fillMaxWidth()) {
+            // Cidade
+            AppTextField(
+                modifier = Modifier.weight(4f)
+                    .padding(end = 2.dp),
+                label = "Cidade",
+                placeholder = "São Paulo",
+                value = cityValue,
+                onValueChange = onCityChanged,
+                leadingIcon = Icons.Outlined.LocationCity,
+                textColor = colorScheme.onPrimary,
+                cursorColor = colorScheme.onPrimary,
+                enabled = false  // ✅ Preenchido automaticamente pelo CEP
+            )
 
-        // Estado
-        AppTextField(
-            modifier = Modifier.fillMaxWidth(),
-            label = "Estado",
-            placeholder = "SP",
-            value = stateValue,
-            onValueChange = onStateChanged,
-            leadingIcon = Icons.Outlined.LocationCity,
-            textColor = colorScheme.onSurfaceVariant,
-            cursorColor = colorScheme.onSurfaceVariant,
-            enabled = false  // ✅ Preenchido automaticamente pelo CEP
-        )
+            // Estado
+            AppTextField(
+                modifier = Modifier.weight(2f),
+                label = "UF",
+                placeholder = "SP",
+                value = stateValue,
+                onValueChange = onStateChanged,
+                leadingIcon = Icons.Outlined.LocationCity,
+                textColor = colorScheme.onPrimary,
+                cursorColor = colorScheme.onPrimary,
+                enabled = false  // ✅ Preenchido automaticamente pelo CEP
+            )
+        }
+
 
         // ========== BOTÃO ==========
 
@@ -253,3 +277,39 @@ fun EditProfileContainer(
     }
 }
 
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES,
+    backgroundColor = 0xFF0f344e)
+@Composable
+private fun EditProfileContainerPreview() {
+    XBizWorkTheme{
+        EditProfileContainer(
+            modifier = Modifier.fillMaxWidth(),
+            isLoading = false,
+            buttonEnabled = true,
+            nameValue = "João da Silva",
+            cpfValue = "12345678900",  // ✅ Apenas dígitos - máscara aplicada automaticamente
+            dateOfBirthValue = null,
+            emailValue = "joao@gmail.com",
+            phoneValue = "11987654321",  // ✅ Apenas dígitos - máscara aplicada automaticamente
+            zipCodeValue = "12345678",  // ✅ Apenas dígitos - máscara aplicada automaticamente
+            addressValue = "Av. Paulista",
+            numberValue = "1000",
+            neighborhoodValue = "Bela Vista",
+            cityValue = "São Paulo",
+            stateValue = "SP",
+            onNameChanged = {},
+            onCpfChanged = {},
+            onDateOfBirthChanged = {},
+            onEmailChanged = {},
+            onPhoneChanged = {},
+            onZipCodeChanged = {},
+            onZipCodeBlur = {},
+            onAddressChanged = {},
+            onNumberChanged = {},
+            onNeighborhoodChanged = {},
+            onCityChanged = {},
+            onStateChanged = {},
+            onSaveClick = {}
+        )
+    }
+}

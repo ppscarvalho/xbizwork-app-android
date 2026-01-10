@@ -70,9 +70,9 @@ class EditProfileViewModel @Inject constructor(
             is EditProfileEvent.OnDateOfBirthChanged -> {
                 _uiState.update { it.copy(dateOfBirth = event.date, hasChanges = true) }
             }
-            is EditProfileEvent.OnGenderChanged -> {
-                _uiState.update { it.copy(gender = event.gender, hasChanges = true) }
-            }
+//            is EditProfileEvent.OnGenderChanged -> {
+//                _uiState.update { it.copy(gender = event.gender, hasChanges = true) }
+//            }
 
             // Contato
             is EditProfileEvent.OnEmailChanged -> {
@@ -163,7 +163,7 @@ class EditProfileViewModel @Inject constructor(
                         logInfo("LOAD_PROFILE", "  - id: ${user.id}")
                         logInfo("LOAD_PROFILE", "  - name: ${user.name}")
                         logInfo("LOAD_PROFILE", "  - cpf: ${user.cpf}")
-                        logInfo("LOAD_PROFILE", "  - gender: ${user.gender}")
+                        //logInfo("LOAD_PROFILE", "  - gender: ${user.gender}")
                         logInfo("LOAD_PROFILE", "  - mobilePhone: ${user.mobilePhone}")
                         logInfo("LOAD_PROFILE", "  - city: ${user.city}")
                         logInfo("LOAD_PROFILE", "  - state: ${user.state}")
@@ -176,7 +176,6 @@ class EditProfileViewModel @Inject constructor(
                                 name = user.name,
                                 cpf = user.cpf ?: "",
                                 dateOfBirth = user.dateOfBirth,
-                                gender = user.gender ?: "",
                                 email = session.email, // Email vem da sessão
                                 phoneNumber = user.mobilePhone ?: "",
                                 zipCode = user.zipCode ?: "",
@@ -300,7 +299,7 @@ class EditProfileViewModel @Inject constructor(
                         name = state.name.trim(),
                         cpf = state.cpf.takeIf { it.isNotBlank() },
                         dateOfBirth = state.dateOfBirth,
-                        gender = state.gender.takeIf { it.isNotBlank() },
+                        //gender = state.gender.takeIf { it.isNotBlank() },
 
                         // Contato
                         email = state.email.trim(),

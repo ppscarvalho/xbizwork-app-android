@@ -33,13 +33,6 @@ fun NavGraphBuilder.signInScreen(
     }
 }
 
-fun NavController.navigateToSignInScreen(clearBackStack: Boolean = false){
-    navigate(AuthScreens.SignInScreen){
-        if (clearBackStack) {
-            popUpTo(0) { inclusive = true }
-        } else {
-            popUpTo(0)
-        }
-        launchSingleTop = true
-    }
+fun NavController.navigateToSignInScreen(){
+    navigate(AuthScreens.SignInScreen)
 }
