@@ -5,3 +5,4 @@ sealed interface AppSideEffect {
     data object NavigateToLogin : AppSideEffect
     data object NavigateBack : AppSideEffect
 }
+

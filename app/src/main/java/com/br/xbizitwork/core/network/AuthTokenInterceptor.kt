@@ -9,7 +9,6 @@ import io.ktor.client.request.header
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.flow.first
-import javax.inject.Inject
 
 /**
  * Plugin Ktor que adiciona automaticamente o token JWT ao header Authorization
@@ -45,10 +44,10 @@ import javax.inject.Inject
  * 7. Se 401: limpa sessão e força reautenticação
  */
 object AuthTokenInterceptor {
-    
+
     /**
      * Cria o plugin Ktor de autenticação.
-     * 
+     *
      * @param authSessionLocalDataSource Fonte do token JWT armazenado
      * @return Plugin pronto para instalar no HttpClient
      */

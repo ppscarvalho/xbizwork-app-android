@@ -115,7 +115,7 @@ fun MenuContainer(
             item {
                 MenuButton(
                     leftIcon = Icons.AutoMirrored.Filled.Assignment,
-                    text = "Seu plano",
+                    text = "Planos",
                     onClick = onClickYourPlan
                 )
             }

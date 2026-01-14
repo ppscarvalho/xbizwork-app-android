@@ -15,7 +15,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.br.xbizitwork.domain.result.category.CategoryResult
 import com.br.xbizitwork.ui.presentation.components.background.AppGradientBackground
+import com.br.xbizitwork.ui.presentation.features.skills.events.SkillsEvent
 import com.br.xbizitwork.ui.presentation.features.skills.state.SkillUiState
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
 import com.br.xbizitwork.ui.theme.poppinsFontFamily
@@ -23,8 +25,9 @@ import com.br.xbizitwork.ui.theme.poppinsFontFamily
 @Composable
 fun SkillsContent(
     modifier: Modifier = Modifier,
+    uiState: SkillUiState,
     paddingValues: PaddingValues,
-    onSaveClick: (List<SkillUiState>) -> Unit
+    onEvent: (SkillsEvent) -> Unit
 ) {
     AppGradientBackground(
         modifier = modifier,
@@ -43,10 +46,10 @@ fun SkillsContent(
                 color = MaterialTheme.colorScheme.onPrimary,
                 modifier = Modifier.padding(top = 4.dp, bottom = 16.dp)
             )
-
             SkillsContainer(
                 modifier = Modifier.fillMaxWidth(),
-                onSaveClick = onSaveClick
+                uiState = uiState,
+                onEvent = onEvent
             )
         }
     }
@@ -61,8 +64,22 @@ fun SkillsContent(
 private fun SkillsContentPreview() {
     XBizWorkTheme {
         SkillsContent(
-            paddingValues = PaddingValues(),
-            onSaveClick = {}
+            uiState = SkillUiState(
+                isLoading = false,
+                categories = listOf(
+                    CategoryResult(1, "Professor"),
+                    CategoryResult(2, "Profissional de Saúde"),
+                    CategoryResult(3, "Diarista"),
+                    CategoryResult(4, "Manicure"),
+                    CategoryResult(5, "Construção Civil"),
+                    CategoryResult(6, "Jardinagem e Limpezas"),
+                    CategoryResult(7, "Refrigeração"),
+                    CategoryResult(8, "Eletricista"),
+                    CategoryResult(9, "Educador Físico")
+                )
+            ),
+            paddingValues = PaddingValues(10.dp),
+            onEvent = {}
         )
     }
 }

@@ -51,7 +51,8 @@ fun NavGraphBuilder.menuGraph(
             onNavigateToLogin = onNavigateToEditProfile
         )
         skillsScreen(
-            onNavigateUp = onNavigateUp
+            onNavigateUp = onNavigateUp,
+            onNavigateToLogin = onNavigateToLogin
         )
 
         createDefaultScheduleScreen(
