@@ -5,6 +5,8 @@ import com.br.xbizitwork.domain.usecase.skills.GetUserSkillsUseCase
 import com.br.xbizitwork.domain.usecase.skills.GetUserSkillsUseCaseImpl
 import com.br.xbizitwork.domain.usecase.skills.SaveUserSkillsUseCase
 import com.br.xbizitwork.domain.usecase.skills.SaveUserSkillsUseCaseImpl
+import com.br.xbizitwork.domain.usecase.skills.SearchProfessionalBySkillUseCase
+import com.br.xbizitwork.domain.usecase.skills.SearchProfessionalBySkillUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,6 +35,14 @@ object SkillsUseCaseModule {
         repository: SkillsRepository
     ): GetUserSkillsUseCase {
         return GetUserSkillsUseCaseImpl(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSearchProfessionalBySkillUseCase(
+        repository: SkillsRepository
+    ): SearchProfessionalBySkillUseCase {
+        return SearchProfessionalBySkillUseCaseImpl(repository)
     }
 }
 
