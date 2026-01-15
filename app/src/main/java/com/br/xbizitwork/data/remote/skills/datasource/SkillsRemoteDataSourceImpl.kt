@@ -4,7 +4,9 @@ import com.br.xbizitwork.core.model.api.ApiResultModel
 import com.br.xbizitwork.core.result.DefaultResult
 import com.br.xbizitwork.core.util.logging.logInfo
 import com.br.xbizitwork.data.remote.skills.api.SkillsApiService
+import com.br.xbizitwork.data.remote.skills.mappers.toDomain
 import com.br.xbizitwork.data.remote.skills.mappers.toRequest
+import com.br.xbizitwork.domain.model.skills.ProfessionalSearchResult
 import com.br.xbizitwork.domain.model.skills.SaveUserSkillsRequestModel
 import com.br.xbizitwork.data.remote.skills.datasource.SkillsRemoteDataSource
 import javax.inject.Inject
@@ -63,6 +65,27 @@ class SkillsRemoteDataSourceImpl @Inject constructor(
             logInfo("SKILLS_DATASOURCE", "❌ Erro: ${e.message}")
             // Erro técnico (rede, timeout, etc)
             DefaultResult.Error(message = e.message ?: "Erro desconhecido ao carregar habilidades")
+        }
+    }
+
+    override suspend fun searchProfessionalsBySkill(skill: String): DefaultResult<List<ProfessionalSearchResult>> {
+        return try {
+            logInfo("SKILLS_DATASOURCE", "📡 Buscando profissionais com skill: $skill")
+
+            // Chama a API
+            val response = apiService.searchProfessionalsBySkill(skill)
+
+            logInfo("SKILLS_DATASOURCE", "📦 Response: ${response.data.size} profissionais encontrados")
+            logInfo("SKILLS_DATASOURCE", "📦 Message: ${response.message}")
+
+            // Converte lista de DTOs para domain models
+            val professionals = response.data.map { it.toDomain() }
+
+            DefaultResult.Success(professionals)
+
+        } catch (e: Exception) {
+            logInfo("SKILLS_DATASOURCE", "❌ Erro ao buscar profissionais: ${e.message}")
+            DefaultResult.Error(message = e.message ?: "Erro desconhecido ao buscar profissionais")
         }
     }
 }

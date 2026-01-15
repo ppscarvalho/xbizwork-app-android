@@ -3,6 +3,7 @@ package com.br.xbizitwork.data.repository
 import com.br.xbizitwork.core.dispatcher.CoroutineDispatcherProvider
 import com.br.xbizitwork.core.model.api.ApiResultModel
 import com.br.xbizitwork.core.result.DefaultResult
+import com.br.xbizitwork.domain.model.skills.ProfessionalSearchResult
 import com.br.xbizitwork.domain.model.skills.SaveUserSkillsRequestModel
 import com.br.xbizitwork.domain.repository.SkillsRepository
 import com.br.xbizitwork.data.remote.skills.datasource.SkillsRemoteDataSource
@@ -27,6 +28,11 @@ class SkillsRepositoryImpl @Inject constructor(
     override suspend fun getUserSkills(userId: Int): DefaultResult<List<Int>> =
         withContext(coroutineDispatcherProvider.io()) {
             remoteDataSource.getUserSkills(userId)
+        }
+
+    override suspend fun searchProfessionalsBySkill(skill: String): DefaultResult<List<ProfessionalSearchResult>> =
+        withContext(coroutineDispatcherProvider.io()) {
+            remoteDataSource.searchProfessionalsBySkill(skill)
         }
 }
 

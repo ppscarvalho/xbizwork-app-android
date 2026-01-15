@@ -2,6 +2,7 @@ package com.br.xbizitwork.domain.repository
 
 import com.br.xbizitwork.core.model.api.ApiResultModel
 import com.br.xbizitwork.core.result.DefaultResult
+import com.br.xbizitwork.domain.model.skills.ProfessionalSearchResult
 import com.br.xbizitwork.domain.model.skills.SaveUserSkillsRequestModel
 
 /**
@@ -24,5 +25,13 @@ interface SkillsRepository {
      * @return DefaultResult com lista de IDs das categorias
      */
     suspend fun getUserSkills(userId: Int): DefaultResult<List<Int>>
+
+    /**
+     * Busca profissionais por habilidade (skill)
+     *
+     * @param skill Termo de busca da habilidade (completo ou parcial)
+     * @return DefaultResult com lista de profissionais encontrados
+     */
+    suspend fun searchProfessionalsBySkill(skill: String): DefaultResult<List<ProfessionalSearchResult>>
 }
 
