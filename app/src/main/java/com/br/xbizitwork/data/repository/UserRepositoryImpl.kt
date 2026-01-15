@@ -8,8 +8,9 @@ import com.br.xbizitwork.data.remote.user.mappers.toModel
 import com.br.xbizitwork.domain.model.user.UserModel
 import com.br.xbizitwork.domain.repository.UserRepository
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class UserRepositoryImpl constructor(
+class UserRepositoryImpl @Inject constructor(
     private val remoteDataSource: UserRemoteDataSource,
     private val coroutineDispatcherProvider: CoroutineDispatcherProvider
 ): UserRepository {

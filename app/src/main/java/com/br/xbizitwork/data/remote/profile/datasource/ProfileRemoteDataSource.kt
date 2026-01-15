@@ -1,4 +1,4 @@
-package com.br.xbizitwork.domain.source.profile
+package com.br.xbizitwork.data.remote.profile.datasource
 
 import com.br.xbizitwork.core.model.api.ApiResultModel
 import com.br.xbizitwork.core.result.DefaultResult
@@ -17,4 +17,3 @@ interface ProfileRemoteDataSource {
      */
     suspend fun updateProfile(model: UpdateProfileRequestModel): DefaultResult<ApiResultModel>
 }
-

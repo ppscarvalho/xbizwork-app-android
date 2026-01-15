@@ -4,7 +4,7 @@ import com.br.xbizitwork.core.dispatcher.CoroutineDispatcherProvider
 import com.br.xbizitwork.core.result.DefaultResult
 import com.br.xbizitwork.domain.model.cep.CepModel
 import com.br.xbizitwork.domain.repository.CepRepository
-import com.br.xbizitwork.domain.source.cep.CepRemoteDataSource
+import com.br.xbizitwork.data.remote.cep.datasource.CepRemoteDataSource
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 

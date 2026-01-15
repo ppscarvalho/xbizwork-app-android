@@ -6,6 +6,8 @@ import com.br.xbizitwork.core.network.RetryPolicy
 import com.br.xbizitwork.core.network.SimpleCache
 import com.br.xbizitwork.core.network.retryWithExponentialBackoff
 import com.br.xbizitwork.core.result.DefaultResult
+import com.br.xbizitwork.core.util.logging.logError
+import com.br.xbizitwork.core.util.logging.logInfo
 import com.br.xbizitwork.data.mappers.toCategoryModel
 import com.br.xbizitwork.data.model.category.CategoryModel
 import com.br.xbizitwork.data.remote.category.api.CategoryApiService
@@ -70,7 +72,6 @@ class CategoryRemoteDataSourceImpl @Inject constructor(
             } else {
                 DefaultResult.Error(message = response.message)
             }
-
         } catch (e: ErrorResponseException) {
             // Erro HTTP (4xx, 5xx) da API
             DefaultResult.Error(code = e.error.httpCode.toString(), message = e.error.message)

@@ -10,7 +10,6 @@ import com.br.xbizitwork.domain.usecase.category.GetCategoriesUseCase
 import com.br.xbizitwork.domain.usecase.session.GetAuthSessionUseCase
 import com.br.xbizitwork.domain.usecase.skills.GetUserSkillsUseCase
 import com.br.xbizitwork.domain.usecase.skills.SaveUserSkillsUseCase
-import com.br.xbizitwork.domain.usecase.user.GetUserByIdUseCase
 import com.br.xbizitwork.ui.presentation.features.skills.events.SkillsEvent
 import com.br.xbizitwork.ui.presentation.features.skills.state.SkillItemUiState
 import com.br.xbizitwork.ui.presentation.features.skills.state.SkillUiState
@@ -19,7 +18,6 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -131,7 +129,7 @@ class SkillsViewModel @Inject constructor(
 
     private fun loadCategories() {
         viewModelScope.launch {
-            getCategoriesUseCase().collectUiState(
+            getCategoriesUseCase.invoke().collectUiState(
                 onLoading = {
                     _uiState.update { it.copy(isLoading = true) }
                 },
@@ -148,11 +146,12 @@ class SkillsViewModel @Inject constructor(
                     logInfo("SKILLS_LOAD_VM", "❌ StackTrace: ${error.stackTraceToString()}")
 
                     // ⚠️ SE FOR ERRO 401 (token inválido), navega ao login
-                    if (error is IllegalStateException && error.message?.contains("Token inválido") == true) {
+                    //if (error is IllegalStateException && error.message?.contains("Token inválido") == true) {
+                   if (error.message?.contains("Token inválido", ignoreCase = true) == true) {
                         logInfo("SKILLS_LOAD_VM", "🔐 Token expirado! Navegando ao login...")
 
                         viewModelScope.launch {
-                            _appSideEffectChannel.send(AppSideEffect.NavigateToLogin)
+                            _appSideEffectChannel.send(AppSideEffect.NavigateToHomeGraph)
                         }
 
                         _uiState.update {
@@ -161,6 +160,10 @@ class SkillsViewModel @Inject constructor(
                                 errorMessage = error.message ?: "Erro ao carregar categorias"
                             )
                         }
+                       val errorMessage = error.message ?: "Sua sessão expirou!"
+                       _appSideEffectChannel.send(
+                           AppSideEffect.ShowToast("Sua sessão expirou. ${errorMessage}")
+                       )
                     } else {
                         // Outros erros
                         _uiState.update {
@@ -210,11 +213,12 @@ class SkillsViewModel @Inject constructor(
                         logInfo("SKILLS_LOAD_VM", "❌ StackTrace: ${error.stackTraceToString()}")
 
                         // ⚠️ SE FOR ERRO 401 (token inválido), navega ao login
-                        if (error is IllegalStateException && error.message?.contains("Token inválido") == true) {
+                        //if (error is IllegalStateException && error.message?.contains("Token inválido") == true) {
+                        if (error.message?.contains("Token inválido", ignoreCase = true) == true) {
                             logInfo("SKILLS_LOAD_VM", "🔐 Token expirado! Navegando ao login...")
 
                             viewModelScope.launch {
-                                _appSideEffectChannel.send(AppSideEffect.NavigateToLogin)
+                                _appSideEffectChannel.send(AppSideEffect.NavigateToHomeGraph)
                             }
 
                             _uiState.update {
@@ -223,6 +227,11 @@ class SkillsViewModel @Inject constructor(
                                     errorMessage = "Sessão expirada. Faça login novamente."
                                 )
                             }
+
+                            val errorMessage = error.message ?: "Sua sessão expirou!"
+                            _appSideEffectChannel.send(
+                                AppSideEffect.ShowToast("Sua sessão expirou. ${errorMessage}")
+                            )
                         } else {
                             // Outros erros
                             _uiState.update {

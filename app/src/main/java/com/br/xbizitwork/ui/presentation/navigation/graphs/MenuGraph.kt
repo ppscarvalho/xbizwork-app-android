@@ -35,7 +35,7 @@ fun NavGraphBuilder.menuGraph(
     onNavigateToListSchedulesScreen: () -> Unit,
     onNavigateToProfessionalAgendaScreen: () -> Unit,
     onNavigateChangePasswordScreen: () -> Unit,
-    onNavigateToLogin: () -> Unit
+    onNavigateToHomeGraph:() -> Unit
 ){
     navigation<Graphs.MenuGraphs>(startDestination = MenuScreens.MenuScreen) {
         menuScreen(
@@ -48,11 +48,11 @@ fun NavGraphBuilder.menuGraph(
         )
         editProfileScreen(
             onNavigateBack = onNavigateUp,
-            onNavigateToLogin = onNavigateToEditProfile
+            onNavigateToHomeGraph = onNavigateToHomeGraph
         )
         skillsScreen(
             onNavigateUp = onNavigateUp,
-            onNavigateToLogin = onNavigateToLogin
+            onNavigateToHomeGraph = onNavigateToHomeGraph
         )
 
         createDefaultScheduleScreen(
@@ -73,7 +73,7 @@ fun NavGraphBuilder.menuGraph(
         listSchedulesScreen(
             onNavigateUp = onNavigateUp,
             onNavigateToCreateSchedule = onNavigateToCreateSchedule,
-            onNavigateToLogin = onNavigateToLogin
+            //onNavigateToLogin = onNavigateToLogin
         )
         changePasswordScreen(
             onNavigateBack = onNavigateUp

@@ -28,7 +28,7 @@ fun CreateScheduleScreen(
         when (sideEffect) {
             is AppSideEffect.ShowToast -> context.toast(sideEffect.message)
 
-            is AppSideEffect.NavigateToLogin -> {
+            is AppSideEffect.NavigateToHomeGraph -> {
                 onNavigateToListSchedulesScreen()
             }
             else -> Unit

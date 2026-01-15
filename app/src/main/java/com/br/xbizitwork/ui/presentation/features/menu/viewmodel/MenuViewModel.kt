@@ -25,8 +25,8 @@ class MenuViewModel @Inject constructor(
 ) : ViewModel() {
 
     // SideEffect Channel para notificações (Toast, etc)
-    private val _App_sideEffectChannel = Channel<AppSideEffect>(capacity = Channel.Factory.BUFFERED)
-    val sideEffectChannel = _App_sideEffectChannel.receiveAsFlow()
+    private val _appSideEffectChannel = Channel<AppSideEffect>(capacity = Channel.Factory.BUFFERED)
+    val sideEffectChannel = _appSideEffectChannel.receiveAsFlow()
 
     /**
      * Realiza logout do usuário
@@ -40,11 +40,11 @@ class MenuViewModel @Inject constructor(
                 },
                 onFailure = {
                     logInfo("REMOVE_TOKEN", "Erro ao remover token: ${it.message}")
-                    _App_sideEffectChannel.send(AppSideEffect.ShowToast("Erro ao fazer logout"))
+                    _appSideEffectChannel.send(AppSideEffect.ShowToast("Erro ao fazer logout"))
                 },
                 onSuccess = {
                     logInfo("REMOVE_TOKEN", "Token removido com sucesso!")
-                    _App_sideEffectChannel.send(AppSideEffect.ShowToast("Você foi deslogado com sucesso!"))
+                    _appSideEffectChannel.send(AppSideEffect.ShowToast("Você foi deslogado com sucesso!"))
                 },
             )
         }

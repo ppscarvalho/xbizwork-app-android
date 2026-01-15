@@ -1,4 +1,4 @@
-package com.br.xbizitwork.domain.source.cep
+package com.br.xbizitwork.data.remote.cep.datasource
 
 import com.br.xbizitwork.core.result.DefaultResult
 import com.br.xbizitwork.domain.model.cep.CepModel
@@ -9,4 +9,3 @@ import com.br.xbizitwork.domain.model.cep.CepModel
 interface CepRemoteDataSource {
     suspend fun getCep(cep: String): DefaultResult<CepModel>
 }
-

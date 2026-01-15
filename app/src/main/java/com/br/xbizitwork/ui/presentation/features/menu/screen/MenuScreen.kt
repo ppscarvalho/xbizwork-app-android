@@ -39,11 +39,12 @@ fun MenuScreen(
 
     // Tratar SideEffects (Toast)
     LifecycleEventEffect(appSideEffectFlow) { sideEffect ->
-        when(sideEffect) {
+        when (sideEffect) {
             is AppSideEffect.ShowToast -> context.toast(sideEffect.message)
-            is AppSideEffect.NavigateToLogin -> {
+            is AppSideEffect.NavigateToHomeGraph -> {
                 // MenuScreen não trata NavigateToLogin, ignora
             }
+
             is AppSideEffect.NavigateBack -> {
                 // MenuScreen não trata NavigateBack, ignora
             }
@@ -64,18 +65,18 @@ fun MenuScreen(
         content = { paddingValues ->
             MenuContent(
                 paddingValues = paddingValues,
-                    onClickUpdateProfile = onClickUpdateProfile,
-                    onClickChangePassword = onClickChangePassword,
-                    onClickCreateSkills = onClickCreateSkills,
-                    onClickSetupSchedule = onClickSetupSchedule,
-                    onClickYourPlan = onClickYourPlan,
-                    onClickMyAppointments = onClickMyAppointments,
-                    onClickProfessionalAgenda = onClickProfessionalAgenda,
-                    onClickFAQ = onClickFAQ,
-                    onClickAppVersion = onClickAppVersion,
-                    onClickRateApp = onClickRateApp,
-                    onClickLogout = onClickLogout
-                )
+                onClickUpdateProfile = onClickUpdateProfile,
+                onClickChangePassword = onClickChangePassword,
+                onClickCreateSkills = onClickCreateSkills,
+                onClickSetupSchedule = onClickSetupSchedule,
+                onClickYourPlan = onClickYourPlan,
+                onClickMyAppointments = onClickMyAppointments,
+                onClickProfessionalAgenda = onClickProfessionalAgenda,
+                onClickFAQ = onClickFAQ,
+                onClickAppVersion = onClickAppVersion,
+                onClickRateApp = onClickRateApp,
+                onClickLogout = onClickLogout
+            )
         }
     )
 }

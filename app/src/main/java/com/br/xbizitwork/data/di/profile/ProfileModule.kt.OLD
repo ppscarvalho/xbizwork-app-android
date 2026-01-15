@@ -6,7 +6,7 @@ import com.br.xbizitwork.data.remote.profile.api.ProfileApiServiceImpl
 import com.br.xbizitwork.data.remote.profile.datasource.ProfileRemoteDataSourceImpl
 import com.br.xbizitwork.data.repository.ProfileRepositoryImpl
 import com.br.xbizitwork.domain.repository.ProfileRepository
-import com.br.xbizitwork.domain.source.profile.ProfileRemoteDataSource
+import com.br.xbizitwork.data.remote.profile.datasource.ProfileRemoteDataSource
 import com.br.xbizitwork.domain.usecase.profile.UpdateProfileUseCase
 import com.br.xbizitwork.domain.usecase.profile.UpdateProfileUseCaseImpl
 import com.br.xbizitwork.domain.usecase.profile.ValidateProfileUseCase

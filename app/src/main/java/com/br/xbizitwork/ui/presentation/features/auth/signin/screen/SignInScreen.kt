@@ -36,7 +36,7 @@ fun SignInScreen(
     LifecycleEventEffect(appSideEffectFlow){ sideEffect ->
         when(sideEffect){
             is AppSideEffect.ShowToast -> context.toast(sideEffect.message)
-            is AppSideEffect.NavigateToLogin -> {
+            is AppSideEffect.NavigateToHomeGraph -> {
                 // Já estamos na tela de login, não faz nada
             }
             is AppSideEffect.NavigateBack -> {

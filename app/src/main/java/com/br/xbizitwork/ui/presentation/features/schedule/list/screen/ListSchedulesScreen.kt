@@ -27,14 +27,14 @@ fun ListSchedulesScreen(
     onEvent: (ListSchedulesEvent) -> Unit,
     onNavigateBack: () -> Unit,
     onNavigateToCreateSchedule: () -> Unit,
-    onNavigateToLogin: () -> Unit = {}
+    //onNavigateToLogin: () -> Unit = {}
 ) {
     val context = LocalContext.current
 
     LifecycleEventEffect(appSideEffectFlow) { sideEffect ->
         when (sideEffect) {
             is AppSideEffect.ShowToast -> context.toast(sideEffect.message)
-            is AppSideEffect.NavigateToLogin -> onNavigateToLogin()
+            //is AppSideEffect.NavigateToLogin -> onNavigateToLogin()
             else -> {}
         }
     }

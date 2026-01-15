@@ -168,10 +168,9 @@ fun EditProfileContainer(
         Row(modifier = Modifier.fillMaxWidth()) {
             // CEP
             AppTextField(
-                modifier = Modifier.weight(2f).padding(end = 2.dp),
+                modifier = Modifier.weight(3f).padding(end = 2.dp),
                 label = "CEP",
                 placeholder = "00000-000",
-                // Passa apenas os números para o componente
                 value = zipCodeValue.filter { it.isDigit() },
                 onValueChange = { input ->
                     val digits = input.filter { it.isDigit() }.take(8)
@@ -188,7 +187,7 @@ fun EditProfileContainer(
 
             AppTextField(
                 modifier = Modifier.weight(2f),
-                label = "Número",
+                label = "Nº",
                 placeholder = "123",
                 value = numberValue,
                 onValueChange = onNumberChanged,
@@ -226,11 +225,12 @@ fun EditProfileContainer(
             enabled = false  // ✅ Preenchido automaticamente pelo CEP
         )
 
-        Row(modifier = Modifier.fillMaxWidth()) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+        ){
             // Cidade
             AppTextField(
-                modifier = Modifier.weight(4f)
-                    .padding(end = 2.dp),
+                modifier = Modifier.weight(3f).padding(end = 2.dp),
                 label = "Cidade",
                 placeholder = "São Paulo",
                 value = cityValue,
@@ -241,7 +241,7 @@ fun EditProfileContainer(
                 enabled = false  // ✅ Preenchido automaticamente pelo CEP
             )
 
-            // Estado
+            //UF
             AppTextField(
                 modifier = Modifier.weight(2f),
                 label = "UF",
@@ -254,7 +254,6 @@ fun EditProfileContainer(
                 enabled = false  // ✅ Preenchido automaticamente pelo CEP
             )
         }
-
 
         // ========== BOTÃO ==========
 

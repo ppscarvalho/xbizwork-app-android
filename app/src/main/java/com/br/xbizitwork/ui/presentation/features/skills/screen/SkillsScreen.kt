@@ -25,15 +25,15 @@ fun SkillsScreen(
     appSideEffectFlow: Flow<AppSideEffect>,
     onEvent: (SkillsEvent) -> Unit,
     onNavigateBack: () -> Unit,
-    onNavigateToLogin: () -> Unit,
+    onNavigateToHomeGraph: () -> Unit
 ) {
     val context = LocalContext.current
     LifecycleEventEffect(appSideEffectFlow) { sideEffect ->
         when (sideEffect) {
             is AppSideEffect.ShowToast -> context.toast(sideEffect.message)
 
-            is AppSideEffect.NavigateToLogin -> {
-                onNavigateToLogin()
+            is AppSideEffect.NavigateToHomeGraph -> {
+                onNavigateToHomeGraph()
             }
 
             is AppSideEffect.NavigateBack -> {
@@ -75,7 +75,7 @@ private fun SkillsScreenPreview() {
             appSideEffectFlow = flowOf(),
             onEvent = {},
             onNavigateBack = {},
-            onNavigateToLogin = {}
+            onNavigateToHomeGraph = {}
         )
     }
 }

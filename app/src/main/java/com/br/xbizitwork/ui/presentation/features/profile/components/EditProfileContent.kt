@@ -77,7 +77,7 @@ fun EditProfileContent(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(top = 10.dp)
-                    .padding(horizontal = 10.dp)                    .padding(horizontal = 12.dp)
+                    .padding(horizontal = 8.dp)                    .padding(horizontal = 12.dp)
                     .verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {

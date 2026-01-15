@@ -1,16 +1,11 @@
 package com.br.xbizitwork.ui.presentation.features.auth.changepassword.screen
 
-import android.app.Activity
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalView
-import androidx.core.view.WindowCompat
 import com.br.xbizitwork.core.sideeffects.AppSideEffect
 import com.br.xbizitwork.core.state.LifecycleEventEffect
 import com.br.xbizitwork.core.util.extensions.toast
@@ -19,7 +14,6 @@ import com.br.xbizitwork.ui.presentation.features.auth.changepassword.components
 import com.br.xbizitwork.ui.presentation.features.auth.changepassword.events.ChangePasswordEvent
 import com.br.xbizitwork.ui.presentation.features.auth.changepassword.state.ChangePasswordState
 import com.br.xbizitwork.ui.presentation.navigation.StateNavigationEffect
-import com.br.xbizitwork.ui.theme.BeigeBackground
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -42,7 +36,7 @@ fun ChangePasswordScreen(
     LifecycleEventEffect(sideEffectFlow) { sideEffect ->
         when (sideEffect) {
             is AppSideEffect.ShowToast -> context.toast(sideEffect.message)
-            is AppSideEffect.NavigateToLogin -> {
+            is AppSideEffect.NavigateToHomeGraph -> {
                 // ChangePasswordScreen não trata NavigateToLogin, ignora
             }
             is AppSideEffect.NavigateBack -> {

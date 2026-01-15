@@ -3,7 +3,7 @@ package com.br.xbizitwork.data.di.skills
 import com.br.xbizitwork.core.dispatcher.CoroutineDispatcherProvider
 import com.br.xbizitwork.data.repository.SkillsRepositoryImpl
 import com.br.xbizitwork.domain.repository.SkillsRepository
-import com.br.xbizitwork.domain.source.skills.SkillsRemoteDataSource
+import com.br.xbizitwork.data.remote.skills.datasource.SkillsRemoteDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

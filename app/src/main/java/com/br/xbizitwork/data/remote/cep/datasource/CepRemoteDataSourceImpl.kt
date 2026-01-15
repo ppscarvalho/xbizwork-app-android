@@ -5,7 +5,7 @@ import com.br.xbizitwork.core.util.logging.logInfo
 import com.br.xbizitwork.data.remote.cep.api.CepApiService
 import com.br.xbizitwork.data.remote.cep.mappers.toModel
 import com.br.xbizitwork.domain.model.cep.CepModel
-import com.br.xbizitwork.domain.source.cep.CepRemoteDataSource
+import com.br.xbizitwork.data.remote.cep.datasource.CepRemoteDataSource
 import javax.inject.Inject
 
 /**

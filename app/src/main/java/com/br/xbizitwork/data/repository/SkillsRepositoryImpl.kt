@@ -5,7 +5,7 @@ import com.br.xbizitwork.core.model.api.ApiResultModel
 import com.br.xbizitwork.core.result.DefaultResult
 import com.br.xbizitwork.domain.model.skills.SaveUserSkillsRequestModel
 import com.br.xbizitwork.domain.repository.SkillsRepository
-import com.br.xbizitwork.domain.source.skills.SkillsRemoteDataSource
+import com.br.xbizitwork.data.remote.skills.datasource.SkillsRemoteDataSource
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 

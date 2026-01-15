@@ -5,7 +5,7 @@ import com.br.xbizitwork.core.result.DefaultResult
 import com.br.xbizitwork.data.remote.profile.api.ProfileApiService
 import com.br.xbizitwork.data.remote.profile.mappers.toRequest
 import com.br.xbizitwork.domain.model.profile.UpdateProfileRequestModel
-import com.br.xbizitwork.domain.source.profile.ProfileRemoteDataSource
+import com.br.xbizitwork.data.remote.profile.datasource.ProfileRemoteDataSource
 import javax.inject.Inject
 
 /**

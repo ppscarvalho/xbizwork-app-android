@@ -3,6 +3,7 @@ package com.br.xbizitwork.core.network
 import com.br.xbizitwork.core.util.logging.logError
 import com.br.xbizitwork.core.util.logging.logInfo
 import com.br.xbizitwork.data.local.auth.datastore.AuthSessionLocalDataSource
+import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.plugins.api.ClientPlugin
 import io.ktor.client.plugins.api.createClientPlugin
 import io.ktor.client.request.header
@@ -87,6 +88,7 @@ object AuthTokenInterceptor {
                         authSessionLocalDataSource.clearSession()
 
                         logInfo("AUTH_INTERCEPTOR", "✅ Sessão limpa! Usuário precisa fazer login novamente.")
+                        //throw IllegalStateException("Unauthorized")
                     }
                 } catch (e: Exception) {
                     logError("AUTH_INTERCEPTOR", "Erro ao processar resposta 401: ${e.message}")

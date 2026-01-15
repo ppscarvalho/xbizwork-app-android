@@ -60,7 +60,9 @@ fun NavGraphBuilder.homeGraph(
             onNavigateChangePasswordScreen = {
                 navController.navigateToChangePasswordScreen()
             },
-            onNavigateToLogin = onNavigateToSignInScreen
+            onNavigateToHomeGraph = {
+                navController.navigationToHomeGraph()
+            }
         )
     }
 }

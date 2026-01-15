@@ -1,6 +1,5 @@
 package com.br.xbizitwork.ui.presentation.features.profile.screen
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
@@ -14,8 +13,6 @@ import com.br.xbizitwork.core.sideeffects.AppSideEffect
 import com.br.xbizitwork.core.state.LifecycleEventEffect
 import com.br.xbizitwork.core.util.extensions.toast
 import com.br.xbizitwork.ui.presentation.components.topbar.AppTopBar
-import com.br.xbizitwork.ui.presentation.features.auth.changepassword.components.ChangePasswordContent
-import com.br.xbizitwork.ui.presentation.features.auth.changepassword.events.ChangePasswordEvent
 import com.br.xbizitwork.ui.presentation.features.profile.components.EditProfileContent
 import com.br.xbizitwork.ui.presentation.features.profile.events.EditProfileEvent
 import com.br.xbizitwork.ui.presentation.features.profile.state.EditProfileUIState
@@ -43,7 +40,7 @@ fun EditProfileScreen(
     appSideEffectFlow: Flow<AppSideEffect>,
     onEvent: (EditProfileEvent) -> Unit,
     onNavigateBack: () -> Unit,
-    onNavigateToLogin: () -> Unit,
+    onNavigateToHomeGraph: () -> Unit,
 ) {
     val context = LocalContext.current
 
@@ -52,8 +49,8 @@ fun EditProfileScreen(
         when (sideEffect) {
             is AppSideEffect.ShowToast -> context.toast(sideEffect.message)
 
-            is AppSideEffect.NavigateToLogin -> {
-                onNavigateToLogin()
+            is AppSideEffect.NavigateToHomeGraph -> {
+                onNavigateToHomeGraph()
             }
 
             is AppSideEffect.NavigateBack -> {
@@ -107,7 +104,7 @@ private fun EditProfileScreenPreview() {
             appSideEffectFlow = flowOf() ,
             onEvent = {},
             onNavigateBack = {},
-            onNavigateToLogin = {}
+            onNavigateToHomeGraph = {}
         )
     }
 }

@@ -2,7 +2,7 @@ package com.br.xbizitwork.data.di.skills
 
 import com.br.xbizitwork.data.remote.skills.api.SkillsApiService
 import com.br.xbizitwork.data.remote.skills.datasource.SkillsRemoteDataSourceImpl
-import com.br.xbizitwork.domain.source.skills.SkillsRemoteDataSource
+import com.br.xbizitwork.data.remote.skills.datasource.SkillsRemoteDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

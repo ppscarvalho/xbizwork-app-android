@@ -2,9 +2,7 @@ package com.br.xbizitwork.ui.presentation.features.home.screen
 
 import android.app.Activity
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -61,7 +59,7 @@ fun DefaultScreen(
     LifecycleEventEffect(sideEffectFlow) { sideEffect ->
         when(sideEffect) {
             is AppSideEffect.ShowToast -> context.toast(sideEffect.message)
-            is AppSideEffect.NavigateToLogin -> {
+            is AppSideEffect.NavigateToHomeGraph -> {
                 // HomeScreen não trata NavigateToLogin, ignora
             }
             is AppSideEffect.NavigateBack -> {

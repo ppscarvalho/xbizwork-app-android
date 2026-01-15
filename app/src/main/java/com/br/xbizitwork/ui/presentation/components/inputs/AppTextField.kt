@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Password
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme.colorScheme
@@ -53,7 +54,8 @@ fun AppTextField(
     enabled: Boolean = true,
 
     // ✅ NOVO: Callback quando perde o foco
-    onFocusLost: (() -> Unit)? = null
+    onFocusLost: (() -> Unit)? = null,
+    maxLength: Int? = null,
 ) {
     Column(modifier = modifier) {
 
@@ -66,8 +68,14 @@ fun AppTextField(
                         onFocusLost()
                     }
                 },
+//            value = value,
+//            onValueChange = onValueChange,
             value = value,
-            onValueChange = onValueChange,
+            onValueChange = { newValue ->
+                if (maxLength == null || newValue.length <= maxLength) {
+                    onValueChange(newValue)
+                }
+            },
 
             textStyle = TextStyle(
                 fontFamily = poppinsFontFamily,
@@ -149,8 +157,10 @@ private fun AppTextFieldPreview() {
             value = name,
             onValueChange = { name = it },
             leadingIcon = Icons.Outlined.Person,
-            textColor = Color.Black,
-            cursorColor = Color.Black
+            textColor = Color.White,
+            cursorColor = Color.Black,
+            trailingIcon = Icons.Outlined.Person,
+            maxLength = 10
         )
     }
 }

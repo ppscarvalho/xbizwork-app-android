@@ -6,7 +6,7 @@ import com.br.xbizitwork.core.util.logging.logInfo
 import com.br.xbizitwork.data.remote.skills.api.SkillsApiService
 import com.br.xbizitwork.data.remote.skills.mappers.toRequest
 import com.br.xbizitwork.domain.model.skills.SaveUserSkillsRequestModel
-import com.br.xbizitwork.domain.source.skills.SkillsRemoteDataSource
+import com.br.xbizitwork.data.remote.skills.datasource.SkillsRemoteDataSource
 import javax.inject.Inject
 
 /**

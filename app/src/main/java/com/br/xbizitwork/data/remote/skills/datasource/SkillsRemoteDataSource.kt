@@ -1,4 +1,4 @@
-package com.br.xbizitwork.domain.source.skills
+package com.br.xbizitwork.data.remote.skills.datasource
 
 import com.br.xbizitwork.core.model.api.ApiResultModel
 import com.br.xbizitwork.core.result.DefaultResult
@@ -25,4 +25,3 @@ interface SkillsRemoteDataSource {
      */
     suspend fun getUserSkills(userId: Int): DefaultResult<List<Int>>
 }
-

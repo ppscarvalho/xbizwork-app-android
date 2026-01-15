@@ -160,15 +160,15 @@ class EditProfileViewModel @Inject constructor(
                     },
                     onSuccess = { user ->
                         logInfo("LOAD_PROFILE", "✅ Dados recebidos da API:")
-                        logInfo("LOAD_PROFILE", "  - id: ${user.id}")
-                        logInfo("LOAD_PROFILE", "  - name: ${user.name}")
-                        logInfo("LOAD_PROFILE", "  - cpf: ${user.cpf}")
-                        logInfo("LOAD_PROFILE", "  - gender: ${user.gender}")
-                        logInfo("LOAD_PROFILE", "  - mobilePhone: ${user.mobilePhone}")
-                        logInfo("LOAD_PROFILE", "  - city: ${user.city}")
-                        logInfo("LOAD_PROFILE", "  - state: ${user.state}")
-                        logInfo("LOAD_PROFILE", "  - status: ${user.status}")
-                        logInfo("LOAD_PROFILE", "  - registration: ${user.registration}")
+//                        logInfo("LOAD_PROFILE", "  - id: ${user.id}")
+//                        logInfo("LOAD_PROFILE", "  - name: ${user.name}")
+//                        logInfo("LOAD_PROFILE", "  - cpf: ${user.cpf}")
+//                        logInfo("LOAD_PROFILE", "  - gender: ${user.gender}")
+//                        logInfo("LOAD_PROFILE", "  - mobilePhone: ${user.mobilePhone}")
+//                        logInfo("LOAD_PROFILE", "  - city: ${user.city}")
+//                        logInfo("LOAD_PROFILE", "  - state: ${user.state}")
+//                        logInfo("LOAD_PROFILE", "  - status: ${user.status}")
+//                        logInfo("LOAD_PROFILE", "  - registration: ${user.registration}")
 
                         _uiState.update {
                             it.copy(
@@ -204,7 +204,7 @@ class EditProfileViewModel @Inject constructor(
                             logInfo("LOAD_PROFILE", "🔐 Token expirado! Navegando ao login...")
 
                             viewModelScope.launch {
-                                _appSideEffectChannel.send(AppSideEffect.NavigateToLogin)
+                                _appSideEffectChannel.send(AppSideEffect.NavigateToHomeGraph)
                             }
 
                             _uiState.update {

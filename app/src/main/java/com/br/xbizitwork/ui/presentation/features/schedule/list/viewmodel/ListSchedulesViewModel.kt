@@ -74,7 +74,7 @@ class ListSchedulesViewModel @Inject constructor(
                         errorMessage.contains("Token inválido") ||
                         errorMessage.contains("Unauthorized")) {
                         viewModelScope.launch {
-                            _appSideEffectChannel.send(AppSideEffect.NavigateToLogin)
+                            _appSideEffectChannel.send(AppSideEffect.NavigateToHomeGraph)
                         }
                     }
 
