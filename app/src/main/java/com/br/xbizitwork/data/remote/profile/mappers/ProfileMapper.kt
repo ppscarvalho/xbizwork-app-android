@@ -16,7 +16,7 @@ fun UpdateProfileRequestModel.toRequest(): UpdateProfileRequest {
         name = this.name,
         cpf = this.cpf,
         dateOfBirth = this.dateOfBirth?.toString(), // LocalDate → String ISO
-        gender = this.gender,
+        //gender = this.gender,
 
         // Contato
         email = this.email,

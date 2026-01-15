@@ -3,7 +3,6 @@ package com.br.xbizitwork.ui.presentation.features.menu.components
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -12,13 +11,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Assignment
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.automirrored.filled.Help
-import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Event
 import androidx.compose.material.icons.filled.Key
 import androidx.compose.material.icons.filled.MobileScreenShare
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Psychology
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.filled.ViewModule
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -35,6 +33,7 @@ fun MenuContainer(
     modifier: Modifier = Modifier,
     onClickUpdateProfile: () -> Unit,
     onClickChangePassword: () -> Unit,
+    onClickCreateSkills: () -> Unit,
     onClickSetupSchedule: () -> Unit,
     onClickYourPlan: () -> Unit,
     onClickMyAppointments: () -> Unit,
@@ -49,8 +48,7 @@ fun MenuContainer(
     ) {
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(1.dp),
-            contentPadding = PaddingValues(vertical = 8.dp)
+            verticalArrangement = Arrangement.spacedBy(1.dp)
         ) {
             // ========== SEÇÃO PERFIL ==========
             item {
@@ -58,24 +56,23 @@ fun MenuContainer(
                     text = "Perfil",
                     fontSize = 14.sp,
                     fontWeight = FontWeight.SemiBold,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = MaterialTheme.colorScheme.onPrimary,
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(horizontal = 16.dp, vertical = 8.dp)
+                        .padding(horizontal = 16.dp, vertical = 4.dp)
                 )
+            }
+            item {
+                Spacer(modifier = Modifier.fillMaxSize())
             }
 
             item {
                 MenuButton(
                     leftIcon = Icons.Filled.Person,
                     text = "Alterar Perfil",
-                    onClick = onClickUpdateProfile,
-                    hasDividerAfter = false
-                )
-            }
+                    onClick = onClickUpdateProfile
 
-            item {
-                Spacer(modifier = Modifier.fillMaxSize())
+                )
             }
 
             // ========== SEÇÃO SERVIÇO ==========
@@ -84,7 +81,7 @@ fun MenuContainer(
                     text = "Serviço",
                     fontSize = 14.sp,
                     fontWeight = FontWeight.SemiBold,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = MaterialTheme.colorScheme.onPrimary,
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(horizontal = 16.dp, vertical = 8.dp)
@@ -101,16 +98,24 @@ fun MenuContainer(
 
             item {
                 MenuButton(
-                    leftIcon = Icons.Filled.DateRange,
-                    text = "Monte sua agenda",
-                    onClick = onClickSetupSchedule
+                    leftIcon = Icons.Filled.Psychology,
+                    text = "Minhas habilidades",
+                    onClick = onClickCreateSkills
                 )
             }
+
+//            item {
+//                MenuButton(
+//                    leftIcon = Icons.Filled.DateRange,
+//                    text = "Monte sua agenda",
+//                    onClick = onClickSetupSchedule
+//                )
+//            }
 
             item {
                 MenuButton(
                     leftIcon = Icons.AutoMirrored.Filled.Assignment,
-                    text = "Seu plano",
+                    text = "Planos",
                     onClick = onClickYourPlan
                 )
             }
@@ -123,14 +128,14 @@ fun MenuContainer(
                 )
             }
 
-            item {
-                MenuButton(
-                    leftIcon = Icons.Filled.ViewModule,
-                    text = "Agenda profissional",
-                    onClick = onClickProfessionalAgenda,
-                    hasDividerAfter = false
-                )
-            }
+//            item {
+//                MenuButton(
+//                    leftIcon = Icons.Filled.ViewModule,
+//                    text = "Agenda profissional",
+//                    onClick = onClickProfessionalAgenda,
+//                    hasDividerAfter = false
+//                )
+//            }
 
             item {
                 Spacer(modifier = Modifier.fillMaxSize())
@@ -142,7 +147,7 @@ fun MenuContainer(
                     text = "Sobre o app",
                     fontSize = 14.sp,
                     fontWeight = FontWeight.SemiBold,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = MaterialTheme.colorScheme.onPrimary,
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(horizontal = 16.dp, vertical = 8.dp)
@@ -169,8 +174,7 @@ fun MenuContainer(
                 MenuButton(
                     leftIcon = Icons.Filled.Star,
                     text = "Avalie nosso aplicativo",
-                    onClick = onClickRateApp,
-                    hasDividerAfter = false
+                    onClick = onClickRateApp
                 )
             }
 
@@ -184,7 +188,7 @@ fun MenuContainer(
                     text = "Gerenciar o App",
                     fontSize = 14.sp,
                     fontWeight = FontWeight.SemiBold,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    color = MaterialTheme.colorScheme.onPrimary,
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(horizontal = 16.dp, vertical = 8.dp)
@@ -196,14 +200,16 @@ fun MenuContainer(
                     leftIcon = Icons.AutoMirrored.Filled.ExitToApp,
                     text = "Sair",
                     onClick = onClickLogout,
-                    hasDividerAfter = false
+                    hasDividerAfter = false,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }
     }
 }
 
-@Preview (showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview (showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES,
+    backgroundColor = 0xFF0f344e)
 @Composable
 private fun MenuContainerPreView() {
     XBizWorkTheme {
@@ -211,6 +217,7 @@ private fun MenuContainerPreView() {
             modifier = Modifier.fillMaxSize(),
             onClickUpdateProfile = {},
             onClickChangePassword = {},
+            onClickCreateSkills={},
             onClickSetupSchedule = {},
             onClickYourPlan = {},
             onClickMyAppointments = {},

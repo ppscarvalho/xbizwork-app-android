@@ -29,8 +29,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
-import com.br.xbizitwork.ui.theme.poppinsFOntFamily
-import com.example.xbizitwork.R
+import com.br.xbizitwork.ui.theme.poppinsFontFamily
+import com.br.xbizitwork.R
 
 @Composable
 fun ProfessionalHighlight(
@@ -80,7 +80,7 @@ fun ProfessionalHighlight(
                         name,
                         fontWeight = FontWeight.Medium,
                         style = MaterialTheme.typography.titleMedium,
-                        fontFamily = poppinsFOntFamily,
+                        fontFamily = poppinsFontFamily,
                         fontSize = 14.sp,
                         color = Color.Black,
                         modifier = Modifier.weight(1f, fill = false)
@@ -88,7 +88,7 @@ fun ProfessionalHighlight(
                     Text(
                         "⭐️ $rating ($recommendations)",
                         fontSize = 11.sp,
-                        fontFamily = poppinsFOntFamily,
+                        fontFamily = poppinsFontFamily,
                         color = Color.Black
                     )
                 }

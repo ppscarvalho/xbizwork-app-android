@@ -24,14 +24,14 @@ import com.br.xbizitwork.ui.theme.XBizWorkTheme
  */
 @Composable
 fun SpecialtyInfoRow(
+    modifier: Modifier = Modifier,
     label: String = "Especialidade:",
     value: String,
-    modifier: Modifier = Modifier
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp),
+            .padding(vertical = 8.dp, horizontal = 8.dp),
         horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.CenterVertically
     ) {

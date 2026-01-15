@@ -12,7 +12,7 @@ import com.br.xbizitwork.ui.presentation.navigation.screens.MenuScreens
 fun NavGraphBuilder.listSchedulesScreen(
     onNavigateUp: () -> Unit,
     onNavigateToCreateSchedule: () -> Unit,
-    onNavigateToLogin: () -> Unit
+    //onNavigateToLogin: () -> Unit
 ) {
     composable<MenuScreens.ListSchedulesScreen> {
         val viewModel: ListSchedulesViewModel = hiltViewModel()
@@ -24,7 +24,7 @@ fun NavGraphBuilder.listSchedulesScreen(
             onEvent = viewModel::onEvent,
             onNavigateBack = onNavigateUp,
             onNavigateToCreateSchedule = onNavigateToCreateSchedule,
-            onNavigateToLogin = onNavigateToLogin
+            //onNavigateToLogin = onNavigateToLogin
         )
     }
 }

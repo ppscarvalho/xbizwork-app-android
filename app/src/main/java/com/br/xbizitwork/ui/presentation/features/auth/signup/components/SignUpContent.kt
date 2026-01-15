@@ -16,11 +16,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -34,9 +36,18 @@ import com.br.xbizitwork.ui.theme.BeigeBackground
 import com.br.xbizitwork.ui.theme.GrayText
 import com.br.xbizitwork.ui.theme.TealPrimary
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
-import com.br.xbizitwork.ui.theme.poppinsFOntFamily
-import com.example.xbizitwork.R
+import com.br.xbizitwork.ui.theme.poppinsFontFamily
+import com.br.xbizitwork.R
+import com.br.xbizitwork.ui.presentation.components.background.AppGradientBackground
 
+val backgroundGradient = Brush.verticalGradient(
+    colors = listOf(
+        Color(0xFF7cc0d8),
+        Color(0xFF92cbdf),
+        Color(0xFFa8d5e5),
+        Color(0xFFbee0ec),
+    )
+)
 
 @Composable
 fun SignUpContent(
@@ -50,11 +61,9 @@ fun SignUpContent(
     onConfirmPasswordChanged: (String) -> Unit,
     onSignUpClick: () -> Unit,
 ) {
-    Box(
-        modifier = modifier
-            .fillMaxSize()
-            .background(Color.White)
-            .padding(paddingValues)
+    AppGradientBackground(
+        modifier = modifier,
+        paddingValues = paddingValues
     ) {
         // Header curvo com fundo bege
         Box(
@@ -62,7 +71,7 @@ fun SignUpContent(
                 .fillMaxWidth()
                 .height(220.dp)
                 .clip(RoundedCornerShape(bottomStart = 40.dp, bottomEnd = 40.dp))
-                .background(BeigeBackground)
+                //.background(BeigeBackground)
         ) {
             AppIcon(
                 modifier = Modifier
@@ -80,16 +89,16 @@ fun SignUpContent(
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(modifier = Modifier.height(60.dp))
+            Spacer(modifier = Modifier.height(20.dp))
 
             // Título
             Text(
                 text = stringResource(R.string.signUp_text),
-                fontFamily = poppinsFOntFamily,
+                fontFamily = poppinsFontFamily,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 22.sp,
                 textAlign = TextAlign.Center,
-                color = TealPrimary,
+                color = colorScheme.onPrimary,
                 modifier = Modifier.fillMaxWidth()
             )
 
@@ -97,7 +106,7 @@ fun SignUpContent(
             if (!uiState.signUpErrorMessage.isNullOrEmpty() || !uiState.fieldErrorMessage.isNullOrEmpty()) {
                 Text(
                     text = uiState.signUpErrorMessage ?: uiState.fieldErrorMessage.orEmpty(),
-                    fontFamily = poppinsFOntFamily,
+                    fontFamily = poppinsFontFamily,
                     fontSize = 14.sp,
                     textAlign = TextAlign.Center,
                     color = Color(0xFFD32F2F),
@@ -135,16 +144,16 @@ fun SignUpContent(
                 Text(
                     text = stringResource(R.string.already_have_an_account),
                     fontSize = 14.sp,
-                    fontFamily = poppinsFOntFamily,
-                    color = GrayText
+                    fontFamily = poppinsFontFamily,
+                    color = colorScheme.onPrimary
                 )
 
                 Text(
                     text = stringResource(R.string.login_text),
                     fontSize = 14.sp,
-                    fontFamily = poppinsFOntFamily,
+                    fontFamily = poppinsFontFamily,
                     fontWeight = FontWeight.Bold,
-                    color = TealPrimary,
+                    color = colorScheme.onPrimary,
                     modifier = Modifier
                         .padding(start = 5.dp)
                         .clickable { onNavigateToSignInScreen() }

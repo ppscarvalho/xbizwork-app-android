@@ -2,7 +2,7 @@ package com.br.xbizitwork.data.di.profile
 
 import com.br.xbizitwork.data.remote.profile.api.ProfileApiService
 import com.br.xbizitwork.data.remote.profile.datasource.ProfileRemoteDataSourceImpl
-import com.br.xbizitwork.domain.source.profile.ProfileRemoteDataSource
+import com.br.xbizitwork.data.remote.profile.datasource.ProfileRemoteDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

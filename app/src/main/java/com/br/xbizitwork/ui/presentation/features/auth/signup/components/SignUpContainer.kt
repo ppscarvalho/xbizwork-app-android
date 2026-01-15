@@ -1,5 +1,6 @@
 package com.br.xbizitwork.ui.presentation.features.auth.signup.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -26,21 +27,18 @@ import com.br.xbizitwork.ui.presentation.components.inputs.AppTextField
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import com.example.xbizitwork.R
+import com.br.xbizitwork.R
 
 
 @Composable
 fun SignUpContainer(
     modifier: Modifier = Modifier,
-
     isLoading: Boolean,
     buttonEnabled: Boolean,
-
     nameValue: String,
     emailValue: String,
     passwordValue: String,
     confirmPasswordValue: String,
-
     onNameChanged: (String) -> Unit,
     onEmailChanged: (String) -> Unit,
     onPasswordChanged: (String) -> Unit,
@@ -59,8 +57,8 @@ fun SignUpContainer(
             value = nameValue,
             onValueChange = onNameChanged,
             leadingIcon = Icons.Outlined.Person,
-            textColor = colorScheme.onSurfaceVariant,
-            cursorColor = colorScheme.onSurfaceVariant
+            textColor = colorScheme.onPrimary,
+            cursorColor = colorScheme.onPrimary
         )
 
         // Campo E-mail (NOVO)
@@ -71,8 +69,8 @@ fun SignUpContainer(
             value = emailValue,
             onValueChange = onEmailChanged,
             leadingIcon = Icons.Outlined.Email,
-            textColor = colorScheme.onSurfaceVariant,
-            cursorColor = colorScheme.onSurfaceVariant
+            textColor = colorScheme.onPrimary,
+            cursorColor = colorScheme.onPrimary
         )
 
         // ✅ Campo Senha (NOVO)
@@ -83,8 +81,8 @@ fun SignUpContainer(
             value = passwordValue,
             onValueChange = onPasswordChanged,
             leadingIcon = Icons.Outlined.Lock,
-            textColor = colorScheme.onSurfaceVariant,
-            cursorColor = colorScheme.onSurfaceVariant
+            textColor = colorScheme.onPrimary,
+            cursorColor = colorScheme.onPrimary
         )
 
         // ✅ Confirmar Senha (NOVO)
@@ -95,8 +93,8 @@ fun SignUpContainer(
             value = confirmPasswordValue,
             onValueChange = onConfirmPasswordChanged,
             leadingIcon = Icons.Outlined.Lock,
-            textColor = colorScheme.onSurfaceVariant,
-            cursorColor = colorScheme.onSurfaceVariant
+            textColor = colorScheme.onPrimary,
+            cursorColor = colorScheme.onPrimary
         )
 
         Column(
@@ -118,7 +116,8 @@ fun SignUpContainer(
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES,
+    backgroundColor = 0xFF0f344e)
 @Composable
 private fun SignUpContainerPreview_Step1() {
     var name by remember { mutableStateOf("") }

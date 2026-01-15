@@ -1,5 +1,6 @@
 package com.br.xbizitwork.ui.presentation.features.auth.signin.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,7 +25,7 @@ import com.br.xbizitwork.ui.presentation.components.buttons.AppButton
 import com.br.xbizitwork.ui.presentation.components.inputs.AppPasswordField
 import com.br.xbizitwork.ui.presentation.components.inputs.AppTextField
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
-import com.example.xbizitwork.R
+import com.br.xbizitwork.R
 
 @Composable
 fun SignInContainer(
@@ -51,8 +52,8 @@ fun SignInContainer(
             value = emailValue,
             onValueChange = onEmailChanged,
             leadingIcon = Icons.Outlined.Email,
-            textColor = colorScheme.onSurfaceVariant,
-            cursorColor = colorScheme.onSurfaceVariant
+            textColor = colorScheme.onPrimary,
+            cursorColor = colorScheme.onPrimary
         )
 
         // ✅ Campo Senha (NOVO)
@@ -63,8 +64,8 @@ fun SignInContainer(
             value = passwordValue,
             onValueChange = onPasswordChanged,
             leadingIcon = Icons.Outlined.Lock,
-            textColor = colorScheme.onSurfaceVariant,
-            cursorColor = colorScheme.onSurfaceVariant
+            textColor = colorScheme.onPrimary,
+            cursorColor = colorScheme.onPrimary
         )
 
         Column(
@@ -86,7 +87,9 @@ fun SignInContainer(
     }
 }
 
-@Preview (showBackground = true, backgroundColor = 0xFFF0EAE2)
+@Preview (showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    backgroundColor = 0xFF0f344e)
 @Composable
 private fun SignInContainerPreview() {
     var email by remember { mutableStateOf("") }

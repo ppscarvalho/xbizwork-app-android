@@ -440,8 +440,8 @@ fun ErrorMessageContainer(
 fun getUsersFromCache() = runTest {
     // Arrange
     val mockUsers = listOf(
-        UserResponseDto(1, "John", "john@example.com"),
-        UserResponseDto(2, "Jane", "jane@example.com")
+        UserResponseDto(1, "John", "john@br.com"),
+        UserResponseDto(2, "Jane", "jane@br.com")
     )
     
     whenever(userApiService.getUsers()).thenReturn(mockUsers)

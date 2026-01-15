@@ -3,13 +3,13 @@ package com.br.xbizitwork.core.network
 import com.br.xbizitwork.core.util.logging.logError
 import com.br.xbizitwork.core.util.logging.logInfo
 import com.br.xbizitwork.data.local.auth.datastore.AuthSessionLocalDataSource
+import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.plugins.api.ClientPlugin
 import io.ktor.client.plugins.api.createClientPlugin
 import io.ktor.client.request.header
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.flow.first
-import javax.inject.Inject
 
 /**
  * Plugin Ktor que adiciona automaticamente o token JWT ao header Authorization
@@ -45,10 +45,10 @@ import javax.inject.Inject
  * 7. Se 401: limpa sessão e força reautenticação
  */
 object AuthTokenInterceptor {
-    
+
     /**
      * Cria o plugin Ktor de autenticação.
-     * 
+     *
      * @param authSessionLocalDataSource Fonte do token JWT armazenado
      * @return Plugin pronto para instalar no HttpClient
      */
@@ -88,6 +88,7 @@ object AuthTokenInterceptor {
                         authSessionLocalDataSource.clearSession()
 
                         logInfo("AUTH_INTERCEPTOR", "✅ Sessão limpa! Usuário precisa fazer login novamente.")
+                        //throw IllegalStateException("Unauthorized")
                     }
                 } catch (e: Exception) {
                     logError("AUTH_INTERCEPTOR", "Erro ao processar resposta 401: ${e.message}")

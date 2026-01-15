@@ -11,7 +11,7 @@ val LightOnPrimary = Color(0xFFFFFFFF)
 val LightPrimaryContainer = Color(0xFFE0F2FE)
 val LightOnPrimaryContainer = Color(0xFFD32F2F)
 
-val LightSecondary = Color(0xFF082f49) //D32F2F
+val LightSecondary = Color(0xFF0f344e) //D32F2F
 val LightOnSecondary = Color(0xFFFFFFFF)
 val LightSecondaryContainer = Color(0xFFE2E8F0)
 val LightOnSecondaryContainer = Color(0xFF8B0000)
@@ -50,4 +50,7 @@ val DarkOnSurface = Color(0xFFFFFFFF)
 
 val DarkText = Color(0xFF000000)
 
+val Blue900 = Color(0xFF082F49)
+val Blue700 = Color(0xFF21445B)
+val Blue200 = Color(0xFFBEE0EC)
 

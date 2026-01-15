@@ -58,14 +58,14 @@ class UserAuthRepositoryImplTest {
     fun signIn_withValidCredentials_returnsDomainSuccess() = runTest {
         // Arrange
         val signInModel = SignInModel(
-            email = "test@example.com",
+            email = "test@br.com",
             password = "Password123!"
         )
 
         val mockRemoteResult = DefaultResult.Success(
             data = SignInResponseModel(
                 name = "Test User",
-                email = "test@example.com",
+                email = "test@br.com",
                 token = "mock_token_123",
                 isSuccessful = true,
                 message = "Login successful"
@@ -88,7 +88,7 @@ class UserAuthRepositoryImplTest {
     fun signIn_withRemoteError_returnsDomainError() = runTest {
         // Arrange
         val signInModel = SignInModel(
-            email = "test@example.com",
+            email = "test@br.com",
             password = "wrongpassword"
         )
 
@@ -115,7 +115,7 @@ class UserAuthRepositoryImplTest {
         // Arrange
         val id = 1
         val name = "John Doe"
-        val email = "test@example.com"
+        val email = "test@br.com"
         val token = "jwt_token"
 
         // Act

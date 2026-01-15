@@ -93,4 +93,9 @@ class ScheduleApiServiceImpl @Inject constructor(
         }
         return response.body()
     }
+
+    override suspend fun getCategoryByDescription(description: String): ApiResponse<List<ScheduleResponse>> {
+        val response = httpClient.get("schedule/search?description=$description")
+        return response.body()
+    }
 }

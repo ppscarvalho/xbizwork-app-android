@@ -21,21 +21,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.br.xbizitwork.ui.presentation.components.icons.AppIcon
+import com.br.xbizitwork.ui.presentation.components.background.AppGradientBackground
 import com.br.xbizitwork.ui.presentation.components.profile.UserAvatar
 import com.br.xbizitwork.ui.presentation.features.auth.changepassword.state.ChangePasswordState
 import com.br.xbizitwork.ui.theme.BeigeBackground
-import com.br.xbizitwork.ui.theme.TealPrimary
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
-import com.br.xbizitwork.ui.theme.poppinsFOntFamily
-import com.example.xbizitwork.R
+import com.br.xbizitwork.ui.theme.poppinsFontFamily
 
 /**
  * Conteúdo da tela de alteração de senha
@@ -52,11 +49,9 @@ fun ChangePasswordContent(
     onConfirmPasswordChanged: (String) -> Unit,
     onChangePasswordClick: () -> Unit,
 ) {
-    Box(
-        modifier = modifier
-            .fillMaxSize()
-            .background(Color.White)
-            .padding(paddingValues)
+    AppGradientBackground(
+        modifier = modifier,
+        paddingValues = paddingValues
     ) {
         // Header curvo com fundo bege
         Box(
@@ -64,7 +59,7 @@ fun ChangePasswordContent(
                 .fillMaxWidth()
                 .height(220.dp)
                 .clip(RoundedCornerShape(bottomStart = 40.dp, bottomEnd = 40.dp))
-                .background(BeigeBackground)
+               // .background(BeigeBackground)
         ) {
             UserAvatar(
                 modifier = Modifier
@@ -92,7 +87,7 @@ fun ChangePasswordContent(
             if (!uiState.changePasswordErrorMessage.isNullOrEmpty() || !uiState.fieldErrorMessage.isNullOrEmpty()) {
                 Text(
                     text = uiState.changePasswordErrorMessage ?: uiState.fieldErrorMessage.orEmpty(),
-                    fontFamily = poppinsFOntFamily,
+                    fontFamily = poppinsFontFamily,
                     fontSize = 14.sp,
                     textAlign = TextAlign.Center,
                     color = Color(0xFFD32F2F),

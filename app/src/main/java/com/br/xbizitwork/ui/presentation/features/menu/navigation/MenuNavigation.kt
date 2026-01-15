@@ -12,6 +12,7 @@ fun NavGraphBuilder.menuScreen(
     onNavigateToHomeGraph: () -> Unit,
     onNavigateToEditProfile: () -> Unit,
     onNavigateToListSchedulesScreen: () -> Unit,
+    onNavigateToCreateSkills: () -> Unit,
     onNavigateToProfessionalAgendaScreen: () -> Unit,
     onNavigateChangePasswordScreen: () -> Unit
 ){
@@ -24,6 +25,7 @@ fun NavGraphBuilder.menuScreen(
             appSideEffectFlow = sideEffect,
             onClickUpdateProfile = { onNavigateToEditProfile() },
             onClickChangePassword = {onNavigateChangePasswordScreen()},
+            onClickCreateSkills = {onNavigateToCreateSkills()},
             onClickSetupSchedule = { onNavigateToListSchedulesScreen() },
             onClickYourPlan = {},
             onClickMyAppointments = {},

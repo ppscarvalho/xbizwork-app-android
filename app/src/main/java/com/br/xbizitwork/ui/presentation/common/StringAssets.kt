@@ -1,7 +1,7 @@
 package com.br.xbizitwork.ui.presentation.common
 
 import androidx.annotation.StringRes
-import com.example.xbizitwork.R
+import com.br.xbizitwork.R
 
 /**
  * Centraliza todas as referências de strings (resources) do app.

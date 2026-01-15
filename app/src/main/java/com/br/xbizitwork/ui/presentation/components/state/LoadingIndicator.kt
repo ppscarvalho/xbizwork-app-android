@@ -15,7 +15,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
-import com.br.xbizitwork.ui.theme.poppinsFOntFamily
+import com.br.xbizitwork.ui.theme.poppinsFontFamily
 
 
 @Composable
@@ -35,9 +35,9 @@ fun LoadingIndicator(
         Text(
             text = message,
             style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            color = MaterialTheme.colorScheme.onPrimary,
             textAlign = TextAlign.Justify,
-            fontFamily = poppinsFOntFamily,
+            fontFamily = poppinsFontFamily,
             modifier = Modifier.padding(top = 8.dp)
         )
     }

@@ -26,8 +26,8 @@ data class UpdateProfileRequest(
     @SerializedName("dateOfBirth")
     val dateOfBirth: String?, // ISO String: "YYYY-MM-DD"
 
-    @SerializedName("gender")
-    val gender: String?,
+//    @SerializedName("gender")
+//    val gender: String?,
 
     // Contato
     @SerializedName("email")

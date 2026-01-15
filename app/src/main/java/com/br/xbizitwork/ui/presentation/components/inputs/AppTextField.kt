@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Password
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme.colorScheme
@@ -29,7 +30,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
-import com.br.xbizitwork.ui.theme.poppinsFOntFamily
+import com.br.xbizitwork.ui.theme.poppinsFontFamily
 
 @Composable
 fun AppTextField(
@@ -53,7 +54,8 @@ fun AppTextField(
     enabled: Boolean = true,
 
     // ✅ NOVO: Callback quando perde o foco
-    onFocusLost: (() -> Unit)? = null
+    onFocusLost: (() -> Unit)? = null,
+    maxLength: Int? = null,
 ) {
     Column(modifier = modifier) {
 
@@ -66,11 +68,17 @@ fun AppTextField(
                         onFocusLost()
                     }
                 },
+//            value = value,
+//            onValueChange = onValueChange,
             value = value,
-            onValueChange = onValueChange,
+            onValueChange = { newValue ->
+                if (maxLength == null || newValue.length <= maxLength) {
+                    onValueChange(newValue)
+                }
+            },
 
             textStyle = TextStyle(
-                fontFamily = poppinsFOntFamily,
+                fontFamily = poppinsFontFamily,
                 textAlign = TextAlign.Start,
                 color = textColor
             ),
@@ -79,15 +87,15 @@ fun AppTextField(
                 Text(
                     text = label,
                     color = textColor,
-                    fontFamily = poppinsFOntFamily
+                    fontFamily = poppinsFontFamily
                 )
             },
 
             placeholder = {
                 Text(
                     text = placeholder,
-                    fontFamily = poppinsFOntFamily,
-                    color = colorScheme.onSurfaceVariant,
+                    fontFamily = poppinsFontFamily,
+                    color = colorScheme.onPrimary,
                 )
             },
 
@@ -96,7 +104,7 @@ fun AppTextField(
                     Icon(
                         imageVector = it,
                         contentDescription = "Leading Icon",
-                        tint = colorScheme.onSurfaceVariant
+                        tint = colorScheme.onPrimary
                     )
                 }
             },
@@ -106,7 +114,7 @@ fun AppTextField(
                     Icon(
                         imageVector = it,
                         contentDescription = "Trailing Icon",
-                        tint = colorScheme.onSurfaceVariant,
+                        tint = colorScheme.onPrimary,
                         modifier = Modifier
                             .padding(end = 8.dp)
                             .clickable { onTrailingIconClick?.invoke() }
@@ -121,21 +129,23 @@ fun AppTextField(
 
             colors = OutlinedTextFieldDefaults.colors(
                 cursorColor = cursorColor,
-                focusedBorderColor = Color.Black,
-                unfocusedBorderColor = Color.Black,
+                focusedBorderColor = Color.White,
+                unfocusedBorderColor = Color.White,
                 errorBorderColor = Color.Red,
                 // ✅ Cores para estado desabilitado - mantém a borda visível
-                disabledBorderColor = Color.Gray,
-                disabledTextColor = Color.Gray,
-                disabledLabelColor = Color.Gray,
+                disabledBorderColor = Color.White,
+                disabledTextColor = Color.White,
+                disabledLabelColor = Color.White,
                 disabledPlaceholderColor = Color.LightGray,
-                disabledLeadingIconColor = Color.Gray
+                disabledLeadingIconColor = Color.White
             )
         )
     }
 }
 
-@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    backgroundColor = 0xFF0f344e)
 @Composable
 private fun AppTextFieldPreview() {
     var name by remember { mutableStateOf("") }
@@ -147,8 +157,10 @@ private fun AppTextFieldPreview() {
             value = name,
             onValueChange = { name = it },
             leadingIcon = Icons.Outlined.Person,
-            textColor = Color.Black,
-            cursorColor = Color.Black
+            textColor = Color.White,
+            cursorColor = Color.Black,
+            trailingIcon = Icons.Outlined.Person,
+            maxLength = 10
         )
     }
 }

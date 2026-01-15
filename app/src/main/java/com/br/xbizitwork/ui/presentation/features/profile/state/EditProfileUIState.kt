@@ -14,7 +14,6 @@ data class EditProfileUIState(
     val name: String = "",
     val cpf: String = "",
     val dateOfBirth: LocalDate? = null,
-    val gender: String = "",
 
     // Contato
     val email: String = "",

@@ -45,7 +45,7 @@ fun SignUpScreen(
     LifecycleEventEffect(sideEffectFlow){ sideEffect ->
         when(sideEffect){
             is AppSideEffect.ShowToast -> context.toast(sideEffect.message)
-            is AppSideEffect.NavigateToLogin -> {
+            is AppSideEffect.NavigateToHomeGraph -> {
                 // SignUpScreen não trata NavigateToLogin, ignora
             }
             is AppSideEffect.NavigateBack -> {

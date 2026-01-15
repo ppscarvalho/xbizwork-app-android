@@ -62,4 +62,8 @@ class ScheduleRemoteDataSourceImpl @Inject constructor(
     override suspend fun validateSchedule(request: CreateScheduleRequest): ApiResultResponse {
         return apiService.validateSchedule(request)
     }
+
+    override suspend fun getCategoryByDescription(description: String): ApiResponse<List<ScheduleResponse>> {
+        return apiService.getCategoryByDescription(description)
+    }
 }

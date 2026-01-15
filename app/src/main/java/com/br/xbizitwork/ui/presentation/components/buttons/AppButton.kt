@@ -16,7 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
-import com.br.xbizitwork.ui.theme.poppinsFOntFamily
+import com.br.xbizitwork.ui.theme.poppinsFontFamily
 
 @Composable
 fun AppButton(
@@ -49,7 +49,7 @@ fun AppButton(
                 text = text,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
-                fontFamily = poppinsFOntFamily,
+                fontFamily = poppinsFontFamily,
                 color = color
             )
         }

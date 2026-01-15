@@ -1,5 +1,6 @@
 package com.br.xbizitwork.ui.presentation.components.state
 
+import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -23,8 +24,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.br.xbizitwork.ui.theme.poppinsFOntFamily
-import com.example.xbizitwork.R
+import com.br.xbizitwork.ui.theme.poppinsFontFamily
+import com.br.xbizitwork.R
 
 @Composable
 fun EmptyState(
@@ -54,7 +55,7 @@ fun EmptyState(
             Spacer(Modifier.height(12.dp))
             Text(
                 text = title,
-                fontFamily = poppinsFOntFamily,
+                fontFamily = poppinsFontFamily,
                 fontWeight = FontWeight.Bold,
                 fontSize = 10.sp,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -65,9 +66,33 @@ fun EmptyState(
     }
 }
 
-@Preview
+@Preview(
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_NO,
+    name = "Light Mode"
+)
 @Composable
-private fun EmptyStatePreview() {
+private fun EmptyStateLightPreview() {
+    EmptyState(
+        image = painterResource(R.drawable.ic_empty_state_recipes),
+        title = "Nenhum registro encontrado!",
+        subTitle ={
+            Text(
+                text = "Por favor tente novamente",
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.Black
+            )
+        }
+    )
+}
+
+@Preview(
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    name = "Dark Mode"
+)
+@Composable
+private fun EmptyStatDarkPreview() {
     EmptyState(
         image = painterResource(R.drawable.ic_empty_state_recipes),
         title = "Nenhum registro encontrado!",

@@ -1,5 +1,7 @@
 package com.br.xbizitwork.ui.presentation.components.schedule
 
+import android.content.res.Configuration
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -56,7 +58,10 @@ fun ScheduleTimeSlotRow(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 12.dp, vertical = 12.dp),
+            .background(
+                MaterialTheme.colorScheme
+                    .primaryContainer.copy(alpha = 0.3f)
+            ).padding(vertical = 8.dp, horizontal = 8.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -103,7 +108,20 @@ fun ScheduleTimeSlotRow(
 
 @Preview(showBackground = true)
 @Composable
-private fun ScheduleTimeSlotRowPreview() {
+private fun ScheduleTimeSlotRowLightPreview() {
+    XBizWorkTheme {
+        ScheduleTimeSlotRow(
+            dayOfWeek = "Segunda-feira",
+            startTime = "08:00",
+            endTime = "10:00",
+            onRemoveClick = {}
+        )
+    }
+}
+
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun ScheduleTimeSlotRowDarkPreview() {
     XBizWorkTheme {
         ScheduleTimeSlotRow(
             dayOfWeek = "Segunda-feira",

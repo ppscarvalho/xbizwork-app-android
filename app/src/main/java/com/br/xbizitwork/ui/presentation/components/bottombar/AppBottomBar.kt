@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
@@ -39,7 +40,7 @@ fun AppBottomBar(
 ) {
     BottomAppBar(
         modifier = modifier
-            // Adiciona padding para respeitar a inset da navigation bar do sistema
+            .height(100.dp)
             .navigationBarsPadding(),
         containerColor = MaterialTheme.colorScheme.secondary,
         actions = {
@@ -104,16 +105,16 @@ private fun BottomBarItem(
             contentDescription = label,
             tint = MaterialTheme.colorScheme.onPrimary,
             modifier = Modifier
-                .size(24.dp)
+                .size(28.dp)
                 .padding(bottom = 4.dp)
         )
-        Text(
-            text = label,
-            fontSize = 10.sp,
-            color = MaterialTheme.colorScheme.onPrimary,
-            textAlign = TextAlign.Center,
-            fontFamily = MaterialTheme.typography.bodySmall.fontFamily
-        )
+//        Text(
+//            text = label,
+//            fontSize = 10.sp,
+//            color = MaterialTheme.colorScheme.onPrimary,
+//            textAlign = TextAlign.Center,
+//            fontFamily = MaterialTheme.typography.bodySmall.fontFamily
+//        )
     }
 }
 

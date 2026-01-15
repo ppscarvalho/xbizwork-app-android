@@ -69,4 +69,9 @@ interface ScheduleApiService {
      * Retorna apenas isSuccessful e message
      */
     suspend fun validateSchedule(request: CreateScheduleRequest): ApiResultResponse
+
+    /**
+     * GET /api/schedules/category/{description} - LIST
+     */
+    suspend fun getCategoryByDescription(description: String): ApiResponse<List<ScheduleResponse>>
 }

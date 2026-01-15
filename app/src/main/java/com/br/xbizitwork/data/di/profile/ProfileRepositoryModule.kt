@@ -3,7 +3,7 @@ package com.br.xbizitwork.data.di.profile
 import com.br.xbizitwork.core.dispatcher.CoroutineDispatcherProvider
 import com.br.xbizitwork.data.repository.ProfileRepositoryImpl
 import com.br.xbizitwork.domain.repository.ProfileRepository
-import com.br.xbizitwork.domain.source.profile.ProfileRemoteDataSource
+import com.br.xbizitwork.data.remote.profile.datasource.ProfileRemoteDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

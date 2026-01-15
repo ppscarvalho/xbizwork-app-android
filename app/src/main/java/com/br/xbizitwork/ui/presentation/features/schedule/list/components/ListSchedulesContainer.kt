@@ -14,16 +14,15 @@ import com.br.xbizitwork.domain.model.schedule.Availability
 import com.br.xbizitwork.domain.model.schedule.DayOfWeek
 import com.br.xbizitwork.domain.model.schedule.Schedule
 import com.br.xbizitwork.domain.model.schedule.WorkingHours
-import com.br.xbizitwork.ui.presentation.components.schedule.ProfessionalScheduleCard
-import com.br.xbizitwork.ui.presentation.components.schedule.TimeSlotItem
-import com.br.xbizitwork.ui.presentation.features.schedule.list.state.ViewSchedulesUIState
+import com.br.xbizitwork.ui.presentation.components.schedule.state.TimeSlotItem
+import com.br.xbizitwork.ui.presentation.features.schedule.list.state.ListSchedulesUIState
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
 import java.time.LocalDateTime
 import java.time.LocalTime
 
 @Composable
 fun ListSchedulesContainer(
-    uiState: ViewSchedulesUIState,
+    uiState: ListSchedulesUIState,
     onRemoveSlot: (String) -> Unit = {}
 ) {
     val groupedSchedules = uiState.schedules.groupBy {
@@ -73,7 +72,7 @@ fun ListSchedulesContainer(
 fun ListSchedulesContainerPreview() {
     XBizWorkTheme {
         ListSchedulesContainer(
-            uiState = ViewSchedulesUIState(
+            uiState = ListSchedulesUIState(
                 isLoading = false,
                 schedules = listOf(
                     fakeSchedule(
@@ -108,7 +107,7 @@ fun ListSchedulesContainerPreview() {
 fun ListSchedulesContainerDarkPreview() {
     XBizWorkTheme {
         ListSchedulesContainer(
-            uiState = ViewSchedulesUIState(
+            uiState = ListSchedulesUIState(
                 isLoading = false,
                 schedules = listOf(
                     fakeSchedule(

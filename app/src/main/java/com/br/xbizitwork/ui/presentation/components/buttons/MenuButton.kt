@@ -1,7 +1,6 @@
 package com.br.xbizitwork.ui.presentation.components.buttons
 
 import android.content.res.Configuration
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -22,13 +21,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
-import com.br.xbizitwork.ui.theme.poppinsFOntFamily
+import com.br.xbizitwork.ui.theme.poppinsFontFamily
 
 /**
  * Componente de botão para menu com layout:
@@ -48,6 +48,7 @@ fun MenuButton(
     text: String,
     rightIcon: ImageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
     hasDividerAfter: Boolean = true,
+    color: Color = MaterialTheme.colorScheme.onPrimary,
     onClick: () -> Unit = {}
 ) {
     Column(
@@ -68,16 +69,16 @@ fun MenuButton(
             Icon(
                 imageVector = leftIcon,
                 contentDescription = text,
-                tint = MaterialTheme.colorScheme.primary
+                tint = MaterialTheme.colorScheme.onPrimary
             )
 
             // Texto
             Text(
                 text = text,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Medium,
-                fontFamily = poppinsFOntFamily,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Normal,
+                fontFamily = poppinsFontFamily,
+                color = color,
                 modifier = Modifier.weight(1f)
             )
 
@@ -85,7 +86,7 @@ fun MenuButton(
             Icon(
                 imageVector = rightIcon,
                 contentDescription = "Navegar",
-                tint = MaterialTheme.colorScheme.onSurfaceVariant
+                tint = MaterialTheme.colorScheme.onPrimary
             )
         }
         
@@ -96,7 +97,7 @@ fun MenuButton(
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp),
                 thickness = 1.dp,
-                color = MaterialTheme.colorScheme.outlineVariant
+                color = MaterialTheme.colorScheme.onPrimary
             )
         }
     }
@@ -104,7 +105,7 @@ fun MenuButton(
 
 @Preview(
     showBackground = true,
-    backgroundColor = 0xFFF3F3F3
+    backgroundColor = 0xFF0f344e
 )
 @Composable
 private fun MenuButtonPreview() {
@@ -117,7 +118,8 @@ private fun MenuButtonPreview() {
     }
 }
 
-@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES,
+    backgroundColor = 0xFF0f344e)
 @Composable
 private fun MenuButtonVariantsPreview() {
     XBizWorkTheme {

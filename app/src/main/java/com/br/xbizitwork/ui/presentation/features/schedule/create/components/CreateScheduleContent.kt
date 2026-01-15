@@ -18,7 +18,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.br.xbizitwork.ui.presentation.components.buttons.AppButton
-import com.br.xbizitwork.ui.presentation.components.schedule.AddedScheduleTimeSlotsCard
 import com.br.xbizitwork.ui.presentation.components.topbar.AppTopBar
 import com.br.xbizitwork.ui.presentation.features.schedule.create.events.CreateScheduleEvent
 import com.br.xbizitwork.ui.presentation.features.schedule.create.state.CreateScheduleUIState

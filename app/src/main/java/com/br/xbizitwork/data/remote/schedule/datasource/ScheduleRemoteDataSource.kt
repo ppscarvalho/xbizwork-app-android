@@ -25,4 +25,5 @@ interface ScheduleRemoteDataSource {
     suspend fun getAvailableTimeSlots(scheduleId: String, date: String, dayOfWeek: String): ApiResponse<List<TimeSlotResponse>>
     suspend fun getActiveSchedules(professionalId: String): ApiResponse<List<ScheduleResponse>>
     suspend fun validateSchedule(request: CreateScheduleRequest): ApiResultResponse
+    suspend fun getCategoryByDescription(description: String): ApiResponse<List<ScheduleResponse>>
 }

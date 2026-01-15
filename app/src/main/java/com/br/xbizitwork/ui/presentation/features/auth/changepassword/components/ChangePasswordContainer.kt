@@ -1,5 +1,6 @@
 package com.br.xbizitwork.ui.presentation.features.auth.changepassword.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import com.br.xbizitwork.ui.presentation.components.buttons.AppButton
 import com.br.xbizitwork.ui.presentation.components.inputs.AppPasswordField
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
-import com.example.xbizitwork.R
+import com.br.xbizitwork.R
 
 /**
  * Container com os campos de alteração de senha
@@ -53,8 +54,8 @@ fun ChangePasswordContainer(
             value = currentPasswordValue,
             onValueChange = onCurrentPasswordChanged,
             leadingIcon = Icons.Outlined.Lock,
-            textColor = colorScheme.onSurfaceVariant,
-            cursorColor = colorScheme.onSurfaceVariant
+            textColor = colorScheme.onPrimary,
+            cursorColor = colorScheme.onPrimary
         )
 
         // Campo Nova Senha
@@ -65,8 +66,8 @@ fun ChangePasswordContainer(
             value = newPasswordValue,
             onValueChange = onNewPasswordChanged,
             leadingIcon = Icons.Outlined.Lock,
-            textColor = colorScheme.onSurfaceVariant,
-            cursorColor = colorScheme.onSurfaceVariant
+            textColor = colorScheme.onPrimary,
+            cursorColor = colorScheme.onPrimary
         )
 
         // Campo Confirmar Nova Senha
@@ -77,8 +78,8 @@ fun ChangePasswordContainer(
             value = confirmPasswordValue,
             onValueChange = onConfirmPasswordChanged,
             leadingIcon = Icons.Outlined.Lock,
-            textColor = colorScheme.onSurfaceVariant,
-            cursorColor = colorScheme.onSurfaceVariant
+            textColor = colorScheme.onPrimary,
+            cursorColor = colorScheme.onPrimary
         )
 
         Column(
@@ -100,7 +101,8 @@ fun ChangePasswordContainer(
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFF0EAE2)
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES,
+    backgroundColor = 0xFF0f344e)
 @Composable
 private fun ChangePasswordContainerPreview() {
     var currentPassword by remember { mutableStateOf("") }
