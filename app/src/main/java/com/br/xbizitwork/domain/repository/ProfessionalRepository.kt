@@ -2,6 +2,7 @@ package com.br.xbizitwork.domain.repository
 
 import com.br.xbizitwork.core.result.DefaultResult
 import com.br.xbizitwork.domain.model.professional.ProfessionalProfile
+import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill
 import com.br.xbizitwork.domain.model.service.SearchFilters
 import com.br.xbizitwork.domain.model.service.SearchResult
 
@@ -15,6 +16,14 @@ import com.br.xbizitwork.domain.model.service.SearchResult
  * - Cache de profissionais frequentemente acessados
  */
 interface ProfessionalRepository {
+    
+    /**
+     * Busca profissionais por habilidade (skill)
+     *
+     * @param skill Nome completo ou parcial da habilidade
+     * @return Lista de profissionais encontrados
+     */
+    suspend fun searchProfessionalsBySkill(skill: String): DefaultResult<List<ProfessionalSearchBySkill>>
     
     /**
      * Busca profissionais com base em filtros
