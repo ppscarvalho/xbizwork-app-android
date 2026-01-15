@@ -35,4 +35,3 @@ interface SkillsApiService {
     suspend fun searchProfessionalsBySkill(skill: String): SearchProfessionalBySkillResponse
 }
 
-

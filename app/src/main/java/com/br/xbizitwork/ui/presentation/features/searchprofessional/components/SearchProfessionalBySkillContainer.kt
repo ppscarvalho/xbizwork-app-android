@@ -105,9 +105,7 @@ fun SearchProfessionalBySkillContainer(
 
         // Results Section
         Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f, fill = false)
+            modifier = Modifier.fillMaxWidth()
         ) {
             when {
                 uiState.isLoading -> {

@@ -89,11 +89,9 @@ class SearchProfessionalBySkillViewModel @Inject constructor(
                             professionals = emptyList()
                         )
                     }
-                    viewModelScope.launch {
-                        _appSideEffectChannel.send(
-                            AppSideEffect.ShowToast("Nenhum profissional encontrado")
-                        )
-                    }
+                    _appSideEffectChannel.send(
+                        AppSideEffect.ShowToast("Nenhum profissional encontrado")
+                    )
                 },
                 onSuccess = { professionals ->
                     logInfo("SEARCH_PROFESSIONAL_VM", "✅ ${professionals.size} profissional(is) encontrado(s)")
@@ -109,11 +107,9 @@ class SearchProfessionalBySkillViewModel @Inject constructor(
                             errorMessage = null
                         )
                     }
-                    viewModelScope.launch {
-                        _appSideEffectChannel.send(
-                            AppSideEffect.ShowToast("${professionals.size} profissional(is) encontrado(s)")
-                        )
-                    }
+                    _appSideEffectChannel.send(
+                        AppSideEffect.ShowToast("${professionals.size} profissional(is) encontrado(s)")
+                    )
                 },
                 onFailure = { error ->
                     logInfo("SEARCH_PROFESSIONAL_VM", "❌ Erro: ${error.message}")
@@ -124,11 +120,9 @@ class SearchProfessionalBySkillViewModel @Inject constructor(
                             errorMessage = error.message ?: "Erro ao buscar profissionais"
                         )
                     }
-                    viewModelScope.launch {
-                        _appSideEffectChannel.send(
-                            AppSideEffect.ShowToast(error.message ?: "Erro ao buscar profissionais")
-                        )
-                    }
+                    _appSideEffectChannel.send(
+                        AppSideEffect.ShowToast(error.message ?: "Erro ao buscar profissionais")
+                    )
                 }
             )
         }
