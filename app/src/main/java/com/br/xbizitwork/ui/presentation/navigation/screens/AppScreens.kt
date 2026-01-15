@@ -65,6 +65,9 @@ sealed interface MenuScreens{
     data object CreateSkillsScreen: MenuScreens
 
     @Serializable
+    data object SearchProfessionalBySkillScreen: MenuScreens
+
+    @Serializable
     data object NewScheduleSuccessScreen: MenuScreens
 
     @Serializable
