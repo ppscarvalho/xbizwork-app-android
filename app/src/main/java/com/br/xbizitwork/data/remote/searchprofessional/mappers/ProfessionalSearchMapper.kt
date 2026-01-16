@@ -1,9 +1,10 @@
-package com.br.xbizitwork.data.remote.professional.mappers
+package com.br.xbizitwork.data.remote.searchprofessional.mappers
 
-import com.br.xbizitwork.data.remote.professional.dtos.responses.ProfessionalSearchBySkillDto
-import com.br.xbizitwork.data.remote.professional.dtos.responses.SkillDto
+import com.br.xbizitwork.data.remote.searchprofessional.dtos.responses.ProfessionalSearchBySkillDto
+import com.br.xbizitwork.data.remote.searchprofessional.dtos.responses.SkillDto
 import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill
 import com.br.xbizitwork.domain.model.professional.SkillInfo
+import kotlin.Double
 
 /**
  * Extension to convert ProfessionalSearchBySkillDto to domain model
@@ -15,6 +16,8 @@ fun ProfessionalSearchBySkillDto.toDomain(): ProfessionalSearchBySkill {
         mobilePhone = this.mobilePhone,
         city = this.city,
         state = this.state,
+        latitude =  this.latitude,
+        longitude = this.longitude,
         skill = this.skill.toDomain()
     )
 }

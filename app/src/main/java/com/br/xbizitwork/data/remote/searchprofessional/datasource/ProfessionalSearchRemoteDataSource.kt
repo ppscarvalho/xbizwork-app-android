@@ -1,4 +1,4 @@
-package com.br.xbizitwork.data.remote.professional.datasource
+package com.br.xbizitwork.data.remote.searchprofessional.datasource
 
 import com.br.xbizitwork.core.result.DefaultResult
 import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill

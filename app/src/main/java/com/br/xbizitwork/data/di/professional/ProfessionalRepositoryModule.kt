@@ -1,7 +1,7 @@
 package com.br.xbizitwork.data.di.professional
 
 import com.br.xbizitwork.core.dispatcher.CoroutineDispatcherProvider
-import com.br.xbizitwork.data.remote.professional.datasource.ProfessionalSearchRemoteDataSource
+import com.br.xbizitwork.data.remote.searchprofessional.datasource.ProfessionalSearchRemoteDataSource
 import com.br.xbizitwork.data.repository.ProfessionalRepositoryImpl
 import com.br.xbizitwork.domain.repository.ProfessionalRepository
 import dagger.Module

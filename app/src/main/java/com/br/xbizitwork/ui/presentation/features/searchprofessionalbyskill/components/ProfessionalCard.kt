@@ -123,7 +123,7 @@ private fun ProfessionalInfoRow(
 
 @Preview(
     showBackground = true,
-    uiMode = Configuration.UI_MODE_NIGHT_YES
+    uiMode = Configuration.UI_MODE_NIGHT_NO
 )
 @Composable
 private fun ProfessionalCardPreview() {

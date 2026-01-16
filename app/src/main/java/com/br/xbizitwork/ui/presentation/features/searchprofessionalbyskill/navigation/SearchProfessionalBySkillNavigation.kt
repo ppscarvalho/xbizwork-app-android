@@ -6,7 +6,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.br.xbizitwork.ui.presentation.features.searchprofessionalbyskill.screen.SearchProfessionalBySkillScreen
+import com.br.xbizitwork.ui.presentation.features.searchprofessionalbyskill.screen.SearchProfessionalSkillScreen
 import com.br.xbizitwork.ui.presentation.features.searchprofessionalbyskill.viewmodel.SearchProfessionalBySkillViewModel
 import com.br.xbizitwork.ui.presentation.navigation.screens.MenuScreens
 
@@ -21,7 +21,7 @@ fun NavGraphBuilder.searchProfessionalBySkillScreen(
         val viewModel: SearchProfessionalBySkillViewModel = hiltViewModel()
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-        SearchProfessionalBySkillScreen(
+        SearchProfessionalSkillScreen(
             uiState = uiState,
             appSideEffectFlow = viewModel.sideEffectChannel,
             onEvent = viewModel::onEvent,

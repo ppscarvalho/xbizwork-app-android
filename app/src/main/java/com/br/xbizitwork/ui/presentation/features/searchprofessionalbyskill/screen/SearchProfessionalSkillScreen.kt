@@ -24,7 +24,7 @@ import kotlinx.coroutines.flow.flowOf
  * Following the same pattern as SkillsScreen
  */
 @Composable
-fun SearchProfessionalBySkillScreen(
+fun SearchProfessionalSkillScreen(
     uiState: SearchProfessionalBySkillUIState,
     appSideEffectFlow: Flow<AppSideEffect>,
     onEvent: (SearchProfessionalBySkillEvent) -> Unit,
@@ -66,9 +66,9 @@ fun SearchProfessionalBySkillScreen(
     device = Devices.PIXEL_4
 )
 @Composable
-private fun SearchProfessionalBySkillScreenPreview() {
+private fun SearchProfessionalSkillScreenPreview() {
     XBizWorkTheme {
-        SearchProfessionalBySkillScreen(
+        SearchProfessionalSkillScreen(
             uiState = SearchProfessionalBySkillUIState(),
             appSideEffectFlow = flowOf(),
             onEvent = {},

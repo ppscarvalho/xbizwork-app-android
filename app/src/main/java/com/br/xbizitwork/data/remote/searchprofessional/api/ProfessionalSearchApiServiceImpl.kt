@@ -1,7 +1,7 @@
-package com.br.xbizitwork.data.remote.professional.api
+package com.br.xbizitwork.data.remote.searchprofessional.api
 
 import com.br.xbizitwork.core.model.api.ApiResponse
-import com.br.xbizitwork.data.remote.professional.dtos.responses.ProfessionalSearchBySkillDto
+import com.br.xbizitwork.data.remote.searchprofessional.dtos.responses.ProfessionalSearchBySkillDto
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get

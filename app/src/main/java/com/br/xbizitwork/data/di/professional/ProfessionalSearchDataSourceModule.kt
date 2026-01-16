@@ -1,8 +1,8 @@
 package com.br.xbizitwork.data.di.professional
 
-import com.br.xbizitwork.data.remote.professional.api.ProfessionalSearchApiService
-import com.br.xbizitwork.data.remote.professional.datasource.ProfessionalSearchRemoteDataSource
-import com.br.xbizitwork.data.remote.professional.datasource.ProfessionalSearchRemoteDataSourceImpl
+import com.br.xbizitwork.data.remote.searchprofessional.api.ProfessionalSearchApiService
+import com.br.xbizitwork.data.remote.searchprofessional.datasource.ProfessionalSearchRemoteDataSource
+import com.br.xbizitwork.data.remote.searchprofessional.datasource.ProfessionalSearchRemoteDataSourceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

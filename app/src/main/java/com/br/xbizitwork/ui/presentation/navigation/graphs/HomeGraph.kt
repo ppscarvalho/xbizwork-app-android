@@ -23,6 +23,7 @@ fun NavGraphBuilder.homeGraph(
     onNavigateToUsersConnectionScreen: () -> Unit,
     onNavigateToMenuGraph: () -> Unit,
     onNavigateProfileScreen: () -> Unit,
+    onNavigationToSearchProfessionalSkillScreen: () -> Unit,
     navController: NavController
 ){
     navigation<Graphs.HomeGraphs>(startDestination = HomeScreens.HomeScreen) {
@@ -32,7 +33,8 @@ fun NavGraphBuilder.homeGraph(
             onNavigateToSearchScreen = onNavigateToSearchScreen,
             onNavigateToUsersConnectionScreen = onNavigateToUsersConnectionScreen,
             onNavigateToMenuScreen = onNavigateToMenuGraph,
-            onNavigateProfileClick = onNavigateProfileScreen
+            onNavigateProfileClick = onNavigateProfileScreen,
+            onNavigationToSearchProfessionalSkillScreen = onNavigationToSearchProfessionalSkillScreen
         )
         searchScheduleScreen(
             onNavigateBack = onNavigateUp,

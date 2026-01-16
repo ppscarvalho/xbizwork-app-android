@@ -1,4 +1,4 @@
-package com.br.xbizitwork.data.remote.professional.dtos.responses
+package com.br.xbizitwork.data.remote.searchprofessional.dtos.responses
 
 import com.google.gson.annotations.SerializedName
 
@@ -21,7 +21,13 @@ data class ProfessionalSearchBySkillDto(
     
     @SerializedName("state")
     val state: String,
-    
+
+    @SerializedName("latitude")
+    val latitude: Double? = null,
+
+    @SerializedName("longitude")
+    val longitude: Double? = null,
+
     @SerializedName("skill")
     val skill: SkillDto
 )

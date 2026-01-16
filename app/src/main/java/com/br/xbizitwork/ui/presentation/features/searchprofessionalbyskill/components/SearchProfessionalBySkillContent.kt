@@ -120,7 +120,7 @@ fun SearchProfessionalBySkillContent(
                 AppButton(
                     modifier = Modifier.height(56.dp),
                     text = "",
-                    icon = Icons.Default.Search,
+                    //icon = Icons.Default.Search,
                     enabled = uiState.searchQuery.isNotEmpty() && !uiState.isLoading,
                     isLoading = uiState.isLoading,
                     contentColor = Color.White,

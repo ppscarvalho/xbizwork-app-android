@@ -1,8 +1,8 @@
-package com.br.xbizitwork.data.remote.professional.datasource
+package com.br.xbizitwork.data.remote.searchprofessional.datasource
 
 import com.br.xbizitwork.core.result.DefaultResult
-import com.br.xbizitwork.data.remote.professional.api.ProfessionalSearchApiService
-import com.br.xbizitwork.data.remote.professional.mappers.toDomain
+import com.br.xbizitwork.data.remote.searchprofessional.api.ProfessionalSearchApiService
+import com.br.xbizitwork.data.remote.searchprofessional.mappers.toDomain
 import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill
 import javax.inject.Inject
 

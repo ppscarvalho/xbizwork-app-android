@@ -2,7 +2,7 @@ package com.br.xbizitwork.data.repository
 
 import com.br.xbizitwork.core.dispatcher.CoroutineDispatcherProvider
 import com.br.xbizitwork.core.result.DefaultResult
-import com.br.xbizitwork.data.remote.professional.datasource.ProfessionalSearchRemoteDataSource
+import com.br.xbizitwork.data.remote.searchprofessional.datasource.ProfessionalSearchRemoteDataSource
 import com.br.xbizitwork.domain.model.professional.ProfessionalProfile
 import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill
 import com.br.xbizitwork.domain.model.service.SearchFilters

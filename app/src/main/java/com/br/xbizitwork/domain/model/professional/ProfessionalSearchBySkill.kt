@@ -1,5 +1,7 @@
 package com.br.xbizitwork.domain.model.professional
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * Domain: Professional data returned from skill search
  * 
@@ -11,6 +13,8 @@ data class ProfessionalSearchBySkill(
     val mobilePhone: String,
     val city: String,
     val state: String,
+    val latitude: Double? = null,
+    val longitude: Double? = null,
     val skill: SkillInfo
 )
 

@@ -29,6 +29,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "BASE_URL", apiKeyProperties.getProperty("BASE_URL"))
+        manifestPlaceholders["MAPS_API_KEY"] = apiKeyProperties.getProperty("MAPS_API_KEY")
     }
 
     buildTypes {
@@ -135,6 +136,10 @@ dependencies {
     androidTestImplementation(libs.mockito.core)
     androidTestImplementation(libs.mockito.kotlin)
     androidTestImplementation(libs.dagger.hilt.android.testing)
+
+    implementation("com.google.android.gms:play-services-maps:19.0.0") // Use a versão estável mais recente de 2026
+    implementation("com.google.maps.android:maps-ktx:5.1.1")
+    implementation("com.google.maps.android:maps-compose:4.4.1") // Compose integration for Google Maps
 
     // Debugging
     debugImplementation(libs.androidx.ui.tooling)

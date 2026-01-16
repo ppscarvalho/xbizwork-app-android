@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
 import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.material.icons.outlined.PersonSearch
 
 @Composable
 fun AppBottomBar(
@@ -37,6 +38,7 @@ fun AppBottomBar(
     onNavigationToSearchScreen: () -> Unit,
     onNavigationToUsersConnectionScreen: () -> Unit,
     onNavigationToMenuScreen: () -> Unit,
+    onNavigationToSearchProfessionalSkillScreen: () -> Unit
 ) {
     BottomAppBar(
         modifier = modifier
@@ -64,6 +66,13 @@ fun AppBottomBar(
                     icon = Icons.Outlined.Search,
                     label = "Pesquisar",
                     onClick = onNavigationToSearchScreen
+                )
+
+                // Pesquisar
+                BottomBarItem(
+                    icon = Icons.Outlined.PersonSearch,
+                    label = "Novo Pesquisar",
+                    onClick = onNavigationToSearchProfessionalSkillScreen
                 )
 
                 // Perfil
@@ -126,7 +135,8 @@ private fun BottomBarPreview() {
             onNavigationToProfileScreen = {},
             onNavigationToSearchScreen = {},
             onNavigationToUsersConnectionScreen = {},
-            onNavigationToMenuScreen = {}
+            onNavigationToMenuScreen = {},
+            onNavigationToSearchProfessionalSkillScreen = {}
         )
     }
 }
