@@ -71,7 +71,7 @@ fun AppBottomBar(
                 // Pesquisar
                 BottomBarItem(
                     icon = Icons.Outlined.PersonSearch,
-                    label = "Novo Pesquisar",
+                    label = "Pesquisar",
                     onClick = onNavigationToSearchProfessionalSkillScreen
                 )
 

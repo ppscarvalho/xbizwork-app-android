@@ -1,4 +1,4 @@
-package com.br.xbizitwork.ui.presentation.features.searchprofessionalbyskill.components
+package com.br.xbizitwork.ui.presentation.features.searchprofessionals.components
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Box

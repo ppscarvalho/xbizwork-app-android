@@ -12,7 +12,7 @@ import com.br.xbizitwork.ui.presentation.features.profile.navigation.editProfile
 import com.br.xbizitwork.ui.presentation.features.schedule.agenda.navigation.professionalAgendaScreen
 import com.br.xbizitwork.ui.presentation.features.schedule.create.navigation.createScheduleScreen
 import com.br.xbizitwork.ui.presentation.features.schedule.list.navigation.listSchedulesScreen
-import com.br.xbizitwork.ui.presentation.features.searchprofessionalbyskill.navigation.searchProfessionalBySkillScreen
+import com.br.xbizitwork.ui.presentation.features.searchprofessionals.navigation.searchProfessionalBySkillScreen
 import com.br.xbizitwork.ui.presentation.features.skills.navigation.skillsScreen
 import com.br.xbizitwork.ui.presentation.navigation.screens.Graphs
 import com.br.xbizitwork.ui.presentation.navigation.screens.MenuScreens
