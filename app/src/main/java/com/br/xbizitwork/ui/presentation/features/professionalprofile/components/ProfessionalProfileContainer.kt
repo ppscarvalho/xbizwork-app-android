@@ -12,6 +12,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,6 +33,8 @@ fun ProfessionalProfileContainer(
     professional: ProfessionalSearchBySkill,
     onEvent: (ProfessionalProfileEvent) -> Unit
 ) {
+    var showContactDialog by remember { mutableStateOf(false) }
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -47,7 +53,7 @@ fun ProfessionalProfileContainer(
         Spacer(modifier = Modifier.weight(1f))
 
         Button(
-            onClick = { onEvent(ProfessionalProfileEvent.OnContactClick) },
+            onClick = { showContactDialog = true },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(56.dp),
@@ -69,6 +75,17 @@ fun ProfessionalProfileContainer(
             )
         }
     }
+
+    ContactConfirmationDialog(
+        showDialog = showContactDialog,
+        onConfirm = {
+            showContactDialog = false
+            onEvent(ProfessionalProfileEvent.OnContactClick)
+        },
+        onDismiss = {
+            showContactDialog = false
+        }
+    )
 }
 
 @Preview (showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
