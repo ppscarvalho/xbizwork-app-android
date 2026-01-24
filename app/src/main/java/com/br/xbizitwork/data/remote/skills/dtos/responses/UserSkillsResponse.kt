@@ -1,5 +1,6 @@
 package com.br.xbizitwork.data.remote.skills.dtos.responses
 
+import com.br.xbizitwork.core.model.api.ApiResponse
 import com.google.gson.annotations.SerializedName
 
 /**
@@ -24,9 +25,16 @@ data class UserSkillItemResponse(
 )
 
 /**
- * Type alias para a lista de habilidades
- * O backend retorna um array de objetos
+ * Wrapper response para a lista de habilidades
+ * O backend retorna um objeto com data, isSuccessful e message
  * Endpoint: GET /user-skills/user/{userId}
+ * 
+ * Exemplo:
+ * {
+ *   "data": [{ id, userId, categoryId, categoryDescription, createdAt }],
+ *   "isSuccessful": true,
+ *   "message": "Habilidades listadas com sucesso!"
+ * }
  */
-typealias UserSkillsResponse = List<UserSkillItemResponse>
+typealias UserSkillsResponse = ApiResponse<List<UserSkillItemResponse>>
 

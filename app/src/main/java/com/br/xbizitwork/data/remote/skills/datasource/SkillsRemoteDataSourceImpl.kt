@@ -44,16 +44,21 @@ class SkillsRemoteDataSourceImpl @Inject constructor(
         return try {
             logInfo("SKILLS_DATASOURCE", "📡 Chamando API getUserSkills para userId: $userId")
 
-            // Chama a API
+            // Chama a API - retorna ApiResponse<List<UserSkillItemResponse>>
             val response = apiService.getUserSkills(userId)
 
-            logInfo("SKILLS_DATASOURCE", "📦 Response recebido: ${response.size} items")
-            response.forEach { item ->
+            logInfo("SKILLS_DATASOURCE", "📦 Response: isSuccessful=${response.isSuccessful}, message='${response.message}'")
+
+            // Extrai a lista de skills do wrapper
+            val skillsList = response.data ?: emptyList()
+            
+            logInfo("SKILLS_DATASOURCE", "📦 Data recebido: ${skillsList.size} items")
+            skillsList.forEach { item ->
                 logInfo("SKILLS_DATASOURCE", "  - categoryId: ${item.categoryId}, description: '${item.categoryDescription}'")
             }
 
             // Extrai apenas os categoryIds da lista de objetos
-            val categoryIds = response.map { it.categoryId }
+            val categoryIds = skillsList.map { it.categoryId }
 
             logInfo("SKILLS_DATASOURCE", "✅ CategoryIds extraídos: $categoryIds")
 
@@ -61,6 +66,7 @@ class SkillsRemoteDataSourceImpl @Inject constructor(
 
         } catch (e: Exception) {
             logInfo("SKILLS_DATASOURCE", "❌ Erro: ${e.message}")
+            logInfo("SKILLS_DATASOURCE", "❌ Stack trace: ${e.stackTraceToString()}")
             // Erro técnico (rede, timeout, etc)
             DefaultResult.Error(message = e.message ?: "Erro desconhecido ao carregar habilidades")
         }
