@@ -33,6 +33,8 @@ class MainActivity : ComponentActivity() {
                 RootHost(
                     startDestination = Graphs.HomeGraphs, //uiState.startDestination,
                     navController = navController,
+                    setSelectedProfessional = viewModel::setSelectedProfessional,
+                    getSelectedProfessional = viewModel::getSelectedProfessional
                 )
             }
         }

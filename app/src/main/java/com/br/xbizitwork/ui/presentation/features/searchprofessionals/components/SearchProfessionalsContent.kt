@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill
 import com.br.xbizitwork.ui.presentation.components.background.AppGradientBackground
 import com.br.xbizitwork.ui.presentation.features.searchprofessionals.events.SearchProfessionalBySkillEvent
 import com.br.xbizitwork.ui.presentation.features.searchprofessionals.state.SearchProfessionalsUiState
@@ -28,7 +29,8 @@ fun SearchProfessionalsContent(
     modifier: Modifier = Modifier,
     uiState: SearchProfessionalsUiState,
     paddingValues: PaddingValues,
-    onEvent: (SearchProfessionalBySkillEvent) -> Unit
+    onEvent: (SearchProfessionalBySkillEvent) -> Unit,
+    onProfessionalSelected: (ProfessionalSearchBySkill) -> Unit = {}
 ) {
     AppGradientBackground(
         modifier = modifier,
@@ -58,7 +60,8 @@ fun SearchProfessionalsContent(
             SearchProfessionalsContainer(
                 modifier = Modifier.fillMaxSize(),
                 uiState = uiState,
-                onEvent = onEvent
+                onEvent = onEvent,
+                onProfessionalSelected = onProfessionalSelected
             )
         }
     }

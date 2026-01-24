@@ -65,6 +65,10 @@ class SearchProfessionalsViewModel @Inject constructor(
         }
     }
 
+    fun onProfessionalSelected(professional: ProfessionalSearchBySkill) {
+        logProfessionalSelected(professional)
+    }
+
     private fun logProfessionalSelected(professional: ProfessionalSearchBySkill) {
         logInfo("SEARCH_PROFESSIONALS_VM", "===========================================")
         logInfo("SEARCH_PROFESSIONALS_VM", "👤 PROFISSIONAL SELECIONADO NO MAPA")

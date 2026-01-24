@@ -4,10 +4,12 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.navigation
+import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill
 import com.br.xbizitwork.ui.presentation.features.auth.changepassword.navigation.changePasswordScreen
 import com.br.xbizitwork.ui.presentation.features.menu.navigation.menuScreen
 import com.br.xbizitwork.ui.presentation.features.newschedule.create.navigation.createDefaultScheduleScreen
 import com.br.xbizitwork.ui.presentation.features.newschedule.success.navigation.scheduleSuccessScreen
+import com.br.xbizitwork.ui.presentation.features.professionalprofile.navigation.professionalProfileScreen
 import com.br.xbizitwork.ui.presentation.features.profile.navigation.editProfileScreen
 import com.br.xbizitwork.ui.presentation.features.schedule.agenda.navigation.professionalAgendaScreen
 import com.br.xbizitwork.ui.presentation.features.schedule.create.navigation.createScheduleScreen
@@ -36,7 +38,10 @@ fun NavGraphBuilder.menuGraph(
     onNavigateToListSchedulesScreen: () -> Unit,
     onNavigateToProfessionalAgendaScreen: () -> Unit,
     onNavigateChangePasswordScreen: () -> Unit,
-    onNavigateToHomeGraph:() -> Unit
+    onNavigateToHomeGraph:() -> Unit,
+    onNavigateToProfessionalProfile: (Int) -> Unit,
+    setSelectedProfessional: (ProfessionalSearchBySkill) -> Unit,
+    getProfessional: (Int) -> ProfessionalSearchBySkill?
 ){
     navigation<Graphs.MenuGraphs>(startDestination = MenuScreens.MenuScreen) {
         menuScreen(
@@ -57,7 +62,16 @@ fun NavGraphBuilder.menuGraph(
         )
 
         searchProfessionalBySkillScreen(
-            onNavigateUp = onNavigateUp
+            onNavigateUp = onNavigateUp,
+            onNavigateToProfessionalProfile = { professionalId ->
+                onNavigateToProfessionalProfile(professionalId)
+            },
+            setSelectedProfessional = setSelectedProfessional
+        )
+
+        professionalProfileScreen(
+            onNavigateUp = onNavigateUp,
+            getProfessional = getProfessional
         )
 
         createDefaultScheduleScreen(

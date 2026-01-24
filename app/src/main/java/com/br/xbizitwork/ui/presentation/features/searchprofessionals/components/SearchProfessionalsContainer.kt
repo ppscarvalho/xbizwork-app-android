@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill
 import com.br.xbizitwork.ui.presentation.components.state.ErrorState
 import com.br.xbizitwork.ui.presentation.components.state.LoadingIndicator
 import com.br.xbizitwork.ui.presentation.features.searchprofessionals.events.SearchProfessionalBySkillEvent
@@ -23,7 +24,8 @@ import com.br.xbizitwork.ui.theme.XBizWorkTheme
 fun SearchProfessionalsContainer(
     modifier: Modifier = Modifier,
     uiState: SearchProfessionalsUiState,
-    onEvent: (SearchProfessionalBySkillEvent) -> Unit
+    onEvent: (SearchProfessionalBySkillEvent) -> Unit,
+    onProfessionalSelected: (ProfessionalSearchBySkill) -> Unit = {}
 ) {
     Box(
         modifier = modifier.fillMaxSize(),
@@ -57,6 +59,7 @@ fun SearchProfessionalsContainer(
                         .padding(horizontal = 12.dp),
                     onProfessionalClick = { professional ->
                         onEvent(SearchProfessionalBySkillEvent.OnProfessionalSelected(professional))
+                        onProfessionalSelected(professional)
                     }
                 )
             }

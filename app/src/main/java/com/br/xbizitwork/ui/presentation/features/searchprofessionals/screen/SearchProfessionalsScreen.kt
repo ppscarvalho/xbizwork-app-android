@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
+import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill
 import com.br.xbizitwork.ui.presentation.components.topbar.AppTopBar
 import com.br.xbizitwork.ui.presentation.features.searchprofessionals.components.SearchProfessionalsContent
 import com.br.xbizitwork.ui.presentation.features.searchprofessionals.events.SearchProfessionalBySkillEvent
@@ -22,7 +23,8 @@ import com.br.xbizitwork.ui.theme.XBizWorkTheme
 fun SearchProfessionalsScreen(
     uiState: SearchProfessionalsUiState,
     onEvent: (SearchProfessionalBySkillEvent) -> Unit,
-    onNavigateBack: () -> Unit
+    onNavigateBack: () -> Unit,
+    onProfessionalSelected: (ProfessionalSearchBySkill) -> Unit = {}
 ) {
     // Iniciar observação da busca
     LaunchedEffect(Unit) {
@@ -43,7 +45,8 @@ fun SearchProfessionalsScreen(
             SearchProfessionalsContent(
                 paddingValues = paddingValues,
                 uiState = uiState,
-                onEvent = onEvent
+                onEvent = onEvent,
+                onProfessionalSelected = onProfessionalSelected
             )
         }
     )

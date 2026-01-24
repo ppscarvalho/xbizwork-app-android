@@ -6,6 +6,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill
 import com.br.xbizitwork.ui.presentation.features.searchprofessionals.screen.SearchProfessionalsScreen
 import com.br.xbizitwork.ui.presentation.features.searchprofessionals.viewmodel.SearchProfessionalsViewModel
 import com.br.xbizitwork.ui.presentation.navigation.screens.MenuScreens
@@ -15,7 +16,9 @@ import com.br.xbizitwork.ui.presentation.navigation.screens.MenuScreens
  * Following the same pattern as skillsScreen
  */
 fun NavGraphBuilder.searchProfessionalBySkillScreen(
-    onNavigateUp: () -> Unit
+    onNavigateUp: () -> Unit,
+    onNavigateToProfessionalProfile: (Int) -> Unit,
+    setSelectedProfessional: (ProfessionalSearchBySkill) -> Unit
 ) {
     composable<MenuScreens.SearchProfessionalBySkillScreen> {
         val viewModel: SearchProfessionalsViewModel = hiltViewModel()
@@ -24,7 +27,12 @@ fun NavGraphBuilder.searchProfessionalBySkillScreen(
         SearchProfessionalsScreen(
             uiState = uiState,
             onEvent = viewModel::onEvent,
-            onNavigateBack = onNavigateUp
+            onNavigateBack = onNavigateUp,
+            onProfessionalSelected = { professional ->
+                viewModel.onProfessionalSelected(professional)
+                setSelectedProfessional(professional)
+                onNavigateToProfessionalProfile(professional.id)
+            }
         )
     }
 }

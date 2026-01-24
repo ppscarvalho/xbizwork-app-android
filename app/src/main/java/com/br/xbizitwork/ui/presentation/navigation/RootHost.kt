@@ -3,6 +3,7 @@ package com.br.xbizitwork.ui.presentation.navigation
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill
 import com.br.xbizitwork.ui.presentation.features.auth.signin.navigation.navigateToSignInScreen
 import com.br.xbizitwork.ui.presentation.features.auth.signup.navigation.navigateToSignUpScreen
 import com.br.xbizitwork.ui.presentation.features.schedule.search.navigation.navigateToSearchScheduleScreen
@@ -16,7 +17,9 @@ import com.br.xbizitwork.ui.presentation.navigation.screens.Graphs
 @Composable
 fun RootHost(
     startDestination: Graphs,
-    navController: NavHostController
+    navController: NavHostController,
+    setSelectedProfessional: (ProfessionalSearchBySkill) -> Unit,
+    getSelectedProfessional: (Int) -> ProfessionalSearchBySkill?
 ){
     NavHost(
         navController = navController,
@@ -57,7 +60,9 @@ fun RootHost(
             onNavigationToSearchProfessionalSkillScreen = {
                 navController.navigateToSearchProfessionalBySkillScreen()
             },
-            navController = navController
+            navController = navController,
+            setSelectedProfessional = setSelectedProfessional,
+            getSelectedProfessional = getSelectedProfessional
         )
     }
 }

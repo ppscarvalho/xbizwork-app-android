@@ -4,8 +4,10 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.navigation
+import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill
 import com.br.xbizitwork.ui.presentation.features.auth.changepassword.navigation.navigateToChangePasswordScreen
 import com.br.xbizitwork.ui.presentation.features.home.navigation.homeScreen
+import com.br.xbizitwork.ui.presentation.features.professionalprofile.navigation.navigateToProfessionalProfileScreen
 import com.br.xbizitwork.ui.presentation.features.profile.navigation.navigateToEditProfileScreen
 import com.br.xbizitwork.ui.presentation.features.schedule.agenda.navigation.navigateToProfessionalAgenda
 import com.br.xbizitwork.ui.presentation.features.schedule.create.navigation.navigateToCreateSchedule
@@ -24,7 +26,9 @@ fun NavGraphBuilder.homeGraph(
     onNavigateToMenuGraph: () -> Unit,
     onNavigateProfileScreen: () -> Unit,
     onNavigationToSearchProfessionalSkillScreen: () -> Unit,
-    navController: NavController
+    navController: NavController,
+    setSelectedProfessional: (ProfessionalSearchBySkill) -> Unit,
+    getSelectedProfessional: (Int) -> ProfessionalSearchBySkill?
 ){
     navigation<Graphs.HomeGraphs>(startDestination = HomeScreens.HomeScreen) {
         homeScreen(
@@ -64,7 +68,12 @@ fun NavGraphBuilder.homeGraph(
             },
             onNavigateToHomeGraph = {
                 navController.navigationToHomeGraph()
-            }
+            },
+            onNavigateToProfessionalProfile = { professionalId ->
+                navController.navigateToProfessionalProfileScreen(professionalId)
+            },
+            setSelectedProfessional = setSelectedProfessional,
+            getProfessional = getSelectedProfessional
         )
     }
 }

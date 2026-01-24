@@ -3,6 +3,7 @@ package com.br.xbizitwork.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.br.xbizitwork.core.util.logging.logInfo
+import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill
 import com.br.xbizitwork.domain.usecase.session.GetAuthSessionUseCase
 import com.br.xbizitwork.ui.presentation.navigation.screens.Graphs
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -39,5 +40,15 @@ class MainViewModel @Inject constructor(
                 _isSplashLoading.update { false }
             }
         }
+    }
+
+    fun setSelectedProfessional(professional: ProfessionalSearchBySkill) {
+        _uiState.update {
+            it.copy(selectedProfessional = professional)
+        }
+    }
+
+    fun getSelectedProfessional(professionalId: Int): ProfessionalSearchBySkill? {
+        return _uiState.value.selectedProfessional?.takeIf { it.id == professionalId }
     }
 }

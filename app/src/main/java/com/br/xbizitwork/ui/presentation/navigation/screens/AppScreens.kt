@@ -80,5 +80,8 @@ sealed interface MenuScreens{
     data object ProfessionalAgendaScreen: MenuScreens
 
     @Serializable
+    data class ProfessionalProfileScreen(val professionalId: Int): MenuScreens
+
+    @Serializable
     data object ChangePasswordScreen: HomeScreens
 }
