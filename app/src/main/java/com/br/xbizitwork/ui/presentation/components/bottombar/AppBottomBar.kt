@@ -55,18 +55,18 @@ fun AppBottomBar(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 // Conexões (Pessoas)
-                BottomBarItem(
-                    icon = Icons.Outlined.PeopleOutline,
-                    label = "Conexões",
-                    onClick = onNavigationToUsersConnectionScreen
-                )
+//                BottomBarItem(
+//                    icon = Icons.Outlined.PeopleOutline,
+//                    label = "Conexões",
+//                    onClick = onNavigationToUsersConnectionScreen
+//                )
 
                 // Pesquisar
-                BottomBarItem(
-                    icon = Icons.Outlined.Search,
-                    label = "Pesquisar",
-                    onClick = onNavigationToSearchScreen
-                )
+//                BottomBarItem(
+//                    icon = Icons.Outlined.Search,
+//                    label = "Pesquisar",
+//                    onClick = onNavigationToSearchScreen
+//                )
 
                 // Pesquisar
                 BottomBarItem(
@@ -76,11 +76,11 @@ fun AppBottomBar(
                 )
 
                 // Perfil
-                BottomBarItem(
-                    icon = Icons.Outlined.Person,
-                    label = "Perfil",
-                    onClick = onNavigationToProfileScreen
-                )
+//                BottomBarItem(
+//                    icon = Icons.Outlined.Person,
+//                    label = "Perfil",
+//                    onClick = onNavigationToProfileScreen
+//                )
 
                 // Menu - Somente exibir se usuário estiver logado
                 if (isLoggedIn) {

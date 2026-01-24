@@ -52,7 +52,12 @@ class SearchProfessionalsBySkillUseCaseImpl @Inject constructor(
                  * Retorna a lista de profissionais encapsulada em UiState.Success
                  */
                 is DefaultResult.Success -> {
-                    UiState.Success(response.data)
+                    if(response.data.isEmpty()){
+                        UiState.Empty
+                    }
+                    else{
+                        UiState.Success(response.data)
+                    }
                 }
                 /**
                  * Erro de regra de negócio retornado pela API

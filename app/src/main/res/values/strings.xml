@@ -42,7 +42,7 @@
     <string name="read_qrcode_text">Ler Qr Code</string>
 
     <!--    SearchBarContent-->
-    <string name="search_text">Pesquise pelo nome ou ingrediente</string>
+    <string name="search_text">Pesquise por: Educador, Processor, Pedreiro, Manicure, etc..</string>
 
     <!--    SearchxbizitworkScreen-->
     <string name="title_search_app_bar">"Pesquisar Receitas"</string>

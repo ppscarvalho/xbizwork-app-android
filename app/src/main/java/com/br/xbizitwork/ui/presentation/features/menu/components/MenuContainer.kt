@@ -75,6 +75,13 @@ fun MenuContainer(
                 )
             }
 
+            item {
+                MenuButton(
+                    leftIcon = Icons.Filled.Key,
+                    text = "Alterar Senha",
+                    onClick = onClickChangePassword
+                )
+            }
             // ========== SEÇÃO SERVIÇO ==========
             item {
                 Text(
@@ -85,14 +92,6 @@ fun MenuContainer(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(horizontal = 16.dp, vertical = 8.dp)
-                )
-            }
-
-            item {
-                MenuButton(
-                    leftIcon = Icons.Filled.Key,
-                    text = "Alterar Senha",
-                    onClick = onClickChangePassword
                 )
             }
 
@@ -120,13 +119,13 @@ fun MenuContainer(
                 )
             }
 
-            item {
-                MenuButton(
-                    leftIcon = Icons.Filled.Event,
-                    text = "Meus compromissos",
-                    onClick = onClickMyAppointments
-                )
-            }
+//            item {
+//                MenuButton(
+//                    leftIcon = Icons.Filled.Event,
+//                    text = "Meus compromissos",
+//                    onClick = onClickMyAppointments
+//                )
+//            }
 
 //            item {
 //                MenuButton(
@@ -162,13 +161,13 @@ fun MenuContainer(
                 )
             }
 
-            item {
-                MenuButton(
-                    leftIcon = Icons.Filled.MobileScreenShare,
-                    text = "Versão do aplicativo",
-                    onClick = onClickAppVersion
-                )
-            }
+//            item {
+//                MenuButton(
+//                    leftIcon = Icons.Filled.MobileScreenShare,
+//                    text = "Versão do aplicativo",
+//                    onClick = onClickAppVersion
+//                )
+//            }
 
             item {
                 MenuButton(
@@ -201,7 +200,7 @@ fun MenuContainer(
                     text = "Sair",
                     onClick = onClickLogout,
                     hasDividerAfter = false,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    color = MaterialTheme.colorScheme.onPrimary
                 )
             }
         }
