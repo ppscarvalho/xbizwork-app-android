@@ -3,7 +3,7 @@ package com.br.xbizitwork.data.remote.skills.api
 import com.br.xbizitwork.core.model.api.ApiResponse
 import com.br.xbizitwork.core.model.api.ApiResultResponse
 import com.br.xbizitwork.data.remote.skills.dtos.requests.SaveUserSkillsRequest
-import com.br.xbizitwork.data.remote.skills.dtos.responses.UserSkillItemResponse
+import com.br.xbizitwork.data.remote.skills.dtos.responses.UserSkillsResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -29,7 +29,7 @@ class SkillsApiServiceImpl @Inject constructor(
         return response.body()
     }
 
-    override suspend fun getUserSkills(userId: Int): ApiResponse<List<UserSkillItemResponse>> {
+    override suspend fun getUserSkills(userId: Int): ApiResponse<List<UserSkillsResponse>> {
         val response = httpClient.get("user-skills/user/$userId")
         return response.body()
     }
