@@ -1,4 +1,4 @@
-package com.br.xbizitwork.data.remote.professional.dtos.responses
+package com.br.xbizitwork.data.remote.searchprofessional.dtos.responses
 
 import com.google.gson.annotations.SerializedName
 

@@ -41,7 +41,8 @@ fun DefaultScreen(
     onNavigateToUsersConnectionScreen: () -> Unit,
     onNavigateToMenuScreen: () -> Unit,
     onNavigateProfileClick: () -> Unit,
-    onLogout: () -> Unit
+    onLogout: () -> Unit,
+    onNavigationToSearchProfessionalSkillScreen: () -> Unit
 ) {
     val context = LocalContext.current
     val view = LocalView.current
@@ -82,7 +83,8 @@ fun DefaultScreen(
                 onNavigationToProfileScreen = onNavigateToProfileScreen,
                 onNavigationToSearchScreen = onNavigateToSearchScreen,
                 onNavigationToUsersConnectionScreen = onNavigateToUsersConnectionScreen,
-                onNavigationToMenuScreen = onNavigateToMenuScreen
+                onNavigationToMenuScreen = onNavigateToMenuScreen,
+                onNavigationToSearchProfessionalSkillScreen = onNavigationToSearchProfessionalSkillScreen
             )
         },
         content = {paddingValues ->
@@ -119,7 +121,8 @@ private fun DefaultScreenPreview() {
             onNavigateToUsersConnectionScreen = {},
             onNavigateToMenuScreen = {},
             onNavigateProfileClick = {},
-            onLogout = {}
+            onLogout = {},
+            onNavigationToSearchProfessionalSkillScreen = {}
         )
     }
     

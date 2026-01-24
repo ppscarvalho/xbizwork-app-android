@@ -190,12 +190,19 @@ class SkillsViewModel @Inject constructor(
             // Primeiro pega o userId da sessão
             getAuthSessionUseCase.invoke().collect { session ->
                 logInfo("SKILLS_LOAD_VM", "📧 Sessão: email=${session.email}, name=${session.name}")
+
+                // Garante que a sessão é válida antes de chamar o use case
+                if (session.id <= 0 || session.token.isBlank()) {
+                    logInfo("SKILLS_LOAD_VM", "⚠️ Sessão inválida (id=${session.id}, token vazio). Ignorando chamada ao GetUserSkillsUseCase até sessão válida.")
+                    return@collect
+                }
+
                 val userId = session.id
                 logInfo("SKILLS_LOAD_VM", "🔑 userId=$userId")
 
                 // Agora busca dados completos da API
                 getUserSkillsUseCase.invoke(
-                    parameters = GetUserSkillsUseCase.Parameters(userId = userId)
+                    parameters = GetUserSkillsUseCase.Parameters(userId)
                 ).collectUiState(
                     onLoading = {
                         logInfo("SKILLS_LOAD_VM", "⏳ Loading skills...")

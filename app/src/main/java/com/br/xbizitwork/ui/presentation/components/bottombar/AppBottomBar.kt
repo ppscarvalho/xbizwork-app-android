@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
 import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.material.icons.outlined.PersonSearch
 
 @Composable
 fun AppBottomBar(
@@ -37,6 +38,7 @@ fun AppBottomBar(
     onNavigationToSearchScreen: () -> Unit,
     onNavigationToUsersConnectionScreen: () -> Unit,
     onNavigationToMenuScreen: () -> Unit,
+    onNavigationToSearchProfessionalSkillScreen: () -> Unit
 ) {
     BottomAppBar(
         modifier = modifier
@@ -53,25 +55,32 @@ fun AppBottomBar(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 // Conexões (Pessoas)
-                BottomBarItem(
-                    icon = Icons.Outlined.PeopleOutline,
-                    label = "Conexões",
-                    onClick = onNavigationToUsersConnectionScreen
-                )
+//                BottomBarItem(
+//                    icon = Icons.Outlined.PeopleOutline,
+//                    label = "Conexões",
+//                    onClick = onNavigationToUsersConnectionScreen
+//                )
+
+                // Pesquisar
+//                BottomBarItem(
+//                    icon = Icons.Outlined.Search,
+//                    label = "Pesquisar",
+//                    onClick = onNavigationToSearchScreen
+//                )
 
                 // Pesquisar
                 BottomBarItem(
-                    icon = Icons.Outlined.Search,
+                    icon = Icons.Outlined.PersonSearch,
                     label = "Pesquisar",
-                    onClick = onNavigationToSearchScreen
+                    onClick = onNavigationToSearchProfessionalSkillScreen
                 )
 
                 // Perfil
-                BottomBarItem(
-                    icon = Icons.Outlined.Person,
-                    label = "Perfil",
-                    onClick = onNavigationToProfileScreen
-                )
+//                BottomBarItem(
+//                    icon = Icons.Outlined.Person,
+//                    label = "Perfil",
+//                    onClick = onNavigationToProfileScreen
+//                )
 
                 // Menu - Somente exibir se usuário estiver logado
                 if (isLoggedIn) {
@@ -126,7 +135,8 @@ private fun BottomBarPreview() {
             onNavigationToProfileScreen = {},
             onNavigationToSearchScreen = {},
             onNavigationToUsersConnectionScreen = {},
-            onNavigationToMenuScreen = {}
+            onNavigationToMenuScreen = {},
+            onNavigationToSearchProfessionalSkillScreen = {}
         )
     }
 }

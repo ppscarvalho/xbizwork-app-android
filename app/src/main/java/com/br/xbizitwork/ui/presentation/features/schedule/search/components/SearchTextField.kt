@@ -1,5 +1,6 @@
 package com.br.xbizitwork.ui.presentation.features.schedule.search.components
 
+import android.content.res.Configuration
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -18,7 +19,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.br.xbizitwork.ui.theme.XBizWorkTheme
 import com.br.xbizitwork.ui.theme.poppinsFontFamily
 
 @Composable
@@ -41,7 +44,8 @@ fun SearchTextField(
             contentDescription = "Icone Search"
         )
         BasicTextField(
-            modifier = Modifier.weight(1f)
+            modifier = Modifier
+                .weight(1f)
                 .padding(12.dp),
             state = queryTextState,
             textStyle = TextStyle(
@@ -50,6 +54,16 @@ fun SearchTextField(
             ),
             cursorBrush = SolidColor(MaterialTheme.colorScheme.onSurfaceVariant),
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
+        )
+    }
+}
+
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+private fun SearchTextFieldPreview() {
+    XBizWorkTheme{
+        SearchTextField(
+            queryTextState = TextFieldState()
         )
     }
 }

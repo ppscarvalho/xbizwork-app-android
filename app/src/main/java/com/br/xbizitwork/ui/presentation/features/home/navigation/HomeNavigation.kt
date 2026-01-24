@@ -16,6 +16,7 @@ fun NavGraphBuilder.homeScreen(
     onNavigateToUsersConnectionScreen: () -> Unit,
     onNavigateToMenuScreen: () -> Unit,
     onNavigateProfileClick: () -> Unit,
+    onNavigationToSearchProfessionalSkillScreen: () -> Unit
 ){
     composable<HomeScreens.HomeScreen> {
 
@@ -32,7 +33,8 @@ fun NavGraphBuilder.homeScreen(
             onNavigateToUsersConnectionScreen = onNavigateToUsersConnectionScreen,
             onNavigateToMenuScreen = onNavigateToMenuScreen,
             onNavigateProfileClick =  onNavigateProfileClick,
-            onLogout = {viewModel.logout()}
+            onLogout = {viewModel.logout()},
+            onNavigationToSearchProfessionalSkillScreen = onNavigationToSearchProfessionalSkillScreen
         )
     }
 }

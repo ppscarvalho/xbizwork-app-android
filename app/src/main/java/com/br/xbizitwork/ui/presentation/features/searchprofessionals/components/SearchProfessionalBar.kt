@@ -1,6 +1,6 @@
-package com.br.xbizitwork.ui.presentation.features.schedule.search.components
+package com.br.xbizitwork.ui.presentation.features.searchprofessionals.components
 
-import android.content.res.Configuration
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -14,51 +14,43 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.br.xbizitwork.ui.theme.XBizWorkTheme
 
 @Composable
-fun SearchScheduleBar(
+fun SearchProfessionalBar(
     modifier: Modifier = Modifier,
     queryTextState: TextFieldState
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .heightIn(min = 48.dp) // 🔑 controla a altura
-            .padding(horizontal = 16.dp) // 🔑 só lateral, não vertical
+            .heightIn(min = 48.dp)
+            .padding(horizontal = 16.dp)
+            .background(
+                color = Color.White,
+                shape = RoundedCornerShape(12.dp)
+            )
             .border(
                 width = 0.5.dp,
                 color = MaterialTheme.colorScheme.outline.copy(alpha = 0.35f),
-                shape = RoundedCornerShape(8.dp)
+                shape = RoundedCornerShape(12.dp)
             ),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        SearchTextField(
+        SearchProfessionalTextField(
             queryTextState = queryTextState,
             modifier = Modifier.weight(1f)
         )
 
-        CleanButton(
+        CleanSearchButton(
             isVisible = queryTextState.text.isNotBlank(),
             onClearClick = {
                 queryTextState.edit { delete(0, length) }
             },
-            modifier = Modifier.padding(end = 8.dp) // 🔹 respiro lateral
+            modifier = Modifier.padding(end = 8.dp)
         )
     }
 }
 
-
-
-@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-private fun SearchScheduleBarPreview() {
-    XBizWorkTheme{
-        SearchScheduleBar(
-            queryTextState = TextFieldState("Buscar")
-        )
-    }
-}
