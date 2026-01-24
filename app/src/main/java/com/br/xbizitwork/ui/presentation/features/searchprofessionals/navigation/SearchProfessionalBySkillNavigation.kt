@@ -1,6 +1,7 @@
 package com.br.xbizitwork.ui.presentation.features.searchprofessionals.navigation
 
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
@@ -10,6 +11,7 @@ import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill
 import com.br.xbizitwork.ui.presentation.features.searchprofessionals.screen.SearchProfessionalsScreen
 import com.br.xbizitwork.ui.presentation.features.searchprofessionals.viewmodel.SearchProfessionalsViewModel
 import com.br.xbizitwork.ui.presentation.navigation.screens.MenuScreens
+import kotlinx.coroutines.launch
 
 /**
  * Navigation extension for SearchProfessionalBySkillScreen
@@ -23,6 +25,7 @@ fun NavGraphBuilder.searchProfessionalBySkillScreen(
     composable<MenuScreens.SearchProfessionalBySkillScreen> {
         val viewModel: SearchProfessionalsViewModel = hiltViewModel()
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+        val scope = rememberCoroutineScope()
 
         SearchProfessionalsScreen(
             uiState = uiState,
@@ -33,6 +36,13 @@ fun NavGraphBuilder.searchProfessionalBySkillScreen(
                 if (viewModel.onProfessionalSelected(professional)) {
                     setSelectedProfessional(professional)
                     onNavigateToProfessionalProfile(professional.id)
+                scope.launch {
+                    // Validar autenticação antes de navegar
+                    val isAuthenticated = viewModel.validateAuthentication()
+                    if (isAuthenticated) {
+                        setSelectedProfessional(professional)
+                        onNavigateToProfessionalProfile(professional.id)
+                    }
                 }
             }
         )

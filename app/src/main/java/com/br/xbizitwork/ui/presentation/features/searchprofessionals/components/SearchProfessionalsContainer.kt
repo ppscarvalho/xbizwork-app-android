@@ -58,7 +58,6 @@ fun SearchProfessionalsContainer(
                         .fillMaxSize()
                         .padding(horizontal = 12.dp),
                     onProfessionalClick = { professional ->
-                        onEvent(SearchProfessionalBySkillEvent.OnProfessionalSelected(professional))
                         onProfessionalSelected(professional)
                     }
                 )

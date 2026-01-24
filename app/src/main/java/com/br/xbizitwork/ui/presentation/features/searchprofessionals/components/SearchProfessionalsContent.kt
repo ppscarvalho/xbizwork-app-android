@@ -42,15 +42,6 @@ fun SearchProfessionalsContent(
                 .padding(top = 16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Search instruction
-//            Text(
-//                text = "Busque profissionais por habilidade",
-//                fontFamily = poppinsFontFamily,
-//                fontSize = 14.sp,
-//                color = MaterialTheme.colorScheme.onPrimary,
-//                modifier = Modifier.padding(horizontal = 16.dp)
-//            )
-
             // Search bar (sem botão, busca automática)
             SearchProfessionalBar(
                 queryTextState = uiState.queryTextState
