@@ -3,16 +3,19 @@ package com.br.xbizitwork.ui.presentation.features.searchprofessionals.viewmodel
 import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.br.xbizitwork.core.sideeffects.AppSideEffect
 import com.br.xbizitwork.core.util.extensions.collectUiState
 import com.br.xbizitwork.core.util.logging.logInfo
 import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill
 import com.br.xbizitwork.domain.usecase.professional.SearchProfessionalsBySkillUseCase
+import com.br.xbizitwork.domain.usecase.session.GetAuthSessionUseCase
 import com.br.xbizitwork.ui.presentation.features.searchprofessionals.events.SearchProfessionalBySkillEvent
 import com.br.xbizitwork.ui.presentation.features.searchprofessionals.state.SearchProfessionalsUiState
 import com.br.xbizitwork.ui.presentation.features.searchprofessionals.state.SearchState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -20,6 +23,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.mapLatest
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -31,13 +35,31 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class SearchProfessionalsViewModel @Inject constructor(
-    private val searchProfessionalsBySkillUseCase: SearchProfessionalsBySkillUseCase
+    private val searchProfessionalsBySkillUseCase: SearchProfessionalsBySkillUseCase,
+    private val getAuthSessionUseCase: GetAuthSessionUseCase
 ) : ViewModel() {
 
 
     private val _uiState: MutableStateFlow<SearchProfessionalsUiState> =
         MutableStateFlow(SearchProfessionalsUiState())
     val uiState: StateFlow<SearchProfessionalsUiState> = _uiState.asStateFlow()
+
+    private val _appSideEffectChannel = Channel<AppSideEffect>(capacity = Channel.Factory.BUFFERED)
+    val sideEffectChannel = _appSideEffectChannel.receiveAsFlow()
+
+    init {
+        observeAuthSession()
+    }
+
+    private fun observeAuthSession() {
+        viewModelScope.launch {
+            getAuthSessionUseCase.invoke().collect { authSession ->
+                _uiState.update {
+                    it.copy(isAuthenticated = authSession.token.isNotEmpty())
+                }
+            }
+        }
+    }
 
     @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
     private val searchState = snapshotFlow { _uiState.value.queryTextState.text }
@@ -62,11 +84,27 @@ class SearchProfessionalsViewModel @Inject constructor(
             is SearchProfessionalBySkillEvent.OnProfessionalSelected -> {
                 logProfessionalSelected(event.professional)
             }
+            is SearchProfessionalBySkillEvent.OnDismissAuthMessage -> {
+                // No longer needed, toast dismisses automatically
+            }
         }
     }
 
-    fun onProfessionalSelected(professional: ProfessionalSearchBySkill) {
+    fun onProfessionalSelected(professional: ProfessionalSearchBySkill): Boolean {
         logProfessionalSelected(professional)
+        
+        if (!_uiState.value.isAuthenticated) {
+            viewModelScope.launch {
+                _appSideEffectChannel.send(
+                    AppSideEffect.ShowToast(
+                        "Para visualizar o perfil de qualquer profissional, você precisa estar logado na nossa plataforma. Se você não tiver um login, faça seu cadastro."
+                    )
+                )
+            }
+            return false
+        }
+        
+        return true
     }
 
     private fun logProfessionalSelected(professional: ProfessionalSearchBySkill) {

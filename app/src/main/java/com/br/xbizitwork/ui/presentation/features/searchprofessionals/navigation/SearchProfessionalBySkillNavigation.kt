@@ -26,12 +26,14 @@ fun NavGraphBuilder.searchProfessionalBySkillScreen(
 
         SearchProfessionalsScreen(
             uiState = uiState,
+            appSideEffectFlow = viewModel.sideEffectChannel,
             onEvent = viewModel::onEvent,
             onNavigateBack = onNavigateUp,
             onProfessionalSelected = { professional ->
-                viewModel.onProfessionalSelected(professional)
-                setSelectedProfessional(professional)
-                onNavigateToProfessionalProfile(professional.id)
+                if (viewModel.onProfessionalSelected(professional)) {
+                    setSelectedProfessional(professional)
+                    onNavigateToProfessionalProfile(professional.id)
+                }
             }
         )
     }

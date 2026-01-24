@@ -13,5 +13,6 @@ data class SearchProfessionalsUiState(
     val isLoading: Boolean = false,
     val errorMessage: String? = null,
     val isEmpty: Boolean = false,
-    val searchIsEmpty: Boolean = true
+    val searchIsEmpty: Boolean = true,
+    val isAuthenticated: Boolean = false
 )
