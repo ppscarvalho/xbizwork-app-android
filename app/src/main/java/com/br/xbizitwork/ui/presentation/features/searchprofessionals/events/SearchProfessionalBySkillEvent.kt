@@ -9,5 +9,4 @@ import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill
 sealed class SearchProfessionalBySkillEvent {
     data object OnRefresh : SearchProfessionalBySkillEvent()
     data class OnProfessionalSelected(val professional: ProfessionalSearchBySkill) : SearchProfessionalBySkillEvent()
-    data object OnDismissAuthMessage : SearchProfessionalBySkillEvent()
 }

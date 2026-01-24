@@ -37,12 +37,7 @@ fun SearchProfessionalsScreen(
     LifecycleEventEffect(appSideEffectFlow) { sideEffect ->
         when (sideEffect) {
             is AppSideEffect.ShowToast -> context.toast(sideEffect.message)
-            is AppSideEffect.NavigateToHomeGraph -> {
-                // Not used in this screen
-            }
-            is AppSideEffect.NavigateBack -> {
-                // Not used in this screen
-            }
+            else -> { /* Other side effects not used in this screen */ }
         }
     }
 

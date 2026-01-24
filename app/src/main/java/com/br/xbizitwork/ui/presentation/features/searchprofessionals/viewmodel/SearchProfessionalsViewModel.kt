@@ -84,9 +84,6 @@ class SearchProfessionalsViewModel @Inject constructor(
             is SearchProfessionalBySkillEvent.OnProfessionalSelected -> {
                 logProfessionalSelected(event.professional)
             }
-            is SearchProfessionalBySkillEvent.OnDismissAuthMessage -> {
-                // No longer needed, toast dismisses automatically
-            }
         }
     }
 
