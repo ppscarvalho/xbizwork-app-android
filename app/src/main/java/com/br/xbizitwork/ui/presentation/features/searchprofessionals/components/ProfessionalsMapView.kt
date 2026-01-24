@@ -41,7 +41,8 @@ import com.google.maps.android.compose.rememberCameraPositionState
 @Composable
 fun ProfessionalsMapView(
     professionals: List<ProfessionalSearchBySkill>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onProfessionalClick: (ProfessionalSearchBySkill) -> Unit = {}
 ) {
     // Filtrar profissionais que têm coordenadas válidas
     val professionalsWithLocation = remember(professionals) {
@@ -127,7 +128,11 @@ fun ProfessionalsMapView(
                             Marker(
                                 state = MarkerState(position = LatLng(lat, lng)),
                                 title = professional.name,
-                                snippet = "${professional.skill.description}\n${professional.mobilePhone}\n${professional.city} - ${professional.state}"
+                                snippet = "${professional.skill.description}\n${professional.mobilePhone}\n${professional.city} - ${professional.state}",
+                                onInfoWindowClick = {
+                                    // Quando a InfoWindow for clicada (segundo toque), chamar o callback
+                                    onProfessionalClick(professional)
+                                }
                             )
                         }
                     }

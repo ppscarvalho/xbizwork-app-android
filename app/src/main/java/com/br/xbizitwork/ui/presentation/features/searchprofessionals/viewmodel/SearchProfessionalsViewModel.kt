@@ -4,6 +4,8 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.br.xbizitwork.core.util.extensions.collectUiState
+import com.br.xbizitwork.core.util.logging.logInfo
+import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill
 import com.br.xbizitwork.domain.usecase.professional.SearchProfessionalsBySkillUseCase
 import com.br.xbizitwork.ui.presentation.features.searchprofessionals.events.SearchProfessionalBySkillEvent
 import com.br.xbizitwork.ui.presentation.features.searchprofessionals.state.SearchProfessionalsUiState
@@ -32,6 +34,7 @@ class SearchProfessionalsViewModel @Inject constructor(
     private val searchProfessionalsBySkillUseCase: SearchProfessionalsBySkillUseCase
 ) : ViewModel() {
 
+
     private val _uiState: MutableStateFlow<SearchProfessionalsUiState> =
         MutableStateFlow(SearchProfessionalsUiState())
     val uiState: StateFlow<SearchProfessionalsUiState> = _uiState.asStateFlow()
@@ -56,7 +59,23 @@ class SearchProfessionalsViewModel @Inject constructor(
             is SearchProfessionalBySkillEvent.OnRefresh -> {
                 observeSearch()
             }
+            is SearchProfessionalBySkillEvent.OnProfessionalSelected -> {
+                logProfessionalSelected(event.professional)
+            }
         }
+    }
+
+    private fun logProfessionalSelected(professional: ProfessionalSearchBySkill) {
+        logInfo("SEARCH_PROFESSIONALS_VM", "===========================================")
+        logInfo("SEARCH_PROFESSIONALS_VM", "👤 PROFISSIONAL SELECIONADO NO MAPA")
+        logInfo("SEARCH_PROFESSIONALS_VM", "===========================================")
+        logInfo("SEARCH_PROFESSIONALS_VM", "📝 Nome: ${professional.name}")
+        logInfo("SEARCH_PROFESSIONALS_VM", "🆔 ID: ${professional.id}")
+        logInfo("SEARCH_PROFESSIONALS_VM", "📱 Telefone: ${professional.mobilePhone}")
+        logInfo("SEARCH_PROFESSIONALS_VM", "📍 Cidade: ${professional.city} - ${professional.state}")
+        logInfo("SEARCH_PROFESSIONALS_VM", "💼 Habilidade: ${professional.skill.description}")
+        logInfo("SEARCH_PROFESSIONALS_VM", "🗺️ Localização: Lat ${professional.latitude}, Lng ${professional.longitude}")
+        logInfo("SEARCH_PROFESSIONALS_VM", "===========================================")
     }
 
     private fun observeSearch() {

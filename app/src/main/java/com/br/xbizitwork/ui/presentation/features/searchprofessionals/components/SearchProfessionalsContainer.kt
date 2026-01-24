@@ -54,7 +54,10 @@ fun SearchProfessionalsContainer(
                     professionals = uiState.professionals,
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(horizontal = 12.dp)
+                        .padding(horizontal = 12.dp),
+                    onProfessionalClick = { professional ->
+                        onEvent(SearchProfessionalBySkillEvent.OnProfessionalSelected(professional))
+                    }
                 )
             }
         }
