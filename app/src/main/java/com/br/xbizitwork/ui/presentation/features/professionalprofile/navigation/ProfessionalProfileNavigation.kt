@@ -7,6 +7,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import androidx.navigation.toRoute
 import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill
 import com.br.xbizitwork.ui.presentation.features.professionalprofile.screen.ProfessionalProfileScreen
 import com.br.xbizitwork.ui.presentation.features.professionalprofile.viewmodel.ProfessionalProfileViewModel
@@ -24,8 +25,9 @@ fun NavGraphBuilder.professionalProfileScreen(
         val viewModel: ProfessionalProfileViewModel = hiltViewModel()
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-        // Get professional ID from route
-        val professionalId = (backStackEntry.arguments?.getInt("professionalId")) ?: 0
+        // Get professional ID from route using type-safe navigation
+        val route = backStackEntry.toRoute<MenuScreens.ProfessionalProfileScreen>()
+        val professionalId = route.professionalId
         
         // Get professional from shared state
         LaunchedEffect(professionalId) {
