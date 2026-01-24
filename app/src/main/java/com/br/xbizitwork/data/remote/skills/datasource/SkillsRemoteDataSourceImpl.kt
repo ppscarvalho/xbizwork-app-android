@@ -44,16 +44,29 @@ class SkillsRemoteDataSourceImpl @Inject constructor(
         return try {
             logInfo("SKILLS_DATASOURCE", "📡 Chamando API getUserSkills para userId: $userId")
 
-            // Chama a API
-            val response = apiService.getUserSkills(userId)
+            // Chama a API (retorna ApiResponse wrapper)
+            val apiResponse = apiService.getUserSkills(userId)
 
-            logInfo("SKILLS_DATASOURCE", "📦 Response recebido: ${response.size} items")
-            response.forEach { item ->
+            // Valida se a resposta foi bem-sucedida
+            if (!apiResponse.isSuccessful) {
+                logInfo("SKILLS_DATASOURCE", "❌ API retornou falha: ${apiResponse.message}")
+                return DefaultResult.Error(message = apiResponse.message)
+            }
+
+            // Valida se o data não é null
+            val responseData = apiResponse.data
+            if (responseData == null) {
+                logInfo("SKILLS_DATASOURCE", "⚠️ API retornou data null")
+                return DefaultResult.Success(emptyList())
+            }
+
+            logInfo("SKILLS_DATASOURCE", "📦 Response recebido: ${responseData.size} items")
+            responseData.forEach { item ->
                 logInfo("SKILLS_DATASOURCE", "  - categoryId: ${item.categoryId}, description: '${item.categoryDescription}'")
             }
 
             // Extrai apenas os categoryIds da lista de objetos
-            val categoryIds = response.map { it.categoryId }
+            val categoryIds = responseData.map { it.categoryId }
 
             logInfo("SKILLS_DATASOURCE", "✅ CategoryIds extraídos: $categoryIds")
 
