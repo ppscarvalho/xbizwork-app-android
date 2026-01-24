@@ -1,7 +1,7 @@
 package com.br.xbizitwork.ui.presentation.features.auth.signin.state
 
 data class SignInState(
-    val email: String = "ppscarvalho@gmail.com",
+    val email: String = "xico@gmail.com",
     val password: String = "Plutao@2025",
 
     val isFormValid: Boolean = false,
