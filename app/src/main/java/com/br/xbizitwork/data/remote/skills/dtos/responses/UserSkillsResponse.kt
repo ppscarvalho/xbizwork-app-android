@@ -25,7 +25,7 @@ data class UserSkillItemResponse(
 )
 
 /**
- * Wrapper response para a lista de habilidades
+ * Type alias para resposta da API de habilidades usando o wrapper genérico ApiResponse
  * O backend retorna um objeto com data, isSuccessful e message
  * Endpoint: GET /user-skills/user/{userId}
  * 
