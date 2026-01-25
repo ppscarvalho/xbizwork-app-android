@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.br.xbizitwork.core.sideeffects.AppSideEffect
 import com.br.xbizitwork.core.util.extensions.collectUiState
 import com.br.xbizitwork.core.util.logging.logInfo
-import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill
 import com.br.xbizitwork.domain.usecase.professional.SearchProfessionalsBySkillUseCase
 import com.br.xbizitwork.domain.usecase.session.GetAuthSessionUseCase
 import com.br.xbizitwork.ui.presentation.features.searchprofessionals.events.SearchProfessionalBySkillEvent
@@ -82,9 +81,6 @@ class SearchProfessionalsViewModel @Inject constructor(
             is SearchProfessionalBySkillEvent.OnRefresh -> {
                 observeSearch()
             }
-            is SearchProfessionalBySkillEvent.OnProfessionalSelected -> {
-                logProfessionalSelected(event.professional)
-            }
         }
     }
 
@@ -102,19 +98,6 @@ class SearchProfessionalsViewModel @Inject constructor(
         }
 
         return true
-    }
-
-    private fun logProfessionalSelected(professional: ProfessionalSearchBySkill) {
-        logInfo("SEARCH_PROFESSIONALS_VM", "===========================================")
-        logInfo("SEARCH_PROFESSIONALS_VM", "👤 PROFISSIONAL SELECIONADO NO MAPA")
-        logInfo("SEARCH_PROFESSIONALS_VM", "===========================================")
-        logInfo("SEARCH_PROFESSIONALS_VM", "📝 Nome: ${professional.name}")
-        logInfo("SEARCH_PROFESSIONALS_VM", "🆔 ID: ${professional.id}")
-        logInfo("SEARCH_PROFESSIONALS_VM", "📱 Telefone: ${professional.mobilePhone}")
-        logInfo("SEARCH_PROFESSIONALS_VM", "📍 Cidade: ${professional.city} - ${professional.state}")
-        logInfo("SEARCH_PROFESSIONALS_VM", "💼 Habilidade: ${professional.skill.description}")
-        logInfo("SEARCH_PROFESSIONALS_VM", "🗺️ Localização: Lat ${professional.latitude}, Lng ${professional.longitude}")
-        logInfo("SEARCH_PROFESSIONALS_VM", "===========================================")
     }
 
 
