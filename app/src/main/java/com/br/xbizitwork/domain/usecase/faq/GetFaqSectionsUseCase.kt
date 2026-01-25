@@ -10,10 +10,10 @@ import javax.inject.Inject
 
 /**
  * Caso de uso para obter as seções de FAQ com suas perguntas
- * Segue o padrão do GetUserSkillsUseCase
+ * Segue o padrão do GetCategoriesUseCase (public data, no parameters needed)
  */
 interface GetFaqSectionsUseCase {
-    operator fun invoke(): Flow<UiState<List<FaqSectionModel>>>
+    operator fun invoke(parameters: Unit = Unit): Flow<UiState<List<FaqSectionModel>>>
 }
 
 /**
