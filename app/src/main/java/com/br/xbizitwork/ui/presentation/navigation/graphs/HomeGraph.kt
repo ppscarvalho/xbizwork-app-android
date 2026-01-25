@@ -6,6 +6,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.navigation
 import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill
 import com.br.xbizitwork.ui.presentation.features.auth.changepassword.navigation.navigateToChangePasswordScreen
+import com.br.xbizitwork.ui.presentation.features.faq.navigation.navigateToFaqScreen
 import com.br.xbizitwork.ui.presentation.features.home.navigation.homeScreen
 import com.br.xbizitwork.ui.presentation.features.professionalprofile.navigation.navigateToProfessionalProfileScreen
 import com.br.xbizitwork.ui.presentation.features.profile.navigation.navigateToEditProfileScreen
@@ -63,7 +64,7 @@ fun NavGraphBuilder.homeGraph(
             onNavigateToProfessionalAgendaScreen = {
                 navController.navigateToProfessionalAgenda()
             },
-            onNavigateChangePasswordScreen = {
+            onNavigateToChangePasswordScreen = {
                 navController.navigateToChangePasswordScreen()
             },
             onNavigateToHomeGraph = {
@@ -73,7 +74,10 @@ fun NavGraphBuilder.homeGraph(
                 navController.navigateToProfessionalProfileScreen(professionalId)
             },
             setSelectedProfessional = setSelectedProfessional,
-            getProfessional = getSelectedProfessional
+            getProfessional = getSelectedProfessional,
+            onNavigateToFaqScreen = {
+                navController.navigateToFaqScreen()
+            }
         )
     }
 }

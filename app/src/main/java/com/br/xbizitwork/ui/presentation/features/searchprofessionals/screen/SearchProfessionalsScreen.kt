@@ -1,6 +1,5 @@
 package com.br.xbizitwork.ui.presentation.features.searchprofessionals.screen
 
-import android.content.res.Configuration
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material3.Scaffold
@@ -19,6 +18,7 @@ import com.br.xbizitwork.ui.presentation.features.searchprofessionals.events.Sea
 import com.br.xbizitwork.ui.presentation.features.searchprofessionals.state.SearchProfessionalsUiState
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 
 /**
  * Screen composable for professional search by skill
@@ -33,7 +33,7 @@ fun SearchProfessionalsScreen(
     onProfessionalSelected: (ProfessionalSearchBySkill) -> Unit = {}
 ) {
     val context = LocalContext.current
-
+    
     // Tratar SideEffects (Toast)
     LifecycleEventEffect(appSideEffectFlow) { sideEffect ->
         when (sideEffect) {
@@ -75,7 +75,6 @@ fun SearchProfessionalsScreen(
 
 @Preview(
     showBackground = true,
-    uiMode = Configuration.UI_MODE_NIGHT_YES,
     device = Devices.PIXEL_4
 )
 @Composable
@@ -83,7 +82,7 @@ private fun SearchProfessionalsScreenPreview() {
     XBizWorkTheme {
         SearchProfessionalsScreen(
             uiState = SearchProfessionalsUiState(),
-            appSideEffectFlow = kotlinx.coroutines.flow.emptyFlow(),
+            appSideEffectFlow = flowOf(),
             onEvent = {},
             onNavigateBack = {}
         )
