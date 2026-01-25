@@ -16,7 +16,7 @@ class FaqApiServiceImpl @Inject constructor(
 ) : FaqApiService {
 
     override suspend fun getFaqSections(): ApiResponse<List<FaqSectionResponse>> {
-        val response = httpClient.get("api/v1/faq-sections/public")
+        val response = httpClient.get("faq-sections/public")
         return response.body()
     }
 }

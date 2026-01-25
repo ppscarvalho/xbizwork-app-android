@@ -39,13 +39,13 @@ fun FaqContent(
                 .padding(16.dp)
                 .verticalScroll(rememberScrollState())
         ) {
-            Text(
-                text = "Dúvidas Frequentes",
-                fontFamily = poppinsFontFamily,
-                fontSize = 14.sp,
-                color = MaterialTheme.colorScheme.onPrimary,
-                modifier = Modifier.padding(top = 4.dp, bottom = 16.dp)
-            )
+//            Text(
+//                text = "Dúvidas Frequentes",
+//                fontFamily = poppinsFontFamily,
+//                fontSize = 14.sp,
+//                color = MaterialTheme.colorScheme.onPrimary,
+//                modifier = Modifier.padding(top = 4.dp, bottom = 16.dp)
+//            )
             
             FaqContainer(
                 modifier = Modifier.fillMaxWidth(),
