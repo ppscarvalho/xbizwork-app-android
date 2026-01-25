@@ -12,7 +12,9 @@ import javax.inject.Inject
  * Use case for fetching public FAQ sections
  */
 interface GetPublicFaqSectionsUseCase {
-    operator fun invoke(): Flow<UiState<List<FaqSection>>>
+    operator fun invoke(parameters: Parameters = Parameters): Flow<UiState<List<FaqSection>>>
+    
+    object Parameters
 }
 
 /**
@@ -21,9 +23,9 @@ interface GetPublicFaqSectionsUseCase {
  */
 class GetPublicFaqSectionsUseCaseImpl @Inject constructor(
     private val repository: FaqRepository
-) : GetPublicFaqSectionsUseCase, FlowUseCase<Unit, List<FaqSection>>() {
+) : GetPublicFaqSectionsUseCase, FlowUseCase<GetPublicFaqSectionsUseCase.Parameters, List<FaqSection>>() {
 
-    override suspend fun executeTask(parameters: Unit): UiState<List<FaqSection>> {
+    override suspend fun executeTask(parameters: GetPublicFaqSectionsUseCase.Parameters): UiState<List<FaqSection>> {
         return try {
             when (val result = repository.getPublicFaqSections()) {
                 is DefaultResult.Success -> {
