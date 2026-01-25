@@ -33,11 +33,7 @@ fun SearchProfessionalsScreen(
     onProfessionalSelected: (ProfessionalSearchBySkill) -> Unit = {}
 ) {
     val context = LocalContext.current
-    LifecycleEventEffect(appSideEffectFlow) { sideEffect ->
-        when (sideEffect) {
-            is AppSideEffect.ShowToast -> context.toast(sideEffect.message)
-            else -> { /* Other side effects not used in this screen */ }
-
+    
     // Tratar SideEffects (Toast)
     LifecycleEventEffect(appSideEffectFlow) { sideEffect ->
         when (sideEffect) {
@@ -87,7 +83,6 @@ private fun SearchProfessionalsScreenPreview() {
         SearchProfessionalsScreen(
             uiState = SearchProfessionalsUiState(),
             appSideEffectFlow = flowOf(),
-            appSideEffectFlow = kotlinx.coroutines.flow.emptyFlow(),
             onEvent = {},
             onNavigateBack = {}
         )

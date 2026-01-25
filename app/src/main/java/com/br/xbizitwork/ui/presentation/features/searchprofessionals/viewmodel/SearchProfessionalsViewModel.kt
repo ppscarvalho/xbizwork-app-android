@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.br.xbizitwork.core.sideeffects.AppSideEffect
 import com.br.xbizitwork.core.util.extensions.collectUiState
 import com.br.xbizitwork.core.util.logging.logInfo
-import com.br.xbizitwork.data.local.auth.datastore.AuthSessionLocalDataSource
+import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill
 import com.br.xbizitwork.domain.usecase.professional.SearchProfessionalsBySkillUseCase
 import com.br.xbizitwork.domain.usecase.session.GetAuthSessionUseCase
 import com.br.xbizitwork.ui.presentation.features.searchprofessionals.events.SearchProfessionalBySkillEvent
@@ -37,7 +37,6 @@ import javax.inject.Inject
 class SearchProfessionalsViewModel @Inject constructor(
     private val searchProfessionalsBySkillUseCase: SearchProfessionalsBySkillUseCase,
     private val getAuthSessionUseCase: GetAuthSessionUseCase
-    private val authSessionLocalDataSource: AuthSessionLocalDataSource
 ) : ViewModel() {
 
 
@@ -45,7 +44,7 @@ class SearchProfessionalsViewModel @Inject constructor(
         MutableStateFlow(SearchProfessionalsUiState())
     val uiState: StateFlow<SearchProfessionalsUiState> = _uiState.asStateFlow()
 
-    private val _appSideEffectChannel = Channel<AppSideEffect>(capacity = Channel.Factory.BUFFERED)
+    private val _appSideEffectChannel = Channel<AppSideEffect>(capacity = Channel.BUFFERED)
     val sideEffectChannel = _appSideEffectChannel.receiveAsFlow()
 
     init {
@@ -62,8 +61,6 @@ class SearchProfessionalsViewModel @Inject constructor(
         }
     }
 
-    private val _appSideEffectChannel = Channel<AppSideEffect>()
-    val sideEffectChannel = _appSideEffectChannel.receiveAsFlow()
 
     @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
     private val searchState = snapshotFlow { _uiState.value.queryTextState.text }
@@ -85,32 +82,18 @@ class SearchProfessionalsViewModel @Inject constructor(
             is SearchProfessionalBySkillEvent.OnRefresh -> {
                 observeSearch()
             }
+            is SearchProfessionalBySkillEvent.OnProfessionalSelected -> {
+                logProfessionalSelected(event.professional)
+            }
         }
     }
 
-    fun onProfessionalSelected(professional: ProfessionalSearchBySkill): Boolean {
-        logProfessionalSelected(professional)
-        
-        if (!_uiState.value.isAuthenticated) {
-            viewModelScope.launch {
-                _appSideEffectChannel.send(
-                    AppSideEffect.ShowToast(
-                        "Para visualizar o perfil de qualquer profissional, você precisa estar logado na nossa plataforma. Se você não tiver um login, faça seu cadastro."
-                    )
-                )
-            }
-            return false
-        }
-        
-        return true
-    }
     /**
      * Valida se o usuário está autenticado antes de permitir visualizar perfil
      * @return true se autenticado, false caso contrário
      */
     suspend fun validateAuthentication(): Boolean {
-        val session = authSessionLocalDataSource.getSession()
-        if (session == null || session.id == 0) {
+        if (!_uiState.value.isAuthenticated) {
             logInfo("SEARCH_PROFESSIONALS_VM", "⚠️ Usuário não autenticado tentando visualizar perfil")
             _appSideEffectChannel.send(
                 AppSideEffect.ShowToast("Para visualizar o perfil de qualquer profissional, você precisa estar logado na nossa plataforma. Se você não tiver um login, faça seu cadastro.")
@@ -119,6 +102,19 @@ class SearchProfessionalsViewModel @Inject constructor(
         }
 
         return true
+    }
+
+    private fun logProfessionalSelected(professional: ProfessionalSearchBySkill) {
+        logInfo("SEARCH_PROFESSIONALS_VM", "===========================================")
+        logInfo("SEARCH_PROFESSIONALS_VM", "👤 PROFISSIONAL SELECIONADO NO MAPA")
+        logInfo("SEARCH_PROFESSIONALS_VM", "===========================================")
+        logInfo("SEARCH_PROFESSIONALS_VM", "📝 Nome: ${professional.name}")
+        logInfo("SEARCH_PROFESSIONALS_VM", "🆔 ID: ${professional.id}")
+        logInfo("SEARCH_PROFESSIONALS_VM", "📱 Telefone: ${professional.mobilePhone}")
+        logInfo("SEARCH_PROFESSIONALS_VM", "📍 Cidade: ${professional.city} - ${professional.state}")
+        logInfo("SEARCH_PROFESSIONALS_VM", "💼 Habilidade: ${professional.skill.description}")
+        logInfo("SEARCH_PROFESSIONALS_VM", "🗺️ Localização: Lat ${professional.latitude}, Lng ${professional.longitude}")
+        logInfo("SEARCH_PROFESSIONALS_VM", "===========================================")
     }
 
 

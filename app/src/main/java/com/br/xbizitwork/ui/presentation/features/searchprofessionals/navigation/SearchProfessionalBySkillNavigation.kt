@@ -33,9 +33,6 @@ fun NavGraphBuilder.searchProfessionalBySkillScreen(
             onEvent = viewModel::onEvent,
             onNavigateBack = onNavigateUp,
             onProfessionalSelected = { professional ->
-                if (viewModel.onProfessionalSelected(professional)) {
-                    setSelectedProfessional(professional)
-                    onNavigateToProfessionalProfile(professional.id)
                 scope.launch {
                     // Validar autenticação antes de navegar
                     val isAuthenticated = viewModel.validateAuthentication()
