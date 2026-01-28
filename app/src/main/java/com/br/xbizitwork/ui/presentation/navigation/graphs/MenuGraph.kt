@@ -15,6 +15,7 @@ import com.br.xbizitwork.ui.presentation.features.profile.navigation.editProfile
 import com.br.xbizitwork.ui.presentation.features.schedule.agenda.navigation.professionalAgendaScreen
 import com.br.xbizitwork.ui.presentation.features.schedule.create.navigation.createScheduleScreen
 import com.br.xbizitwork.ui.presentation.features.schedule.list.navigation.listSchedulesScreen
+import com.br.xbizitwork.ui.presentation.features.searchprofessionals.navigation.professionalMapScreen
 import com.br.xbizitwork.ui.presentation.features.searchprofessionals.navigation.searchProfessionalBySkillScreen
 import com.br.xbizitwork.ui.presentation.features.skills.navigation.skillsScreen
 import com.br.xbizitwork.ui.presentation.navigation.screens.Graphs
@@ -41,7 +42,11 @@ fun NavGraphBuilder.menuGraph(
     onNavigateToChangePasswordScreen: () -> Unit,
     onNavigateToHomeGraph:() -> Unit,
     onNavigateToProfessionalProfile: (Int) -> Unit,
+    onNavigateToProfessionalMap: (Int) -> Unit,
     setSelectedProfessional: (ProfessionalSearchBySkill) -> Unit,
+    setAllProfessionals: (List<ProfessionalSearchBySkill>) -> Unit,
+    getSelectedProfessional: () -> ProfessionalSearchBySkill?,
+    getAllProfessionals: () -> List<ProfessionalSearchBySkill>,
     getProfessional: (Int) -> ProfessionalSearchBySkill?,
     onNavigateToFaqScreen: () -> Unit,
 ){
@@ -69,12 +74,25 @@ fun NavGraphBuilder.menuGraph(
             onNavigateToProfessionalProfile = { professionalId ->
                 onNavigateToProfessionalProfile(professionalId)
             },
-            setSelectedProfessional = setSelectedProfessional
+            onNavigateToProfessionalMap = { professionalId ->
+                onNavigateToProfessionalMap(professionalId)
+            },
+            setSelectedProfessional = setSelectedProfessional,
+            setAllProfessionals = setAllProfessionals
         )
 
         professionalProfileScreen(
             onNavigateUp = onNavigateUp,
             getProfessional = getProfessional
+        )
+
+        professionalMapScreen(
+            onNavigateUp = onNavigateUp,
+            getSelectedProfessional = getSelectedProfessional,
+            getAllProfessionals = getAllProfessionals,
+            onNavigateToProfessionalProfile = { professionalId ->
+                onNavigateToProfessionalProfile(professionalId)
+            }
         )
 
         createDefaultScheduleScreen(

@@ -100,6 +100,11 @@ class SearchProfessionalsViewModel @Inject constructor(
         return true
     }
 
+    /**
+     * Retorna a lista completa de profissionais (para usar no mapa)
+     */
+    fun getAllProfessionals() = _uiState.value.professionals
+
 
     private fun observeSearch() {
         viewModelScope.launch {
@@ -133,7 +138,7 @@ class SearchProfessionalsViewModel @Inject constructor(
                     _uiState.update { it.copy(isLoading = true, searchIsEmpty = false) }
                 },
                 onEmpty = {
-                    _uiState.update { it.copy(isLoading = false, isEmpty = true, searchIsEmpty = false) }
+                    _uiState.update { it.copy(isLoading = false, isEmpty = true, searchIsEmpty = false, searchQuery = query) }
                 },
                 onFailure = { error ->
                     _uiState.update {
@@ -151,6 +156,7 @@ class SearchProfessionalsViewModel @Inject constructor(
                             isLoading = false,
                             isEmpty = false,
                             searchIsEmpty = false,
+                            searchQuery = query,
                             professionals = result,
                             errorMessage = null
                         )

@@ -19,7 +19,10 @@ fun RootHost(
     startDestination: Graphs,
     navController: NavHostController,
     setSelectedProfessional: (ProfessionalSearchBySkill) -> Unit,
-    getSelectedProfessional: (Int) -> ProfessionalSearchBySkill?
+    getSelectedProfessional: (Int) -> ProfessionalSearchBySkill?,
+    getSelectedProfessionalDirect: () -> ProfessionalSearchBySkill?,
+    setAllProfessionals: (List<ProfessionalSearchBySkill>) -> Unit,
+    getAllProfessionals: () -> List<ProfessionalSearchBySkill>
 ){
     NavHost(
         navController = navController,
@@ -62,7 +65,10 @@ fun RootHost(
             },
             navController = navController,
             setSelectedProfessional = setSelectedProfessional,
-            getSelectedProfessional = getSelectedProfessional
+            getSelectedProfessional = getSelectedProfessional,
+            getSelectedProfessionalDirect = getSelectedProfessionalDirect,
+            setAllProfessionals = setAllProfessionals,
+            getAllProfessionals = getAllProfessionals
         )
     }
 }

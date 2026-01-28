@@ -78,7 +78,7 @@ private fun SearchProfessionalTextFieldPreview() {
     XBizWorkTheme {
         androidx.compose.foundation.layout.Box(
             modifier = Modifier
-                .padding(16.dp)
+                .padding(10.dp)
                 .background(
                     color = Color.White,
                     shape = RoundedCornerShape(12.dp)

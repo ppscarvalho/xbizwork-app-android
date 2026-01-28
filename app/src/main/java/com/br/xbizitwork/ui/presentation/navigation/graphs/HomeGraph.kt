@@ -14,6 +14,7 @@ import com.br.xbizitwork.ui.presentation.features.schedule.agenda.navigation.nav
 import com.br.xbizitwork.ui.presentation.features.schedule.create.navigation.navigateToCreateSchedule
 import com.br.xbizitwork.ui.presentation.features.schedule.list.navigation.navigateToViewSchedules
 import com.br.xbizitwork.ui.presentation.features.schedule.search.navigation.searchScheduleScreen
+import com.br.xbizitwork.ui.presentation.features.searchprofessionals.navigation.navigateToProfessionalMapScreen
 import com.br.xbizitwork.ui.presentation.features.skills.navigation.navigateToCreateSkillsScreen
 import com.br.xbizitwork.ui.presentation.navigation.screens.Graphs
 import com.br.xbizitwork.ui.presentation.navigation.screens.HomeScreens
@@ -29,7 +30,10 @@ fun NavGraphBuilder.homeGraph(
     onNavigationToSearchProfessionalSkillScreen: () -> Unit,
     navController: NavController,
     setSelectedProfessional: (ProfessionalSearchBySkill) -> Unit,
-    getSelectedProfessional: (Int) -> ProfessionalSearchBySkill?
+    getSelectedProfessional: (Int) -> ProfessionalSearchBySkill?,
+    getSelectedProfessionalDirect: () -> ProfessionalSearchBySkill?,
+    setAllProfessionals: (List<ProfessionalSearchBySkill>) -> Unit,
+    getAllProfessionals: () -> List<ProfessionalSearchBySkill>
 ){
     navigation<Graphs.HomeGraphs>(startDestination = HomeScreens.HomeScreen) {
         homeScreen(
@@ -73,7 +77,13 @@ fun NavGraphBuilder.homeGraph(
             onNavigateToProfessionalProfile = { professionalId ->
                 navController.navigateToProfessionalProfileScreen(professionalId)
             },
+            onNavigateToProfessionalMap = { professionalId ->
+                navController.navigateToProfessionalMapScreen(professionalId)
+            },
             setSelectedProfessional = setSelectedProfessional,
+            setAllProfessionals = setAllProfessionals,
+            getSelectedProfessional = getSelectedProfessionalDirect,
+            getAllProfessionals = getAllProfessionals,
             getProfessional = getSelectedProfessional,
             onNavigateToFaqScreen = {
                 navController.navigateToFaqScreen()

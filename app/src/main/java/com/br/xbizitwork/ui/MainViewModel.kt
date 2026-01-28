@@ -51,4 +51,18 @@ class MainViewModel @Inject constructor(
     fun getSelectedProfessional(professionalId: Int): ProfessionalSearchBySkill? {
         return _uiState.value.selectedProfessional?.takeIf { it.id == professionalId }
     }
+
+    fun getSelectedProfessionalDirect(): ProfessionalSearchBySkill? {
+        return _uiState.value.selectedProfessional
+    }
+
+    fun setAllProfessionals(professionals: List<ProfessionalSearchBySkill>) {
+        _uiState.update {
+            it.copy(allProfessionals = professionals)
+        }
+    }
+
+    fun getAllProfessionals(): List<ProfessionalSearchBySkill> {
+        return _uiState.value.allProfessionals
+    }
 }

@@ -30,7 +30,8 @@ fun SearchProfessionalsScreen(
     appSideEffectFlow: Flow<AppSideEffect>,
     onEvent: (SearchProfessionalBySkillEvent) -> Unit,
     onNavigateBack: () -> Unit,
-    onProfessionalSelected: (ProfessionalSearchBySkill) -> Unit = {}
+    onProfessionalSelected: (ProfessionalSearchBySkill) -> Unit = {},
+    onMapClick: (ProfessionalSearchBySkill) -> Unit = {}
 ) {
     val context = LocalContext.current
     
@@ -67,7 +68,8 @@ fun SearchProfessionalsScreen(
                 paddingValues = paddingValues,
                 uiState = uiState,
                 onEvent = onEvent,
-                onProfessionalSelected = onProfessionalSelected
+                onProfessionalSelected = onProfessionalSelected,
+                onMapClick = onMapClick
             )
         }
     )

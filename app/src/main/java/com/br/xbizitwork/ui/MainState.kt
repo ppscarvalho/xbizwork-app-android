@@ -5,5 +5,6 @@ import com.br.xbizitwork.ui.presentation.navigation.screens.Graphs
 
 data class MainUiState(
     val startDestination: Graphs = Graphs.AuthGraphs,
-    val selectedProfessional: ProfessionalSearchBySkill? = null
+    val selectedProfessional: ProfessionalSearchBySkill? = null,
+    val allProfessionals: List<ProfessionalSearchBySkill> = emptyList()
 )

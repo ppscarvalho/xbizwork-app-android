@@ -20,7 +20,9 @@ import kotlinx.coroutines.launch
 fun NavGraphBuilder.searchProfessionalBySkillScreen(
     onNavigateUp: () -> Unit,
     onNavigateToProfessionalProfile: (Int) -> Unit,
-    setSelectedProfessional: (ProfessionalSearchBySkill) -> Unit
+    onNavigateToProfessionalMap: (Int) -> Unit,
+    setSelectedProfessional: (ProfessionalSearchBySkill) -> Unit,
+    setAllProfessionals: (List<ProfessionalSearchBySkill>) -> Unit
 ) {
     composable<MenuScreens.SearchProfessionalBySkillScreen> {
         val viewModel: SearchProfessionalsViewModel = hiltViewModel()
@@ -41,6 +43,12 @@ fun NavGraphBuilder.searchProfessionalBySkillScreen(
                         onNavigateToProfessionalProfile(professional.id)
                     }
                 }
+            },
+            onMapClick = { professional ->
+                // Navegar para tela de mapa com profissional em destaque
+                setSelectedProfessional(professional)
+                setAllProfessionals(viewModel.getAllProfessionals())
+                onNavigateToProfessionalMap(professional.id)
             }
         )
     }

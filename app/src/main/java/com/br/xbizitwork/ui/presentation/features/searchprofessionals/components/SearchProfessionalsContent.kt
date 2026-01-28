@@ -30,7 +30,8 @@ fun SearchProfessionalsContent(
     uiState: SearchProfessionalsUiState,
     paddingValues: PaddingValues,
     onEvent: (SearchProfessionalBySkillEvent) -> Unit,
-    onProfessionalSelected: (ProfessionalSearchBySkill) -> Unit = {}
+    onProfessionalSelected: (ProfessionalSearchBySkill) -> Unit = {},
+    onMapClick: (ProfessionalSearchBySkill) -> Unit = {}
 ) {
     AppGradientBackground(
         modifier = modifier,
@@ -39,12 +40,18 @@ fun SearchProfessionalsContent(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(top = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+                .padding(top = 10.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             // Search bar (sem botão, busca automática)
             SearchProfessionalBar(
                 queryTextState = uiState.queryTextState
+            )
+
+            // Results counter - mostra "Foram encontrados X profissionais [Especialidade]"
+            ProfessionalsResultsCounter(
+                count = uiState.professionals.size,
+                searchQuery = uiState.searchQuery
             )
 
             // Results container
@@ -52,7 +59,8 @@ fun SearchProfessionalsContent(
                 modifier = Modifier.fillMaxSize(),
                 uiState = uiState,
                 onEvent = onEvent,
-                onProfessionalSelected = onProfessionalSelected
+                onProfessionalSelected = onProfessionalSelected,
+                onMapClick = onMapClick
             )
         }
     }
