@@ -14,7 +14,7 @@ class CategoryApiServiceImpl @Inject constructor(
     private val httpClient: HttpClient
 ) : CategoryApiService {
     override suspend fun getAllCategory(): ApiResponse<List<CategoryResponse>> {
-        val response = httpClient.get("categories/list") {
+        val response = httpClient.get("categories") {
             contentType(ContentType.Application.Json)
         }
         return response.body()
