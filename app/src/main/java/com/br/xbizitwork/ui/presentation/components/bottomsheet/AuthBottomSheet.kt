@@ -30,7 +30,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -47,7 +46,6 @@ import com.br.xbizitwork.ui.presentation.features.auth.signin.events.SignInEvent
 import com.br.xbizitwork.ui.presentation.features.auth.signin.viewmodel.SignInViewModel
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
 import com.br.xbizitwork.ui.theme.poppinsFontFamily
-import kotlinx.coroutines.launch
 
 /**
  * BottomSheet para autenticação inline
@@ -65,7 +63,6 @@ fun AuthBottomSheet(
 ) {
     if (!isVisible) return
 
-    val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = false)
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -83,7 +80,7 @@ fun AuthBottomSheet(
 
     // Observar erro do login
     LaunchedEffect(uiState.signUpErrorMessage) {
-        if (uiState.signUpErrorMessage.isNotEmpty()) {
+        if (!uiState.signUpErrorMessage.isNullOrEmpty()) {
             errorMessage = uiState.signUpErrorMessage
         }
     }
