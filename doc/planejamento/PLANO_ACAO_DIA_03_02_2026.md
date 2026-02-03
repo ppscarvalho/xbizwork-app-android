@@ -1,8 +1,44 @@
 # 📋 PLANO DE AÇÃO - 03/02/2026
 
 **Data**: 03/02/2026 (Hoje)  
-**Status**: 📝 Planejado  
+**Status**: 📝 Planejado | ✅ AuthBottomSheet Refatorado  
 **Prioridade**: 🔴 Alta
+
+---
+
+## ⚠️ ATUALIZAÇÃO IMPORTANTE
+
+### ✅ REFATORAÇÃO DO AUTHBOTTOMSHEET CONCLUÍDA
+
+**Motivo**: Código anterior estava FORA DO PADRÃO do projeto
+
+**Problema identificado**:
+- Tudo em um único arquivo monolítico
+- ViewModel injetado diretamente no composable
+- Sem separação State/Events/ViewModel/Container/Content
+- Não seguia padrão SignUp, Profile, Schedule
+
+**Solução implementada**:
+- ✅ 6 arquivos criados seguindo padrão
+- ✅ State, Events, ViewModel, Container, Content, Screen
+- ✅ ViewModel gerenciado externamente
+- ✅ Código testável e manutenível
+- ✅ Documentação completa
+- ✅ Commit realizado
+
+**Arquivos**:
+```
+features/auth/bottomsheet/
+  ├── state/AuthBottomSheetState.kt
+  ├── events/AuthBottomSheetEvent.kt
+  ├── viewmodel/AuthBottomSheetViewModel.kt
+  ├── components/
+  │   ├── AuthBottomSheetContainer.kt
+  │   └── AuthBottomSheetContent.kt
+  └── screen/AuthBottomSheetScreen.kt
+```
+
+**Documentação**: `REFATORACAO_AUTH_BOTTOMSHEET_PADRAO.md`
 
 ---
 
