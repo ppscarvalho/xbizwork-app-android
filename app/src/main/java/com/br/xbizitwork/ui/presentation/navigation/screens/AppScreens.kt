@@ -32,7 +32,7 @@ sealed interface HomeScreens{
     data object ProfileScreen: HomeScreens
 
     @Serializable
-    data object ReserveScreen: HomeScreens
+    data object FaqScreen: HomeScreens
 
     @Serializable
     data object PromoteYourWorkScreen: HomeScreens

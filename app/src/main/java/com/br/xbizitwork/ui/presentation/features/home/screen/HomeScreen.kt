@@ -38,7 +38,7 @@ fun DefaultScreen(
     onNavigateToSignInScreen: () -> Unit,
     onNavigateToProfileScreen: () -> Unit,
     onNavigateToSearchScreen: () -> Unit,
-    onNavigateToUsersConnectionScreen: () -> Unit,
+    onNavigationToFaqScreen: () -> Unit,
     onNavigateToMenuScreen: () -> Unit,
     onNavigateProfileClick: () -> Unit,
     onLogout: () -> Unit,
@@ -82,7 +82,7 @@ fun DefaultScreen(
                 isLoggedIn = !uiState.userName.isNullOrEmpty(),
                 onNavigationToProfileScreen = onNavigateToProfileScreen,
                 onNavigationToSearchScreen = onNavigateToSearchScreen,
-                onNavigationToUsersConnectionScreen = onNavigateToUsersConnectionScreen,
+                onNavigationToFaqScreen = onNavigationToFaqScreen,
                 onNavigationToMenuScreen = onNavigateToMenuScreen,
                 onNavigationToSearchProfessionalSkillScreen = onNavigationToSearchProfessionalSkillScreen
             )
@@ -90,8 +90,7 @@ fun DefaultScreen(
         content = {paddingValues ->
                 Column(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 2.dp),
+                        .fillMaxWidth(),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
@@ -118,7 +117,7 @@ private fun DefaultScreenPreview() {
             onNavigateToSignInScreen = {},
             onNavigateToProfileScreen = {},
             onNavigateToSearchScreen = {},
-            onNavigateToUsersConnectionScreen = {},
+            onNavigationToFaqScreen = {},
             onNavigateToMenuScreen = {},
             onNavigateProfileClick = {},
             onLogout = {},

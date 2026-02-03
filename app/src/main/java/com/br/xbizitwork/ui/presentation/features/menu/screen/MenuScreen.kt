@@ -30,7 +30,7 @@ fun MenuScreen(
     onClickYourPlan: () -> Unit,
     onClickMyAppointments: () -> Unit,
     onClickProfessionalAgenda: () -> Unit,
-    onClickFAQ: () -> Unit,
+    //onClickFAQ: () -> Unit,
     onClickAppVersion: () -> Unit,
     onClickRateApp: () -> Unit,
     onClickLogout: () -> Unit
@@ -72,7 +72,7 @@ fun MenuScreen(
                 onClickYourPlan = onClickYourPlan,
                 onClickMyAppointments = onClickMyAppointments,
                 onClickProfessionalAgenda = onClickProfessionalAgenda,
-                onClickFAQ = onClickFAQ,
+                //onClickFAQ = onClickFAQ,
                 onClickAppVersion = onClickAppVersion,
                 onClickRateApp = onClickRateApp,
                 onClickLogout = onClickLogout
@@ -99,7 +99,6 @@ private fun MenuScreenPreview() {
             onClickYourPlan = {},
             onClickMyAppointments = {},
             onClickProfessionalAgenda = {},
-            onClickFAQ = {},
             onClickAppVersion = {},
             onClickRateApp = {},
             onClickLogout = {}

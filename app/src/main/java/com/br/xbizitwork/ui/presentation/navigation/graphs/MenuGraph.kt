@@ -48,7 +48,6 @@ fun NavGraphBuilder.menuGraph(
     getSelectedProfessional: () -> ProfessionalSearchBySkill?,
     getAllProfessionals: () -> List<ProfessionalSearchBySkill>,
     getProfessional: (Int) -> ProfessionalSearchBySkill?,
-    onNavigateToFaqScreen: () -> Unit,
 ){
     navigation<Graphs.MenuGraphs>(startDestination = MenuScreens.MenuScreen) {
         menuScreen(
@@ -58,7 +57,6 @@ fun NavGraphBuilder.menuGraph(
             onNavigateToProfessionalAgendaScreen = onNavigateToProfessionalAgendaScreen,
             onNavigateToChangePasswordScreen = onNavigateToChangePasswordScreen,
             onNavigateToCreateSkills = onNavigateToCreateSkills,
-            onNavigateToFaqScreen = onNavigateToFaqScreen
         )
         editProfileScreen(
             onNavigateBack = onNavigateUp,
@@ -118,10 +116,6 @@ fun NavGraphBuilder.menuGraph(
         changePasswordScreen(
             onNavigateBack = onNavigateUp
         )
-        faqScreen(
-            onNavigateUp = onNavigateUp
-        )
-
         professionalAgendaScreen(onNavigateUp = onNavigateUp)
     }
 }

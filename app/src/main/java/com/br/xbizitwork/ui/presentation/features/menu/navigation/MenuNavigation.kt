@@ -14,8 +14,7 @@ fun NavGraphBuilder.menuScreen(
     onNavigateToListSchedulesScreen: () -> Unit,
     onNavigateToCreateSkills: () -> Unit,
     onNavigateToProfessionalAgendaScreen: () -> Unit,
-    onNavigateToChangePasswordScreen: () -> Unit,
-    onNavigateToFaqScreen: () -> Unit,
+    onNavigateToChangePasswordScreen: () -> Unit
 ){
     composable<MenuScreens.MenuScreen> {
         val viewModel: MenuViewModel = hiltViewModel()
@@ -31,7 +30,6 @@ fun NavGraphBuilder.menuScreen(
             onClickYourPlan = {},
             onClickMyAppointments = {},
             onClickProfessionalAgenda = { onNavigateToProfessionalAgendaScreen() },
-            onClickFAQ = {onNavigateToFaqScreen()},
             onClickAppVersion = {},
             onClickRateApp = {},
             onClickLogout = { 

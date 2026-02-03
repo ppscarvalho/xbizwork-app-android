@@ -13,7 +13,7 @@ fun NavGraphBuilder.homeScreen(
     onNavigateToSignInScreen: () -> Unit,
     onNavigateToProfileScreen: () -> Unit,
     onNavigateToSearchScreen: () -> Unit,
-    onNavigateToUsersConnectionScreen: () -> Unit,
+    onNavigationToFaqScreen: () -> Unit,
     onNavigateToMenuScreen: () -> Unit,
     onNavigateProfileClick: () -> Unit,
     onNavigationToSearchProfessionalSkillScreen: () -> Unit
@@ -30,7 +30,7 @@ fun NavGraphBuilder.homeScreen(
             onNavigateToSignInScreen = onNavigateToSignInScreen,
             onNavigateToProfileScreen = onNavigateToProfileScreen,
             onNavigateToSearchScreen = onNavigateToSearchScreen,
-            onNavigateToUsersConnectionScreen = onNavigateToUsersConnectionScreen,
+            onNavigationToFaqScreen = onNavigationToFaqScreen,
             onNavigateToMenuScreen = onNavigateToMenuScreen,
             onNavigateProfileClick =  onNavigateProfileClick,
             onLogout = {viewModel.logout()},

@@ -8,28 +8,23 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.br.xbizitwork.ui.presentation.features.faq.screen.FaqScreen
 import com.br.xbizitwork.ui.presentation.features.faq.viewmodel.FaqViewModel
+import com.br.xbizitwork.ui.presentation.navigation.screens.HomeScreens
 import kotlinx.serialization.Serializable
-
-/**
- * Definição de rota para navegação do FAQ
- */
-@Serializable
-object FaqScreenRoute
 
 /**
  * Extensão para adicionar a tela de FAQ ao NavGraphBuilder
  */
 fun NavGraphBuilder.faqScreen(
-    onNavigateUp: () -> Unit
+    onNavigateBack: () -> Unit
 ) {
-    composable<FaqScreenRoute> {
+    composable<HomeScreens.FaqScreen> {
         val viewModel: FaqViewModel = hiltViewModel()
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
         FaqScreen(
             uiState = uiState,
             onEvent = viewModel::onEvent,
-            onNavigateBack = onNavigateUp
+            onNavigateBack = onNavigateBack
         )
     }
 }
@@ -38,7 +33,7 @@ fun NavGraphBuilder.faqScreen(
  * Extensão para navegar para a tela de FAQ
  */
 fun NavController.navigateToFaqScreen() {
-    navigate(FaqScreenRoute) {
+    navigate(HomeScreens.FaqScreen) {
         launchSingleTop = true
     }
 }

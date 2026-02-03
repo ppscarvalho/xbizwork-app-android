@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill
 import com.br.xbizitwork.ui.presentation.features.auth.signin.navigation.navigateToSignInScreen
 import com.br.xbizitwork.ui.presentation.features.auth.signup.navigation.navigateToSignUpScreen
+import com.br.xbizitwork.ui.presentation.features.faq.navigation.navigateToFaqScreen
 import com.br.xbizitwork.ui.presentation.features.schedule.search.navigation.navigateToSearchScheduleScreen
 import com.br.xbizitwork.ui.presentation.features.searchprofessionals.navigation.navigateToSearchProfessionalBySkillScreen
 import com.br.xbizitwork.ui.presentation.navigation.graphs.authGraph
@@ -52,7 +53,9 @@ fun RootHost(
             onNavigateToSearchScreen = {
                 navController.navigateToSearchScheduleScreen()
             },
-            onNavigateToUsersConnectionScreen = {},
+            onNavigationToFaqScreen = {
+                navController.navigateToFaqScreen()
+            },
             onNavigateToMenuGraph = {
                 navController.navigateToMenuGraph()
             },

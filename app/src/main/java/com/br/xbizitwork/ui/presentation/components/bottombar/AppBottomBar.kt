@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -28,7 +29,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
 import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.material.icons.automirrored.filled.Help
 import androidx.compose.material.icons.outlined.PersonSearch
+import com.br.xbizitwork.ui.presentation.components.buttons.MenuButton
 
 @Composable
 fun AppBottomBar(
@@ -36,14 +39,13 @@ fun AppBottomBar(
     isLoggedIn: Boolean = false,
     onNavigationToProfileScreen: () -> Unit,
     onNavigationToSearchScreen: () -> Unit,
-    onNavigationToUsersConnectionScreen: () -> Unit,
+    onNavigationToFaqScreen: () -> Unit,
     onNavigationToMenuScreen: () -> Unit,
     onNavigationToSearchProfessionalSkillScreen: () -> Unit
 ) {
     BottomAppBar(
         modifier = modifier
-            .height(100.dp)
-            .navigationBarsPadding(),
+            .height(100.dp),
         containerColor = MaterialTheme.colorScheme.secondary,
         actions = {
             // Row com espaçamento uniforme para distribuir ícones
@@ -75,6 +77,13 @@ fun AppBottomBar(
                     onClick = onNavigationToSearchProfessionalSkillScreen
                 )
 
+                // Dúvidas Frequentes
+                BottomBarItem(
+                    icon = Icons.AutoMirrored.Filled.Help,
+                    label = "Dúvidas",
+                    onClick = onNavigationToFaqScreen
+                )
+
                 // Perfil
 //                BottomBarItem(
 //                    icon = Icons.Outlined.Person,
@@ -104,28 +113,30 @@ private fun BottomBarItem(
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.Top, // 👈 não centraliza
         modifier = modifier
             .clickable(onClick = onClick)
-            .padding(vertical = 8.dp, horizontal = 12.dp)
+            .padding(horizontal = 8.dp, vertical = 2.dp) // 👈 MUITO importante
     ) {
         Icon(
             imageVector = icon,
             contentDescription = label,
             tint = MaterialTheme.colorScheme.onPrimary,
-            modifier = Modifier
-                .size(28.dp)
-                .padding(bottom = 4.dp)
+            modifier = Modifier.size(24.dp)
         )
-//        Text(
-//            text = label,
-//            fontSize = 10.sp,
-//            color = MaterialTheme.colorScheme.onPrimary,
-//            textAlign = TextAlign.Center,
-//            fontFamily = MaterialTheme.typography.bodySmall.fontFamily
-//        )
+        Spacer(modifier = Modifier.height(2.dp)) // 👈 controle fino do espaço
+        Text(
+            text = label,
+            fontSize = 11.sp,
+            color = MaterialTheme.colorScheme.onPrimary,
+            textAlign = TextAlign.Center,
+            maxLines = 1,
+            lineHeight = 11.sp, // 👈 cola no ícone
+            modifier = Modifier.padding(top = 0.dp)
+        )
     }
 }
+
 
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_NO)
 @Composable
@@ -134,7 +145,7 @@ private fun BottomBarPreview() {
         AppBottomBar(
             onNavigationToProfileScreen = {},
             onNavigationToSearchScreen = {},
-            onNavigationToUsersConnectionScreen = {},
+            onNavigationToFaqScreen = {},
             onNavigationToMenuScreen = {},
             onNavigationToSearchProfessionalSkillScreen = {}
         )

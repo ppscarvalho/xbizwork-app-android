@@ -3,10 +3,13 @@ package com.br.xbizitwork.ui.presentation.features.home.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.br.xbizitwork.ui.presentation.components.background.AppGradientBackground
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
 
@@ -18,22 +21,17 @@ fun HomeContent(
     onNavigateToProfileScreen: () -> Unit
 ) {
     AppGradientBackground(
-        modifier = modifier,
+        modifier = modifier.fillMaxSize(),
         paddingValues = paddingValues
     ) {
-        Column(
-            modifier = modifier,
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            HomeContainer(
-                modifier = Modifier.weight(1f),
-                onNavigationToSignInScreen = onNavigationToSignInScreen,
-                onNavigateToProfileScreen = onNavigateToProfileScreen
-            )
-        }
+        HomeContainer(
+            modifier = Modifier.fillMaxSize(), // 👈 ocupa tudo
+            onNavigationToSignInScreen = onNavigationToSignInScreen,
+            onNavigateToProfileScreen = onNavigateToProfileScreen
+        )
     }
 }
+
 
 @Preview
 @Composable

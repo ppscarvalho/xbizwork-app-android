@@ -6,6 +6,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.navigation
 import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill
 import com.br.xbizitwork.ui.presentation.features.auth.changepassword.navigation.navigateToChangePasswordScreen
+import com.br.xbizitwork.ui.presentation.features.faq.navigation.faqScreen
 import com.br.xbizitwork.ui.presentation.features.faq.navigation.navigateToFaqScreen
 import com.br.xbizitwork.ui.presentation.features.home.navigation.homeScreen
 import com.br.xbizitwork.ui.presentation.features.professionalprofile.navigation.navigateToProfessionalProfileScreen
@@ -24,7 +25,7 @@ fun NavGraphBuilder.homeGraph(
     onNavigateToSignInScreen: () -> Unit,
     onNavigateToProfileScreen: () -> Unit,
     onNavigateToSearchScreen: () -> Unit,
-    onNavigateToUsersConnectionScreen: () -> Unit,
+    onNavigationToFaqScreen: () -> Unit,
     onNavigateToMenuGraph: () -> Unit,
     onNavigateProfileScreen: () -> Unit,
     onNavigationToSearchProfessionalSkillScreen: () -> Unit,
@@ -40,7 +41,7 @@ fun NavGraphBuilder.homeGraph(
             onNavigateToSignInScreen = onNavigateToSignInScreen,
             onNavigateToProfileScreen = onNavigateToProfileScreen,
             onNavigateToSearchScreen = onNavigateToSearchScreen,
-            onNavigateToUsersConnectionScreen = onNavigateToUsersConnectionScreen,
+            onNavigationToFaqScreen = onNavigationToFaqScreen,
             onNavigateToMenuScreen = onNavigateToMenuGraph,
             onNavigateProfileClick = onNavigateProfileScreen,
             onNavigationToSearchProfessionalSkillScreen = onNavigationToSearchProfessionalSkillScreen
@@ -48,6 +49,10 @@ fun NavGraphBuilder.homeGraph(
         searchScheduleScreen(
             onNavigateBack = onNavigateUp,
             onNavigateToScheduleDetail = {}
+        )
+
+        faqScreen(
+            onNavigateBack = onNavigateUp,
         )
 
         // Menu é um nested graph com suas próprias screens
@@ -85,9 +90,6 @@ fun NavGraphBuilder.homeGraph(
             getSelectedProfessional = getSelectedProfessionalDirect,
             getAllProfessionals = getAllProfessionals,
             getProfessional = getSelectedProfessional,
-            onNavigateToFaqScreen = {
-                navController.navigateToFaqScreen()
-            }
         )
     }
 }

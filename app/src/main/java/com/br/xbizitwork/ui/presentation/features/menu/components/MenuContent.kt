@@ -25,7 +25,6 @@ fun MenuContent(
     onClickYourPlan: () -> Unit,
     onClickMyAppointments: () -> Unit,
     onClickProfessionalAgenda: () -> Unit,
-    onClickFAQ: () -> Unit,
     onClickAppVersion: () -> Unit,
     onClickRateApp: () -> Unit,
     onClickLogout: () -> Unit
@@ -54,7 +53,6 @@ fun MenuContent(
                 onClickYourPlan = onClickYourPlan,
                 onClickMyAppointments = onClickMyAppointments,
                 onClickProfessionalAgenda = onClickProfessionalAgenda,
-                onClickFAQ = onClickFAQ,
                 onClickAppVersion = onClickAppVersion,
                 onClickRateApp = onClickRateApp,
                 onClickLogout = onClickLogout
@@ -76,7 +74,6 @@ private fun MenuContentPreview() {
             onClickYourPlan = {},
             onClickMyAppointments = {},
             onClickProfessionalAgenda = {},
-            onClickFAQ = {},
             onClickAppVersion = {},
             onClickRateApp = {},
             onClickLogout = {}
