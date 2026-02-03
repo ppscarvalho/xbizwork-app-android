@@ -13,11 +13,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.br.xbizitwork.core.sideeffects.AppSideEffect
 import com.br.xbizitwork.core.state.LifecycleEventEffect
 import com.br.xbizitwork.core.util.extensions.toast
 import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill
-import com.br.xbizitwork.ui.presentation.components.bottomsheet.AuthBottomSheet
+import com.br.xbizitwork.ui.presentation.features.auth.bottomsheet.screen.AuthBottomSheetScreen
+import com.br.xbizitwork.ui.presentation.features.auth.bottomsheet.viewmodel.AuthBottomSheetViewModel
 import com.br.xbizitwork.ui.presentation.components.topbar.AppTopBar
 import com.br.xbizitwork.ui.presentation.features.searchprofessionals.components.SearchProfessionalsContent
 import com.br.xbizitwork.ui.presentation.features.searchprofessionals.events.SearchProfessionalBySkillEvent
@@ -27,14 +30,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 
-/**
- * Screen composable for professional search by skill
- * Following the same pattern as SearchScheduleScreen
- *
- * Inclui validação de autenticação antes de navegar para o mapa:
- * - Se autenticado: navega direto
- * - Se não autenticado: abre AuthBottomSheet para login inline
- */
 @Composable
 fun SearchProfessionalsScreen(
     uiState: SearchProfessionalsUiState,
@@ -47,6 +42,10 @@ fun SearchProfessionalsScreen(
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
+
+    // ViewModel do AuthBottomSheet (separado)
+    val authViewModel: AuthBottomSheetViewModel = hiltViewModel()
+    val authUiState by authViewModel.uiState.collectAsStateWithLifecycle()
 
     // Estado para controlar AuthBottomSheet
     var showAuthBottomSheet by remember { mutableStateOf(false) }
@@ -102,9 +101,14 @@ fun SearchProfessionalsScreen(
                 }
             )
 
-            // AuthBottomSheet para login inline
-            AuthBottomSheet(
+            // AuthBottomSheet com ViewModel separado (padrão correto)
+            AuthBottomSheetScreen(
                 isVisible = showAuthBottomSheet,
+                uiState = authUiState,
+                appSideEffectFlow = authViewModel.sideEffectChannel,
+                onEmailChange = authViewModel::onEmailChange,
+                onPasswordChange = authViewModel::onPasswordChange,
+                onEvent = authViewModel::onEvent,
                 onDismiss = {
                     showAuthBottomSheet = false
                     pendingMapNavigation = null
