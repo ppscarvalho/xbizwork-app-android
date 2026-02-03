@@ -49,7 +49,8 @@ fun NavGraphBuilder.searchProfessionalBySkillScreen(
                 setSelectedProfessional(professional)
                 setAllProfessionals(viewModel.getAllProfessionals())
                 onNavigateToProfessionalMap(professional.id)
-            }
+            },
+            validateAuthentication = { viewModel.validateAuthentication() }
         )
     }
 }

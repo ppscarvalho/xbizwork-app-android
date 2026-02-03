@@ -3,6 +3,7 @@ package com.br.xbizitwork.ui.presentation.features.searchprofessionals.viewmodel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.delay
 import com.br.xbizitwork.core.util.DistanceCalculator
 import com.br.xbizitwork.core.util.logging.logInfo
 import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill
@@ -36,12 +37,15 @@ class ProfessionalMapViewModel @Inject constructor(
         allProfessionals: List<ProfessionalSearchBySkill>
     ) {
         viewModelScope.launch {
-            _uiState.update { it.copy(isLoading = true) }
+            _uiState.update { it.copy(isLoading = true, isLoadingMap = true) }
 
             val lat = selectedProfessional.latitude
             val lon = selectedProfessional.longitude
 
             if (lat != null && lon != null) {
+                // Delay mínimo para garantir que o loading seja visível
+                delay(300)
+
                 // Filtrar profissionais próximos (excluindo o selecionado)
                 val nearby = DistanceCalculator.filterByRadius(
                     centerLat = lat,
@@ -58,6 +62,7 @@ class ProfessionalMapViewModel @Inject constructor(
                         allProfessionals = allProfessionals,
                         nearbyProfessionals = nearby,
                         isLoading = false,
+                        isLoadingMap = false,
                         errorMessage = null
                     )
                 }
@@ -65,6 +70,7 @@ class ProfessionalMapViewModel @Inject constructor(
                 _uiState.update {
                     it.copy(
                         isLoading = false,
+                        isLoadingMap = false,
                         errorMessage = "Profissional não possui localização definida"
                     )
                 }

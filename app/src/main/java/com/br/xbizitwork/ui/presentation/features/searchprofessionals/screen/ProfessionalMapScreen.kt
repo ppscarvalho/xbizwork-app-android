@@ -74,8 +74,8 @@ fun ProfessionalMapScreen(
                 contentAlignment = Alignment.Center
             ) {
                 when {
-                    uiState.isLoading -> {
-                        LoadingIndicator(message = "Carregando mapa...")
+                    uiState.isLoading || uiState.isLoadingMap -> {
+                        LoadingIndicator(message = "Carregando mapa e profissionais próximos...")
                     }
 
                     uiState.errorMessage != null -> {

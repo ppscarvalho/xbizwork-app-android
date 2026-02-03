@@ -11,5 +11,6 @@ data class ProfessionalMapUiState(
     val allProfessionals: List<ProfessionalSearchBySkill> = emptyList(),
     val radiusKm: Double = 10.0,
     val isLoading: Boolean = false,
+    val isLoadingMap: Boolean = true,  // Indica que o mapa está sendo carregado
     val errorMessage: String? = null
 )
