@@ -36,6 +36,7 @@ class MainActivity : ComponentActivity() {
                     setSelectedProfessional = viewModel::setSelectedProfessional,
                     getSelectedProfessional = viewModel::getSelectedProfessional,
                     getSelectedProfessionalDirect = viewModel::getSelectedProfessionalDirect,
+                    getProfessionalById = viewModel::getProfessionalById,
                     setAllProfessionals = viewModel::setAllProfessionals,
                     getAllProfessionals = viewModel::getAllProfessionals
                 )

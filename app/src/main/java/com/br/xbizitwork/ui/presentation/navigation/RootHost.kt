@@ -22,6 +22,7 @@ fun RootHost(
     setSelectedProfessional: (ProfessionalSearchBySkill) -> Unit,
     getSelectedProfessional: (Int) -> ProfessionalSearchBySkill?,
     getSelectedProfessionalDirect: () -> ProfessionalSearchBySkill?,
+    getProfessionalById: (Int) -> ProfessionalSearchBySkill?,
     setAllProfessionals: (List<ProfessionalSearchBySkill>) -> Unit,
     getAllProfessionals: () -> List<ProfessionalSearchBySkill>
 ){
@@ -70,6 +71,7 @@ fun RootHost(
             setSelectedProfessional = setSelectedProfessional,
             getSelectedProfessional = getSelectedProfessional,
             getSelectedProfessionalDirect = getSelectedProfessionalDirect,
+            getProfessionalById = getProfessionalById,
             setAllProfessionals = setAllProfessionals,
             getAllProfessionals = getAllProfessionals
         )

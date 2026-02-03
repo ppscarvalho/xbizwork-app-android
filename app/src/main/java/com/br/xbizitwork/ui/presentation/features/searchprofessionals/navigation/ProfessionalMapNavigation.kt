@@ -13,12 +13,14 @@ import com.br.xbizitwork.ui.presentation.navigation.screens.MenuScreens
 
 /**
  * Navegação para tela de mapa com profissional em destaque
+ * Suporta visualização rápida de profissionais não selecionados via BottomSheet
  */
 fun NavGraphBuilder.professionalMapScreen(
     onNavigateUp: () -> Unit,
     getSelectedProfessional: () -> ProfessionalSearchBySkill?,
     getAllProfessionals: () -> List<ProfessionalSearchBySkill>,
-    onNavigateToProfessionalProfile: (Int) -> Unit
+    onNavigateToProfessionalProfile: (Int) -> Unit,
+    setSelectedProfessional: (ProfessionalSearchBySkill) -> Unit
 ) {
     composable<MenuScreens.ProfessionalMapScreen> {
         val viewModel: ProfessionalMapViewModel = hiltViewModel()
@@ -37,7 +39,8 @@ fun NavGraphBuilder.professionalMapScreen(
             },
             onProfessionalClick = { professional ->
                 onNavigateToProfessionalProfile(professional.id)
-            }
+            },
+            setSelectedProfessional = setSelectedProfessional
         )
     }
 }

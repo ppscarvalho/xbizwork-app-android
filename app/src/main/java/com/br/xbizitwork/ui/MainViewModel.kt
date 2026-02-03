@@ -56,6 +56,15 @@ class MainViewModel @Inject constructor(
         return _uiState.value.selectedProfessional
     }
 
+    /**
+     * Busca um profissional por ID na lista de todos os profissionais
+     * Útil para navegação sem sobrescrever o profissional selecionado
+     */
+    fun getProfessionalById(professionalId: Int): ProfessionalSearchBySkill? {
+        return _uiState.value.allProfessionals.find { it.id == professionalId }
+            ?: _uiState.value.selectedProfessional?.takeIf { it.id == professionalId }
+    }
+
     fun setAllProfessionals(professionals: List<ProfessionalSearchBySkill>) {
         _uiState.update {
             it.copy(allProfessionals = professionals)

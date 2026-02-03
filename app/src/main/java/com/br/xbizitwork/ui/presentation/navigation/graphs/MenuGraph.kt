@@ -90,7 +90,8 @@ fun NavGraphBuilder.menuGraph(
             getAllProfessionals = getAllProfessionals,
             onNavigateToProfessionalProfile = { professionalId ->
                 onNavigateToProfessionalProfile(professionalId)
-            }
+            },
+            setSelectedProfessional = setSelectedProfessional
         )
 
         createDefaultScheduleScreen(

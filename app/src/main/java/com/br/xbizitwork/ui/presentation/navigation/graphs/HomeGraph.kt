@@ -33,6 +33,7 @@ fun NavGraphBuilder.homeGraph(
     setSelectedProfessional: (ProfessionalSearchBySkill) -> Unit,
     getSelectedProfessional: (Int) -> ProfessionalSearchBySkill?,
     getSelectedProfessionalDirect: () -> ProfessionalSearchBySkill?,
+    getProfessionalById: (Int) -> ProfessionalSearchBySkill?,
     setAllProfessionals: (List<ProfessionalSearchBySkill>) -> Unit,
     getAllProfessionals: () -> List<ProfessionalSearchBySkill>
 ){
@@ -89,7 +90,7 @@ fun NavGraphBuilder.homeGraph(
             setAllProfessionals = setAllProfessionals,
             getSelectedProfessional = getSelectedProfessionalDirect,
             getAllProfessionals = getAllProfessionals,
-            getProfessional = getSelectedProfessional,
+            getProfessional = getProfessionalById,
         )
     }
 }
