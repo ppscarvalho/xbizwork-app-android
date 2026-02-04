@@ -7,8 +7,8 @@ import androidx.navigation.navigation
 import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill
 import com.br.xbizitwork.ui.presentation.features.auth.changepassword.navigation.navigateToChangePasswordScreen
 import com.br.xbizitwork.ui.presentation.features.faq.navigation.faqScreen
-import com.br.xbizitwork.ui.presentation.features.faq.navigation.navigateToFaqScreen
 import com.br.xbizitwork.ui.presentation.features.home.navigation.homeScreen
+import com.br.xbizitwork.ui.presentation.features.plans.navigation.navigateToPlanScreen
 import com.br.xbizitwork.ui.presentation.features.professionalprofile.navigation.navigateToProfessionalProfileScreen
 import com.br.xbizitwork.ui.presentation.features.profile.navigation.navigateToEditProfileScreen
 import com.br.xbizitwork.ui.presentation.features.schedule.agenda.navigation.navigateToProfessionalAgenda
@@ -76,6 +76,9 @@ fun NavGraphBuilder.homeGraph(
             },
             onNavigateToChangePasswordScreen = {
                 navController.navigateToChangePasswordScreen()
+            },
+            onNavigateToPlanScreen = {
+                navController.navigateToPlanScreen()
             },
             onNavigateToHomeGraph = {
                 navController.navigationToHomeGraph()

@@ -7,7 +7,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.ktor.client.HttpClient
-import jakarta.inject.Singleton
+import javax.inject.Singleton
 
 /**
  * Módulo Dagger Hilt para prover dependências de API de Planos de Serviço

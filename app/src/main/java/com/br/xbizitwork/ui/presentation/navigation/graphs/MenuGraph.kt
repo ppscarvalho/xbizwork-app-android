@@ -10,6 +10,7 @@ import com.br.xbizitwork.ui.presentation.features.faq.navigation.faqScreen
 import com.br.xbizitwork.ui.presentation.features.menu.navigation.menuScreen
 import com.br.xbizitwork.ui.presentation.features.newschedule.create.navigation.createDefaultScheduleScreen
 import com.br.xbizitwork.ui.presentation.features.newschedule.success.navigation.scheduleSuccessScreen
+import com.br.xbizitwork.ui.presentation.features.plans.navigation.planScreen
 import com.br.xbizitwork.ui.presentation.features.professionalprofile.navigation.professionalProfileScreen
 import com.br.xbizitwork.ui.presentation.features.profile.navigation.editProfileScreen
 import com.br.xbizitwork.ui.presentation.features.schedule.agenda.navigation.professionalAgendaScreen
@@ -40,6 +41,7 @@ fun NavGraphBuilder.menuGraph(
     onNavigateToListSchedulesScreen: () -> Unit,
     onNavigateToProfessionalAgendaScreen: () -> Unit,
     onNavigateToChangePasswordScreen: () -> Unit,
+    onNavigateToPlanScreen: () -> Unit,
     onNavigateToHomeGraph:() -> Unit,
     onNavigateToProfessionalProfile: (Int) -> Unit,
     onNavigateToProfessionalMap: (Int) -> Unit,
@@ -57,6 +59,7 @@ fun NavGraphBuilder.menuGraph(
             onNavigateToProfessionalAgendaScreen = onNavigateToProfessionalAgendaScreen,
             onNavigateToChangePasswordScreen = onNavigateToChangePasswordScreen,
             onNavigateToCreateSkills = onNavigateToCreateSkills,
+            onNavigateToPlanScreen = onNavigateToPlanScreen
         )
         editProfileScreen(
             onNavigateBack = onNavigateUp,
@@ -118,6 +121,11 @@ fun NavGraphBuilder.menuGraph(
             onNavigateBack = onNavigateUp
         )
         professionalAgendaScreen(onNavigateUp = onNavigateUp)
+
+        // Plan Screen
+        planScreen(
+            onNavigateUp = onNavigateUp
+        )
     }
 }
 

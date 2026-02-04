@@ -167,9 +167,241 @@ fun NavController.navigateToSearchProfessionalBySkillScreen() {
 - ✅ Components 100% prontos
 - ❌ Screen, ViewModel, State, Events, Navigation - FALTANDO
 
+---
+
+## 📡 INFORMAÇÕES DA API
+
+### 🔓 Endpoint Público - Listar Planos
+**Não requer autenticação** - Usuário pode ver planos antes de fazer login
+
+```
+GET /api/v1/plans/public
+Content-Type: application/json
+```
+
+**Resposta de Sucesso**:
+```json
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "Plano Gratuito",
+            "description": "schedule:30 dias|check_circle:Acesso inicial à plataforma|rocket_launch:Ideal para testes",
+            "price": 0,
+            "durationInDays": 30,
+            "isActive": true,
+            "createdAt": "2026-01-24T03:02:44.238Z",
+            "updatedAt": "2026-01-24T03:26:34.521Z"
+        },
+        {
+            "id": 2,
+            "name": "Plano Básico",
+            "description": "schedule:90 dias|photo:1 foto no portfólio|person:Perfil visível para clientes",
+            "price": 10,
+            "durationInDays": 90,
+            "isActive": true,
+            "createdAt": "2026-01-24T03:05:20.138Z",
+            "updatedAt": "2026-01-24T03:26:45.885Z"
+        },
+        {
+            "id": 3,
+            "name": "Plano Premium",
+            "description": "schedule:365 dias|collections:Até 5 fotos no portfólio|star:Destaque na busca (Top 5)|trending_up:Maior visibilidade",
+            "price": 15,
+            "durationInDays": 365,
+            "isActive": true,
+            "createdAt": "2026-01-24T03:17:48.252Z",
+            "updatedAt": "2026-01-24T03:27:01.748Z"
+        }
+    ],
+    "isSuccessful": true,
+    "message": "Planos listados com sucesso!"
+}
+```
+
+### 🔒 Endpoint Autenticado - Assinar Plano
+**Requer autenticação** - Usuário deve estar logado
+
+```
+POST /api/v1/user-plans
+Content-Type: application/json
+Authorization: Bearer {token}
+
+Body:
+{
+  "userId": 2,
+  "planId": 2
+}
+```
+
+**Resposta de Sucesso**:
+```json
+{
+    "data": {
+        "id": 3,
+        "userId": 4,
+        "planId": 2,
+        "startDate": "2026-02-04T20:21:11.679Z",
+        "expirationDate": "2026-05-05T20:21:11.679Z",
+        "isActive": true,
+        "isExpired": false,
+        "remainingDays": 90,
+        "createdAt": "2026-02-04T20:21:11.679Z",
+        "updatedAt": "2026-02-04T20:21:11.679Z"
+    },
+    "isSuccessful": true,
+    "message": "Plano vinculado com sucesso"
+}
+```
+
+---
+
+## 🎨 SISTEMA DE ÍCONES NOS BENEFÍCIOS
+
+### Formato da Descrição
+A descrição dos planos vem com **palavras-chave que representam ícones**, separadas por `|`:
+
+```
+icon_name:Texto do benefício|icon_name:Texto do benefício
+```
+
+### Mapeamento de Ícones
+
+| Palavra-chave | Ícone Material | Significado |
+|---------------|----------------|-------------|
+| `schedule` | Icons.Default.Schedule | Duração do plano |
+| `check_circle` | Icons.Default.CheckCircle | Recurso incluído |
+| `rocket_launch` | Icons.Default.RocketLaunch | Destaque/Lançamento |
+| `photo` | Icons.Default.Photo | Fotos no portfólio |
+| `person` | Icons.Default.Person | Perfil/Usuário |
+| `collections` | Icons.Default.Collections | Galeria de fotos |
+| `star` | Icons.Default.Star | Destaque/Premium |
+| `trending_up` | Icons.Default.TrendingUp | Visibilidade/Crescimento |
+
+### Exemplos de Parsing
+
+**Plano Gratuito**:
+```
+schedule:30 dias|check_circle:Acesso inicial à plataforma|rocket_launch:Ideal para testes
+```
+Deve exibir:
+- 📅 30 dias
+- ✓ Acesso inicial à plataforma
+- 🚀 Ideal para testes
+
+**Plano Premium**:
+```
+schedule:365 dias|collections:Até 5 fotos no portfólio|star:Destaque na busca (Top 5)|trending_up:Maior visibilidade
+```
+Deve exibir:
+- 📅 365 dias
+- 🖼️ Até 5 fotos no portfólio
+- ⭐ Destaque na busca (Top 5)
+- 📈 Maior visibilidade
+
+### Função de Parsing (A Implementar)
+
+```kotlin
+data class PlanBenefit(
+    val icon: ImageVector,
+    val text: String
+)
+
+fun parsePlanDescription(description: String): List<PlanBenefit> {
+    return description.split("|").mapNotNull { benefit ->
+        val parts = benefit.split(":", limit = 2)
+        if (parts.size == 2) {
+            val iconName = parts[0].trim()
+            val text = parts[1].trim()
+            val icon = getIconFromName(iconName)
+            PlanBenefit(icon, text)
+        } else null
+    }
+}
+
+fun getIconFromName(name: String): ImageVector {
+    return when (name) {
+        "schedule" -> Icons.Default.Schedule
+        "check_circle" -> Icons.Default.CheckCircle
+        "rocket_launch" -> Icons.Default.RocketLaunch
+        "photo" -> Icons.Default.Photo
+        "person" -> Icons.Default.Person
+        "collections" -> Icons.Default.Collections
+        "star" -> Icons.Default.Star
+        "trending_up" -> Icons.Default.TrendingUp
+        else -> Icons.Default.Circle // Fallback
+    }
+}
+```
+
+---
+
 ### Implementação
 
-#### FASE 1: State + Events (10 min)
+#### FASE 1: Model + State + Events (20 min)
+
+**📌 IMPORTANTE**: Adicionar data class para benefícios com ícones
+
+**Criar: `domain/model/plan/PlanBenefit.kt`**
+```kotlin
+package com.br.xbizitwork.domain.model.plan
+
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.*
+import androidx.compose.ui.graphics.vector.ImageVector
+
+data class PlanBenefit(
+    val icon: ImageVector,
+    val text: String
+)
+
+/**
+ * Faz o parsing da descrição do plano que vem no formato:
+ * "icon_name:Texto do benefício|icon_name:Texto do benefício"
+ * 
+ * Exemplo: "schedule:30 dias|check_circle:Acesso inicial|rocket_launch:Ideal para testes"
+ */
+fun parsePlanDescription(description: String): List<PlanBenefit> {
+    return description.split("|").mapNotNull { benefit ->
+        val parts = benefit.split(":", limit = 2)
+        if (parts.size == 2) {
+            val iconName = parts[0].trim()
+            val text = parts[1].trim()
+            val icon = getIconFromName(iconName)
+            PlanBenefit(icon, text)
+        } else null
+    }
+}
+
+/**
+ * Mapeia o nome do ícone (vindo da API) para o ícone Material correspondente
+ */
+private fun getIconFromName(name: String): ImageVector {
+    return when (name) {
+        "schedule" -> Icons.Default.Schedule
+        "check_circle" -> Icons.Default.CheckCircle
+        "rocket_launch" -> Icons.Default.RocketLaunch
+        "photo" -> Icons.Default.Photo
+        "person" -> Icons.Default.Person
+        "collections" -> Icons.Default.Collections
+        "star" -> Icons.Default.Star
+        "trending_up" -> Icons.Default.TrendingUp
+        else -> Icons.Default.Circle // Fallback para ícones desconhecidos
+    }
+}
+```
+
+**Atualizar: `domain/model/plan/PlanModel.kt`** (Adicionar helper)
+```kotlin
+// Adicionar ao final da data class PlanModel:
+
+/**
+ * Retorna os benefícios do plano parseados com seus respectivos ícones
+ */
+fun getBenefits(): List<PlanBenefit> {
+    return parsePlanDescription(description)
+}
+```
 
 **Criar: `PlanUiState.kt`**
 ```kotlin
@@ -183,7 +415,10 @@ data class PlanUiState(
     val isLoading: Boolean = false,
     val isSubscribing: Boolean = false,
     val errorMessage: String? = null,
-    val subscriptionSuccess: Boolean = false
+    val subscriptionSuccess: Boolean = false,
+    val subscribedPlanId: Int? = null,
+    val isAuthenticated: Boolean = false,
+    val currentUserId: Int = 0
 )
 ```
 
@@ -196,7 +431,8 @@ import com.br.xbizitwork.domain.model.plan.PlanModel
 sealed class PlanEvent {
     data object OnRefresh : PlanEvent()
     data class OnPlanSelected(val plan: PlanModel) : PlanEvent()
-    data class OnSubscribeClick(val planId: Int) : PlanEvent()
+    data class OnSubscribeClick(val userId: Int, val planId: Int) : PlanEvent()
+    data object OnDismissSuccess : PlanEvent()
 }
 ```
 
@@ -211,7 +447,9 @@ import androidx.lifecycle.viewModelScope
 import com.br.xbizitwork.core.sideeffects.AppSideEffect
 import com.br.xbizitwork.core.util.extensions.collectUiState
 import com.br.xbizitwork.core.util.logging.logInfo
+import com.br.xbizitwork.domain.usecase.auth.GetAuthSessionUseCase
 import com.br.xbizitwork.domain.usecase.plan.GetAllPlanUseCase
+import com.br.xbizitwork.domain.usecase.plan.SubscribeToPlanUseCase
 import com.br.xbizitwork.ui.presentation.features.plans.events.PlanEvent
 import com.br.xbizitwork.ui.presentation.features.plans.state.PlanUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -225,7 +463,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PlanViewModel @Inject constructor(
-    private val getAllPlanUseCase: GetAllPlanUseCase
+    private val getAllPlanUseCase: GetAllPlanUseCase,
+    private val getAuthSessionUseCase: GetAuthSessionUseCase,
+    private val subscribeToPlanUseCase: SubscribeToPlanUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(PlanUiState())
@@ -236,13 +476,28 @@ class PlanViewModel @Inject constructor(
 
     init {
         loadPlans()
+        observeAuthSession()
     }
 
     fun onEvent(event: PlanEvent) {
         when (event) {
             is PlanEvent.OnRefresh -> loadPlans()
             is PlanEvent.OnPlanSelected -> selectPlan(event.plan)
-            is PlanEvent.OnSubscribeClick -> subscribeToPlan(event.planId)
+            is PlanEvent.OnSubscribeClick -> subscribeToPlan(event.userId, event.planId)
+            is PlanEvent.OnDismissSuccess -> dismissSuccess()
+        }
+    }
+
+    private fun observeAuthSession() {
+        viewModelScope.launch {
+            getAuthSessionUseCase.invoke().collect { authSession ->
+                _uiState.update { 
+                    it.copy(
+                        isAuthenticated = authSession.token.isNotEmpty(),
+                        currentUserId = authSession.id
+                    ) 
+                }
+            }
         }
     }
 
@@ -279,24 +534,49 @@ class PlanViewModel @Inject constructor(
         _uiState.update { it.copy(selectedPlan = plan) }
     }
 
-    private fun subscribeToPlan(planId: Int) {
+    private fun subscribeToPlan(userId: Int, planId: Int) {
         viewModelScope.launch {
-            // TODO: Implementar quando API de assinatura existir
             _uiState.update { it.copy(isSubscribing = true) }
             
-            // Simulação de sucesso (remover quando API existir)
-            kotlinx.coroutines.delay(1500)
-            
-            _uiState.update {
-                it.copy(
-                    isSubscribing = false,
-                    subscriptionSuccess = true
-                )
-            }
-            
-            _sideEffectChannel.send(
-                AppSideEffect.ShowToast("Plano assinado com sucesso! (Simulado)")
+            subscribeToPlanUseCase.invoke(userId, planId).collectUiState(
+                onLoading = {
+                    logInfo("PLAN_VM", "⏳ Assinando plano...")
+                },
+                onSuccess = { subscription ->
+                    logInfo("PLAN_VM", "✅ Plano assinado com sucesso: ${subscription.id}")
+                    _uiState.update {
+                        it.copy(
+                            isSubscribing = false,
+                            subscriptionSuccess = true,
+                            subscribedPlanId = planId
+                        )
+                    }
+                    _sideEffectChannel.send(
+                        AppSideEffect.ShowToast("Plano assinado com sucesso!")
+                    )
+                },
+                onFailure = { error ->
+                    logInfo("PLAN_VM", "❌ Erro ao assinar plano: ${error.message}")
+                    _uiState.update {
+                        it.copy(
+                            isSubscribing = false,
+                            errorMessage = error.message
+                        )
+                    }
+                    _sideEffectChannel.send(
+                        AppSideEffect.ShowToast("Erro ao assinar plano: ${error.message}")
+                    )
+                }
             )
+        }
+    }
+
+    private fun dismissSuccess() {
+        _uiState.update { 
+            it.copy(
+                subscriptionSuccess = false,
+                subscribedPlanId = null
+            ) 
         }
     }
 }
@@ -402,7 +682,6 @@ fun PlanContent(
             }
             
             uiState.errorMessage != null -> {
-                // TODO: Criar ErrorState component
                 Box(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
@@ -420,13 +699,22 @@ fun PlanContent(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     uiState.plans.forEach { plan ->
+                        val benefits = plan.getBenefits()
+                        
                         PlanCard(
-                            planLabel = plan.description,
-                            planDescription = "Duração: ${plan.duration} dias - R$ ${plan.price}",
+                            planName = plan.name,
+                            benefits = benefits,
+                            price = "R$ ${plan.price}",
+                            duration = "${plan.durationInDays} dias",
                             isLoading = uiState.isSubscribing,
                             buttonEnabled = !uiState.isSubscribing && plan.isActive,
                             onClick = {
-                                onEvent(PlanEvent.OnSubscribeClick(plan.id))
+                                onEvent(
+                                    PlanEvent.OnSubscribeClick(
+                                        userId = uiState.currentUserId,
+                                        planId = plan.id
+                                    )
+                                )
                             }
                         )
                         Spacer(modifier = Modifier.height(16.dp))

@@ -87,4 +87,7 @@ sealed interface MenuScreens{
 
     @Serializable
     data object ChangePasswordScreen: HomeScreens
+
+    @Serializable
+    data object PlanScreen: MenuScreens
 }
