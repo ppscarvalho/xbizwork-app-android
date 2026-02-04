@@ -15,7 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.br.xbizitwork.core.util.logging.logInfo
 import com.br.xbizitwork.ui.presentation.components.background.AppGradientBackground
 import com.br.xbizitwork.ui.presentation.components.state.LoadingIndicator
 import com.br.xbizitwork.ui.presentation.features.plans.events.PlanEvent
@@ -64,7 +63,6 @@ fun PlanContent(
                         val benefits = plan.getBenefits()
                         val isCurrentPlan = uiState.currentUserPlan?.planId == plan.id
 
-                        logInfo("PLAN_CONTENT", "Plano: ${plan.name} (ID: ${plan.id}) | currentUserPlan: ${uiState.currentUserPlan?.planId} | isCurrentPlan: $isCurrentPlan")
 
                         PlanCard(
                             planName = plan.name,
