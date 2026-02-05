@@ -11,7 +11,9 @@ import com.br.xbizitwork.ui.presentation.features.plans.viewmodel.PlanViewModel
 import com.br.xbizitwork.ui.presentation.navigation.screens.MenuScreens
 
 fun NavGraphBuilder.planScreen(
-    onNavigateUp: () -> Unit
+    onNavigateUp: () -> Unit,
+    onNavigateToLogin: () -> Unit = {},
+    onNavigateToSignUp: () -> Unit = {}
 ) {
     composable<MenuScreens.PlanScreen> {
         val viewModel: PlanViewModel = hiltViewModel()
@@ -21,7 +23,9 @@ fun NavGraphBuilder.planScreen(
             uiState = uiState,
             appSideEffectFlow = viewModel.sideEffectChannel,
             onEvent = viewModel::onEvent,
-            onNavigateBack = onNavigateUp
+            onNavigateBack = onNavigateUp,
+            onNavigateToLogin = onNavigateToLogin,
+            onNavigateToSignUp = onNavigateToSignUp
         )
     }
 }

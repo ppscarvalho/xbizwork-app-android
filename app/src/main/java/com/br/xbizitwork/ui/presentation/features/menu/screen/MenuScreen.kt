@@ -48,6 +48,9 @@ fun MenuScreen(
             is AppSideEffect.NavigateBack -> {
                 // MenuScreen não trata NavigateBack, ignora
             }
+            is AppSideEffect.OpenExternalUrl -> {
+                // HomeScreen não abre URLs externas, ignora
+            }
         }
     }
 

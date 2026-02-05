@@ -11,7 +11,7 @@ import com.br.xbizitwork.ui.theme.XBizWorkTheme
 @Composable
 fun PromotionalContainer(
     modifier: Modifier = Modifier,
-    onNavigationToSignInScreen: () -> Unit
+    onNavigateToPlansScreen: () -> Unit
 ) {
     Box(
         modifier = modifier.fillMaxWidth(),
@@ -19,7 +19,7 @@ fun PromotionalContainer(
     ) {
         CardContainer(
             modifier = Modifier.fillMaxWidth(),
-            onNavigationToSignInScreen = onNavigationToSignInScreen
+            onNavigateToPlansScreen = onNavigateToPlansScreen
         )
     }
 }
@@ -30,7 +30,7 @@ private fun PromotionalContainerPreview() {
     XBizWorkTheme {
         PromotionalContainer(
             modifier = Modifier.fillMaxWidth(),
-            onNavigationToSignInScreen = {}
+            onNavigateToPlansScreen = {}
         )
     }
 }

@@ -17,7 +17,7 @@ import com.br.xbizitwork.ui.theme.XBizWorkTheme
 fun HomeContent(
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues,
-    onNavigationToSignInScreen: () -> Unit,
+    onNavigateToPlansScreen: () -> Unit,
     onNavigateToProfileScreen: () -> Unit
 ) {
     AppGradientBackground(
@@ -26,7 +26,7 @@ fun HomeContent(
     ) {
         HomeContainer(
             modifier = Modifier.fillMaxSize(), // 👈 ocupa tudo
-            onNavigationToSignInScreen = onNavigationToSignInScreen,
+            onNavigateToPlansScreen = onNavigateToPlansScreen,
             onNavigateToProfileScreen = onNavigateToProfileScreen
         )
     }
@@ -39,7 +39,7 @@ private fun HomeContentPreview() {
     XBizWorkTheme {
         HomeContent(
             paddingValues = PaddingValues(),
-            onNavigationToSignInScreen = {},
+            onNavigateToPlansScreen = {},
             onNavigateToProfileScreen = {}
         )
     }

@@ -41,7 +41,7 @@ fun DefaultScreen(
     onNavigationToFaqScreen: () -> Unit,
     onNavigateToMenuScreen: () -> Unit,
     onNavigateProfileClick: () -> Unit,
-    onLogout: () -> Unit,
+    onNavigateToPlansScreen: () -> Unit,
     onNavigationToSearchProfessionalSkillScreen: () -> Unit
 ) {
     val context = LocalContext.current
@@ -66,6 +66,9 @@ fun DefaultScreen(
             is AppSideEffect.NavigateBack -> {
                 // HomeScreen não trata NavigateBack, ignora
             }
+            is AppSideEffect.OpenExternalUrl -> {
+                // HomeScreen não abre URLs externas, ignora
+            }
         }
     }
 
@@ -74,7 +77,13 @@ fun DefaultScreen(
         topBar = {
             AppTopBar(
                 username = if (uiState.userName.isNullOrEmpty()) "Usuário" else uiState.userName,
-                onRightIconClick = {onLogout()}
+                onRightIconClick = {
+                    if (uiState.userName.isNullOrEmpty()) {
+                        onNavigateToSignInScreen()  // Deslogado → Login
+                    } else {
+                        onNavigateToProfileScreen()  // Logado → Perfil
+                    }
+                }
             )
         },
         bottomBar = {
@@ -97,7 +106,7 @@ fun DefaultScreen(
                     HomeContent(
                         modifier = Modifier.fillMaxWidth(),
                         paddingValues = paddingValues,
-                        onNavigationToSignInScreen = onNavigateToSignInScreen,
+                        onNavigateToPlansScreen = onNavigateToPlansScreen,
                         onNavigateToProfileScreen = { onNavigateProfileClick()}
                     )
                 }
@@ -120,7 +129,7 @@ private fun DefaultScreenPreview() {
             onNavigationToFaqScreen = {},
             onNavigateToMenuScreen = {},
             onNavigateProfileClick = {},
-            onLogout = {},
+            onNavigateToPlansScreen = {},
             onNavigationToSearchProfessionalSkillScreen = {}
         )
     }

@@ -24,6 +24,7 @@ fun NavGraphBuilder.professionalProfileScreen(
     composable<MenuScreens.ProfessionalProfileScreen> { backStackEntry ->
         val viewModel: ProfessionalProfileViewModel = hiltViewModel()
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+        val sideEffectFlow = viewModel.sideEffectChannel
 
         // Get professional ID from route using type-safe navigation
         val route = backStackEntry.toRoute<MenuScreens.ProfessionalProfileScreen>()
@@ -38,6 +39,7 @@ fun NavGraphBuilder.professionalProfileScreen(
 
         ProfessionalProfileScreen(
             uiState = uiState,
+            sideEffectFlow = sideEffectFlow,
             onEvent = viewModel::onEvent,
             onNavigateBack = onNavigateUp
         )
