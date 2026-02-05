@@ -12,10 +12,15 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.br.xbizitwork.ui.presentation.components.background.AppGradientBackground
+import com.br.xbizitwork.ui.presentation.components.dialogs.PlanSelectionDialog
 import com.br.xbizitwork.ui.presentation.components.state.LoadingIndicator
 import com.br.xbizitwork.ui.presentation.features.plans.events.PlanEvent
 import com.br.xbizitwork.ui.presentation.features.plans.state.PlanUiState
@@ -25,8 +30,12 @@ fun PlanContent(
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues,
     uiState: PlanUiState,
-    onEvent: (PlanEvent) -> Unit
+    onEvent: (PlanEvent) -> Unit,
+    onNavigateToLogin: () -> Unit = {},
+    onNavigateToSignUp: () -> Unit = {}
 ) {
+    var showAuthDialog by remember { mutableStateOf(false) }
+
     AppGradientBackground(
         modifier = modifier,
         paddingValues = paddingValues
@@ -70,15 +79,20 @@ fun PlanContent(
                             price = "R$ ${plan.price}",
                             duration = "${plan.durationInDays} dias",
                             isLoading = uiState.isSubscribing,
-                            buttonEnabled = !uiState.isSubscribing && plan.isActive,
+                            buttonEnabled = !uiState.isSubscribing && plan.isActive && !isCurrentPlan,
                             isCurrentPlan = isCurrentPlan,
                             onClick = {
-                                onEvent(
-                                    PlanEvent.OnSubscribeClick(
-                                        userId = uiState.currentUserId,
-                                        planId = plan.id
+                                // Verificar autenticação antes de assinar
+                                if (!uiState.isAuthenticated) {
+                                    showAuthDialog = true
+                                } else {
+                                    onEvent(
+                                        PlanEvent.OnSubscribeClick(
+                                            userId = uiState.currentUserId,
+                                            planId = plan.id
+                                        )
                                     )
-                                )
+                                }
                             }
                         )
                         Spacer(modifier = Modifier.height(16.dp))
@@ -86,5 +100,20 @@ fun PlanContent(
                 }
             }
         }
+    }
+
+    // Dialog de autenticação
+    if (showAuthDialog) {
+        PlanSelectionDialog(
+            onDismiss = { showAuthDialog = false },
+            onLoginClick = {
+                showAuthDialog = false
+                onNavigateToLogin()
+            },
+            onSignUpClick = {
+                showAuthDialog = false
+                onNavigateToSignUp()
+            }
+        )
     }
 }

@@ -20,7 +20,7 @@ import com.br.xbizitwork.ui.theme.XBizWorkTheme
 @Composable
 fun HomeContainer(
     modifier: Modifier = Modifier,
-    onNavigationToSignInScreen: () -> Unit,
+    onNavigateToPlansScreen: () -> Unit,
     onNavigateToProfileScreen: () -> Unit
 ) {
     LazyColumn(
@@ -38,7 +38,7 @@ fun HomeContainer(
         item {
             PromotionalContainer(
                 modifier = Modifier.fillMaxWidth(),
-                onNavigationToSignInScreen = onNavigationToSignInScreen
+                onNavigateToPlansScreen = onNavigateToPlansScreen
             )
         }
 
@@ -61,7 +61,7 @@ private fun HomeContainerPreview() {
     XBizWorkTheme {
         HomeContainer(
             modifier = Modifier.fillMaxSize(),
-            onNavigationToSignInScreen = {},
+            onNavigateToPlansScreen = {},
             onNavigateToProfileScreen = {}
         )
     }

@@ -43,6 +43,8 @@ fun NavGraphBuilder.menuGraph(
     onNavigateToChangePasswordScreen: () -> Unit,
     onNavigateToPlanScreen: () -> Unit,
     onNavigateToHomeGraph:() -> Unit,
+    onNavigateToLogin: () -> Unit = {},
+    onNavigateToSignUp: () -> Unit = {},
     onNavigateToProfessionalProfile: (Int) -> Unit,
     onNavigateToProfessionalMap: (Int) -> Unit,
     setSelectedProfessional: (ProfessionalSearchBySkill) -> Unit,
@@ -124,7 +126,9 @@ fun NavGraphBuilder.menuGraph(
 
         // Plan Screen
         planScreen(
-            onNavigateUp = onNavigateUp
+            onNavigateUp = onNavigateUp,
+            onNavigateToLogin = onNavigateToLogin,
+            onNavigateToSignUp = onNavigateToSignUp
         )
     }
 }

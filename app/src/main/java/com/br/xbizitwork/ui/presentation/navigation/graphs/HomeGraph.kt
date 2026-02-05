@@ -45,6 +45,9 @@ fun NavGraphBuilder.homeGraph(
             onNavigationToFaqScreen = onNavigationToFaqScreen,
             onNavigateToMenuScreen = onNavigateToMenuGraph,
             onNavigateProfileClick = onNavigateProfileScreen,
+            onNavigateToPlansScreen = {
+                navController.navigateToPlanScreen()
+            },
             onNavigationToSearchProfessionalSkillScreen = onNavigationToSearchProfessionalSkillScreen
         )
         searchScheduleScreen(
@@ -82,6 +85,11 @@ fun NavGraphBuilder.homeGraph(
             },
             onNavigateToHomeGraph = {
                 navController.navigationToHomeGraph()
+            },
+            onNavigateToLogin = onNavigateToSignInScreen,
+            onNavigateToSignUp = {
+                // Navegar para SignUpScreen quando implementado
+                onNavigateToSignInScreen()
             },
             onNavigateToProfessionalProfile = { professionalId ->
                 navController.navigateToProfessionalProfileScreen(professionalId)

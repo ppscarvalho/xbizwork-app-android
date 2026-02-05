@@ -20,7 +20,9 @@ fun PlanScreen(
     uiState: PlanUiState,
     appSideEffectFlow: Flow<AppSideEffect>,
     onEvent: (PlanEvent) -> Unit,
-    onNavigateBack: () -> Unit
+    onNavigateBack: () -> Unit,
+    onNavigateToLogin: () -> Unit = {},
+    onNavigateToSignUp: () -> Unit = {}
 ) {
     val context = LocalContext.current
 
@@ -51,7 +53,9 @@ fun PlanScreen(
             PlanContent(
                 paddingValues = paddingValues,
                 uiState = uiState,
-                onEvent = onEvent
+                onEvent = onEvent,
+                onNavigateToLogin = onNavigateToLogin,
+                onNavigateToSignUp = onNavigateToSignUp
             )
         }
     )
