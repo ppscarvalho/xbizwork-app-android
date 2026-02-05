@@ -53,18 +53,30 @@ fun ProfessionalProfileContainer(
         )
 
         // Seção de Portfólio
-        Text(
-            text = "Trabalhos realizados",
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.Bold,
-            fontFamily = poppinsFontFamily,
-            modifier = Modifier.padding(top = 8.dp)
-        )
+        androidx.compose.material3.Card(
+            modifier = Modifier.fillMaxWidth(),
+            elevation = androidx.compose.material3.CardDefaults.cardElevation(defaultElevation = 2.dp)
+        ) {
+            Column(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = "Trabalhos realizados",
+                    fontFamily = poppinsFontFamily,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp)
+                )
 
-        PortfolioCarousel(
-            images = getPortfolioImages(professional.skill.description),
-            modifier = Modifier.fillMaxWidth()
-        )
+                PortfolioCarousel(
+                    images = getPortfolioImages(professional.skill.description),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 16.dp)
+                )
+            }
+        }
 
         Spacer(modifier = Modifier.weight(1f))
 

@@ -146,7 +146,10 @@ private fun PortfolioCarouselPreview() {
             images = listOf(
                 ImageAssets.PORTFOLIO_EDUCADOR_1,
                 ImageAssets.PORTFOLIO_EDUCADOR_2,
-                ImageAssets.PORTFOLIO_EDUCADOR_3
+                ImageAssets.PORTFOLIO_EDUCADOR_3,
+                ImageAssets.PORTFOLIO_MANICURE_1,
+                ImageAssets.PORTFOLIO_MANICURE_2,
+                ImageAssets.PORTFOLIO_MANICURE_3,
             ),
             modifier = Modifier.fillMaxWidth()
         )
