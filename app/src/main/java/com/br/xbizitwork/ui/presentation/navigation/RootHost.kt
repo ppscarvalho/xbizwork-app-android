@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill
 import com.br.xbizitwork.ui.presentation.features.auth.signin.navigation.navigateToSignInScreen
 import com.br.xbizitwork.ui.presentation.features.auth.signup.navigation.navigateToSignUpScreen
+import com.br.xbizitwork.ui.presentation.features.faq.navigation.navigateToFaqScreen
 import com.br.xbizitwork.ui.presentation.features.schedule.search.navigation.navigateToSearchScheduleScreen
 import com.br.xbizitwork.ui.presentation.features.searchprofessionals.navigation.navigateToSearchProfessionalBySkillScreen
 import com.br.xbizitwork.ui.presentation.navigation.graphs.authGraph
@@ -19,7 +20,11 @@ fun RootHost(
     startDestination: Graphs,
     navController: NavHostController,
     setSelectedProfessional: (ProfessionalSearchBySkill) -> Unit,
-    getSelectedProfessional: (Int) -> ProfessionalSearchBySkill?
+    getSelectedProfessional: (Int) -> ProfessionalSearchBySkill?,
+    getSelectedProfessionalDirect: () -> ProfessionalSearchBySkill?,
+    getProfessionalById: (Int) -> ProfessionalSearchBySkill?,
+    setAllProfessionals: (List<ProfessionalSearchBySkill>) -> Unit,
+    getAllProfessionals: () -> List<ProfessionalSearchBySkill>
 ){
     NavHost(
         navController = navController,
@@ -49,7 +54,9 @@ fun RootHost(
             onNavigateToSearchScreen = {
                 navController.navigateToSearchScheduleScreen()
             },
-            onNavigateToUsersConnectionScreen = {},
+            onNavigationToFaqScreen = {
+                navController.navigateToFaqScreen()
+            },
             onNavigateToMenuGraph = {
                 navController.navigateToMenuGraph()
             },
@@ -62,7 +69,11 @@ fun RootHost(
             },
             navController = navController,
             setSelectedProfessional = setSelectedProfessional,
-            getSelectedProfessional = getSelectedProfessional
+            getSelectedProfessional = getSelectedProfessional,
+            getSelectedProfessionalDirect = getSelectedProfessionalDirect,
+            getProfessionalById = getProfessionalById,
+            setAllProfessionals = setAllProfessionals,
+            getAllProfessionals = getAllProfessionals
         )
     }
 }

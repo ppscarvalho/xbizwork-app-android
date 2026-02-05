@@ -38,10 +38,10 @@ fun DefaultScreen(
     onNavigateToSignInScreen: () -> Unit,
     onNavigateToProfileScreen: () -> Unit,
     onNavigateToSearchScreen: () -> Unit,
-    onNavigateToUsersConnectionScreen: () -> Unit,
+    onNavigationToFaqScreen: () -> Unit,
     onNavigateToMenuScreen: () -> Unit,
     onNavigateProfileClick: () -> Unit,
-    onLogout: () -> Unit,
+    onNavigateToPlansScreen: () -> Unit,
     onNavigationToSearchProfessionalSkillScreen: () -> Unit
 ) {
     val context = LocalContext.current
@@ -66,6 +66,9 @@ fun DefaultScreen(
             is AppSideEffect.NavigateBack -> {
                 // HomeScreen não trata NavigateBack, ignora
             }
+            is AppSideEffect.OpenExternalUrl -> {
+                // HomeScreen não abre URLs externas, ignora
+            }
         }
     }
 
@@ -74,7 +77,13 @@ fun DefaultScreen(
         topBar = {
             AppTopBar(
                 username = if (uiState.userName.isNullOrEmpty()) "Usuário" else uiState.userName,
-                onRightIconClick = {onLogout()}
+                onRightIconClick = {
+                    if (uiState.userName.isNullOrEmpty()) {
+                        onNavigateToSignInScreen()  // Deslogado → Login
+                    } else {
+                        onNavigateToProfileScreen()  // Logado → Perfil
+                    }
+                }
             )
         },
         bottomBar = {
@@ -82,7 +91,7 @@ fun DefaultScreen(
                 isLoggedIn = !uiState.userName.isNullOrEmpty(),
                 onNavigationToProfileScreen = onNavigateToProfileScreen,
                 onNavigationToSearchScreen = onNavigateToSearchScreen,
-                onNavigationToUsersConnectionScreen = onNavigateToUsersConnectionScreen,
+                onNavigationToFaqScreen = onNavigationToFaqScreen,
                 onNavigationToMenuScreen = onNavigateToMenuScreen,
                 onNavigationToSearchProfessionalSkillScreen = onNavigationToSearchProfessionalSkillScreen
             )
@@ -90,15 +99,14 @@ fun DefaultScreen(
         content = {paddingValues ->
                 Column(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 2.dp),
+                        .fillMaxWidth(),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     HomeContent(
                         modifier = Modifier.fillMaxWidth(),
                         paddingValues = paddingValues,
-                        onNavigationToSignInScreen = onNavigateToSignInScreen,
+                        onNavigateToPlansScreen = onNavigateToPlansScreen,
                         onNavigateToProfileScreen = { onNavigateProfileClick()}
                     )
                 }
@@ -118,10 +126,10 @@ private fun DefaultScreenPreview() {
             onNavigateToSignInScreen = {},
             onNavigateToProfileScreen = {},
             onNavigateToSearchScreen = {},
-            onNavigateToUsersConnectionScreen = {},
+            onNavigationToFaqScreen = {},
             onNavigateToMenuScreen = {},
             onNavigateProfileClick = {},
-            onLogout = {},
+            onNavigateToPlansScreen = {},
             onNavigationToSearchProfessionalSkillScreen = {}
         )
     }

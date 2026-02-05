@@ -34,7 +34,11 @@ class MainActivity : ComponentActivity() {
                     startDestination = Graphs.HomeGraphs, //uiState.startDestination,
                     navController = navController,
                     setSelectedProfessional = viewModel::setSelectedProfessional,
-                    getSelectedProfessional = viewModel::getSelectedProfessional
+                    getSelectedProfessional = viewModel::getSelectedProfessional,
+                    getSelectedProfessionalDirect = viewModel::getSelectedProfessionalDirect,
+                    getProfessionalById = viewModel::getProfessionalById,
+                    setAllProfessionals = viewModel::setAllProfessionals,
+                    getAllProfessionals = viewModel::getAllProfessionals
                 )
             }
         }

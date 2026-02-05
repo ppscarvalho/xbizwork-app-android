@@ -56,6 +56,10 @@ fun EditProfileScreen(
             is AppSideEffect.NavigateBack -> {
                 onNavigateBack()
             }
+
+            is AppSideEffect.OpenExternalUrl -> {
+                // SignUpScreen não abre URLs externas, ignora
+            }
         }
     }
 

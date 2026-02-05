@@ -4,6 +4,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
+import com.br.xbizitwork.core.sideeffects.AppSideEffect
+import com.br.xbizitwork.core.state.LifecycleEventEffect
+import com.br.xbizitwork.core.util.extensions.toast
 import com.br.xbizitwork.ui.presentation.components.topbar.AppTopBar
 import com.br.xbizitwork.ui.presentation.features.faq.components.FaqContent
 import com.br.xbizitwork.ui.presentation.features.faq.events.FaqEvent

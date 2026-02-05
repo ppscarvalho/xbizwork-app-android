@@ -10,11 +10,13 @@ import com.br.xbizitwork.ui.presentation.features.faq.navigation.faqScreen
 import com.br.xbizitwork.ui.presentation.features.menu.navigation.menuScreen
 import com.br.xbizitwork.ui.presentation.features.newschedule.create.navigation.createDefaultScheduleScreen
 import com.br.xbizitwork.ui.presentation.features.newschedule.success.navigation.scheduleSuccessScreen
+import com.br.xbizitwork.ui.presentation.features.plans.navigation.planScreen
 import com.br.xbizitwork.ui.presentation.features.professionalprofile.navigation.professionalProfileScreen
 import com.br.xbizitwork.ui.presentation.features.profile.navigation.editProfileScreen
 import com.br.xbizitwork.ui.presentation.features.schedule.agenda.navigation.professionalAgendaScreen
 import com.br.xbizitwork.ui.presentation.features.schedule.create.navigation.createScheduleScreen
 import com.br.xbizitwork.ui.presentation.features.schedule.list.navigation.listSchedulesScreen
+import com.br.xbizitwork.ui.presentation.features.searchprofessionals.navigation.professionalMapScreen
 import com.br.xbizitwork.ui.presentation.features.searchprofessionals.navigation.searchProfessionalBySkillScreen
 import com.br.xbizitwork.ui.presentation.features.skills.navigation.skillsScreen
 import com.br.xbizitwork.ui.presentation.navigation.screens.Graphs
@@ -39,11 +41,17 @@ fun NavGraphBuilder.menuGraph(
     onNavigateToListSchedulesScreen: () -> Unit,
     onNavigateToProfessionalAgendaScreen: () -> Unit,
     onNavigateToChangePasswordScreen: () -> Unit,
+    onNavigateToPlanScreen: () -> Unit,
     onNavigateToHomeGraph:() -> Unit,
+    onNavigateToLogin: () -> Unit = {},
+    onNavigateToSignUp: () -> Unit = {},
     onNavigateToProfessionalProfile: (Int) -> Unit,
+    onNavigateToProfessionalMap: (Int) -> Unit,
     setSelectedProfessional: (ProfessionalSearchBySkill) -> Unit,
+    setAllProfessionals: (List<ProfessionalSearchBySkill>) -> Unit,
+    getSelectedProfessional: () -> ProfessionalSearchBySkill?,
+    getAllProfessionals: () -> List<ProfessionalSearchBySkill>,
     getProfessional: (Int) -> ProfessionalSearchBySkill?,
-    onNavigateToFaqScreen: () -> Unit,
 ){
     navigation<Graphs.MenuGraphs>(startDestination = MenuScreens.MenuScreen) {
         menuScreen(
@@ -53,7 +61,7 @@ fun NavGraphBuilder.menuGraph(
             onNavigateToProfessionalAgendaScreen = onNavigateToProfessionalAgendaScreen,
             onNavigateToChangePasswordScreen = onNavigateToChangePasswordScreen,
             onNavigateToCreateSkills = onNavigateToCreateSkills,
-            onNavigateToFaqScreen = onNavigateToFaqScreen
+            onNavigateToPlanScreen = onNavigateToPlanScreen
         )
         editProfileScreen(
             onNavigateBack = onNavigateUp,
@@ -69,12 +77,26 @@ fun NavGraphBuilder.menuGraph(
             onNavigateToProfessionalProfile = { professionalId ->
                 onNavigateToProfessionalProfile(professionalId)
             },
-            setSelectedProfessional = setSelectedProfessional
+            onNavigateToProfessionalMap = { professionalId ->
+                onNavigateToProfessionalMap(professionalId)
+            },
+            setSelectedProfessional = setSelectedProfessional,
+            setAllProfessionals = setAllProfessionals
         )
 
         professionalProfileScreen(
             onNavigateUp = onNavigateUp,
             getProfessional = getProfessional
+        )
+
+        professionalMapScreen(
+            onNavigateUp = onNavigateUp,
+            getSelectedProfessional = getSelectedProfessional,
+            getAllProfessionals = getAllProfessionals,
+            onNavigateToProfessionalProfile = { professionalId ->
+                onNavigateToProfessionalProfile(professionalId)
+            },
+            setSelectedProfessional = setSelectedProfessional
         )
 
         createDefaultScheduleScreen(
@@ -100,11 +122,14 @@ fun NavGraphBuilder.menuGraph(
         changePasswordScreen(
             onNavigateBack = onNavigateUp
         )
-        faqScreen(
-            onNavigateUp = onNavigateUp
-        )
-
         professionalAgendaScreen(onNavigateUp = onNavigateUp)
+
+        // Plan Screen
+        planScreen(
+            onNavigateUp = onNavigateUp,
+            onNavigateToLogin = onNavigateToLogin,
+            onNavigateToSignUp = onNavigateToSignUp
+        )
     }
 }
 

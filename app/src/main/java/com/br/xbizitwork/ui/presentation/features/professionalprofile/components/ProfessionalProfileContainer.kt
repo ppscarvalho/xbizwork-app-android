@@ -23,6 +23,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill
 import com.br.xbizitwork.domain.model.professional.SkillInfo
+import com.br.xbizitwork.ui.presentation.common.ImageAssets
+import com.br.xbizitwork.ui.presentation.components.carousel.PortfolioCarousel
 import com.br.xbizitwork.ui.presentation.features.professionalprofile.events.ProfessionalProfileEvent
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
 import com.br.xbizitwork.ui.theme.poppinsFontFamily
@@ -49,6 +51,32 @@ fun ProfessionalProfileContainer(
         ProfessionalProfileContactInfo(
             professional = professional
         )
+
+        // Seção de Portfólio
+        androidx.compose.material3.Card(
+            modifier = Modifier.fillMaxWidth(),
+            elevation = androidx.compose.material3.CardDefaults.cardElevation(defaultElevation = 2.dp)
+        ) {
+            Column(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = "Trabalhos realizados",
+                    fontFamily = poppinsFontFamily,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.padding(horizontal = 16.dp, vertical = 16.dp)
+                )
+
+                PortfolioCarousel(
+                    images = getPortfolioImages(professional.skill.description),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 16.dp)
+                )
+            }
+        }
 
         Spacer(modifier = Modifier.weight(1f))
 
@@ -86,6 +114,30 @@ fun ProfessionalProfileContainer(
             showContactDialog = false
         }
     )
+}
+
+/**
+ * Helper function para retornar imagens de portfólio baseado na skill
+ * Por enquanto usa imagens mock da pasta drawable
+ */
+private fun getPortfolioImages(skillName: String): List<Int> {
+    return when {
+        skillName.contains("Educador", ignoreCase = true) -> listOf(
+            ImageAssets.PORTFOLIO_EDUCADOR_1,
+            ImageAssets.PORTFOLIO_EDUCADOR_2,
+            ImageAssets.PORTFOLIO_EDUCADOR_3
+        )
+        skillName.contains("Manicure", ignoreCase = true) ||
+        skillName.contains("Manicura", ignoreCase = true) -> listOf(
+            ImageAssets.PORTFOLIO_MANICURE_1,
+            ImageAssets.PORTFOLIO_MANICURE_2,
+            ImageAssets.PORTFOLIO_MANICURE_3
+        )
+        else -> listOf(
+            ImageAssets.PORTFOLIO_EDUCADOR_1,
+            ImageAssets.PORTFOLIO_EDUCADOR_2
+        )
+    }
 }
 
 @Preview (showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)

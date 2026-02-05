@@ -42,6 +42,9 @@ fun SignInScreen(
             is AppSideEffect.NavigateBack -> {
                 // Não usado nesta tela, mas precisa estar aqui por causa do sealed interface
             }
+            is AppSideEffect.OpenExternalUrl -> {
+                // SignInScreen não abre URLs externas, ignora
+            }
         }
     }
 

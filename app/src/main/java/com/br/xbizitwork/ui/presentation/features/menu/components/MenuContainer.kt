@@ -38,7 +38,6 @@ fun MenuContainer(
     onClickYourPlan: () -> Unit,
     onClickMyAppointments: () -> Unit,
     onClickProfessionalAgenda: () -> Unit,
-    onClickFAQ: () -> Unit,
     onClickAppVersion: () -> Unit,
     onClickRateApp: () -> Unit,
     onClickLogout: () -> Unit
@@ -153,13 +152,13 @@ fun MenuContainer(
                 )
             }
 
-            item {
-                MenuButton(
-                    leftIcon = Icons.AutoMirrored.Filled.Help,
-                    text = "Dúvidas frequentes",
-                    onClick = onClickFAQ
-                )
-            }
+//            item {
+//                MenuButton(
+//                    leftIcon = Icons.AutoMirrored.Filled.Help,
+//                    text = "Dúvidas frequentes",
+//                    onClick = onClickFAQ
+//                )
+//            }
 
 //            item {
 //                MenuButton(
@@ -221,7 +220,6 @@ private fun MenuContainerPreView() {
             onClickYourPlan = {},
             onClickMyAppointments = {},
             onClickProfessionalAgenda = {},
-            onClickFAQ = {},
             onClickAppVersion = {},
             onClickRateApp = {},
             onClickLogout = {}

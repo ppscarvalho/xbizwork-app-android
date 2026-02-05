@@ -30,7 +30,7 @@ fun MenuScreen(
     onClickYourPlan: () -> Unit,
     onClickMyAppointments: () -> Unit,
     onClickProfessionalAgenda: () -> Unit,
-    onClickFAQ: () -> Unit,
+    //onClickFAQ: () -> Unit,
     onClickAppVersion: () -> Unit,
     onClickRateApp: () -> Unit,
     onClickLogout: () -> Unit
@@ -47,6 +47,9 @@ fun MenuScreen(
 
             is AppSideEffect.NavigateBack -> {
                 // MenuScreen não trata NavigateBack, ignora
+            }
+            is AppSideEffect.OpenExternalUrl -> {
+                // HomeScreen não abre URLs externas, ignora
             }
         }
     }
@@ -72,7 +75,7 @@ fun MenuScreen(
                 onClickYourPlan = onClickYourPlan,
                 onClickMyAppointments = onClickMyAppointments,
                 onClickProfessionalAgenda = onClickProfessionalAgenda,
-                onClickFAQ = onClickFAQ,
+                //onClickFAQ = onClickFAQ,
                 onClickAppVersion = onClickAppVersion,
                 onClickRateApp = onClickRateApp,
                 onClickLogout = onClickLogout
@@ -99,7 +102,6 @@ private fun MenuScreenPreview() {
             onClickYourPlan = {},
             onClickMyAppointments = {},
             onClickProfessionalAgenda = {},
-            onClickFAQ = {},
             onClickAppVersion = {},
             onClickRateApp = {},
             onClickLogout = {}

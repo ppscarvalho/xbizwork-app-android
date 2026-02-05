@@ -9,6 +9,7 @@ import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill
  */
 data class SearchProfessionalsUiState(
     val queryTextState: TextFieldState = TextFieldState(),
+    val searchQuery: String = "", // Armazena a especialidade pesquisada para exibir no contador
     val professionals: List<ProfessionalSearchBySkill> = emptyList(),
     val isLoading: Boolean = false,
     val errorMessage: String? = null,

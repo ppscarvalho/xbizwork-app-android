@@ -6,14 +6,16 @@ import androidx.navigation.NavOptions
 import androidx.navigation.navigation
 import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill
 import com.br.xbizitwork.ui.presentation.features.auth.changepassword.navigation.navigateToChangePasswordScreen
-import com.br.xbizitwork.ui.presentation.features.faq.navigation.navigateToFaqScreen
+import com.br.xbizitwork.ui.presentation.features.faq.navigation.faqScreen
 import com.br.xbizitwork.ui.presentation.features.home.navigation.homeScreen
+import com.br.xbizitwork.ui.presentation.features.plans.navigation.navigateToPlanScreen
 import com.br.xbizitwork.ui.presentation.features.professionalprofile.navigation.navigateToProfessionalProfileScreen
 import com.br.xbizitwork.ui.presentation.features.profile.navigation.navigateToEditProfileScreen
 import com.br.xbizitwork.ui.presentation.features.schedule.agenda.navigation.navigateToProfessionalAgenda
 import com.br.xbizitwork.ui.presentation.features.schedule.create.navigation.navigateToCreateSchedule
 import com.br.xbizitwork.ui.presentation.features.schedule.list.navigation.navigateToViewSchedules
 import com.br.xbizitwork.ui.presentation.features.schedule.search.navigation.searchScheduleScreen
+import com.br.xbizitwork.ui.presentation.features.searchprofessionals.navigation.navigateToProfessionalMapScreen
 import com.br.xbizitwork.ui.presentation.features.skills.navigation.navigateToCreateSkillsScreen
 import com.br.xbizitwork.ui.presentation.navigation.screens.Graphs
 import com.br.xbizitwork.ui.presentation.navigation.screens.HomeScreens
@@ -23,27 +25,38 @@ fun NavGraphBuilder.homeGraph(
     onNavigateToSignInScreen: () -> Unit,
     onNavigateToProfileScreen: () -> Unit,
     onNavigateToSearchScreen: () -> Unit,
-    onNavigateToUsersConnectionScreen: () -> Unit,
+    onNavigationToFaqScreen: () -> Unit,
     onNavigateToMenuGraph: () -> Unit,
     onNavigateProfileScreen: () -> Unit,
     onNavigationToSearchProfessionalSkillScreen: () -> Unit,
     navController: NavController,
     setSelectedProfessional: (ProfessionalSearchBySkill) -> Unit,
-    getSelectedProfessional: (Int) -> ProfessionalSearchBySkill?
+    getSelectedProfessional: (Int) -> ProfessionalSearchBySkill?,
+    getSelectedProfessionalDirect: () -> ProfessionalSearchBySkill?,
+    getProfessionalById: (Int) -> ProfessionalSearchBySkill?,
+    setAllProfessionals: (List<ProfessionalSearchBySkill>) -> Unit,
+    getAllProfessionals: () -> List<ProfessionalSearchBySkill>
 ){
     navigation<Graphs.HomeGraphs>(startDestination = HomeScreens.HomeScreen) {
         homeScreen(
             onNavigateToSignInScreen = onNavigateToSignInScreen,
             onNavigateToProfileScreen = onNavigateToProfileScreen,
             onNavigateToSearchScreen = onNavigateToSearchScreen,
-            onNavigateToUsersConnectionScreen = onNavigateToUsersConnectionScreen,
+            onNavigationToFaqScreen = onNavigationToFaqScreen,
             onNavigateToMenuScreen = onNavigateToMenuGraph,
             onNavigateProfileClick = onNavigateProfileScreen,
+            onNavigateToPlansScreen = {
+                navController.navigateToPlanScreen()
+            },
             onNavigationToSearchProfessionalSkillScreen = onNavigationToSearchProfessionalSkillScreen
         )
         searchScheduleScreen(
             onNavigateBack = onNavigateUp,
             onNavigateToScheduleDetail = {}
+        )
+
+        faqScreen(
+            onNavigateBack = onNavigateUp,
         )
 
         // Menu é um nested graph com suas próprias screens
@@ -67,17 +80,28 @@ fun NavGraphBuilder.homeGraph(
             onNavigateToChangePasswordScreen = {
                 navController.navigateToChangePasswordScreen()
             },
+            onNavigateToPlanScreen = {
+                navController.navigateToPlanScreen()
+            },
             onNavigateToHomeGraph = {
                 navController.navigationToHomeGraph()
+            },
+            onNavigateToLogin = onNavigateToSignInScreen,
+            onNavigateToSignUp = {
+                // Navegar para SignUpScreen quando implementado
+                onNavigateToSignInScreen()
             },
             onNavigateToProfessionalProfile = { professionalId ->
                 navController.navigateToProfessionalProfileScreen(professionalId)
             },
+            onNavigateToProfessionalMap = { professionalId ->
+                navController.navigateToProfessionalMapScreen(professionalId)
+            },
             setSelectedProfessional = setSelectedProfessional,
-            getProfessional = getSelectedProfessional,
-            onNavigateToFaqScreen = {
-                navController.navigateToFaqScreen()
-            }
+            setAllProfessionals = setAllProfessionals,
+            getSelectedProfessional = getSelectedProfessionalDirect,
+            getAllProfessionals = getAllProfessionals,
+            getProfessional = getProfessionalById,
         )
     }
 }

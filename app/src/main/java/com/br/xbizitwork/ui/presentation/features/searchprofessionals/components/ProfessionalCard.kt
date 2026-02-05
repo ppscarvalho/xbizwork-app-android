@@ -4,18 +4,20 @@ import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Phone
+import androidx.compose.material.icons.outlined.Map
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -32,13 +34,14 @@ import com.br.xbizitwork.ui.theme.poppinsFontFamily
 @Composable
 fun ProfessionalCard(
     professional: ProfessionalSearchBySkill,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onMapClick: (ProfessionalSearchBySkill) -> Unit = {}
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
+            containerColor = MaterialTheme.colorScheme.secondaryContainer
         ),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
@@ -46,79 +49,105 @@ fun ProfessionalCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(2.dp)
         ) {
-            // Name
+            // Name and Map Button
             Row(
+                modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Icon(
-                    imageVector = Icons.Default.Person,
-                    contentDescription = "Professional",
-                    tint = MaterialTheme.colorScheme.primary
-                )
-                Text(
-                    text = professional.name,
-                    fontFamily = poppinsFontFamily,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
+                // Name section
+                Row(
+                    modifier = Modifier.weight(1f),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Person,
+                        contentDescription = "Professional",
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                    Text(
+                        text = professional.name,
+                        fontFamily = poppinsFontFamily,
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Normal,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                }
+
+                // Map button
+                TextButton(
+                    onClick = { onMapClick(professional) }
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Map,
+                        contentDescription = "Ver no mapa",
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                    Spacer(modifier = Modifier.width(2.dp))
+                    Text(
+                        text = "Ver no mapa",
+                        fontFamily = poppinsFontFamily,
+                        fontSize = 12.sp,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
             }
 
             // Skill
             Text(
                 text = professional.skill.description,
                 fontFamily = poppinsFontFamily,
-                fontSize = 14.sp,
+                fontSize = 10.sp,
                 fontWeight = FontWeight.Medium,
                 color = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.padding(start = 32.dp)
+                modifier = Modifier.padding(start = 32.dp, top = 0.dp)
             )
 
-            // Phone
-            ProfessionalInfoRow(
-                icon = Icons.Default.Phone,
-                label = "Telefone",
-                value = professional.mobilePhone
-            )
+            // Phone - comentado conforme original
+//            ProfessionalInfoRow(
+//                icon = Icons.Default.Phone,
+//                label = "Telefone",
+//                value = professional.mobilePhone
+//            )
 
-            // Location
-            ProfessionalInfoRow(
-                icon = Icons.Default.LocationOn,
-                label = "Localização",
-                value = "${professional.city} - ${professional.state}"
-            )
+            // Location - REMOVIDO conforme requisito
+//            ProfessionalInfoRow(
+//                icon = Icons.Default.LocationOn,
+//                label = "Localização",
+//                value = "${professional.city} - ${professional.state}"
+//            )
         }
     }
 }
-
-@Composable
-private fun ProfessionalInfoRow(
-    icon: ImageVector,
-    label: String,
-    value: String,
-    modifier: Modifier = Modifier
-) {
-    Row(
-        modifier = modifier.fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = label,
-            tint = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-        Text(
-            text = value,
-            fontFamily = poppinsFontFamily,
-            fontSize = 14.sp,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-    }
-}
+//
+//@Composable
+//private fun ProfessionalInfoRow(
+//    icon: ImageVector,
+//    label: String,
+//    value: String,
+//    modifier: Modifier = Modifier
+//) {
+//    Row(
+//        modifier = modifier.fillMaxWidth(),
+//        verticalAlignment = Alignment.CenterVertically,
+//        horizontalArrangement = Arrangement.spacedBy(8.dp)
+//    ) {
+//        Icon(
+//            imageVector = icon,
+//            contentDescription = label,
+//            tint = MaterialTheme.colorScheme.onSurfaceVariant
+//        )
+//        Text(
+//            text = value,
+//            fontFamily = poppinsFontFamily,
+//            fontSize = 14.sp,
+//            color = MaterialTheme.colorScheme.onSurfaceVariant
+//        )
+//    }
+//}
 
 @Preview(
     showBackground = true,
@@ -139,7 +168,7 @@ private fun ProfessionalCardPreview() {
                     description = "Educador Físico"
                 )
             ),
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(12.dp)
         )
     }
 }

@@ -22,10 +22,10 @@ import com.br.xbizitwork.ui.theme.poppinsFontFamily
 fun AppButton(
     modifier: Modifier = Modifier,
     text: String,
-    isLoading: Boolean,
-    contentColor: Color,
-    color: Color = Color.White,
-    enabled: Boolean,
+    isLoading: Boolean = false,
+    containerColor: Color = colorScheme.primary,
+    contentColor: Color = Color.White,
+    enabled: Boolean = true,
     onClick: () -> Unit
 ) {
     Button(
@@ -33,7 +33,7 @@ fun AppButton(
         onClick = onClick,
         shape = RoundedCornerShape(25.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = colorScheme.primary,
+            containerColor = containerColor,
             contentColor = contentColor,
             disabledContentColor = Color.LightGray
         ),
@@ -50,7 +50,7 @@ fun AppButton(
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
                 fontFamily = poppinsFontFamily,
-                color = color
+                color = contentColor
             )
         }
     }
@@ -62,9 +62,6 @@ private fun AppButtonPreviewDark() {
     XBizWorkTheme {
         AppButton(
             text = "Entrar",
-            isLoading = false,
-            contentColor = Color.White,
-            enabled = false,
             onClick = {}
         )
     }
@@ -76,9 +73,6 @@ private fun AppButtonPreviewLight() {
     XBizWorkTheme {
         AppButton(
             text = "Entrar",
-            isLoading = false,
-            contentColor = Color.White,
-            enabled = false,
             onClick = {}
         )
     }

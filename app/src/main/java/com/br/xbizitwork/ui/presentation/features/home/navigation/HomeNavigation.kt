@@ -13,9 +13,10 @@ fun NavGraphBuilder.homeScreen(
     onNavigateToSignInScreen: () -> Unit,
     onNavigateToProfileScreen: () -> Unit,
     onNavigateToSearchScreen: () -> Unit,
-    onNavigateToUsersConnectionScreen: () -> Unit,
+    onNavigationToFaqScreen: () -> Unit,
     onNavigateToMenuScreen: () -> Unit,
     onNavigateProfileClick: () -> Unit,
+    onNavigateToPlansScreen: () -> Unit,
     onNavigationToSearchProfessionalSkillScreen: () -> Unit
 ){
     composable<HomeScreens.HomeScreen> {
@@ -30,10 +31,10 @@ fun NavGraphBuilder.homeScreen(
             onNavigateToSignInScreen = onNavigateToSignInScreen,
             onNavigateToProfileScreen = onNavigateToProfileScreen,
             onNavigateToSearchScreen = onNavigateToSearchScreen,
-            onNavigateToUsersConnectionScreen = onNavigateToUsersConnectionScreen,
+            onNavigationToFaqScreen = onNavigationToFaqScreen,
             onNavigateToMenuScreen = onNavigateToMenuScreen,
             onNavigateProfileClick =  onNavigateProfileClick,
-            onLogout = {viewModel.logout()},
+            onNavigateToPlansScreen = onNavigateToPlansScreen,
             onNavigationToSearchProfessionalSkillScreen = onNavigationToSearchProfessionalSkillScreen
         )
     }

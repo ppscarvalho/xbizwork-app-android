@@ -40,4 +40,23 @@ object ImageAssets {
     
     @DrawableRes
     val CATEGORIA_REFRIGERACAO = R.drawable.refrigeracao_ar_condicionado
+
+    // Portfolio Mock Images
+    @DrawableRes
+    val PORTFOLIO_EDUCADOR_1 = R.drawable.educador_1
+
+    @DrawableRes
+    val PORTFOLIO_EDUCADOR_2 = R.drawable.educador_2
+
+    @DrawableRes
+    val PORTFOLIO_EDUCADOR_3 = R.drawable.educador_3
+
+    @DrawableRes
+    val PORTFOLIO_MANICURE_1 = R.drawable.manicure_1
+
+    @DrawableRes
+    val PORTFOLIO_MANICURE_2 = R.drawable.manicure_2
+
+    @DrawableRes
+    val PORTFOLIO_MANICURE_3 = R.drawable.manicure_3
 }

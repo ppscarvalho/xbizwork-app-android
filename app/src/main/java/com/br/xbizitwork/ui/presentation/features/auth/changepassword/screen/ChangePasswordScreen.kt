@@ -42,6 +42,9 @@ fun ChangePasswordScreen(
             is AppSideEffect.NavigateBack -> {
                 // ChangePasswordScreen não trata NavigateBack, ignora
             }
+            is AppSideEffect.OpenExternalUrl -> {
+                // ChangePasswordScreen não trata OpenExternalUrl, ignora
+            }
         }
     }
 

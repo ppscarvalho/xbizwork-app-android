@@ -8,8 +8,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CardMembership
 import androidx.compose.material.icons.filled.Groups
-import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,7 +23,7 @@ import com.br.xbizitwork.R
 @Composable
 fun CardContainer(
     modifier: Modifier = Modifier,
-    onNavigationToSignInScreen: () -> Unit
+    onNavigateToPlansScreen: () -> Unit
 ) {
     Row(
         modifier = modifier
@@ -33,11 +33,11 @@ fun CardContainer(
         verticalAlignment = Alignment.CenterVertically
     ) {
         ShortcutCard(
-            icon = Icons.Default.Share,
-            title = stringResource(id = R.string.divulgue_text),
-            subtitle = stringResource(id = R.string.seu_trabalho_text),
+            icon = Icons.Default.CardMembership,
+            title = stringResource(id = R.string.planos_text),
+            subtitle = stringResource(id = R.string.assinatura_text),
             backgroundColor = MaterialTheme.colorScheme.primaryContainer,
-            onClick = { onNavigationToSignInScreen() },
+            onClick = { onNavigateToPlansScreen() },
             modifier = Modifier.weight(1f)
         )
         Spacer(modifier = Modifier.width(12.dp))
@@ -58,7 +58,7 @@ private fun CadContainerPreview() {
     XBizWorkTheme {
         CardContainer(
             modifier = Modifier.fillMaxWidth(),
-            onNavigationToSignInScreen = {}
+            onNavigateToPlansScreen = {}
         )
     }
 }

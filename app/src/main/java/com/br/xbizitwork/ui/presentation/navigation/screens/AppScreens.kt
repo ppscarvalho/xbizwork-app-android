@@ -32,7 +32,7 @@ sealed interface HomeScreens{
     data object ProfileScreen: HomeScreens
 
     @Serializable
-    data object ReserveScreen: HomeScreens
+    data object FaqScreen: HomeScreens
 
     @Serializable
     data object PromoteYourWorkScreen: HomeScreens
@@ -83,5 +83,11 @@ sealed interface MenuScreens{
     data class ProfessionalProfileScreen(val professionalId: Int): MenuScreens
 
     @Serializable
+    data class ProfessionalMapScreen(val professionalId: Int): MenuScreens
+
+    @Serializable
     data object ChangePasswordScreen: HomeScreens
+
+    @Serializable
+    data object PlanScreen: MenuScreens
 }

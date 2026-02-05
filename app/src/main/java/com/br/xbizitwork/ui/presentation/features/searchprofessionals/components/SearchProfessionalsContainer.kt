@@ -15,6 +15,10 @@ import com.br.xbizitwork.ui.presentation.components.state.LoadingIndicator
 import com.br.xbizitwork.ui.presentation.features.searchprofessionals.events.SearchProfessionalBySkillEvent
 import com.br.xbizitwork.ui.presentation.features.searchprofessionals.state.SearchProfessionalsUiState
 import com.br.xbizitwork.ui.theme.XBizWorkTheme
+// Imports do Maps comentados - mudança de escopo
+//import com.google.android.gms.maps.model.LatLng
+//import com.google.maps.android.compose.Marker
+//import com.google.maps.android.compose.MarkerState
 
 /**
  * Container for professional search results
@@ -25,7 +29,8 @@ fun SearchProfessionalsContainer(
     modifier: Modifier = Modifier,
     uiState: SearchProfessionalsUiState,
     onEvent: (SearchProfessionalBySkillEvent) -> Unit,
-    onProfessionalSelected: (ProfessionalSearchBySkill) -> Unit = {}
+    onProfessionalSelected: (ProfessionalSearchBySkill) -> Unit = {},
+    onMapClick: (ProfessionalSearchBySkill) -> Unit = {}
 ) {
     Box(
         modifier = modifier.fillMaxSize(),
@@ -51,16 +56,29 @@ fun SearchProfessionalsContainer(
             }
 
             uiState.professionals.isNotEmpty() -> {
-                // Mapa ocupando toda a área disponível
-                ProfessionalsMapView(
+                // Lista de profissionais usando ProfessionalCard
+                ProfessionalsList(
                     professionals = uiState.professionals,
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(horizontal = 12.dp),
                     onProfessionalClick = { professional ->
                         onProfessionalSelected(professional)
-                    }
+                    },
+                    onMapClick = onMapClick
                 )
+
+                // TODO: Adicionar link para visualizar no mapa
+                // Mapa ocupando toda a área disponível (COMENTADO - mudança de escopo)
+//                ProfessionalsMapView(
+//                    professionals = uiState.professionals,
+//                    modifier = Modifier
+//                        .fillMaxSize()
+//                        .padding(horizontal = 12.dp),
+//                    onProfessionalClick = { professional ->
+//                        onProfessionalSelected(professional)
+//                    }
+//                )
             }
         }
     }

@@ -122,6 +122,13 @@
     <string name="indique_text">Indique um</string>
     <string name="profissional_text">seu trabalho! Cadastra-se</string>
 
+    <!-- Strings de Planos de Assinatura -->
+    <string name="planos_text">Planos de</string>
+    <string name="assinatura_text">Assinatura</string>
+    <string name="possui_cadastro_text">Você já possui um cadastro?</string>
+    <string name="fazer_login_text">Fazer login</string>
+    <string name="cadastrar_se_text">Cadastrar-se</string>
+
     <!-- Strings de CarouselImageItem Profissões-->
     <string name="educacao_text">Educação</string>
     <string name="saude_text">Saúde</string>

@@ -1,3 +1,4 @@
+
 package com.br.xbizitwork.ui.presentation.features.professionalprofile.components
 
 import androidx.compose.foundation.layout.*
@@ -9,9 +10,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.br.xbizitwork.domain.model.professional.ProfessionalSearchBySkill
+import com.br.xbizitwork.domain.model.professional.SkillInfo
 import com.br.xbizitwork.ui.theme.poppinsFontFamily
 
 @Composable
@@ -95,3 +98,21 @@ fun ProfessionalProfileContactInfo(
     }
 }
 
+@Preview(showBackground = true)
+@Composable
+fun ProfessionalProfileContactInfoPreview() {
+    val professionalPreview = ProfessionalSearchBySkill(
+        mobilePhone = "(91) 99123-4567",
+        city = "Belém",
+        state = "PA",
+        skill = SkillInfo(9, "Educador Físico"),
+        name = "Paula Manuela",
+        id = 14
+    )
+
+    MaterialTheme {
+        ProfessionalProfileContactInfo(
+            professional = professionalPreview
+        )
+    }
+}

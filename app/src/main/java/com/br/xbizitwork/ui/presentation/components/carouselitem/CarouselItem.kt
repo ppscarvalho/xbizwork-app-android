@@ -16,10 +16,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.br.xbizitwork.R
 import com.br.xbizitwork.ui.presentation.features.home.models.CarouselImageItem
+import com.br.xbizitwork.ui.theme.XBizWorkTheme
 
 @Composable
 fun CarouselItemView(
@@ -47,6 +50,17 @@ fun CarouselItemView(
             fontWeight = FontWeight.Medium,
             color = Color.White,
             modifier = Modifier.padding(horizontal = 4.dp)
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun CarouselItemViewPreview() {
+    XBizWorkTheme{
+        CarouselItemView(
+            item = CarouselImageItem(1, "Educação", resourceId = R.drawable.educacao),
+            imageHeight = 200.dp
         )
     }
 }

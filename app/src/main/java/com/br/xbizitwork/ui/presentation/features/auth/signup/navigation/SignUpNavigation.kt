@@ -1,5 +1,6 @@
 package com.br.xbizitwork.ui.presentation.features.auth.signup.navigation
 
+import androidx.compose.runtime.getValue
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
@@ -8,7 +9,6 @@ import androidx.navigation.compose.composable
 import com.br.xbizitwork.ui.presentation.features.auth.signup.screen.SignUpScreen
 import com.br.xbizitwork.ui.presentation.features.auth.signup.viewmodel.SignUpViewModel
 import com.br.xbizitwork.ui.presentation.navigation.screens.AuthScreens
-import androidx.compose.runtime.getValue
 
 fun NavGraphBuilder.signUpScreen(
     onNavigateToSignInScreen: () -> Unit,
