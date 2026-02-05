@@ -102,7 +102,7 @@ class ProfessionalProfileViewModel @Inject constructor(
 
                 val message = "Olá, me chamo $userName. " +
                               "Encontrei seu perfil no aplicativo e gostaria de " +
-                              "conversar sobre um trabalho de ${professional.skill.name.lowercase()}."
+                              "conversar sobre um trabalho de ${professional.skill.description.lowercase()}."
 
                 val phone = professional.mobilePhone.replace(Regex("[^0-9]"), "")
                 val whatsappUrl = "https://wa.me/55$phone?text=${Uri.encode(message)}"

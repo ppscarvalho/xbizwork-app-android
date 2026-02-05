@@ -62,7 +62,7 @@ fun ProfessionalProfileContainer(
         )
 
         PortfolioCarousel(
-            images = getPortfolioImages(professional.skill.name),
+            images = getPortfolioImages(professional.skill.description),
             modifier = Modifier.fillMaxWidth()
         )
 
