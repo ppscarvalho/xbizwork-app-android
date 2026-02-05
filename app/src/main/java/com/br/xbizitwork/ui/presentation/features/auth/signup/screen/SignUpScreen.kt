@@ -51,6 +51,9 @@ fun SignUpScreen(
             is AppSideEffect.NavigateBack -> {
                 // SignUpScreen não trata NavigateBack, ignora
             }
+            is AppSideEffect.OpenExternalUrl -> {
+                // SignUpScreen não abre URLs externas, ignora
+            }
         }
     }
 

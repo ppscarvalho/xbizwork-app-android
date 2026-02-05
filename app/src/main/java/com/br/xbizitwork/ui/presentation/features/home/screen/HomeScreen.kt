@@ -66,6 +66,9 @@ fun DefaultScreen(
             is AppSideEffect.NavigateBack -> {
                 // HomeScreen não trata NavigateBack, ignora
             }
+            is AppSideEffect.OpenExternalUrl -> {
+                // HomeScreen não abre URLs externas, ignora
+            }
         }
     }
 
